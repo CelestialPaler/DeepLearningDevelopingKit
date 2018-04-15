@@ -8,6 +8,7 @@
 #include "..\Nerual\Node.h"
 #include "..\Nerual\Layer.h"
 #include "..\Nerual\Module.h"
+#include "..\Util\Port.h"
 
 #include <iostream>
 
@@ -142,14 +143,24 @@ int main()
 #endif // LayerDebug
 
 #ifdef ModuleDebug
+
 int main()
 {
 	InputLayer<2, 2> inputLayer;
 	HiddenLayer<2, 5> hiddenLayer;
 	OutputLayer<5, 1> outputLayer;
 
+	InputPort<2, 1> inputPort;
+	OutputPort<1, 1> outputPort;
+
 	Module BPNet;
-	BPNet.Push(inputLayer);
+	BPNet.PushLayer(&inputLayer);
+	BPNet.PushLayer(&hiddenLayer);
+	BPNet.PushLayer(&outputLayer);
+	BPNet.PushInputPort(&inputPort);
+	BPNet.PushOutputPort(&outputPort);
+
+	BPNet.Run();
 
 
 	system("pause");

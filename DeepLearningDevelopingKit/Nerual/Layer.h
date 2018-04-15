@@ -21,7 +21,7 @@ namespace Nerual
 {
 	/***************************************************************************************************/
 	// Class : LayerPointer 
-	class LayerPointer;
+	class LayerPointer {};
 	/***************************************************************************************************/
 	// Class : Layer 
 	/// Base class of the layer class

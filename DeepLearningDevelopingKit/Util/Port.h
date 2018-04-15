@@ -12,11 +12,13 @@
 // Name space
 using namespace MathLib;
 
+class PortPointer {};
+
 template<size_t M,size_t N>
-class Port
+class Port : public PortPointer
 {
 public:
-	virtual void Set() {}
+	virtual void Set() {} = 0;
 };
 
 template<size_t M, size_t N>
