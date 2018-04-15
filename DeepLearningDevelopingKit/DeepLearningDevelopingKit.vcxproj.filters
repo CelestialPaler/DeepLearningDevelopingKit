@@ -36,16 +36,16 @@
     <Filter Include="src\Nerual">
       <UniqueIdentifier>{63d5b91e-3c6b-48b4-85bd-f77e19d7af85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Debug">
-      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Util">
       <UniqueIdentifier>{d25435b0-b066-473f-95c2-52faf7c28699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Test">
+      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug\Debug.cpp">
-      <Filter>src\Debug</Filter>
+      <Filter>src\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
