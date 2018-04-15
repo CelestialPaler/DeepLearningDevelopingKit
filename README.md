@@ -25,6 +25,6 @@ Under developing:
 *   Acceleration using CUDA
 <p>&nbsp;&nbsp;&nbsp;&nbsp;This is still an early stage of development. So, it`s welcomed for anyone to contribute to this project. Feel free to upload your code or pull a request. More than anything, please share your idea and give me some precious advices. XD</p>
 
-For more information, check my website [*Celestial Tech*](www.tianshicangxie.com "Title") .
+For more information, check my website [*Celestial Tech*](www.tianshicangxie.com "天师苍邪科技") .
 
 *Copyright © 2015-2018 Celestial Tech Inc.*
