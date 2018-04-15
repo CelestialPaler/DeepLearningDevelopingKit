@@ -25,6 +25,9 @@
     <ClInclude Include="Util\Port.h">
       <Filter>src\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Nerual\Module.h">
+      <Filter>src\Nerual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

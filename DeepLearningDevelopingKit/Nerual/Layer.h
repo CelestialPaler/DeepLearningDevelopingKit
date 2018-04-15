@@ -20,10 +20,13 @@ using namespace std;
 namespace Nerual
 {
 	/***************************************************************************************************/
+	// Class : LayerPointer 
+	class LayerPointer;
+	/***************************************************************************************************/
 	// Class : Layer 
 	/// Base class of the layer class
-	template<size_t M, size_t N>
-	class Layer
+	template<size_t M, size_t N> 
+	class Layer : public LayerPointer
 	{
 	protected:
 		virtual void SetInput(const Vector<double, M> & _data) = 0;

@@ -150,6 +150,7 @@
     <ClInclude Include="MathLib\ToolFunction.h" />
     <ClInclude Include="MathLib\Vector.h" />
     <ClInclude Include="Nerual\Layer.h" />
+    <ClInclude Include="Nerual\Module.h" />
     <ClInclude Include="Nerual\Node.h" />
     <ClInclude Include="Util\Port.h" />
   </ItemGroup>

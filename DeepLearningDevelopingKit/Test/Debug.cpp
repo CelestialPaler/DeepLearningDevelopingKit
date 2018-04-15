@@ -7,6 +7,7 @@
 #include "..\MathLib\MathLib.h"
 #include "..\Nerual\Node.h"
 #include "..\Nerual\Layer.h"
+#include "..\Nerual\Module.h"
 
 #include <iostream>
 
@@ -15,7 +16,8 @@ using namespace Nerual;
 using namespace std;
 // #define MathDebug
 // #define NodeDebug
-#define LayerDebug
+// #define LayerDebug
+#define ModuleDebug
 
 #ifdef MathDebug
 int main()
@@ -105,8 +107,12 @@ int main()
 {
 	cout << "Layer Uint Test" << endl;
 	InputLayer<2, 2> inputLayer;
-	HiddenLayer<2, 5> hiddenLayer;
-	OutputLayer<5, 1> outputLayer;
+	HiddenLayer<2, 100> hiddenLayer1;
+	HiddenLayer<100, 100> hiddenLayer2;
+	HiddenLayer<100, 100> hiddenLayer3;
+	HiddenLayer<100, 100> hiddenLayer4;
+	HiddenLayer<100, 100> hiddenLayer5;
+	OutputLayer<100, 1> outputLayer;
 
 	double data[] = { 0.3, 0.7 };
 	Vector<double, 2> input(data);
@@ -114,19 +120,42 @@ int main()
 	inputLayer.SetInput(input);
 	inputLayer.Forward();
 
-	hiddenLayer.SetInput(inputLayer.Output());
-	hiddenLayer.Forward();
+	hiddenLayer1.SetInput(inputLayer.Output());
+	hiddenLayer1.Forward();
+	hiddenLayer2.SetInput(hiddenLayer1.Output());
+	hiddenLayer2.Forward();
+	hiddenLayer3.SetInput(hiddenLayer2.Output());
+	hiddenLayer3.Forward();
+	hiddenLayer4.SetInput(hiddenLayer3.Output());
+	hiddenLayer4.Forward();
+	hiddenLayer5.SetInput(hiddenLayer4.Output());
+	hiddenLayer5.Forward();
 
-	outputLayer.SetInput(hiddenLayer.Output());
+	outputLayer.SetInput(hiddenLayer5.Output());
 	outputLayer.Forward();
 
-	inputLayer.Output().PrintToConsole();
-	hiddenLayer.Output().PrintToConsole();
 	outputLayer.Output().PrintToConsole();
 
 	system("pause");
 	return 0;
 }
 #endif // LayerDebug
+
+#ifdef ModuleDebug
+int main()
+{
+	InputLayer<2, 2> inputLayer;
+	HiddenLayer<2, 5> hiddenLayer;
+	OutputLayer<5, 1> outputLayer;
+
+	Module BPNet;
+	BPNet.Push(inputLayer);
+
+
+	system("pause");
+	return 0;
+}
+#endif // ModuleDebug
+
 
 
