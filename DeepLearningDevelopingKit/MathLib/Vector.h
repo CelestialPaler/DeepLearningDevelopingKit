@@ -61,10 +61,15 @@ namespace MathLib
 			return data[0];
 		}
 
+		// ???? Wired bug here
+		/// temp code 
 		Vector<T, M> & operator = (const Vector<T, M> & _other)
 		{
 			if (this != &_other) {
-				memcpy(this->_data, _other._data, sizeof(_data));
+				for (size_t i = 0; i < M; i++)
+				{
+					this->_data[i][0] = _other._data[i][0];
+				}
 			}
 			return (*this);
 		}

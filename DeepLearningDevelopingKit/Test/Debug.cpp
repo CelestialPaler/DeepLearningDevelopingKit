@@ -13,7 +13,6 @@
 using namespace MathLib;
 using namespace Nerual;
 using namespace std;
-
 // #define MathDebug
 // #define NodeDebug
 #define LayerDebug
@@ -51,6 +50,8 @@ int main()
 
 	a.PrintToConsole();
 	b.PrintToConsole();
+
+	a = b;
 
 	(a + b).PrintToConsole();
 
@@ -103,13 +104,25 @@ int main()
 int main()
 {
 	cout << "Layer Uint Test" << endl;
-	InputLayer<2> inputLayer(2);
-	HiddenLayer<2> hiddenLayer(5);
-	OutputLayer<5> ouputLayer(1);
+	InputLayer<2, 2> inputLayer;
+	HiddenLayer<2, 5> hiddenLayer;
+	OutputLayer<5, 1> outputLayer;
 
 	double data[] = { 0.3, 0.7 };
 	Vector<double, 2> input(data);
+
 	inputLayer.SetInput(input);
+	inputLayer.Forward();
+
+	hiddenLayer.SetInput(inputLayer.Output());
+	hiddenLayer.Forward();
+
+	outputLayer.SetInput(hiddenLayer.Output());
+	outputLayer.Forward();
+
+	inputLayer.Output().PrintToConsole();
+	hiddenLayer.Output().PrintToConsole();
+	outputLayer.Output().PrintToConsole();
 
 	system("pause");
 	return 0;

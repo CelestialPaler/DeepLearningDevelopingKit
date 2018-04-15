@@ -7,9 +7,7 @@
 #pragma once
 
 // Header files
-#include "..\MathLib\Matrix.h"
-#include "..\MathLib\Vector.h"
-#include "..\MathLib\ToolFunction.h"
+#include "..\MathLib\MathLib.h"
 
 // Name space
 using namespace MathLib;

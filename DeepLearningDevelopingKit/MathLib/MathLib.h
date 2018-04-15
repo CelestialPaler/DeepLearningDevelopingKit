@@ -6,8 +6,9 @@
 /***************************************************************************************************/
 #pragma once
 
-#include "MathDef.h"
-#include "Vector.h"
-#include "Matrix.h"
+#include "..\MathLib\MathDef.h"
+#include "..\MathLib\Matrix.h"
+#include "..\MathLib\Vector.h"
+#include "..\MathLib\ToolFunction.h"
 
 

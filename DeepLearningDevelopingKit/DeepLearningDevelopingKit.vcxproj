@@ -154,7 +154,7 @@
     <ClInclude Include="Util\Port.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Debug\Debug.cpp" />
+    <ClCompile Include="Test\Debug.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
