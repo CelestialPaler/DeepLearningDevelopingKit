@@ -1,17 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <ClInclude Include="MathLib\MathDef.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\MathLib.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\Matrix.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\Vector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\ToolFunction.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Nerual\Layer.h">
+      <Filter>src\Nerual</Filter>
+    </ClInclude>
+    <ClInclude Include="Nerual\Node.h">
+      <Filter>src\Nerual</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Port.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{74312593-2d6c-4f01-b797-d1e37fe6664f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="src\MathLib">
+      <UniqueIdentifier>{b5504acd-7a39-484a-854c-c85bb3f86f44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="src\Nerual">
+      <UniqueIdentifier>{63d5b91e-3c6b-48b4-85bd-f77e19d7af85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Debug">
+      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util">
+      <UniqueIdentifier>{d25435b0-b066-473f-95c2-52faf7c28699}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Debug\Debug.cpp">
+      <Filter>src\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

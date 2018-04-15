@@ -134,6 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -143,6 +144,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MathLib\MathDef.h" />
+    <ClInclude Include="MathLib\MathLib.h" />
+    <ClInclude Include="MathLib\Matrix.h" />
+    <ClInclude Include="MathLib\ToolFunction.h" />
+    <ClInclude Include="MathLib\Vector.h" />
+    <ClInclude Include="Nerual\Layer.h" />
+    <ClInclude Include="Nerual\Node.h" />
+    <ClInclude Include="Util\Port.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Debug\Debug.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
