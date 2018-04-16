@@ -29,22 +29,26 @@ namespace Nerual
 	/***************************************************************************************************/
 	// Class : Layer 
 	/// Base class of the layer class
-	class Layer : public LayerPointer
+	template<size_t M, size_t N>
+	class Layer
 	{
 	public:
 		virtual ~Layer() {}
-	protected:
-		template<size_t M, size_t N>
+		/*
 		virtual void SetInput(const Vector<double, M> & _data) = 0;
-		template<size_t M, size_t N>
 		virtual Vector<double, N> Output(void) = 0;
 		virtual void Forward(void) = 0;
+		*/
+		template<size_t M, size_t N>
+		void SetNextLayer(Layer<M, N>* b) { a = b; }
+	private:
+		Layer * a;
 	};
 
 	/***************************************************************************************************/
 	// Class : InputLayer 
 	template<size_t M, size_t N>
-	class InputLayer : public Layer<M, N>
+	class InputLayer : public Layer
 	{
 	public:
 		InputLayer(void);
@@ -95,7 +99,7 @@ namespace Nerual
 	/***************************************************************************************************/
 	// Class : HiddenLayer
 	template<size_t M, size_t N>
-	class HiddenLayer : public Layer<M, N>
+	class HiddenLayer : public Layer
 	{
 	public:
 		HiddenLayer(void);
@@ -149,7 +153,7 @@ namespace Nerual
 	/***************************************************************************************************/
 	// Class : OutputLayer
 	template<size_t M, size_t N>
-	class OutputLayer : public Layer<M, N>
+	class OutputLayer : public Layer
 	{
 	public:
 		OutputLayer()

@@ -18,7 +18,7 @@ using namespace std;
 // #define MathDebug
 // #define NodeDebug
 // #define LayerDebug
-// #define ModuleDebug
+#define ModuleDebug
 
 #ifdef MathDebug
 int main()
@@ -151,8 +151,7 @@ int main()
 	OutputLayer<5, 1> outputLayer;
 
 	InputPort<2, 1> inputPort;
-	OutputPort<1, 1> outputPort;
-
+	OutputPort<1, 1> outputPort; 
 
 	system("pause");
 	return 0;
