@@ -18,7 +18,7 @@ template<size_t M,size_t N>
 class Port : public PortPointer
 {
 public:
-	virtual void Set() {} = 0;
+	virtual void Set() {};
 };
 
 template<size_t M, size_t N>

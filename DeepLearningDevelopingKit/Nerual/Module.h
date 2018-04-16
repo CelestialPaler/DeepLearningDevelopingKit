@@ -22,20 +22,24 @@ public:
 	{
 		layers.push_back(_newLayer);
 	}
+
 	void PushInputPort(PortPointer * _newLayer)
 	{
 		inputPorts.push_back(_newLayer);
 	}
+
 	void PushOutputPort(PortPointer * _newLayer)
 	{
 		outputPorts.push_back(_newLayer);
 	}
+
 	void Run(void)
 	{
 
 	}
-private:
-	vector<LayerPointer *>  layers;
+
+public:
+	vector<LayerPointer *> layers;
 	vector<PortPointer *> inputPorts;
 	vector<PortPointer *> outputPorts;
 };

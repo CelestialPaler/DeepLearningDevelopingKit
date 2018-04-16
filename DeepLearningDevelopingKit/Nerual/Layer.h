@@ -21,15 +21,22 @@ namespace Nerual
 {
 	/***************************************************************************************************/
 	// Class : LayerPointer 
-	class LayerPointer {};
+	class LayerPointer 
+	{ 
+	public:
+		virtual ~LayerPointer() {}
+	};
 	/***************************************************************************************************/
 	// Class : Layer 
 	/// Base class of the layer class
-	template<size_t M, size_t N> 
 	class Layer : public LayerPointer
 	{
+	public:
+		virtual ~Layer() {}
 	protected:
+		template<size_t M, size_t N>
 		virtual void SetInput(const Vector<double, M> & _data) = 0;
+		template<size_t M, size_t N>
 		virtual Vector<double, N> Output(void) = 0;
 		virtual void Forward(void) = 0;
 	};
@@ -50,7 +57,7 @@ namespace Nerual
 		// Forward propegation
 		void Forward(void);
 
-	private:
+	public:
 		Vector<double, M> inputBuffer;
 		vector<InputNode> nodes;
 	};

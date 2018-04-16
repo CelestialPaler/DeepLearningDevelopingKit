@@ -18,7 +18,7 @@ using namespace std;
 // #define MathDebug
 // #define NodeDebug
 // #define LayerDebug
-#define ModuleDebug
+// #define ModuleDebug
 
 #ifdef MathDebug
 int main()
@@ -152,15 +152,6 @@ int main()
 
 	InputPort<2, 1> inputPort;
 	OutputPort<1, 1> outputPort;
-
-	Module BPNet;
-	BPNet.PushLayer(&inputLayer);
-	BPNet.PushLayer(&hiddenLayer);
-	BPNet.PushLayer(&outputLayer);
-	BPNet.PushInputPort(&inputPort);
-	BPNet.PushOutputPort(&outputPort);
-
-	BPNet.Run();
 
 
 	system("pause");
