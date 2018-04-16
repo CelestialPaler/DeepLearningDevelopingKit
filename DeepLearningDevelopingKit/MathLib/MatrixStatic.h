@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
 /*								        		 	           Math Library 	                                                              */
-/*								        		 	                Matrix   	                                                              */
+/*								        		 	           Matrix Static   	                                                          */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -11,11 +11,13 @@
 #include <iostream>
 #include "MathDef.h"
 
+using namespace MathLib;
+
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
 /// Specialized for deep learning purpose. Emm might be true ... or not ... XD whatever!
-namespace MathLib
+namespace MathLibStatic
 {
 	/***************************************************************************************************/
 	// Class : Matrix
@@ -171,7 +173,7 @@ namespace MathLib
 
 /***************************************************************************************************/
 // Implement
-namespace MathLib
+namespace MathLibStatic
 {
 	template<class T, size_t M, size_t N>
 	inline Matrix<T, M, N>::Matrix(void)
@@ -199,7 +201,7 @@ namespace MathLib
 
 	// Used for debugging
 	template<class T, size_t M, size_t N>
-	inline void MathLib::Matrix<T, M, N>::PrintToConsole(void)
+	inline void MathLibStatic::Matrix<T, M, N>::PrintToConsole(void)
 	{
 		for (size_t i = 0; i < M; i++)
 		{

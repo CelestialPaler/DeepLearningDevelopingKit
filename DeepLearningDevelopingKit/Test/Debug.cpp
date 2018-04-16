@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-using namespace MathLib;
+using namespace MathLibStatic;
 using namespace Nerual;
 using namespace std;
 // #define MathDebug

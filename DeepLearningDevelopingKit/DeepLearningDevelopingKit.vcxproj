@@ -146,7 +146,8 @@
   <ItemGroup>
     <ClInclude Include="MathLib\MathDef.h" />
     <ClInclude Include="MathLib\MathLib.h" />
-    <ClInclude Include="MathLib\Matrix.h" />
+    <ClInclude Include="MathLib\MatrixDynamic.h" />
+    <ClInclude Include="MathLib\MatrixStatic.h" />
     <ClInclude Include="MathLib\ToolFunction.h" />
     <ClInclude Include="MathLib\Vector.h" />
     <ClInclude Include="Nerual\Layer.h" />

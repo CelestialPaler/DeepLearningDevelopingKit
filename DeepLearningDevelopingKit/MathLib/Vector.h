@@ -19,7 +19,7 @@ using namespace std;
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
 /// Specialized for deep learning purpose. Emm might be true ... or not ... XD whatever!
-namespace MathLib
+namespace MathLibStatic
 {
 	/***************************************************************************************************/
 	// Class : Vector
@@ -106,7 +106,7 @@ namespace MathLib
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
-namespace MathLib
+namespace MathLibStatic
 {
 	template<class T, size_t M>
 	inline Vector<T, M>::Vector(void)

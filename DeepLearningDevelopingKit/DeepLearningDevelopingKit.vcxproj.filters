@@ -7,9 +7,6 @@
     <ClInclude Include="MathLib\MathLib.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\Matrix.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
     <ClInclude Include="MathLib\Vector.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
@@ -27,6 +24,12 @@
     </ClInclude>
     <ClInclude Include="Nerual\Module.h">
       <Filter>src\Nerual</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\MatrixStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\MatrixDynamic.h">
+      <Filter>src\MathLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
