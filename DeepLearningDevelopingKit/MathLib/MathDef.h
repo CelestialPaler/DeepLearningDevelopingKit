@@ -6,7 +6,7 @@
 /***************************************************************************************************/
 #pragma once
 
-namespace MathLibDynamic
+namespace MathLib
 {
 	// Type of vector and matrix
 	enum Type {

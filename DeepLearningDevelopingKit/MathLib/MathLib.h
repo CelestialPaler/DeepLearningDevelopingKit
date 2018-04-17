@@ -15,8 +15,8 @@
 
 #ifdef USING_DYNAMIC_MATHLIB
 
-#include "..\MathLib\MatrixDynamic.h"
-#include "..\MathLib\VectorDynamic.h"
+#include "..\MathLib\Matrix.h"
+#include "..\MathLib\Vector.h"
 #endif // USING_DYNAMIC_MATHLIB
 
 #include "..\MathLib\MathDef.h"

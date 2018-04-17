@@ -25,16 +25,16 @@
     <ClInclude Include="MathLib\MatrixStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\MatrixDynamic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
     <ClInclude Include="MathLib\VectorStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
     <ClInclude Include="Util\Log.h">
       <Filter>src\Util</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\VectorDynamic.h">
+    <ClInclude Include="MathLib\Matrix.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\Vector.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
   </ItemGroup>

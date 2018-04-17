@@ -17,7 +17,7 @@ using namespace MathLibStatic;
 #endif // USING_STATIC_MATHLIB
 
 #ifdef USING_DYNAMIC_MATHLIB
-using namespace MathLibDynamic;
+using namespace MathLib;
 #define MathDynamicDebug
 #endif // USING_DYNAMIC_MATHLIB
 
@@ -71,7 +71,11 @@ int main()
 	cout << PrintInfo() << "Math Dynamic Test" << endl;
 	Matrix<int> A(3, 3);
 	Matrix<int> B(3, 3);
-	Matrix<int> C(2, 2);
+	Matrix<int> C(3, 3);
+
+	Matrix<int> D(3, 2);
+	Matrix<int> E(2, 3);
+	Matrix<int> F(3, 3);
 
 	A(1, 1) = 6;
 	B(0, 0) = 3;
@@ -79,24 +83,21 @@ int main()
 	B(2, 2) = 3;
 	C(0, 0) = 1;
 
+	D(1, 1) = 6;
+	E(0, 0) = 3;
+	E(1, 1) = 3;
+	E(2, 2) = 3;
+
 	cout << A << B;
 
 	A = A + B;
-	C = C + 1;
+	C += A;
+	C -= 2;
 
 	cout << A << B << C;
 
-	Vector<int> a(3);
-	Vector<int> b(3);
-	Vector<int> c(2);
-
-	a(0) = 1;
-	a(2) = 1;
-	b(2) = 2;
-
-	a = a + b;
-
-	cout << a << b;
+	F = D * E;
+	cout << D << E << F;
 
 	system("pause");
 	return 0;

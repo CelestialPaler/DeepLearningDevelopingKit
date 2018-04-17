@@ -20,7 +20,7 @@
 
 #ifdef USING_DYNAMIC_MATHLIB
 #include "..\MathLib\MathDef.h"
-#include "..\MathLib\MatrixDynamic.h"
+#include "..\MathLib\Matrix.h"
 #include "..\MathLib\ToolFunction.h"
 #endif // USING_DYNAMIC_MATHLIB
 

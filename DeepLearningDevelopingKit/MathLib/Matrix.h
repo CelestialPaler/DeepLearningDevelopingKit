@@ -1,0 +1,288 @@
+﻿/***************************************************************************************************/
+/*                                               Deep Learning Developing Kit                                                   */
+/*								        		 	           Math Library 	                                                              */
+/*								        		 	                Matrix   	                                                              */
+/*                                                   www.tianshicangxie.com                                                        */
+/*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
+/***************************************************************************************************/
+#pragma once
+
+// Headerfiles
+#include <iostream>
+#include <vector>
+
+#include "MathDef.h"
+
+// Namespaces
+using namespace std;
+
+/***************************************************************************************************/
+// Namespace : MathLib
+/// Provide mathematic support and calculation tools for different algorithms.
+namespace MathLib
+{
+	/***************************************************************************************************/
+	// Class : Matrix
+	/// Implemented in std::vector.
+	/// Specialized for deep learning purpose. (Maybe...) 
+	template<class T>
+	class Matrix
+	{
+	public: // Constructors
+
+		// Default constructor
+		/// Take no parameters, set elements to 0.
+		Matrix(const size_t _m, const size_t _n);
+		// Constructor (Using Type)
+		/// Specified a type of matrix.
+		Matrix(const Type _type);
+		// Constructor (Using given Data)
+		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the matrix
+		// Matrix(const T _data[][]);
+
+	public: // Pointers
+
+		// Pointer
+		T * data() { return this->_data[0]; }
+		// Const pointer
+		const T * data() const { return this->_data[0]; }
+
+	public: // Operator Overloading 
+
+		// "( )" operator
+		/// Used for accessing the element in the matrix.
+		inline T operator()(size_t _i, size_t _j) const
+		{
+			return this->_data[_i][_j];
+		}
+
+		/// Used for referencing the element in the matrix.
+		inline T & operator()(size_t _i, size_t _j)
+		{
+			return this->_data[_i][_j];
+		}
+
+		// "<<" operator
+		/// Used for streaming in format.
+		friend ostream& operator<<(ostream& _outstream, Matrix<T>& _mat)
+		{
+			_outstream << typeid(_mat).name() << endl;
+			for (size_t i = 0; i < _mat.m; i++)
+			{
+				_outstream << "|";
+				for (size_t j = 0; j < _mat.n; j++)
+				{
+					_outstream << _mat(i, j);
+					if (j != _mat.n - 1)	_outstream << " ";
+				}
+				_outstream << "|" << endl;
+			}
+			return _outstream;
+		}
+
+		// "=" operator
+		Matrix<T> & operator = (const Matrix<T> & _other)
+		{
+			if (this != &_other)
+				_data = _other._data;
+			return (*this);
+		}
+
+		// "+" operator
+		/// Addition of two matrixs.
+		Matrix<T> operator + (const Matrix<T> & _other) const
+		{
+			const Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				return temp;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) = self(i, j) + _other(i, j);
+			return temp;
+		}
+
+		/// Addition of a matrix and a scalar.
+		/// Add scalar to each element in the matrix.
+		Matrix operator + (const T & _other) const
+		{
+			const Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) = self(i, j) + _other;
+			return temp;
+		}
+
+		// "-" operator
+		/// Substraction of two matrixs.
+		Matrix<T> operator - (const Matrix<T> & _other) const
+		{
+			const Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Substraction!" << endl;
+				return temp;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) = self(i, j) - _other(i, j);
+			return temp;
+		}
+
+		/// Substraction of a matrix and a scalar.
+		/// Substract a scalar to each element in the matrix.
+		Matrix operator - (const T & _other) const
+		{
+			const Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) = self(i, j) - _other;
+			return temp;
+		}
+
+		// "+=" operator
+		/// Add another matrix to this matrix.
+		void operator += (const Matrix<T> & _other)
+		{
+			Matrix<T> & self = *this;
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) + _other(i, j);
+		}
+
+		/// Add scalar to each element in this matrix.
+		void operator += (const T & _other)
+		{
+			Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) + _other;
+		}
+
+		// "-=" operator
+		/// Substract another matrix to this matrix.
+		void operator -= (const Matrix<T> & _other)
+		{
+			Matrix<T> & self = *this;
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) - _other(i, j);
+		}
+
+		/// Substract scalar to each element in this matrix.
+		void operator -= (const T & _other)
+		{
+			Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) - _other;
+		}
+
+		// "*" operator
+		/// Multiplication of two matrixs.
+		Matrix<T> operator * (const Matrix<T> &_other) const
+		{
+			const Matrix<T> &self = *this;
+			Matrix<T> temp(self.m, _other.n);
+			if (self.n!=_other.m)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				return temp;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t k = 0; k < _other.m; k++)
+					for (size_t j = 0; j < self.n; j++)
+						temp(i, k) += self(i, j) * _other(j, k);
+			return temp;
+		}
+
+		// "*" operator
+		/// Multiply a scalar to each element in the matrix.
+		Matrix<T> operator * (const T &_other) const
+		{
+			const Matrix<T> &self = *this;
+			Matrix<T> temp(self.m, self.n);
+			for (size_t i = 0; i < self.m; i++)
+					for (size_t j = 0; j < self.n; j++)
+						temp(i, j) += self(i, j) * _other;
+			return temp;
+		}
+
+	public: // Used for debugging
+
+		void PrintToConsole(void);
+
+	private:
+		vector<vector<T>> _data;
+		size_t m, n;
+	};
+
+	template<class T>
+	inline Matrix<T>::Matrix(const size_t _m, const size_t _n)
+	{
+		for (size_t i = 0; i < _m; i++)
+		{
+			vector<T> tempVec = *new vector<T>;
+			for (size_t j = 0; j < _n; j++)
+			{
+				T tempElem = *new T;
+				tempElem = 0;
+				tempVec.push_back(tempElem);
+			}
+			this->_data.push_back(tempVec);
+		}
+		m = _m;
+		n = _n;
+	}
+
+	template<class T>
+	inline Matrix<T>::Matrix(Type _type)
+	{
+		for (size_t i = 0; i < M; i++)
+			for (size_t j = 0; j < N; j++)
+				this->_data[i][j] = 0;
+	}
+
+	/*
+	template<class T>
+	inline Matrix<T>::Matrix(const T _data[][])
+	{
+		for (size_t i = 0; i < m; i++)
+			for (size_t j = 0; j < n; j++)
+				this->_data[i][j] = _data[i][j];
+	}
+	*/
+
+	// Used for debugging
+	template<class T>
+	inline void MathLib::Matrix<T>::PrintToConsole(void)
+	{
+		for (size_t i = 0; i < m; i++)
+		{
+			cout << "|";
+			for (size_t j = 0; j < n; j++)
+				cout << _data[i][j] << " ";
+			cout << "|" << endl;
+		}
+		cout << endl;
+	}
+
+
+}
+
