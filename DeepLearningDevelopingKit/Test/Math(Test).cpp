@@ -71,17 +71,32 @@ int main()
 	cout << PrintInfo() << "Math Dynamic Test" << endl;
 	Matrix<int> A(3, 3);
 	Matrix<int> B(3, 3);
+	Matrix<int> C(2, 2);
 
 	A(1, 1) = 6;
 	B(0, 0) = 3;
 	B(1, 1) = 3;
 	B(2, 2) = 3;
+	C(0, 0) = 1;
 
 	cout << A << B;
 
-	A = B + A;
+	A = A + B;
+	C = C + 1;
 
-	cout << A << B;
+	cout << A << B << C;
+
+	Vector<int> a(3);
+	Vector<int> b(3);
+	Vector<int> c(2);
+
+	a(0) = 1;
+	a(2) = 1;
+	b(2) = 2;
+
+	a = a + b;
+
+	cout << a << b;
 
 	system("pause");
 	return 0;

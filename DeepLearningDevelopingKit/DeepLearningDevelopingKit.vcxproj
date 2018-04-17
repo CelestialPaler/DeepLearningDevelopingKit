@@ -149,6 +149,7 @@
     <ClInclude Include="MathLib\MatrixDynamic.h" />
     <ClInclude Include="MathLib\MatrixStatic.h" />
     <ClInclude Include="MathLib\ToolFunction.h" />
+    <ClInclude Include="MathLib\VectorDynamic.h" />
     <ClInclude Include="MathLib\VectorStatic.h" />
     <ClInclude Include="Nerual\Layer.h" />
     <ClInclude Include="Nerual\Module.h" />

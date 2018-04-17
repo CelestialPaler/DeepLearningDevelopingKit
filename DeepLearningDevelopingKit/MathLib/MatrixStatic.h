@@ -11,8 +11,6 @@
 #include <iostream>
 #include "MathDef.h"
 
-using namespace MathLib;
-
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.

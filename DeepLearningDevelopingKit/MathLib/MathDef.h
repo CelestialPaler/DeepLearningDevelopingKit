@@ -6,10 +6,20 @@
 /***************************************************************************************************/
 #pragma once
 
-/***************************************************************************************************/
-// Namespace : MathLib
-/// Provide mathematic support and calculation tools for different algorithms.
-namespace MathLib
+namespace MathLibDynamic
+{
+	// Type of vector and matrix
+	enum Type {
+		Zero,
+		Ones,
+		Random,
+		Identity,
+		Diagonal,
+		Triangle
+	};
+}
+
+namespace MathLibStatic
 {
 	// Type of vector and matrix
 	enum Type {

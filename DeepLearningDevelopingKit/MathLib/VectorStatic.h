@@ -14,7 +14,6 @@
 
 using namespace std;
 
-
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.

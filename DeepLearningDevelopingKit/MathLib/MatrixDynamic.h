@@ -7,28 +7,37 @@
 /***************************************************************************************************/
 #pragma once
 
-// Header files
+/***************************************************************************************************
+ * Dynamic Matrix Lib, which means the size(shape) of Matrix is changeable. Implemented in 
+ * std::vector<T> gives the matrix with flexbility.
+ */
+
+// Headr Files
 #include <iostream>
 #include <vector>
 
 #include "MathDef.h"
 
+// Namespaces
 using namespace std;
-using namespace MathLib;
 
-/***************************************************************************************************/
-// Namespace : MathLib
-/// Provide mathematic support and calculation tools for different algorithms.
-/// Specialized for deep learning purpose. Emm might be true ... or not ... XD whatever!
+/***************************************************************************************************
+* Namespace : MathLibDynamic
+* Provide mathematic support and calculation tools for different algorithms.
+* Specialized for deep learning purpose.
+*/
 namespace MathLibDynamic
 {
-	/***************************************************************************************************/
-	// Class : Matrix
+	/***************************************************************************************************
+	* Class : Matrix
+	* 
+	*/
 	template<class T>
 	class Matrix
 	{
 	public:
 		Matrix(const size_t _m, const size_t _n);
+		Matrix(Type );
 
 	public:
 		// Pointer
@@ -82,13 +91,30 @@ namespace MathLibDynamic
 
 		// "+" operator
 		/// Addition of two matrixs.
-		Matrix operator + (const Matrix & _other)
+		Matrix<T> operator + (const Matrix<T> & _other) const
 		{
-			Matrix<T> temp(m, n);
 			const Matrix<T> & self = *this;
-			for (size_t i = 0; i < m; i++)
-				for (size_t j = 0; j < n; j++)
+			Matrix<T> temp(m, n);
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				return temp;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
 					temp(i, j) = self(i, j) + _other(i, j);
+			return temp;
+		}
+
+		/// Addition of a matrix and a scalar.
+		/// Add scalar to each element in the matrix.
+		Matrix operator + (const T & _other) const
+		{
+			const Matrix<T> & self = *this;
+			Matrix<T> temp(m, n);
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) = self(i, j) + _other;
 			return temp;
 		}
 
@@ -96,6 +122,7 @@ namespace MathLibDynamic
 		// Used for debugging
 	public:
 		void PrintToConsole(void);
+
 	private:
 		vector<vector<T>> _data;
 		size_t m, n;
@@ -132,8 +159,5 @@ namespace MathLibDynamic
 		}
 		cout << endl;
 	}
-
-
-
 }
 

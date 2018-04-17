@@ -34,6 +34,9 @@
     <ClInclude Include="Util\Log.h">
       <Filter>src\Util</Filter>
     </ClInclude>
+    <ClInclude Include="MathLib\VectorDynamic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
