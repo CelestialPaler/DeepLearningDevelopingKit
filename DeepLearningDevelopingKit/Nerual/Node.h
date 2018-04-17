@@ -10,7 +10,12 @@
 #include "..\MathLib\MathLib.h"
 
 // Name space
+#ifdef USING_STATIC_MATHLIB
 using namespace MathLibStatic;
+#endif // USING_STATIC_MATHLIB
+#ifdef USING_DYNAMIC_MATHLIB
+using namespace MathLibDynamic;
+#endif // USING_STATIC_MATHLIB
 
 /***************************************************************************************************/
 // Namespace : Nerual

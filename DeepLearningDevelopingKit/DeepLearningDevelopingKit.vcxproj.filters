@@ -7,9 +7,6 @@
     <ClInclude Include="MathLib\MathLib.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\Vector.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
     <ClInclude Include="MathLib\ToolFunction.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
@@ -31,6 +28,12 @@
     <ClInclude Include="MathLib\MatrixDynamic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="MathLib\VectorStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Log.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -50,7 +53,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test\Debug.cpp">
+    <ClCompile Include="Test\Math%28Test%29.cpp">
+      <Filter>src\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Node(Test).cpp">
       <Filter>src\Test</Filter>
     </ClCompile>
   </ItemGroup>

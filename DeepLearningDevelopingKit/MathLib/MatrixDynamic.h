@@ -8,11 +8,13 @@
 #pragma once
 
 // Header files
-#include "MathDef.h"
 #include <iostream>
 #include <vector>
 
+#include "MathDef.h"
+
 using namespace std;
+using namespace MathLib;
 
 /***************************************************************************************************/
 // Namespace : MathLib
@@ -26,17 +28,112 @@ namespace MathLibDynamic
 	class Matrix
 	{
 	public:
-		Matrix();
+		Matrix(const size_t _m, const size_t _n);
+
+	public:
+		// Pointer
+		T * data()
+		{
+			return this->_data[0];
+		}
+
+		// Const pointer
+		const T * data() const
+		{
+			return this->_data[0];
+		}
+
+		// "( )" operator
+		/// used for accessing the elemnet in the matrix.
+		inline T operator()(size_t _i, size_t _j) const
+		{
+			return this->_data[_i][_j];
+		}
+
+		/// Used for referencing the element in the matrix.
+		inline T & operator()(size_t _i, size_t _j)
+		{
+			return this->_data[_i][_j];
+		}
+
+		friend ostream& operator<<(ostream& _os, Matrix<T>& _mat)
+		{
+			_os << typeid(_mat).name() << endl;
+			for (size_t i = 0; i < _mat.m; i++)
+			{
+				_os << "|";
+				for (size_t j = 0; j < _mat.n; j++)
+				{
+					_os << _mat(i, j);
+					if (j != _mat.n - 1)	_os << " ";
+				}
+				_os << "|" << endl;
+			}
+			return _os;
+		}
+
+		// "=" operator
+		Matrix<T> & operator = (const Matrix<T> & _other)
+		{
+			if (this != &_other)
+				_data = _other._data;
+			return (*this);
+		}
+
+		// "+" operator
+		/// Addition of two matrixs.
+		Matrix operator + (const Matrix & _other)
+		{
+			Matrix<T> temp(m, n);
+			const Matrix<T> & self = *this;
+			for (size_t i = 0; i < m; i++)
+				for (size_t j = 0; j < n; j++)
+					temp(i, j) = self(i, j) + _other(i, j);
+			return temp;
+		}
+
+		/***************************************************************************************************/
+		// Used for debugging
+	public:
+		void PrintToConsole(void);
 	private:
 		vector<vector<T>> _data;
+		size_t m, n;
 	};
 
 	template<class T>
-	inline Matrix<T>::Matrix(void)
+	inline Matrix<T>::Matrix(const size_t _m, const size_t _n)
 	{
-		for (size_t i = 0; i < M; i++)
-			for (size_t j = 0; j < N; j++)
-				this->_data[i][j] = 0;
+		for (size_t i = 0; i < _m; i++)
+		{
+			vector<T> tempVec = *new vector<T>;
+			for (size_t j = 0; j < _n; j++)
+			{
+				T tempElem = *new T;
+				tempElem = 0;
+				tempVec.push_back(tempElem);
+			}
+			this->_data.push_back(tempVec);
+		}
+		m = _m;
+		n = _n;
 	}
+
+	// Used for debugging
+	template<class T>
+	inline void MathLibDynamic::Matrix<T>::PrintToConsole(void)
+	{
+		for (size_t i = 0; i < m; i++)
+		{
+			cout << "|";
+			for (size_t j = 0; j < n; j++)
+				cout << _data[i][j] << " ";
+			cout << "|" << endl;
+		}
+		cout << endl;
+	}
+
+
+
 }
 

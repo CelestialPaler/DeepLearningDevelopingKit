@@ -10,10 +10,10 @@
 // Header files
 #include <iostream>
 #include "Mathdef.h"
-#include "Matrix.h"
+#include "MatrixStatic.h"
 
-// Name space
 using namespace std;
+
 
 /***************************************************************************************************/
 // Namespace : MathLib

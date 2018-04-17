@@ -149,14 +149,16 @@
     <ClInclude Include="MathLib\MatrixDynamic.h" />
     <ClInclude Include="MathLib\MatrixStatic.h" />
     <ClInclude Include="MathLib\ToolFunction.h" />
-    <ClInclude Include="MathLib\Vector.h" />
+    <ClInclude Include="MathLib\VectorStatic.h" />
     <ClInclude Include="Nerual\Layer.h" />
     <ClInclude Include="Nerual\Module.h" />
     <ClInclude Include="Nerual\Node.h" />
+    <ClInclude Include="Util\Log.h" />
     <ClInclude Include="Util\Port.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test\Debug.cpp" />
+    <ClCompile Include="Test\Math%28Test%29.cpp" />
+    <ClCompile Include="Test\Node(Test).cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

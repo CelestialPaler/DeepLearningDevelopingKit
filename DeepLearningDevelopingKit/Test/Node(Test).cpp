@@ -1,67 +1,3 @@
-﻿/***************************************************************************************************/
-/*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	                Debug   	                                                              */
-/*                                                   www.tianshicangxie.com                                                        */
-/*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
-/***************************************************************************************************/
-#include "..\MathLib\MathLib.h"
-#include "..\Nerual\Node.h"
-#include "..\Nerual\Layer.h"
-#include "..\Nerual\Module.h"
-#include "..\Util\Port.h"
-
-#include <iostream>
-
-using namespace MathLibStatic;
-using namespace Nerual;
-using namespace std;
-// #define MathDebug
-// #define NodeDebug
-// #define LayerDebug
-#define ModuleDebug
-
-#ifdef MathDebug
-int main()
-{
-	cout << "Math Uint Test" << endl;
-	Matrix<int, 3, 3> A, B, C, D, E;
-
-	A(1, 1) = 6;
-	B(0, 0) = 3;
-	B(1, 1) = 3;
-	B(2, 2) = 3;
-
-	C = A + B;
-	C.PrintToConsole();
-	C = C + 1;
-	C.PrintToConsole();
-	D = A - B;
-	D.PrintToConsole();
-	E = A * B;
-	E.PrintToConsole();
-	int data[3][3] = { { 1,2,3 },{ 4,5,6 },{ 7,8,9 } };
-	Matrix<int, 3, 3> F(data);
-	F.PrintToConsole();
-
-	F = F * 3;
-	F.PrintToConsole();
-
-	Vector<int, 3> a, b, c;
-	a(0) = 3;
-	a(1) = 3;
-	b(0) = 4;
-
-	a.PrintToConsole();
-	b.PrintToConsole();
-
-	a = b;
-
-	(a + b).PrintToConsole();
-
-	system("pause");
-	return 0;
-}
-#endif // Debug
 
 #ifdef NodeDebug
 int main()
@@ -151,12 +87,9 @@ int main()
 	OutputLayer<5, 1> outputLayer;
 
 	InputPort<2, 1> inputPort;
-	OutputPort<1, 1> outputPort; 
+	OutputPort<1, 1> outputPort;
 
 	system("pause");
 	return 0;
 }
 #endif // ModuleDebug
-
-
-
