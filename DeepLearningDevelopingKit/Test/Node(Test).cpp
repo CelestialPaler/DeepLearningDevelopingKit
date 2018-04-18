@@ -11,7 +11,7 @@
 #include "..\Nerual\Node.h"
 #include "..\Util\Log.h"
 
-#define NodeDebug
+// #define NodeDebug
 using namespace Nerual;
 
 #ifdef NodeDebug

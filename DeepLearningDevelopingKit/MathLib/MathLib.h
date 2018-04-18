@@ -14,14 +14,12 @@
 #endif // USING_STATIC_MATHLIB
 
 #ifdef USING_STANDARD_MATHLIB
-
 #include "..\MathLib\Matrix.h"
 #include "..\MathLib\Vector.h"
 #endif // USING_DYNAMIC_MATHLIB
 
 #include "..\MathLib\MathDef.h"
 #include "..\MathLib\ToolFunction.h"
-
-
+#include "..\Util\Log.h"
 
 

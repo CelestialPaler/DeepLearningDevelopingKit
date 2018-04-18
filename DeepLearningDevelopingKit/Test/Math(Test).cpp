@@ -9,18 +9,12 @@
 #include <iostream>
 
 #include "..\MathLib\MathLib.h"
+#include "..\Util\Log.h"
 
-#ifdef USING_STATIC_MATHLIB
-using namespace MathLibStatic;
-#define MathStaticDebug
-#endif // USING_STATIC_MATHLIB
-
-#ifdef USING_DYNAMIC_MATHLIB
-using namespace MathLib;
 #define MathDynamicDebug
-#endif // USING_DYNAMIC_MATHLIB
 
 using namespace std;
+using namespace MathLib;
 
 #ifdef MathStaticDebug
 int main()

@@ -43,7 +43,8 @@ namespace MathLib
 	public: // Initializing
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
-	public: // Initializing
+	public: // 
+		T Sum(void);
 
 	public: // Pointer
 
@@ -138,6 +139,12 @@ namespace MathLib
 			tempElem = 0;
 			_data.push_back(tempElem);
 		}
+	}
+
+	template<class T>
+	T Vector<T>::Sum(void)
+	{
+		return accumulate(_data.begin(), _data.end(), 0);
 	}
 
 }

@@ -42,7 +42,7 @@ Nerual::HiddenNode::HiddenNode(size_t _n)
 
 void Nerual::HiddenNode::Calculate(void)
 {
-	this->value = tempInput * 
+	// this->value = tempInput * 
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
