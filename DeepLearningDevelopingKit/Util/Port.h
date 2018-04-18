@@ -15,7 +15,7 @@
 using namespace MathLibStatic;
 #endif // USING_STATIC_MATHLIB
 #ifdef USING_DYNAMIC_MATHLIB
-using namespace MathLibDynamic;
+using namespace MathLib;
 #endif // USING_STATIC_MATHLIB
 
 class PortPointer {};

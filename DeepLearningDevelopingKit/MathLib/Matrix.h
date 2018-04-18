@@ -31,14 +31,14 @@ namespace MathLib
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters, set elements to 0.
-		Matrix(const size_t _m, const size_t _n);
-		// Constructor (Using Type)
-		/// Specified a type of matrix.
-		Matrix(const Type _type);
+		/// Take no parameters and before use Init() should be involked.
+		Matrix(void);
+		// Constructor (Using Size and Type)
+		/// Specified the size of vector.
+		Matrix(const size_t _m, const size_t _n, const MatrixType _type = MatrixType::Zero);
 		// Constructor (Using given Data)
 		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the matrix
-		// Matrix(const T _data[][]);
+		// Matrix(const T ** _data, size_t m, size_t n);
 
 	public: // Pointers
 
@@ -107,7 +107,7 @@ namespace MathLib
 
 		/// Addition of a matrix and a scalar.
 		/// Add scalar to each element in the matrix.
-		Matrix operator + (const T & _other) const
+		Matrix<T> operator + (const T & _other) const
 		{
 			const Matrix<T> & self = *this;
 			Matrix<T> temp(m, n);
@@ -234,7 +234,7 @@ namespace MathLib
 	};
 
 	template<class T>
-	inline Matrix<T>::Matrix(const size_t _m, const size_t _n)
+	inline Matrix<T>::Matrix(const size_t _m, const size_t _n, const MatrixType _type)
 	{
 		for (size_t i = 0; i < _m; i++)
 		{
@@ -250,24 +250,6 @@ namespace MathLib
 		m = _m;
 		n = _n;
 	}
-
-	template<class T>
-	inline Matrix<T>::Matrix(Type _type)
-	{
-		for (size_t i = 0; i < M; i++)
-			for (size_t j = 0; j < N; j++)
-				this->_data[i][j] = 0;
-	}
-
-	/*
-	template<class T>
-	inline Matrix<T>::Matrix(const T _data[][])
-	{
-		for (size_t i = 0; i < m; i++)
-			for (size_t j = 0; j < n; j++)
-				this->_data[i][j] = _data[i][j];
-	}
-	*/
 
 	// Used for debugging
 	template<class T>

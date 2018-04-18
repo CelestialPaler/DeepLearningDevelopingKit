@@ -158,8 +158,12 @@
     <ClInclude Include="Util\Port.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Nerual\Node.cpp" />
     <ClCompile Include="Test\Math%28Test%29.cpp" />
     <ClCompile Include="Test\Node(Test).cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

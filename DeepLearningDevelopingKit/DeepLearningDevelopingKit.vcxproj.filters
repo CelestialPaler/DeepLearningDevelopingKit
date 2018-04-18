@@ -62,5 +62,11 @@
     <ClCompile Include="Test\Node(Test).cpp">
       <Filter>src\Test</Filter>
     </ClCompile>
+    <ClCompile Include="Nerual\Node.cpp">
+      <Filter>src\Nerual</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,6 @@
 #include <iostream>
 
 #include "..\MathLib\MathLib.h"
-#include "..\Util\Log.h"
 
 #ifdef USING_STATIC_MATHLIB
 using namespace MathLibStatic;
@@ -69,6 +68,7 @@ int main()
 int main()
 {
 	cout << PrintInfo() << "Math Dynamic Test" << endl;
+	int data[][] = { { 1,2,3 },{ 4,5,6 },{ 7,8,9 } };
 	Matrix<int> A(3, 3);
 	Matrix<int> B(3, 3);
 	Matrix<int> C(3, 3);
@@ -77,7 +77,6 @@ int main()
 	Matrix<int> E(2, 3);
 	Matrix<int> F(3, 3);
 
-	A(1, 1) = 6;
 	B(0, 0) = 3;
 	B(1, 1) = 3;
 	B(2, 2) = 3;

@@ -6,14 +6,14 @@
 /***************************************************************************************************/
 #pragma once
 
-#define USING_DYNAMIC_MATHLIB
+#define USING_STANDARD_MATHLIB
 
 #ifdef USING_STATIC_MATHLIB
 #include "..\MathLib\MatrixStatic.h"
 #include "..\MathLib\VectorStatic.h"
 #endif // USING_STATIC_MATHLIB
 
-#ifdef USING_DYNAMIC_MATHLIB
+#ifdef USING_STANDARD_MATHLIB
 
 #include "..\MathLib\Matrix.h"
 #include "..\MathLib\Vector.h"

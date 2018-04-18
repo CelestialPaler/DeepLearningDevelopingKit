@@ -13,20 +13,22 @@
 #ifdef USING_STATIC_MATHLIB
 using namespace MathLibStatic;
 #endif // USING_STATIC_MATHLIB
-#ifdef USING_DYNAMIC_MATHLIB
-using namespace MathLibDynamic;
-#endif // USING_STATIC_MATHLIB
+#ifdef USING_STANDARD_MATHLIB
+using namespace MathLib;
+#endif // USING_STANDARD_MATHLIB
 
 /***************************************************************************************************/
 // Namespace : Nerual
+/// Provide Node for nerual network algorithms.
 namespace Nerual
 {
+	typedef double ElemType;
+
 	class Node
 	{
 	public:
-		virtual void Init() {};
+		virtual void Calculate(void) = 0;
 	private:
-
 	};
 
 	/**********************************************************************************************************/
@@ -35,91 +37,45 @@ namespace Nerual
 	{
 	public:
 		/// Constructor
-		InputNode() { Init(); }
+		InputNode(void);
 	public:
-		void Init(void);
+		void Calculate(void) override;
+
+	public:
+		// "<<" operator
+		/// Used for streaming in format.
+		friend ostream& operator<<(ostream& _outstream, InputNode& _node);
 
 	public:
 		/// Used for BP Algorithm
-		double value;
+		ElemType value;
+		ElemType tempInput;
 	};
-
-	inline void InputNode::Init(void)
-	{
-		this->value = 0.f;
-	}
 
 	/**********************************************************************************************************/
 	// Class : HiddenNode
-	template<size_t N>
 	class HiddenNode : public Node
 	{
 	public:
 		/// Constructor
-		HiddenNode() { Init(); }
+		HiddenNode(size_t _n);
 	public:
-		void Init(void);
+		void Calculate(void) override;
+	    
+	public:
+		// "<<" operator
+		/// Used for streaming in format.
+		friend ostream& operator<<(ostream& _outstream, HiddenNode& _node);
 
 	public:
 		/// Used for BP Algorithm
-		double value;
-		double delta;
-		double bias;
-		double biasDelta;
-		Vector<double, N> weight;
-		Vector<double, N> weightDelta;
+		ElemType value;
+		ElemType delta;
+		ElemType tempInput;
+		ElemType bias;
+		ElemType biasDelta;
+		Vector<ElemType> weight;
+		Vector<ElemType> weightDelta;
 	};
 
-	template<size_t N>
-	inline void HiddenNode<N>::Init(void)
-	{
-		this->value = 0.f;
-		this->delta = 0.f;
-		this->bias = 0.f;
-		this->biasDelta = 0.f;
-		for (size_t i = 0; i < N; i++)
-			this->weight(i) = RandomSqrt(N);
-		for (size_t i = 0; i < N; i++)
-			this->weightDelta(i) = RandomSqrt(N);
-	}
-
-	/**********************************************************************************************************/
-	// Class : OutputNode
-	template<size_t N>
-	class OutputNode : public Node
-	{
-	public:
-		/// Constructor
-		OutputNode() { Init(); }
-	public:
-		void Init(void);
-
-	public:
-		/// Used for BP Algorithm
-		double value;
-		double delta;
-		double error;
-		double loss;
-		double expectation;
-		double bias;
-		double biasDelta;
-		Vector<double, N> weight;
-		Vector<double, N> weightDelta;
-	};
-
-	template<size_t N>
-	inline void OutputNode<N>::Init(void)
-	{
-		this->value = 0.f;
-		this->delta = 0.f;
-		this->error = 0.f;
-		this->loss = 0.f;
-		this->expectation = 0.f;
-		this->bias = 0.f;
-		this->biasDelta = 0.f;
-		for (size_t i = 0; i < N; i++)
-			this->weight(i) = RandomSqrt(N);
-		for (size_t i = 0; i < N; i++)
-			this->weightDelta(i) = RandomSqrt(N);
-	}
 }

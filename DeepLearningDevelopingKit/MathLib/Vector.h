@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
 /*								        		 	           Math Library 	                                                              */
-/*								        		 	         Vector Dynamic 	                                                           */
+/*								        		 	                Vector  	                                                              */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -9,65 +9,77 @@
 
 // Header files
 #include <iostream>
-#include "MathLib.h"
+#include <vector>
 
-#ifdef USING_STATIC_MATHLIB
-#include "..\MathLib\MathDef.h"
-#include "..\MathLib\MatrixStatic.h"
-#include "..\MathLib\VectorStatic.h"
-#include "..\MathLib\ToolFunction.h"
-#endif // USING_STATIC_MATHLIB
+#include "MathDef.h"
 
-#ifdef USING_DYNAMIC_MATHLIB
-#include "..\MathLib\MathDef.h"
-#include "..\MathLib\Matrix.h"
-#include "..\MathLib\ToolFunction.h"
-#endif // USING_DYNAMIC_MATHLIB
-
+// Namespaces
 using namespace std;
-
 
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
-/// Specialized for deep learning purpose. Emm might be true ... or not ... XD whatever!
-namespace MathLibDynamic
+namespace MathLib
 {
 	/***************************************************************************************************/
 	// Class : Vector
-	/// 
+	/// Implemented in std::vector.
+	/// Specialized for deep learning purpose. (Maybe...) 
 	template<class T>
 	class Vector
 	{
-		/***************************************************************************************************/
-		// Constructors
-	public:
-		Vector(const size_t _n);
+	public: // Constructors
 
-	public:
+		// Default constructor
+		/// Take no parameters and before use Init() should be involked.
+		Vector(void);
+		// Constructor (Using Size and Type)
+		/// Specified the size of vector.
+		Vector(const size_t _n, const VectorType _type = VectorType::Zero);
+		// Constructor (Using given Data)
+		/// Using data from a given pointer, which is pointed to an array, to initialize the vector
+		// Matrix(const T * _data, size_t n);
+
+	public: // Initializing
+		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
+
+	public: // Initializing
+
+	public: // Pointer
+
 		// Pointer
-		T * data()
-		{
-			return this->_data[0];
-		}
-
+		T * data() { return this->_data[0]; }
 		// Const pointer
-		const T * data() const
-		{
-			return this->_data[0];
-		}
+		const T * data() const { return this->_data[0]; }
+
+	public: // Operator Overloading
 
 		// "( )" operator
-		/// used for accessing the elemnet in the matrix.
+		/// Used for accessing the element in the vector.
 		inline T operator()(size_t _j) const
 		{
 			return this->_data[_j];
 		}
 
-		/// Used for referencing the element in the matrix.
+		/// Used for referencing the element in the vector.
 		inline T & operator()(size_t _j)
 		{
 			return this->_data[_j];
+		}
+
+		// "<<" operator
+		/// Used for streaming in format.
+		friend ostream& operator<<(ostream& _outstream, Vector<T>& _vec)
+		{
+			_outstream << typeid(_vec).name() << endl;
+			_outstream << "|";
+			for (size_t j = 0; j < _vec.n; j++)
+			{
+				_outstream << _vec(j);
+				if (j != _vec.n - 1)	_outstream << " ";
+			}
+			_outstream << "|" << endl;
+			return _outstream;
 		}
 
 		// "=" operator
@@ -83,28 +95,15 @@ namespace MathLibDynamic
 		Vector<T> operator + (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
-			Vector<T> temp(n);
+			Vector<T> temp(m);
 			if (self.n != _other.n)
 			{
 				cerr << "ERROR : Invalid Vector Addtion!" << endl;
 				return temp;
 			}
 			for (size_t j = 0; j < self.n; j++)
-				temp( j) = self(j) + _other(j);
+				temp(j) = self(j) + _other(j);
 			return temp;
-		}
-
-		friend ostream& operator<<(ostream& _os, Vector<T>& _mat)
-		{
-			_os << typeid(_mat).name() << endl;
-			_os << "|";
-			for (size_t j = 0; j < _mat.n; j++)
-			{
-				_os << _mat(j);
-				if (j != _mat.n - 1)	_os << " ";
-			}
-			_os << "|" << endl;
-			return _os;
 		}
 
 		/***************************************************************************************************/
@@ -117,9 +116,8 @@ namespace MathLibDynamic
 		size_t n;
 	};
 
-
 	template<class T>
-	inline MathLibDynamic::Vector<T>::Vector(const size_t _n)
+	inline MathLib::Vector<T>::Vector(const size_t _n, const VectorType _type)
 	{
 		for (size_t j = 0; j < _n; j++)
 		{
@@ -129,4 +127,18 @@ namespace MathLibDynamic
 		}
 		n = _n;
 	}
+
+	template<class T>
+	inline void Vector<T>::Init(const size_t _n, const VectorType _type)
+	{
+		this->n = _n;
+		for (size_t j = 0; j < _n; j++)
+		{
+			T tempElem = *new T;
+			tempElem = 0;
+			_data.push_back(tempElem);
+		}
+	}
+
 }
+

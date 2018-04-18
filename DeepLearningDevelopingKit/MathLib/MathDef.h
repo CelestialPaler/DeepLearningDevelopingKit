@@ -9,13 +9,21 @@
 namespace MathLib
 {
 	// Type of vector and matrix
-	enum Type {
+	enum class MatrixType {
 		Zero,
 		Ones,
 		Random,
 		Identity,
 		Diagonal,
 		Triangle
+	};
+
+	// Type of vector and matrix
+	enum class VectorType {
+		Zero,
+		Ones,
+		Random,
+		Identity
 	};
 }
 
