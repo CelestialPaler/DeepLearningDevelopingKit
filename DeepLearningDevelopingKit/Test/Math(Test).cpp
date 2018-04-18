@@ -9,7 +9,7 @@
 #include <iostream>
 
 #include "..\MathLib\MathLib.h"
-#include "..\Util\Log.h"
+// #include "..\Util\Log.h"
 
 #define MathDynamicDebug
 
@@ -61,36 +61,27 @@ int main()
 #ifdef MathDynamicDebug
 int main()
 {
-	cout << PrintInfo() << "Math Dynamic Test" << endl;
-	int data[][] = { { 1,2,3 },{ 4,5,6 },{ 7,8,9 } };
-	Matrix<int> A(3, 3);
-	Matrix<int> B(3, 3);
-	Matrix<int> C(3, 3);
+	// cout << PrintInfo() << "Math Dynamic Test" << endl;
+	Vector<int> input;
+	input.Init(5);
+	for (size_t i = 0; i < 5; i++) 
+		input(i) = i;
 
-	Matrix<int> D(3, 2);
-	Matrix<int> E(2, 3);
-	Matrix<int> F(3, 3);
+	Vector<int> weight;
+	weight.Init(5);
+	for (size_t i = 0; i < 5; i++)
+		weight(i) = i;
 
-	B(0, 0) = 3;
-	B(1, 1) = 3;
-	B(2, 2) = 3;
-	C(0, 0) = 1;
+	int bias = 2, ans = 0;
 
-	D(1, 1) = 6;
-	E(0, 0) = 3;
-	E(1, 1) = 3;
-	E(2, 2) = 3;
+	cout << input << weight << bias << endl;
 
-	cout << A << B;
+	ans = (input * weight).Sum() + bias;
+	cout << ans << endl;
 
-	A = A + B;
-	C += A;
-	C -= 2;
 
-	cout << A << B << C;
 
-	F = D * E;
-	cout << D << E << F;
+
 
 	system("pause");
 	return 0;

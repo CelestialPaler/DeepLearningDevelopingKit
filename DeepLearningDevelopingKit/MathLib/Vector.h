@@ -10,6 +10,7 @@
 // Header files
 #include <iostream>
 #include <vector>
+#include<numeric>
 
 #include "MathDef.h"
 
@@ -21,6 +22,14 @@ using namespace std;
 /// Provide mathematic support and calculation tools for different algorithms.
 namespace MathLib
 {
+	// Type of Vector.
+	enum class VectorType {
+		Zero,
+		Ones,
+		Random,
+		Identity
+	};
+
 	/***************************************************************************************************/
 	// Class : Vector
 	/// Implemented in std::vector.
@@ -34,16 +43,22 @@ namespace MathLib
 		/// Take no parameters and before use Init() should be involked.
 		Vector(void);
 		// Constructor (Using Size and Type)
-		/// Specified the size of vector.
+		/// Specified the size of Vector.
 		Vector(const size_t _n, const VectorType _type = VectorType::Zero);
 		// Constructor (Using given Data)
-		/// Using data from a given pointer, which is pointed to an array, to initialize the vector
+		/// Using data from a given pointer, which is pointed to an array, to initialize the Vector.
 		// Matrix(const T * _data, size_t n);
 
 	public: // Initializing
+
+		// Initializing function
+		/// Initializing the Vector after defination.
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
-	public: // 
+	public: // Quantification
+
+		// Sum function
+		/// Add up all the element in the Vector.
 		T Sum(void);
 
 	public: // Pointer
@@ -72,7 +87,7 @@ namespace MathLib
 		/// Used for streaming in format.
 		friend ostream& operator<<(ostream& _outstream, Vector<T>& _vec)
 		{
-			_outstream << typeid(_vec).name() << endl;
+			_outstream << typeid(_vec).name() << " ";
 			_outstream << "|";
 			for (size_t j = 0; j < _vec.n; j++)
 			{
@@ -96,7 +111,7 @@ namespace MathLib
 		Vector<T> operator + (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
-			Vector<T> temp(m);
+			Vector<T> temp(n);
 			if (self.n != _other.n)
 			{
 				cerr << "ERROR : Invalid Vector Addtion!" << endl;
@@ -107,9 +122,23 @@ namespace MathLib
 			return temp;
 		}
 
-		/***************************************************************************************************/
-		// Used for debugging
-	public:
+		// "*" operator
+		/// Addition of two matrixs.
+		Vector<T> operator * (const Vector<T> & _other) const
+		{
+			const Vector<T> & self = *this;
+			Vector<T> temp(n);
+			if (self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Vector Multiplication!" << endl;
+				return temp;
+			}
+			for (size_t j = 0; j < self.n; j++)
+				temp(j) = self(j) * _other(j);
+			return temp;
+		}
+
+	public: // Used for debugging
 		void PrintToConsole(void);
 
 	private:
@@ -118,7 +147,13 @@ namespace MathLib
 	};
 
 	template<class T>
-	inline MathLib::Vector<T>::Vector(const size_t _n, const VectorType _type)
+	inline Vector<T>::Vector(void)
+	{
+
+	}
+
+	template<class T>
+	inline Vector<T>::Vector(const size_t _n, const VectorType _type)
 	{
 		for (size_t j = 0; j < _n; j++)
 		{
@@ -132,13 +167,13 @@ namespace MathLib
 	template<class T>
 	inline void Vector<T>::Init(const size_t _n, const VectorType _type)
 	{
-		this->n = _n;
 		for (size_t j = 0; j < _n; j++)
 		{
 			T tempElem = *new T;
 			tempElem = 0;
 			_data.push_back(tempElem);
 		}
+		n = _n;
 	}
 
 	template<class T>

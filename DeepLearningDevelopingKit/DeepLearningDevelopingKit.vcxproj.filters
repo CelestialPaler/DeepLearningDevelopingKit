@@ -22,12 +22,6 @@
     <ClInclude Include="Nerual\Module.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\MatrixStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\VectorStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
     <ClInclude Include="Util\Log.h">
       <Filter>src\Util</Filter>
     </ClInclude>
@@ -35,6 +29,12 @@
       <Filter>src\MathLib</Filter>
     </ClInclude>
     <ClInclude Include="MathLib\Vector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\MatrixStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib\VectorStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,6 +10,7 @@
 
 using namespace std;
 
+/*
 string PrintInfo(void)
 {
 	string temp;
@@ -19,6 +20,6 @@ string PrintInfo(void)
 	temp += "Branch : Master alpha\n\n";
 	chrono::system_clock::time_point now =chrono::system_clock::now();
 	time_t now_c = chrono::system_clock::to_time_t(now - chrono::hours(24));
-	struct tm t;   //tm结构指针
 	return temp;
 }
+*/

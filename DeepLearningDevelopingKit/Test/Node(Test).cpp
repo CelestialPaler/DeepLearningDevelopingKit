@@ -9,7 +9,6 @@
 #include <iostream>
 
 #include "..\Nerual\Node.h"
-#include "..\Util\Log.h"
 
 // #define NodeDebug
 using namespace Nerual;

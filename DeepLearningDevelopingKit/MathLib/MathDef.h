@@ -17,14 +17,6 @@ namespace MathLib
 		Diagonal,
 		Triangle
 	};
-
-	// Type of vector and matrix
-	enum class VectorType {
-		Zero,
-		Ones,
-		Random,
-		Identity
-	};
 }
 
 namespace MathLibStatic

@@ -51,31 +51,4 @@ namespace Nerual
 		ElemType value;
 		ElemType tempInput;
 	};
-
-	/**********************************************************************************************************/
-	// Class : HiddenNode
-	class HiddenNode : public Node
-	{
-	public:
-		/// Constructor
-		HiddenNode(size_t _n);
-	public:
-		void Calculate(void) override;
-	    
-	public:
-		// "<<" operator
-		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, HiddenNode& _node);
-
-	public:
-		/// Used for BP Algorithm
-		ElemType value;
-		ElemType delta;
-		ElemType tempInput;
-		ElemType bias;
-		ElemType biasDelta;
-		Vector<ElemType> weight;
-		Vector<ElemType> weightDelta;
-	};
-
 }
