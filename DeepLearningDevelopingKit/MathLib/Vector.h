@@ -12,8 +12,6 @@
 #include <vector>
 #include<numeric>
 
-#include "MathDef.h"
-
 // Namespaces
 using namespace std;
 
@@ -41,7 +39,7 @@ namespace MathLib
 
 		// Default constructor
 		/// Take no parameters and before use Init() should be involked.
-		Vector(void);
+		Vector(void);	
 		// Constructor (Using Size and Type)
 		/// Specified the size of Vector.
 		Vector(const size_t _n, const VectorType _type = VectorType::Zero);

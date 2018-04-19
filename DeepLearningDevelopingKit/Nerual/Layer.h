@@ -10,7 +10,6 @@
 #include <vector>
 #include "..\MathLib\MathLib.h"
 #include "..\Nerual\Node.h"
-#include "..\Util\Port.h"
 
 // Name space
 using namespace std;
@@ -20,171 +19,45 @@ using namespace std;
 namespace Nerual
 {
 	/***************************************************************************************************/
-	// Class : LayerPointer 
-	class LayerPointer 
-	{ 
-	public:
-		virtual ~LayerPointer() {}
-	};
-	/***************************************************************************************************/
 	// Class : Layer 
 	/// Base class of the layer class
-	template<size_t M, size_t N>
 	class Layer
 	{
 	public:
-		virtual ~Layer() {}
-		/*
-		virtual void SetInput(const Vector<double, M> & _data) = 0;
-		virtual Vector<double, N> Output(void) = 0;
-		virtual void Forward(void) = 0;
-		*/
-		template<size_t M, size_t N>
-		void SetNextLayer(Layer<M, N>* b) { a = b; }
+		virtual void SetInput(const Vector<ElemType> & _vec) = 0;
 	private:
-		Layer * a;
+
 	};
 
-	/***************************************************************************************************/
-	// Class : InputLayer 
-	template<size_t M, size_t N>
 	class InputLayer : public Layer
 	{
 	public:
 		InputLayer(void);
+		InputLayer(const size_t _n);
 
 	public:
-		// Set the input of the layer
-		void SetInput(const Vector<double, M> & _vec) { this->inputBuffer = _vec; }
-		// Get the output of the layer
-		Vector<double, N> Output(void);
-		// Forward propegation
-		void Forward(void);
+		friend ostream & operator<<(ostream & _outstream, InputLayer &  _layer);
 
-	public:
-		Vector<double, M> inputBuffer;
-		vector<InputNode> nodes;
-	};
+		void SetInput(const Vector<ElemType> & _vec) override;
 
-	template<size_t M, size_t N>
-	inline InputLayer<M, N>::InputLayer(void)
-	{
-		for (size_t i = 0; i < N; i++)
-		{
-			InputNode tempNode = *new InputNode();
-			nodes.push_back(tempNode);
-		}
-	}
-
-	template<size_t M, size_t N>
-	inline Vector<double, N> InputLayer<M, N>::Output(void)
-	{
-		Vector<double, N> temp;
-		for (size_t i = 0; i < N; i++)
-		{
-			temp(i) = this->nodes.at(i).value;
-		}
-		return temp;
-	}
-
-	template<size_t M, size_t N>
-	inline void InputLayer<M, N>::Forward(void)
-	{
-		for (size_t i = 0; i < N; i++)
-		{
-			this->nodes.at(i).value = inputBuffer(i);
-		}
-	}
-
-	/***************************************************************************************************/
-	// Class : HiddenLayer
-	template<size_t M, size_t N>
-	class HiddenLayer : public Layer
-	{
-	public:
-		HiddenLayer(void);
-	public:
-		// Set the input of the layer
-		void SetInput(const Vector<double, M> & _vec) 
-		{
-			// _vec.PrintToConsole();
-			for (size_t i = 0; i < M; i++)
-			{
-				this->inputBuffer(i) = _vec(i);
-			}
-		}
-		// Get the output of the layer
-		Vector<double, N> Output(void);
-		// Forward propegation
-		void Forward(void)
-		{
-			for (size_t i = 0; i < N; i++)
-			{
-				HiddenNode<M> * temp = &this->nodes.at(i);
-				temp->value = (inputBuffer * temp->weight).Sum() - temp->bias;
-			}
-		}
 	private:
-		Vector<double, M> inputBuffer;
-		vector<HiddenNode<M>> nodes;
+		vector<InputNode> _nodes;
+		size_t n;
 	};
 
-	template<size_t M, size_t N>
-	inline HiddenLayer<M, N>::HiddenLayer(void)
-	{
-		for (size_t i = 0; i < N; i++)
-		{
-			HiddenNode<M> tempNode = *new HiddenNode<M>();
-			nodes.push_back(tempNode);
-		}
-	}
-
-	template<size_t M, size_t N>
-	inline Vector<double, N> HiddenLayer<M, N>::Output(void)
-	{
-		Vector<double, N> temp;
-		for (size_t i = 0; i < N; i++)
-		{
-			temp(i) = this->nodes.at(i).value;
-		}
-		return temp;
-	}
-
-	/***************************************************************************************************/
-	// Class : OutputLayer
-	template<size_t M, size_t N>
-	class OutputLayer : public Layer
+	class HIddenLayer : public Layer
 	{
 	public:
-		OutputLayer()
-		{
-			for (size_t i = 0; i < N; i++)
-			{
-				OutputNode<M> tempNode = *new OutputNode<M>();
-				nodes.push_back(tempNode);
-			}
-		}
+		HIddenLayer(void);
+		HIddenLayer(const size_t _n, const size_t _m);
+
 	public:
-		void SetInput(const Vector<double, M> & _data) { this->inputBuffer = _data; }
-		Vector<double, N> Output(void)
-		{
-			Vector<double, N> temp;
-			for (size_t i = 0; i < N; i++)
-			{
-				temp(i) = this->nodes.at(i).value;
-			}
-			return temp;
-		}
-		void Forward(void)
-		{
-			for (size_t i = 0; i < N; i++)
-			{
-				OutputNode<M> * temp = &this->nodes.at(i);
-				temp->value = (inputBuffer * temp->weight).Sum() - temp->bias;
-			}
-		}
+		void SetInput(const Vector<ElemType> & _vec) override;
+
 	private:
-		Vector<double, M> inputBuffer;
-		vector<OutputNode<M>> nodes;
+		vector<HiddenNode> _nodes;
+		size_t n;
+		size_t m;
 	};
+
 }

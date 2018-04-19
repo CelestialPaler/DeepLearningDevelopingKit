@@ -11,8 +11,6 @@
 #include <iostream>
 #include <vector>
 
-#include "MathDef.h"
-
 // Namespaces
 using namespace std;
 
@@ -21,6 +19,16 @@ using namespace std;
 /// Provide mathematic support and calculation tools for different algorithms.
 namespace MathLib
 {
+	// Type of Matrix.
+	enum class MatrixType {
+		Zero,
+		Ones,
+		Random,
+		Identity,
+		Diagonal,
+		Triangle
+	};
+
 	/***************************************************************************************************/
 	// Class : Matrix
 	/// Implemented in std::vector.

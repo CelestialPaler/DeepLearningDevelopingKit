@@ -18,7 +18,6 @@
 #include "..\MathLib\Vector.h"
 #endif // USING_DYNAMIC_MATHLIB
 
-#include "..\MathLib\MathDef.h"
 #include "..\MathLib\ToolFunction.h"
 #include "..\Util\Log.h"
 

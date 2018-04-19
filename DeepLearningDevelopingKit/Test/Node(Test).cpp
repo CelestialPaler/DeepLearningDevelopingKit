@@ -9,8 +9,9 @@
 #include <iostream>
 
 #include "..\Nerual\Node.h"
+#include "..\Nerual\Layer.h"
 
-#define NodeDebug
+#define LayerDebug
 using namespace Nerual;
 
 #ifdef NodeDebug
@@ -30,36 +31,10 @@ int main()
 #ifdef LayerDebug
 int main()
 {
-	cout << "Layer Uint Test" << endl;
-	InputLayer<2, 2> inputLayer;
-	HiddenLayer<2, 100> hiddenLayer1;
-	HiddenLayer<100, 100> hiddenLayer2;
-	HiddenLayer<100, 100> hiddenLayer3;
-	HiddenLayer<100, 100> hiddenLayer4;
-	HiddenLayer<100, 100> hiddenLayer5;
-	OutputLayer<100, 1> outputLayer;
+	InputLayer inputLayer(2);
+	HIddenLayer hiddenLayer(10, 2);
 
-	double data[] = { 0.3, 0.7 };
-	Vector<double, 2> input(data);
-
-	inputLayer.SetInput(input);
-	inputLayer.Forward();
-
-	hiddenLayer1.SetInput(inputLayer.Output());
-	hiddenLayer1.Forward();
-	hiddenLayer2.SetInput(hiddenLayer1.Output());
-	hiddenLayer2.Forward();
-	hiddenLayer3.SetInput(hiddenLayer2.Output());
-	hiddenLayer3.Forward();
-	hiddenLayer4.SetInput(hiddenLayer3.Output());
-	hiddenLayer4.Forward();
-	hiddenLayer5.SetInput(hiddenLayer4.Output());
-	hiddenLayer5.Forward();
-
-	outputLayer.SetInput(hiddenLayer5.Output());
-	outputLayer.Forward();
-
-	outputLayer.Output().PrintToConsole();
+	cout << inputLayer;
 
 	system("pause");
 	return 0;

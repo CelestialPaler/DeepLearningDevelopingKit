@@ -38,6 +38,7 @@ namespace Nerual
 	public:
 		/// Constructor
 		InputNode(void);
+
 	public:
 		void Calculate(void) override;
 
