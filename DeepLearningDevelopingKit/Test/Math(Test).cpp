@@ -12,7 +12,7 @@
 #include "..\MathLib\MathLib.h"
 // #include "..\Util\Log.h"
 
-#define MathDynamicDebug
+// #define MathDynamicDebug
 
 using namespace std;
 using namespace MathLib;

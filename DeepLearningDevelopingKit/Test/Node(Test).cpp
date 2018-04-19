@@ -10,16 +10,17 @@
 
 #include "..\Nerual\Node.h"
 
-// #define NodeDebug
+#define NodeDebug
 using namespace Nerual;
 
 #ifdef NodeDebug
 int main()
 {
-	cout << PrintInfo() << "Node Test" << endl;
 	InputNode InputNode1;
+	HiddenNode HiddenNode1(2);
+	OutputNode OutputNode1(10);
 
-	cout << InputNode1;
+	cout << OutputNode1;
 
 	system("pause");
 	return 0;

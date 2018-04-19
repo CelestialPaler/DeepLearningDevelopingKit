@@ -87,7 +87,7 @@ namespace MathLib
 		/// Used for streaming in format.
 		friend ostream& operator<<(ostream& _outstream, Vector<T>& _vec)
 		{
-			_outstream << typeid(_vec).name() << " ";
+			// _outstream << typeid(_vec).name() << " ";
 			_outstream << "|";
 			for (size_t j = 0; j < _vec.n; j++)
 			{
@@ -247,6 +247,14 @@ namespace MathLib
 			{
 				T tempElem = *new T;
 				tempElem = 1.f;
+				_data.push_back(tempElem);
+			}
+			break;
+		case VectorType::Random:
+			for (size_t j = 0; j < _n; j++)
+			{
+				T tempElem = *new T;
+				tempElem = RandomSqrt(_n);
 				_data.push_back(tempElem);
 			}
 			break;
