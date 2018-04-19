@@ -7,6 +7,7 @@
 #pragma once
 #include <ctime>
 #include <cmath>
+#include <random>
 
 /************************************************************************************************************/
 /* Tool functions */

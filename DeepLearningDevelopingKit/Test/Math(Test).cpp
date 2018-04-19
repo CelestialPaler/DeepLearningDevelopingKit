@@ -7,6 +7,7 @@
 
 // Header FIle
 #include <iostream>
+#include <chrono>
 
 #include "..\MathLib\MathLib.h"
 // #include "..\Util\Log.h"
@@ -61,7 +62,6 @@ int main()
 #ifdef MathDynamicDebug
 int main()
 {
-	// cout << PrintInfo() << "Math Dynamic Test" << endl;
 	Vector<int> input;
 	input.Init(5);
 	for (size_t i = 0; i < 5; i++) 
@@ -74,14 +74,12 @@ int main()
 
 	int bias = 2, ans = 0;
 
+	input = input * 2;
+
 	cout << input << weight << bias << endl;
 
 	ans = (input * weight).Sum() + bias;
 	cout << ans << endl;
-
-
-
-
 
 	system("pause");
 	return 0;

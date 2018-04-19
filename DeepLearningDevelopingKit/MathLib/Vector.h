@@ -107,7 +107,7 @@ namespace MathLib
 		}
 
 		// "+" operator
-		/// Addition of two matrixs.
+		/// Addition of two Vector.
 		Vector<T> operator + (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -122,8 +122,72 @@ namespace MathLib
 			return temp;
 		}
 
+		// "+=" operator
+		/// Add another Vector to this Vector.
+		void operator += (const Vector<T> & _other)
+		{
+			Vector<T> & self = *this;
+			if (self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Vector Self-Addtion!" << endl;
+
+				for (size_t j = 0; j < self.n; j++)
+					self(j) = self( j) + _other(j);
+			}
+		}
+
+		/// Addition of a Vector and a scalar.
+		Vector<T> operator + (const T & _other) const
+		{
+			const Vector<T> & self = *this;
+			Vector<T> temp(n);
+			for (size_t j = 0; j < self.n; j++)
+				temp(j) = self(j) + _other;
+			return temp;
+		}
+
+		// "-" operator
+		/// Substraction of two Vector.
+		Vector<T> operator - (const Vector<T> & _other) const
+		{
+			const Vector<T> & self = *this;
+			Vector<T> temp(n);
+			if (self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Vector Substraction!" << endl;
+				return temp;
+			}
+			for (size_t j = 0; j < self.n; j++)
+				temp(j) = self(j) - _other(j);
+			return temp;
+		}
+
+		/// Substraction of a Vector and a scalar.
+		Vector<T> operator - (const T & _other) const
+		{
+			const Vector<T> & self = *this;
+			Vector<T> temp(n);
+			for (size_t j = 0; j < self.n; j++)
+				temp(j) = self(j) - _other;
+			return temp;
+		}
+
+		// "-=" operator
+		/// Substract another matrix to this Vector.
+		void operator -= (const Vector<T> & _other)
+		{
+			Vector<T> & self = *this;
+			if (self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Vector Self-Substraction!" << endl;
+
+				for (size_t j = 0; j < self.n; j++)
+					self(j) = self(j) - _other(j);
+			}
+		}
+
 		// "*" operator
-		/// Addition of two matrixs.
+		/// Multiplication of two Vector.
 		Vector<T> operator * (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -138,8 +202,15 @@ namespace MathLib
 			return temp;
 		}
 
-	public: // Used for debugging
-		void PrintToConsole(void);
+		/// Multiplication of a Vector and a scalar.
+		Vector<T> operator * (const T & _other) const
+		{
+			const Vector<T> & self = *this;
+			Vector<T> temp(n);
+			for (size_t j = 0; j < self.n; j++)
+				temp(j) = self(j) * _other;
+			return temp;
+		}
 
 	private:
 		vector<T> _data;
@@ -155,23 +226,32 @@ namespace MathLib
 	template<class T>
 	inline Vector<T>::Vector(const size_t _n, const VectorType _type)
 	{
-		for (size_t j = 0; j < _n; j++)
-		{
-			T tempElem = *new T;
-			tempElem = 0;
-			_data.push_back(tempElem);
-		}
-		n = _n;
+		Init(_n, _type);
 	}
 
 	template<class T>
 	inline void Vector<T>::Init(const size_t _n, const VectorType _type)
 	{
-		for (size_t j = 0; j < _n; j++)
+		switch (_type)
 		{
-			T tempElem = *new T;
-			tempElem = 0;
-			_data.push_back(tempElem);
+		case VectorType::Zero:
+			for (size_t j = 0; j < _n; j++)
+			{
+				T tempElem = *new T;
+				tempElem = 0.f;
+				_data.push_back(tempElem);
+			}
+			break;
+		case VectorType::Ones:
+			for (size_t j = 0; j < _n; j++)
+			{
+				T tempElem = *new T;
+				tempElem = 1.f;
+				_data.push_back(tempElem);
+			}
+			break;
+		default:
+			break;
 		}
 		n = _n;
 	}
