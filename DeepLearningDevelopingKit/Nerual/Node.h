@@ -28,6 +28,7 @@ namespace Nerual
 	{
 	public:
 		virtual void Calculate(void) = 0;
+
 	private:
 	};
 

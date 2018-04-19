@@ -34,6 +34,9 @@
     <ClInclude Include="MathLib\VectorStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="Nerual\NerualLib.h">
+      <Filter>src\Nerual</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

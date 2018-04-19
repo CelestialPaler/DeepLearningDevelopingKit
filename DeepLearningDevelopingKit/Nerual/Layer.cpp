@@ -30,11 +30,29 @@ void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
 	}
 }
 
-Nerual::HIddenLayer::HIddenLayer(void)
+Vector<Nerual::ElemType> Nerual::InputLayer::GetOutput(void)
+{
+	Vector<ElemType> temp;
+	for (size_t i = 0; i < n; i++)
+	{
+		temp(i) = _nodes.at(i).value;
+	}
+	return temp;
+}
+
+void Nerual::InputLayer::ForwardPropagation(void)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		_nodes.at(i).Calculate();
+	}
+}
+
+Nerual::HiddenLayer::HiddenLayer(void)
 {
 }
 
-Nerual::HIddenLayer::HIddenLayer(const size_t _n, const size_t _m)
+Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 {
 	for (size_t i = 0; i < _n; i++)
 	{
@@ -43,7 +61,7 @@ Nerual::HIddenLayer::HIddenLayer(const size_t _n, const size_t _m)
 	}
 }
 
-void Nerual::HIddenLayer::SetInput(const Vector<ElemType>& _vec)
+void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < n; i++)
 	{

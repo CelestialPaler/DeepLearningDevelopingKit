@@ -10,7 +10,7 @@
 // Header files
 #include <iostream>
 #include <vector>
-#include<numeric>
+#include <numeric>
 
 // Namespaces
 using namespace std;

@@ -10,6 +10,7 @@
 
 #include "..\Nerual\Node.h"
 #include "..\Nerual\Layer.h"
+#include "..\Nerual\Module.h"
 
 #define LayerDebug
 using namespace Nerual;
@@ -31,10 +32,17 @@ int main()
 #ifdef LayerDebug
 int main()
 {
+	Vector<double> data(2, VectorType::Random);
 	InputLayer inputLayer(2);
-	HIddenLayer hiddenLayer(10, 2);
+	HiddenLayer hiddenLayer(10, 2);
 
 	cout << inputLayer;
+	inputLayer.SetInput(data);
+	inputLayer.ForwardPropagation();
+	Vector<double> res = inputLayer.GetOutput();
+	cout << res;
+
+	Module BPNet;
 
 	system("pause");
 	return 0;
