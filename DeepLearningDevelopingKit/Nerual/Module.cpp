@@ -13,8 +13,6 @@ Nerual::BPNet::BPNet(void)
 
 Nerual::BPNet::BPNet(const BPNetInitor & _initor)
 {
-	vector<size_t> temp;
-	temp.push_back(_initor.Size.at(0));
 }
 
 void Nerual::BPNet::PushLayer(InputLayer * _newLayer)

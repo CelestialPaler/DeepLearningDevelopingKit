@@ -89,6 +89,12 @@
     <ClCompile Include="Nerual\Module.cpp">
       <Filter>src\Nerual</Filter>
     </ClCompile>
+    <ClCompile Include="Test\DataSetTest.cpp">
+      <Filter>src\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSet\DataSet.cpp">
+      <Filter>src\DataSet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
