@@ -28,16 +28,30 @@ namespace Nerual
 
 	};
 
+
+	// BPNet Initor
+	/// Used for initialization of a BPNet.
 	struct BPNetInitor
 	{
-		vector<size_t> Size;
+		size_t InputNodeNum;
+		size_t HiddenLayerNum;
+		size_t HiddenNodeNum;
+		size_t OutputNodeNum;
 	};
 
+	/***************************************************************************************************/
+	// Class : BPNet
+	/// BackPropagation Network.
+	/// It will be a built-in Module.
 	class BPNet : public Module
 	{
-	public:
+	public: // Constructors
+
+		// Default constructor
 		BPNet(void);
+		// Constructor (Using Initor)
 		BPNet(const BPNetInitor & _initor);
+
 	public:
 		void PushLayer(InputLayer * _newLayer);
 		void PushLayer(HiddenLayer * _newLayer);

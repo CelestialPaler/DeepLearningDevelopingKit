@@ -13,6 +13,21 @@ Nerual::BPNet::BPNet(void)
 
 Nerual::BPNet::BPNet(const BPNetInitor & _initor)
 {
+	_inputlayer = new InputLayer(_initor.InputNodeNum, _initor.InputNodeNum);
+
+	for (size_t i = 0; i < _initor.HiddenLayerNum; i++)
+	{
+		if (i==0)
+		{
+			_hiddenlayers.push_back(new HiddenLayer(_initor.InputNodeNum, _initor.HiddenNodeNum));
+		}
+		else
+		{
+			_hiddenlayers.push_back(new HiddenLayer(_initor.HiddenNodeNum, _initor.HiddenNodeNum));
+		}
+	}
+
+	_outputlayer = new OutputLayer(_initor.HiddenNodeNum, _initor.OutputNodeNum);
 }
 
 void Nerual::BPNet::PushLayer(InputLayer * _newLayer)
