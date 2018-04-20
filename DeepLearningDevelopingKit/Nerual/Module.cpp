@@ -7,6 +7,16 @@
 
 #include "Module.h"
 
+Nerual::BPNet::BPNet(void)
+{
+}
+
+Nerual::BPNet::BPNet(const BPNetInitor & _initor)
+{
+	vector<size_t> temp;
+	temp.push_back(_initor.Size.at(0));
+}
+
 void Nerual::BPNet::PushLayer(InputLayer * _newLayer)
 {
 	this->_inputlayer = _newLayer;
@@ -59,5 +69,33 @@ void Nerual::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 		Vector<double> tempDelta(_hiddenlayers.at(i)->GetNodeNum());
 		tempDelta = _hiddenlayers.at(i)->BackwardPropagation(tempDelta);
 	}
+}
+
+void Nerual::BPNet::SetExpection(const Vector<ElemType>& _vec)
+{
+	_outputlayer->SetExpectation(_vec);
+}
+
+Nerual::ElemType Nerual::BPNet::GetLoss(void)
+{
+	return _outputlayer->GetLoss();
+}
+
+void Nerual::BPNet::Train()
+{
+	do
+	{
+		ForwardPropagation();
+		BackwardPropagation();
+		Update();
+	} while (GetLoss() > 0.001);
+}
+
+void Nerual::BPNet::Update(void)
+{
+	_inputlayer->Update();
+	for (size_t i = 0; i < _hiddenlayers.size(); i++)
+			_hiddenlayers.at(i)->Update();
+	_outputlayer->Update();
 }
 

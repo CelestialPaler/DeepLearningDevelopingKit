@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataSet\DataSet.h" />
     <ClInclude Include="MathLib\LossFunction.h" />
     <ClInclude Include="MathLib\MathLib.h" />
     <ClInclude Include="MathLib\Matrix.h" />

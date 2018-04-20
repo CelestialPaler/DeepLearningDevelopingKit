@@ -43,6 +43,9 @@
     <ClInclude Include="MathLib\NodeVector.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="DataSet\DataSet.h">
+      <Filter>src\DataSet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -59,6 +62,9 @@
     </Filter>
     <Filter Include="src\Test">
       <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DataSet">
+      <UniqueIdentifier>{d5c3cb57-64ad-46f4-bfec-bdbc42a71b33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

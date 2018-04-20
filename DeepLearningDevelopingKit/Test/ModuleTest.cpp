@@ -22,19 +22,26 @@ int main()
 	target(1) = 0;
 	Vector<double> output(1);
 
-	InputLayer in(2, 2);
-	HiddenLayer hidden1(2, 10), hidden2(10, 3), hidden3(3, 9);
-	OutputLayer out(9, 1);
+	{
+		InputLayer in(2, 2);
+		HiddenLayer hidden1(2, 10), hidden2(10, 3), hidden3(3, 9);
+		OutputLayer out(9, 1);
 
-	BPNet myBP;
-	myBP.PushLayer(&in);
-	myBP.PushLayer(&hidden1);
-	myBP.PushLayer(&hidden2);
-	myBP.PushLayer(&hidden3);
-	myBP.PushLayer(&out);
+		BPNet TestBP1;
+		TestBP1.PushLayer(&in);
+		TestBP1.PushLayer(&hidden1);
+		TestBP1.PushLayer(&hidden2);
+		TestBP1.PushLayer(&hidden3);
+		TestBP1.PushLayer(&out);
+	}
+	
+	{
+		BPNetInitor MyNewBP{ {2,10,15,12,13,1} };
 
-	myBP.ForwardPropagation(input);
-	myBP.BackwardPropagation(target);
+		BPNet myBP;
+
+		myBP.Train();
+	}
 
 	system("pause");
 	return 0;

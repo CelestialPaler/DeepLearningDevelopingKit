@@ -25,18 +25,34 @@ namespace Nerual
 
 	};
 
+	struct BPNetInitor
+	{
+		vector<size_t> Size;
+	};
+
 	class BPNet : public Module
 	{
+	public:
+		BPNet(void);
+		BPNet(const BPNetInitor & _initor);
 	public:
 		void PushLayer(InputLayer * _newLayer);
 		void PushLayer(HiddenLayer * _newLayer);
 		void PushLayer(OutputLayer * _newLayer);
 
-		void ForwardPropagation(const Vector<ElemType> & _vec);
-		void BackwardPropagation(const Vector<ElemType> & _vec);
+	public:
 		void SetExpection(const Vector<ElemType> & _vec);
 		ElemType GetLoss(void);
+
+	public:
+		void Train();
+
+	private:
+		void ForwardPropagation(const Vector<ElemType> & _vec);
+		void BackwardPropagation(const Vector<ElemType> & _vec);
 		void Update(void);
+
+
 
 	private:
 		InputLayer * _inputlayer;
