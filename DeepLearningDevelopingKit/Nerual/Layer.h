@@ -10,6 +10,7 @@
 #include <vector>
 #include "Node.h"
 #include "..\MathLib\MathLib.h"
+#include "..\MathLib\LossFunction.h"
 
 // Name space
 using namespace std;
@@ -33,7 +34,7 @@ namespace Nerual
 		// Forward Propagation.
 		virtual void ForwardPropagation(void) = 0;
 		// Backward Propagation.
-		// virtual void BackwardPropagation(const Vector<ElemType> & _weightDelta, const ElemType & _biasDelta) = 0;
+		virtual Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) = 0;
 
 	private:
 
@@ -64,60 +65,13 @@ namespace Nerual
 
 		void SetInput(const Vector<ElemType> & _vec) override;
 		Vector<ElemType> GetOutput(void) override;
+		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
 
 	public:
 
 		void ForwardPropagation(void) override;
 
 	private:
-		vector<InputNode> _nodes;
-		size_t n;
-	};
-
-	/***************************************************************************************************/
-	// Class : FilterLayer
-	/// Used for filter out specified range of data.
-	class FilterLayer : public Layer
-	{
-	public:
-
-		FilterLayer(void);
-		FilterLayer(const size_t _n);
-
-	public:
-
-		friend ostream & operator<<(ostream & _outstream, FilterLayer &  _layer);
-
-		void SetInput(const Vector<ElemType> & _vec) override;
-		Vector<ElemType> GetOutput(void) override;
-		void ForwardPropagation(void) override;
-
-	private:
-
-		vector<InputNode> _nodes;
-		size_t n;
-	};
-
-	/***************************************************************************************************/
-	// Class : NoiseLayer
-	/// Used for appending various noise to the data;
-	class NoiseLayer : public Layer
-	{
-	public:
-
-		NoiseLayer(void);
-		NoiseLayer(const size_t _n);
-
-	public:
-
-		friend ostream & operator<<(ostream & _outstream, NoiseLayer &  _layer);
-
-		void SetInput(const Vector<ElemType> & _vec) override;
-		Vector<ElemType> GetOutput(void) override;
-		void ForwardPropagation(void) override;
-
-	private:
-
 		vector<InputNode> _nodes;
 		size_t n;
 	};
@@ -135,6 +89,8 @@ namespace Nerual
 		void SetInput(const Vector<ElemType> & _vec) override;
 		Vector<ElemType> GetOutput(void) override;
 		void ForwardPropagation(void) override;
+		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
+		void Update(void);
 
 	private:
 		vector<HiddenNode> _nodes;
@@ -144,7 +100,7 @@ namespace Nerual
 
 	/***************************************************************************************************/
 	// Class : OutputLayer
-	/// Used for input data.
+	/// Used for output data.
 	class OutputLayer : public Layer
 	{
 	public:
@@ -153,11 +109,16 @@ namespace Nerual
 
 	public:
 		void SetInput(const Vector<ElemType> & _vec) override;
+		void SetExpectation(const Vector<ElemType> & _vec);
 		Vector<ElemType> GetOutput(void) override;
+		ElemType GetLoss(void);
+		Vector<ElemType> GetDelta(void);
 		void ForwardPropagation(void) override;
+		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
+		void Update(void);
 
 	private:
-		vector<HiddenNode> _nodes;
+		vector<OutputNode> _nodes;
 		size_t n;
 		size_t m;
 	};

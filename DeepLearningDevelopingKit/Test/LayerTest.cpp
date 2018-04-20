@@ -23,21 +23,51 @@ int main()
 {
 	PrintLocalTime();
 	PrintTitle();
-	Vector<double> input(2, VectorType::Random);
 
-	InputLayer in1(2);
+	Vector<double> input(2);
+	input(0) = 0;
+	input(1) = 0;
+	Vector<double> target(2, VectorType::Random);
+	target(0) = 0;
+	target(1) = 0;
+	Vector<double> output(1);
+
+	InputLayer in(2);
 	HiddenLayer hidden1(10, 2);
+	HiddenLayer hidden2(10, 10);
+	HiddenLayer hidden3(10, 10);
+	OutputLayer out(1, 10);
 
-	in1.SetInput(input);
-	in1.ForwardPropagation();
+	for (size_t i = 0; i < 100; i++)
+	{
+		in.SetInput(input);
+		in.ForwardPropagation();
 
-	hidden1.SetInput(in1.GetOutput());
-	hidden1.ForwardPropagation();
+		hidden1.SetInput(in.GetOutput());
+		hidden1.ForwardPropagation();
+		hidden2.SetInput(hidden1.GetOutput());
+		hidden2.ForwardPropagation();
+		hidden3.SetInput(hidden2.GetOutput());
+		hidden3.ForwardPropagation();
 
-	Vector<double> output(10);
-	output = hidden1.GetOutput();
+		out.SetInput(hidden3.GetOutput());
+		out.ForwardPropagation();
 
-	cout << output;
+		out.SetExpectation(target);
+		
+		cout << i << "  Loss :" << out.GetLoss() << endl;
+
+		Vector<double> tempDelta(10);
+		tempDelta = out.BackwardPropagation(out.GetDelta());
+		tempDelta = hidden3.BackwardPropagation(tempDelta);
+		tempDelta = hidden2.BackwardPropagation(tempDelta);
+		tempDelta = hidden1.BackwardPropagation(tempDelta);
+		
+		out.Update();
+		hidden1.Update();
+		hidden2.Update();
+		hidden3.Update();
+	}
 
 
 

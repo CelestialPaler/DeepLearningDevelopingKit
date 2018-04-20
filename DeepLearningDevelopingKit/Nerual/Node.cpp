@@ -32,7 +32,7 @@ ostream & Nerual::operator<<(ostream & _outstream, InputNode & _node)
 Nerual::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
-	this->delta = 0.f;
+	this->valueDelta = 0.f;
 	this->bias = RandomSqrt(_n);
 	this->biasDelta = 0.f;
 	this->tempInput.Init(_n);
@@ -49,7 +49,7 @@ ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;
 	_outstream << "	value: " << _node.value << endl;
-	_outstream << "	delta: " << _node.delta << endl;
+	_outstream << "	delta: " << _node.valueDelta << endl;
 	_outstream << "	bias: " << _node.bias << endl;
 	_outstream << "	biasDelta: " << _node.biasDelta << endl;
 	_outstream << "	tempInput: " << _node.tempInput;
@@ -63,8 +63,7 @@ ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
 Nerual::OutputNode::OutputNode(const size_t _n)
 {
 	this->value = 0.f;
-	this->delta = 0.f;
-	this->error = 0.f;
+	this->valueDelta = 0.f;
 	this->loss = 0.f;
 	this->bias = RandomSqrt(_n);
 	this->biasDelta = 0.f;
@@ -83,8 +82,7 @@ ostream & Nerual::operator<<(ostream & _outstream, OutputNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;
 	_outstream << "	value: " << _node.value << endl;
-	_outstream << "	delta: " << _node.delta << endl;
-	_outstream << "	error: " << _node.error << endl;
+	_outstream << "	valueDelta: " << _node.valueDelta << endl;
 	_outstream << "	loss: " << _node.loss << endl;
 	_outstream << "	bias: " << _node.bias << endl;
 	_outstream << "	biasDelta: " << _node.biasDelta << endl;

@@ -74,27 +74,3 @@ inline double tanh(double x) {
 inline double Softplus(double x) {
 	return logf(1 + exp(x));
 }
-
-/************************************************************************************************************/
-/* Loss functions */
-enum LossFunction {
-	MESFunc,
-	ZeroOneFunc,
-	CECFunc
-};
-
-/// Variance loss function 
-inline double MES(double _predict, double _expectation) {
-	return pow(_predict - _expectation, 2) / 2;
-}
-
-/// Zero-One loss function
-inline double ZeroOne(double x) {
-	return x > 0 ? 1.f : 0.f;
-}
-
-/// Cross-Entropy Cost Function
-inline double CEC(double _predict, double _expectation) {
-	return -1 * (_expectation * log(_predict) + (1 - _expectation)*log(1 - _predict));
-}
-

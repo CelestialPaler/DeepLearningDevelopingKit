@@ -65,6 +65,7 @@ namespace Nerual
 	public:
 		/// Constructor
 		HiddenNode(const size_t _n);
+
 	public:
 		void Calculate(void) override;
 
@@ -76,7 +77,7 @@ namespace Nerual
 	private:
 		/// Used for BP Algorithm
 		ElemType value;
-		ElemType delta;
+		ElemType valueDelta;
 		ElemType bias;
 		ElemType biasDelta;
 		Vector<ElemType> tempInput;
@@ -103,8 +104,7 @@ namespace Nerual
 	private:
 		/// Used for BP Algorithm
 		ElemType value;
-		ElemType delta;
-		ElemType error;
+		ElemType valueDelta;
 		ElemType loss;
 		ElemType bias;
 		ElemType biasDelta;
