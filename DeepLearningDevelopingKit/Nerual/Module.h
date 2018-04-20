@@ -8,12 +8,15 @@
 
 // Header files
 #include <vector>
+#include "..\MathLib\MathLib.h"
 #include "Layer.h"
 #include "Node.h"
-#include "..\MathLib\MathLib.h"
+#include "..\DataSet\DataSet.h"
 
 // Namespaces
 using namespace std;
+using namespace MathLib;
+using namespace Data;
 
 /***************************************************************************************************/
 // Namespace : Nerual
@@ -43,20 +46,27 @@ namespace Nerual
 	public:
 		void SetExpection(const Vector<ElemType> & _vec);
 		ElemType GetLoss(void);
+		Vector<ElemType> GetOutput(void);
+
+	public:
+		void SetTrainSet(NumaricSet * _trainset);
+		void SetTestSet(NumaricSet * _testset);
 
 	public:
 		void Train();
+		void Test();
 
 	private:
 		void ForwardPropagation(const Vector<ElemType> & _vec);
 		void BackwardPropagation(const Vector<ElemType> & _vec);
 		void Update(void);
 
-
-
 	private:
 		InputLayer * _inputlayer;
 		vector<HiddenLayer *> _hiddenlayers;
 		OutputLayer * _outputlayer;
+
+		NumaricSet * _trainSet;
+		NumaricSet * _testSet;
 	};
 }

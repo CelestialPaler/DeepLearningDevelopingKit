@@ -24,9 +24,34 @@ namespace Data
 	{
 	public:
 		typedef pair<Vector<double>, Vector<double>> Sample;
-		friend ostream & operator <<(ostream & _outstream, Sample & _sample);
+	public:
+		NumaricSet();
+	public:
+		void AddToSet(const Sample & _sample);
+	public:
+		Sample GetBatch(void);
+	private:
+		vector<Sample> _data;
+	};
+
+	class ImageSet : public DataSet
+	{
+	public:
 
 	private:
+	};
 
+	class AudioSet : public DataSet
+	{
+	public:
+
+	private:
+	};
+
+	class VideoSet : public DataSet
+	{
+	public:
+
+	private:
 	};
 }

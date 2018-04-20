@@ -57,8 +57,6 @@ void Nerual::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	_outputlayer->SetExpectation(_vec);
 
-	cout << "Loss :" << _outputlayer->GetLoss() << endl;
-
 	Vector<double> tempDelta(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
 	tempDelta = _outputlayer->BackwardPropagation(_outputlayer->GetDelta());
 
@@ -79,14 +77,51 @@ Nerual::ElemType Nerual::BPNet::GetLoss(void)
 	return _outputlayer->GetLoss();
 }
 
+Vector<Nerual::ElemType> Nerual::BPNet::GetOutput(void)
+{
+	return _outputlayer->GetOutput();
+}
+
+void Nerual::BPNet::SetTrainSet(NumaricSet * _trainset)
+{
+	this->_trainSet = _trainset;
+}
+
+void Nerual::BPNet::SetTestSet(NumaricSet * _testset)
+{
+	this->_testSet = _testSet;
+}
+
 void Nerual::BPNet::Train()
 {
+	int count = 100;
+	NumaricSet::Sample sample;
 	do
 	{
-		ForwardPropagation();
-		BackwardPropagation();
+		if (count == 100)
+		{
+			sample = _trainSet->GetBatch();
+			count = 0;
+		}
+		else
+			count++;
+
+		ForwardPropagation(sample.first);
+		BackwardPropagation(sample.second);
 		Update();
-	} while (GetLoss() > 0.001);
+		cout << "Loss :" << _outputlayer->GetLoss() << endl;
+		cout << sample.first(0) << sample.first(1) << endl;
+	} while (GetLoss() > 0.00001);
+}
+
+void Nerual::BPNet::Test()
+{
+	for (size_t i = 0; i < 2; i++)
+	{
+		NumaricSet::Sample test = _testSet->GetBatch();
+		ForwardPropagation(test.first);
+		cout << this->GetOutput()(0);
+	}
 }
 
 void Nerual::BPNet::Update(void)

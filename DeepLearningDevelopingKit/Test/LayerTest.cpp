@@ -18,6 +18,7 @@
 // Namespaces
 using namespace std;
 using namespace MathLib;
+using namespace Nerual;
 
 int main()
 {
@@ -33,11 +34,12 @@ int main()
 	Vector<double> output(1);
 
 	InputLayer in(2, 2);
-	HiddenLayer hidden1(10, 2);
-	HiddenLayer hidden2(10, 10);
-	HiddenLayer hidden3(10, 10);
-	OutputLayer out(1, 10);
+	HiddenLayer hidden1(2, 10);
+	HiddenLayer hidden2(10, 15);
+	HiddenLayer hidden3(15, 10);
+	OutputLayer out(10, 1);
 
+	unsigned count = 0;
 	do
 	{
 		in.SetInput(input);
@@ -55,7 +57,7 @@ int main()
 
 		out.SetExpectation(target);
 
-		cout <<"Loss :" << out.GetLoss() << endl;
+		cout << count << "  Loss :" << out.GetLoss() << endl;
 
 		Vector<double> tempDelta(10);
 		tempDelta = out.BackwardPropagation(out.GetDelta());
@@ -67,7 +69,9 @@ int main()
 		hidden1.Update();
 		hidden2.Update();
 		hidden3.Update();
-	} while (out.GetLoss() > 0.001);
+
+		count++;
+	} while (out.GetLoss() > 0.00001);
 
 	system("pause");
 	return 0;

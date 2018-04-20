@@ -5,22 +5,23 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define DataSetDebug
+// #define DataSetDebug
 
 #ifdef DataSetDebug
-#include "..\DataSet\DataSet.h"
+#include <iostream>
+// #include "..\DataSet\DataSet.h"
+
 using namespace Data;
 
 int main()
 {
-	NumaricSet testSet;
+	NumaricSet trainSet;
+	NumaricSample sample1 = {
+		Vector<double>(2, VectorType::Random), 
+		Vector<double>(2, VectorType::Random) 
+	};
 
-	testSet.printsdfsafsa();
-
-
-
-
-
+	trainSet.AddToSet(sample1);
 
 	system("pause");
 	return 0;

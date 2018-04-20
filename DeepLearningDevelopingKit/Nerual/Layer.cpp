@@ -81,8 +81,6 @@ void Nerual::InputLayer::Update(void)
 }
 
 
-
-
 /***************************************************************************************************/
 // Class : HiddenLayer
 /// Used for input data.
@@ -143,11 +141,11 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 	for (size_t i = 0; i < m; i++)
 		_nodes.at(i).valueDelta = _vec(i);
 
-	for (size_t i = 0; i < m; i++) // All the outputNodes
+	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weightDelta(j) = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value)) * _nodes.at(i).tempInput(j);
 
-	for (size_t i = 0; i < m; i++) // All the outputNodes
+	for (size_t i = 0; i < m; i++) 
 		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
 
 	Vector<ElemType> tempVec(n);
