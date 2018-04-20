@@ -69,6 +69,16 @@ void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 	}
 }
 
+Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
+{
+	return Vector<ElemType>();
+}
+
+void Nerual::HiddenLayer::ForwardPropagation(void)
+{
+
+}
+
 ostream & Nerual::operator<<(ostream & _outstream, InputLayer & _layer)
 {
 	_outstream << typeid(_layer).name() << endl;

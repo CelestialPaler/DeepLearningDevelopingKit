@@ -1,21 +1,19 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	             Math Test   	                                                              */
+/*								        		 	            Vector Test   	                                                          */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
 // Header FIle
 #include <iostream>
-#include <chrono>
-
 #include "..\MathLib\MathLib.h"
-// #include "..\Util\Log.h"
-
-// #define MathDynamicDebug
+#include "..\Util\Log.h"
 
 using namespace std;
 using namespace MathLib;
+
+#define MathDynamicDebug
 
 #ifdef MathStaticDebug
 int main()
@@ -62,6 +60,9 @@ int main()
 #ifdef MathDynamicDebug
 int main()
 {
+	PrintLocalTime();
+	PrintTitle();
+
 	Vector<int> input;
 	input.Init(5);
 	for (size_t i = 0; i < 5; i++) 

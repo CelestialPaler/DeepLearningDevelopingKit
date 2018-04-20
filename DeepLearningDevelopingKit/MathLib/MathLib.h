@@ -19,6 +19,5 @@
 #endif // USING_DYNAMIC_MATHLIB
 
 #include "..\MathLib\ToolFunction.h"
-#include "..\Util\Log.h"
-
+// #include "..\Util\Log.h"
 

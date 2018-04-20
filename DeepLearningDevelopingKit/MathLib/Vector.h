@@ -10,6 +10,7 @@
 // Header files
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <numeric>
 
 // Namespaces
@@ -38,26 +39,36 @@ namespace MathLib
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters and before use Init() should be involked.
+		/// Take no parameters.
+		/// After default constructor and before use the Vector object, Init() should be involked.
 		Vector(void);	
 		// Constructor (Using Size and Type)
 		/// Specified the size of Vector.
 		Vector(const size_t _n, const VectorType _type = VectorType::Zero);
 		// Constructor (Using given Data)
 		/// Using data from a given pointer, which is pointed to an array, to initialize the Vector.
-		// Matrix(const T * _data, size_t n);
+		Vector(const T * _data, size_t n);
 
 	public: // Initializing
 
 		// Initializing function
-		/// Initializing the Vector after defination.
+		/// Initializing the Vector after defined by default constructor.
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
 	public: // Quantification
 
 		// Sum function
 		/// Add up all the element in the Vector.
-		T Sum(void);
+		T Sum(void) const;
+		// Average function
+		/// Calculate the average value of all the element in the Vector.
+		T Average(void) const;
+		// Max function
+		/// Get the value of the max element in the Vector.
+		T Max(void) const;		
+		// Min function
+		/// Get the value of the min element in the Vector.
+		T Min(void) const;
 
 	public: // Pointer
 
@@ -120,20 +131,6 @@ namespace MathLib
 			return temp;
 		}
 
-		// "+=" operator
-		/// Add another Vector to this Vector.
-		void operator += (const Vector<T> & _other)
-		{
-			Vector<T> & self = *this;
-			if (self.n != _other.n)
-			{
-				cerr << "ERROR : Invalid Vector Self-Addtion!" << endl;
-
-				for (size_t j = 0; j < self.n; j++)
-					self(j) = self( j) + _other(j);
-			}
-		}
-
 		/// Addition of a Vector and a scalar.
 		Vector<T> operator + (const T & _other) const
 		{
@@ -142,6 +139,27 @@ namespace MathLib
 			for (size_t j = 0; j < self.n; j++)
 				temp(j) = self(j) + _other;
 			return temp;
+		}
+
+		// "+=" operator
+		/// Add another Vector to this Vector.
+		void operator += (const Vector<T> & _other)
+		{
+			Vector<T> & self = *this;
+			if (self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Vector Self-Addtion!" << endl;
+			}
+			for (size_t j = 0; j < self.n; j++)
+				self(j) = self( j) + _other(j);
+		}
+
+		/// Add another scalar to this Vector.
+		void operator += (const T & _other)
+		{
+			Vector<T> & self = *this;
+			for (size_t j = 0; j < self.n; j++)
+				self(j) = self(j) + _other;
 		}
 
 		// "-" operator
@@ -178,10 +196,17 @@ namespace MathLib
 			if (self.n != _other.n)
 			{
 				cerr << "ERROR : Invalid Vector Self-Substraction!" << endl;
-
-				for (size_t j = 0; j < self.n; j++)
-					self(j) = self(j) - _other(j);
 			}
+			for (size_t j = 0; j < self.n; j++)
+				self(j) = self(j) - _other(j);
+		}
+
+		/// Substract another scalar to this Vector.
+		void operator -= (const T & _other)
+		{
+			Vector<T> & self = *this;
+			for (size_t j = 0; j < self.n; j++)
+				self(j) = self(j) - _other;
 		}
 
 		// "*" operator
@@ -228,6 +253,12 @@ namespace MathLib
 	}
 
 	template<class T>
+	inline Vector<T>::Vector(const T * _data, size_t n)
+	{
+
+	}
+
+	template<class T>
 	inline void Vector<T>::Init(const size_t _n, const VectorType _type)
 	{
 		switch (_type)
@@ -263,10 +294,15 @@ namespace MathLib
 	}
 
 	template<class T>
-	T Vector<T>::Sum(void)
+	T Vector<T>::Sum(void) const
 	{
 		return accumulate(_data.begin(), _data.end(), 0);
 	}
 
+	template<class T>
+	inline T Vector<T>::Average(void) const
+	{
+		return Sum() / n;
+	}
 }
 

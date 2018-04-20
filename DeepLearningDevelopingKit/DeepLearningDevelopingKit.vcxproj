@@ -160,8 +160,7 @@
   <ItemGroup>
     <ClCompile Include="Nerual\Layer.cpp" />
     <ClCompile Include="Nerual\Node.cpp" />
-    <ClCompile Include="Test\Math%28Test%29.cpp" />
-    <ClCompile Include="Test\Node(Test).cpp" />
+    <ClCompile Include="Test\VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

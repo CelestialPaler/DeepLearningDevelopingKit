@@ -19,9 +19,6 @@
     <ClInclude Include="Nerual\Module.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Log.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
     <ClInclude Include="MathLib\Matrix.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
@@ -36,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="Nerual\NerualLib.h">
       <Filter>src\Nerual</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Log.h">
+      <Filter>src\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,17 +56,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test\Math%28Test%29.cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Node(Test).cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Nerual\Node.cpp">
       <Filter>src\Nerual</Filter>
     </ClCompile>
     <ClCompile Include="Nerual\Layer.cpp">
       <Filter>src\Nerual</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\VectorTest.cpp">
+      <Filter>src\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
