@@ -162,8 +162,10 @@
   <ItemGroup>
     <ClCompile Include="MathLib\ActivationFunction.h" />
     <ClCompile Include="Nerual\Layer.cpp" />
+    <ClCompile Include="Nerual\Module.cpp" />
     <ClCompile Include="Nerual\Node.cpp" />
     <ClCompile Include="Test\LayerTest.cpp" />
+    <ClCompile Include="Test\ModuleTest.cpp" />
     <ClCompile Include="Test\VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>

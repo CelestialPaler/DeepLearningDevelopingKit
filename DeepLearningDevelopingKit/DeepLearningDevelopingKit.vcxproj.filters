@@ -77,6 +77,12 @@
     <ClCompile Include="MathLib\ActivationFunction.h">
       <Filter>src\MathLib</Filter>
     </ClCompile>
+    <ClCompile Include="Test\ModuleTest.cpp">
+      <Filter>src\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Nerual\Module.cpp">
+      <Filter>src\Nerual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

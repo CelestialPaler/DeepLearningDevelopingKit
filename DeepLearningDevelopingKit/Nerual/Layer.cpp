@@ -92,9 +92,9 @@ void Nerual::InputLayer::Update(void)
 /// m is the output num of the layer, which of course is the node num in this layer.
 Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 {
-	for (size_t i = 0; i < _n; i++)
+	for (size_t i = 0; i < _m; i++)
 	{
-		HiddenNode tempNode = *new HiddenNode(_m);
+		HiddenNode tempNode = *new HiddenNode(_n);
 		this->_nodes.push_back(tempNode);
 	}
 	this->n = _n;
@@ -105,9 +105,9 @@ Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 /// Which means set the nodes` tempInput.
 void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < m; j++)
+		for (size_t j = 0; j < n; j++)
 		{
 			_nodes.at(i).tempInput(j) = _vec(j);
 		}
@@ -118,8 +118,8 @@ void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 /// Which means get the value pf all nodes in Vector.
 Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
 {
-	Vector<ElemType> temp(n);
-	for (size_t i = 0; i < n; i++)
+	Vector<ElemType> temp(m);
+	for (size_t i = 0; i < m; i++)
 	{
 		temp(i) = _nodes.at(i).value;
 	}
@@ -130,7 +130,7 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
 /// Calculate the value of each node.
 void Nerual::HiddenLayer::ForwardPropagation(void)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).Calculate();
 	}
@@ -140,21 +140,21 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 /// Calculate the gradient(delta) of each node.
 Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 		_nodes.at(i).valueDelta = _vec(i);
 
-	for (size_t i = 0; i < n; i++) // All the outputNodes
-		for (size_t j = 0; j < m; j++)
+	for (size_t i = 0; i < m; i++) // All the outputNodes
+		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weightDelta(j) = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value)) * _nodes.at(i).tempInput(j);
 
-	for (size_t i = 0; i < n; i++) // All the outputNodes
+	for (size_t i = 0; i < m; i++) // All the outputNodes
 		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
 
-	Vector<ElemType> tempVec(m);
-	for (size_t i = 0; i < m; i++)
+	Vector<ElemType> tempVec(n);
+	for (size_t i = 0; i < n; i++)
 	{
 		ElemType tempDelta = 0;
-		for (size_t j = 0; j < n; j++)
+		for (size_t j = 0; j < m; j++)
 		{
 			tempDelta += 2 * _nodes.at(j).valueDelta * (_nodes.at(j).value * (1 - _nodes.at(j).value)) * _nodes.at(j).weight(i);
 		}
@@ -167,9 +167,9 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 /// Update the weight and bias of each node.
 void Nerual::HiddenLayer::Update(void)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < m; j++)
+		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weight(j) -= _nodes.at(i).weightDelta(j);
 		_nodes.at(i).bias -= _nodes.at(i).biasDelta;
 	}
@@ -185,9 +185,9 @@ void Nerual::HiddenLayer::Update(void)
 /// m is the output num of the layer, which of course is the node num in this layer.
 Nerual::OutputLayer::OutputLayer(const size_t _n, const size_t _m)
 {
-	for (size_t i = 0; i < _n; i++)
+	for (size_t i = 0; i < _m; i++)
 	{
-		OutputNode tempNode = *new OutputNode(_m);
+		OutputNode tempNode = *new OutputNode(_n);
 		this->_nodes.push_back(tempNode);
 	}
 	this->n = _n;
@@ -198,9 +198,9 @@ Nerual::OutputLayer::OutputLayer(const size_t _n, const size_t _m)
 /// Which means set the nodes` tempInput.
 void Nerual::OutputLayer::SetInput(const Vector<ElemType>& _vec)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < m; j++)
+		for (size_t j = 0; j < n; j++)
 		{
 			_nodes.at(i).tempInput(j) = _vec(j);
 		}
@@ -210,7 +210,7 @@ void Nerual::OutputLayer::SetInput(const Vector<ElemType>& _vec)
 // Set the expectation of the OutputLayer.
 void Nerual::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).expectation = _vec(i);
 	}
@@ -221,7 +221,7 @@ void Nerual::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
 Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
 {
 	Vector<ElemType> temp(n);
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		temp(i) = _nodes.at(i).value;
 	}
@@ -231,13 +231,13 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
 // Get the estimated loss between output and expectation.
 Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).loss = MES(_nodes.at(i).value, _nodes.at(i).expectation);
 	}
 
 	ElemType temp = 0;
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		temp += _nodes.at(i).loss;
 	}
@@ -248,8 +248,8 @@ Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
 // Get the exact error(Delta) between output and expectation.
 Vector<Nerual::ElemType> Nerual::OutputLayer::GetDelta(void)
 {
-	Vector<ElemType> temp(n);
-	for (size_t i = 0; i < n; i++)
+	Vector<ElemType> temp(m);
+	for (size_t i = 0; i < m; i++)
 	{
 		temp(i) = _nodes.at(i).value - _nodes.at(i).expectation;
 	}
@@ -260,7 +260,7 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::GetDelta(void)
 /// Calculate the value of each node.
 void Nerual::OutputLayer::ForwardPropagation(void)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).Calculate();
 	}
@@ -270,21 +270,21 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 /// Calculate the gradient(delta) of each node.
 Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<ElemType> & _vec)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 		_nodes.at(i).valueDelta = _vec(i);
 
-	for (size_t i = 0; i < n; i++) // All the outputNodes
+	for (size_t i = 0; i < m; i++) // All the outputNodes
 		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weightDelta(j) = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value)) * _nodes.at(i).tempInput(j);
 
-	for (size_t i = 0; i < n; i++) // All the outputNodes
+	for (size_t i = 0; i < m; i++) // All the outputNodes
 		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
 
-	Vector<ElemType> tempVec(m);
-	for (size_t i = 0; i < m; i++)
+	Vector<ElemType> tempVec(n);
+	for (size_t i = 0; i < n; i++)
 	{
 		ElemType tempDelta = 0;
-		for (size_t j = 0; j < n; j++)
+		for (size_t j = 0; j < m; j++)
 		{
 			tempDelta += 2 * _nodes.at(j).valueDelta * (_nodes.at(j).value * (1 - _nodes.at(j).value)) * _nodes.at(j).weight(i);
 		}
@@ -297,12 +297,16 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<E
 /// Update the weight and bias of each node.
 void Nerual::OutputLayer::Update(void)
 {
-	for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < m; j++)
+		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weight(j) -= _nodes.at(i).weightDelta(j);
 		_nodes.at(i).bias -= _nodes.at(i).biasDelta;
 	}
 }
 
-
+// Get the node number of the layers.
+size_t Nerual::Layer::GetNodeNum(void)
+{
+	return m;
+}

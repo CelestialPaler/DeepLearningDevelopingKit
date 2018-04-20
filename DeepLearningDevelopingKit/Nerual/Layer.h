@@ -36,6 +36,8 @@ namespace Nerual
 		// Get the output of the layer.
 		/// Which means get the value pf all nodes in Vector.
 		virtual Vector<ElemType> GetOutput(void) = 0;
+		// Get the node number of the layers.
+		size_t GetNodeNum(void);
 
 	public: // BackPropagation Algorithm
 

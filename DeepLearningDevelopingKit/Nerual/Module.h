@@ -1,43 +1,46 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	                Layer     	                                                               */
+/*								        		 	              Module     	                                                               */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 #pragma once
 
-// Header FIle
+// Header files
 #include <vector>
 #include "Layer.h"
 #include "Node.h"
 #include "..\MathLib\MathLib.h"
 
 // Namespaces
-using namespace Nerual;
 using namespace std;
 
-class Module
+/***************************************************************************************************/
+// Namespace : Nerual
+/// Provide Node for nerual network algorithms.
+namespace Nerual
 {
-public:
-	void PushLayer(Layer * _newLayer)
-	{
-		layers.push_back(_newLayer);
-	}
-
-	void Run(void)
+	class Module
 	{
 
-	}
+	};
 
-public:
-	vector<Layer *> layers;
-};
+	class BPNet : public Module
+	{
+	public:
+		void PushLayer(InputLayer * _newLayer);
+		void PushLayer(HiddenLayer * _newLayer);
+		void PushLayer(OutputLayer * _newLayer);
 
+		void ForwardPropagation(const Vector<ElemType> & _vec);
+		void BackwardPropagation(const Vector<ElemType> & _vec);
+		void SetExpection(const Vector<ElemType> & _vec);
+		ElemType GetLoss(void);
+		void Update(void);
 
-class BPNet : public Module
-{
-public:
-
-private:
-
-};
+	private:
+		InputLayer * _inputlayer;
+		vector<HiddenLayer *> _hiddenlayers;
+		OutputLayer * _outputlayer;
+	};
+}
