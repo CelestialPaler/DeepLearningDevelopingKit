@@ -26,16 +26,6 @@ namespace Data
 		typedef pair<Vector<double>, Vector<double>> Sample;
 		friend ostream & operator <<(ostream & _outstream, Sample & _sample);
 
-		void printsdfsafsa(void){
-			NumaricSet::Sample testSample;
-
-			Vector<double> input(3, VectorType::Random);
-			Vector<double> output(2, VectorType::Random);
-			testSample.first = input;
-			testSample.second = output;
-
-			cout << testSample;
-		}
 	private:
 
 	};

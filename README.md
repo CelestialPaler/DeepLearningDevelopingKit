@@ -15,13 +15,13 @@ Feature:
 
 *   Simple and intuitive.
 *   High-efficiency
-*   Modulariztion
+*   Modularization
 *   Expandability
 
 ## Developing Status
 Under developing:
-*   Layer and Module
-*   Port for flexibility in linking Modules
+*   Data Set Management
+*   Module and Port for flexibility in linking Modules
 *   Acceleration using CUDA
 <p>&nbsp;&nbsp;&nbsp;&nbsp;This is still an early stage of development. So, it`s welcomed for anyone to contribute to this project. Feel free to upload your code or pull a request. More than anything, please share your idea and give me some precious advices. XD</p>
 
