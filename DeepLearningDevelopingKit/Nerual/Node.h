@@ -26,7 +26,9 @@ namespace Nerual
 
 	class Node
 	{
+
 	public:
+
 		virtual void Calculate(void) = 0;
 
 	private:
@@ -36,6 +38,7 @@ namespace Nerual
 	// Class : InputNode
 	class InputNode : public Node
 	{
+		friend class InputLayer;
 	public:
 		/// Constructor
 		InputNode(void);
@@ -58,6 +61,7 @@ namespace Nerual
 	// Class : HiddenNode
 	class HiddenNode : public Node
 	{
+		friend class HiddenLayer;
 	public:
 		/// Constructor
 		HiddenNode(const size_t _n);
@@ -84,6 +88,7 @@ namespace Nerual
 	// Class : OutputNode
 	class OutputNode : public Node
 	{
+		friend class OutputLayer;
 	public:
 		/// Constructor
 		OutputNode(const size_t _n);

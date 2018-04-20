@@ -42,7 +42,7 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 
 void Nerual::HiddenNode::Calculate(void)
 {
-	this->value = (tempInput * weight).Sum() + bias;
+	this->value = Sigmoid((tempInput * weight).Sum() + bias);
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
@@ -76,7 +76,7 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 
 void Nerual::OutputNode::Calculate(void)
 {
-	this->value = (tempInput * weight).Sum() + bias;
+	this->value = Sigmoid((tempInput * weight).Sum() + bias);
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, OutputNode & _node)
