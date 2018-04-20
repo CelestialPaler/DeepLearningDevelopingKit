@@ -17,7 +17,7 @@ Nerual::InputNode::InputNode(void)
 
 void Nerual::InputNode::Calculate(void)
 {
-	this->value = tempInput;
+	this->value = Sigmoid(tempInput);
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, InputNode & _node)
@@ -33,7 +33,7 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->delta = 0.f;
-	this->bias = 0.f;
+	this->bias = RandomSqrt(_n);
 	this->biasDelta = 0.f;
 	this->tempInput.Init(_n);
 	this->weight.Init(_n, VectorType::Random);

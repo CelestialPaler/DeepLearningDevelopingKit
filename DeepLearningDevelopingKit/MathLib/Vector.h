@@ -94,7 +94,7 @@ namespace MathLib
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, Vector<T>& _vec)
+		friend ostream & operator<<(ostream& _outstream, Vector<T>& _vec)
 		{
 			// _outstream << typeid(_vec).name() << " ";
 			_outstream << "|";
@@ -296,7 +296,14 @@ namespace MathLib
 	template<class T>
 	T Vector<T>::Sum(void) const
 	{
-		return accumulate(_data.begin(), _data.end(), 0);
+		const Vector<T> & self = *this;
+		T Sum = 0;
+		for (size_t i = 0; i < n; i++)
+		{
+			Sum += self(i);
+		}
+		Sum = Sum / n;
+		return Sum;
 	}
 
 	template<class T>

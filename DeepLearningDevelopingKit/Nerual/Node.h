@@ -46,9 +46,9 @@ namespace Nerual
 	public:
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, InputNode& _node);
+		friend ostream & operator<<(ostream & _outstream, InputNode & _node);
 
-	public:
+	private:
 		/// Used for BP Algorithm
 		ElemType value;
 		ElemType tempInput;
@@ -67,9 +67,9 @@ namespace Nerual
 	public:
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, HiddenNode& _node);
+		friend ostream & operator<<(ostream & _outstream, HiddenNode & _node);
 
-	public:
+	private:
 		/// Used for BP Algorithm
 		ElemType value;
 		ElemType delta;
@@ -93,9 +93,9 @@ namespace Nerual
 	public:
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, OutputNode& _node);
+		friend ostream & operator<<(ostream & _outstream, OutputNode & _node);
 
-	public:
+	private:
 		/// Used for BP Algorithm
 		ElemType value;
 		ElemType delta;

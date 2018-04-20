@@ -4,16 +4,7 @@
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-
-// Header FIle
-#include <iostream>
-#include "..\MathLib\MathLib.h"
-#include "..\Util\Log.h"
-
-using namespace std;
-using namespace MathLib;
-
-#define MathDynamicDebug
+// #define VectorDebug
 
 #ifdef MathStaticDebug
 int main()
@@ -57,7 +48,16 @@ int main()
 }
 #endif // MathStaticDebug
 
-#ifdef MathDynamicDebug
+#ifdef VectorDebug
+
+// Header FIle
+#include <iostream>
+#include "..\MathLib\MathLib.h"
+#include "..\Util\Log.h"
+
+using namespace std;
+using namespace MathLib;
+
 int main()
 {
 	PrintLocalTime();
@@ -82,6 +82,8 @@ int main()
 	ans = (input * weight).Sum() + bias;
 	cout << ans << endl;
 
+	Vector<double> test(5, VectorType::Random);
+	cout << test<< test.Sum();
 	system("pause");
 	return 0;
 }

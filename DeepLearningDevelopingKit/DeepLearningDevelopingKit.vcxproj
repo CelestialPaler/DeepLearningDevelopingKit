@@ -158,8 +158,10 @@
     <ClInclude Include="Util\Port.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MathLib\ActivationFunction.h" />
     <ClCompile Include="Nerual\Layer.cpp" />
     <ClCompile Include="Nerual\Node.cpp" />
+    <ClCompile Include="Test\LayerTest.cpp" />
     <ClCompile Include="Test\VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>

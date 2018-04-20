@@ -20,6 +20,7 @@ Nerual::InputLayer::InputLayer(const size_t _n)
 		InputNode tempNode = *new InputNode();
 		this->_nodes.push_back(tempNode);
 	}
+	this->n = _n;
 }
 
 void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
@@ -32,7 +33,7 @@ void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
 
 Vector<Nerual::ElemType> Nerual::InputLayer::GetOutput(void)
 {
-	Vector<ElemType> temp;
+	Vector<ElemType> temp(n);
 	for (size_t i = 0; i < n; i++)
 	{
 		temp(i) = _nodes.at(i).value;
@@ -59,24 +60,37 @@ Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 		HiddenNode tempNode = *new HiddenNode(_m);
 		this->_nodes.push_back(tempNode);
 	}
+	this->n = _n;
+	this->m = _m;
 }
 
 void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < n; i++)
 	{
-		_nodes.at(i).tempInput = _vec(i);
+		for (size_t j = 0; j < m; j++)
+		{
+			_nodes.at(i).tempInput(j) = _vec(j);
+		}
 	}
 }
 
 Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
 {
-	return Vector<ElemType>();
+	Vector<ElemType> temp(n);
+	for (size_t i = 0; i < n; i++)
+	{
+		temp(i) = _nodes.at(i).value;
+	}
+	return temp;
 }
 
 void Nerual::HiddenLayer::ForwardPropagation(void)
 {
-
+	for (size_t i = 0; i < n; i++)
+	{
+		_nodes.at(i).Calculate();
+	}
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, InputLayer & _layer)

@@ -33,7 +33,7 @@ namespace Nerual
 		// Forward Propagation.
 		virtual void ForwardPropagation(void) = 0;
 		// Backward Propagation.
-		virtual void BackwardPropagation(const Vector<ElemType> & _weightDelta, const ElemType & _biasDelta) = 0;
+		// virtual void BackwardPropagation(const Vector<ElemType> & _weightDelta, const ElemType & _biasDelta) = 0;
 
 	private:
 
@@ -130,6 +130,26 @@ namespace Nerual
 	public:
 		HiddenLayer(void);
 		HiddenLayer(const size_t _n, const size_t _m);
+
+	public:
+		void SetInput(const Vector<ElemType> & _vec) override;
+		Vector<ElemType> GetOutput(void) override;
+		void ForwardPropagation(void) override;
+
+	private:
+		vector<HiddenNode> _nodes;
+		size_t n;
+		size_t m;
+	};
+
+	/***************************************************************************************************/
+	// Class : OutputLayer
+	/// Used for input data.
+	class OutputLayer : public Layer
+	{
+	public:
+		OutputLayer(void);
+		OutputLayer(const size_t _n, const size_t _m);
 
 	public:
 		void SetInput(const Vector<ElemType> & _vec) override;
