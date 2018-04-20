@@ -25,19 +25,33 @@ namespace Nerual
 	/// Base class of the layer class.
 	class Layer
 	{
-	public:
+	public: // Setters
 
-		// Set the input of a layer.
+		// Set the input of the layer.
+		/// Which means set the nodes` tempInput.
 		virtual void SetInput(const Vector<ElemType> & _vec) = 0;
-		// Get the value of a layer.
+
+	public: // Getters
+
+		// Get the output of the layer.
+		/// Which means get the value pf all nodes in Vector.
 		virtual Vector<ElemType> GetOutput(void) = 0;
-		// Forward Propagation.
+
+	public: // BackPropagation Algorithm
+
+		// ForwardPropagation Function
+		/// Calculate the value of each node.
 		virtual void ForwardPropagation(void) = 0;
-		// Backward Propagation.
+		// BackwardPropagation Function
+		/// Calculate the gradient(delta) of each node.
 		virtual Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) = 0;
+		// Update Function
+		/// Update the weight and bias of each node.
+		virtual void Update(void) = 0;
 
-	private:
+	protected:
 
+		size_t n, m;
 	};
 
 	/***************************************************************************************************/
@@ -47,12 +61,10 @@ namespace Nerual
 	{
 	public: // Constructors
 
-		// Default constructor
-		/// Take no parameters and before use Init() should be involked.
-		InputLayer(void);
-		// Constructor (Using Size)
-		/// Specified the node num of InputLayer.
-		InputLayer(const size_t _n);
+		// Constructor
+		/// n is the input num of the layer.
+		/// m is the output num of the layer, which of course is the node num in this layer.
+		InputLayer(const size_t _n, const size_t _m);
 
 	public: // Operator Overloading
 
@@ -60,41 +72,74 @@ namespace Nerual
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream & _outstream, InputLayer &  _layer);
 
-	public: // 
+	public: // Setters
 
+		// Set the input of the layer.
+		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+
+	public: // Getters
+
+		// Get the output of the layer.
+		/// Which means get the value pf all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
-		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
 
-	public:
+	public: // BackPropagation Algorithm
 
+		// ForwardPropagation Function
+		/// Calculate the value of each node.
 		void ForwardPropagation(void) override;
+		// BackwardPropagation Function
+		/// Calculate the gradient(delta) of each node.
+		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
+		// Update Function
+		/// Update the weight and bias of each node.
+		void Update(void) override;
 
 	private:
+
 		vector<InputNode> _nodes;
-		size_t n;
 	};
 
 	/***************************************************************************************************/
 	// Class : HiddenLayer
-	/// Used for input data.
+	/// 
 	class HiddenLayer : public Layer
 	{
-	public:
-		HiddenLayer(void);
+	public: // Constructors
+
+		// Constructor
+		/// n is the input num of the layer.
+		/// m is the output num of the layer, which of course is the node num in this layer.
 		HiddenLayer(const size_t _n, const size_t _m);
 
-	public:
+	public: // Setters
+
+		// Set the input of the layer.
+		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+
+	public: // Getters
+
+		// Get the output of the layer.
+		/// Which means get the value pf all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
+
+	public: // BackPropagation Algorithm
+
+		// ForwardPropagation Function
+		/// Calculate the value of each node.
 		void ForwardPropagation(void) override;
+		// BackwardPropagation Function
+		/// Calculate the gradient(delta) of each node.
 		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
+		// Update Function
+		/// Update the weight and bias of each node.
 		void Update(void);
 
 	private:
+
 		vector<HiddenNode> _nodes;
-		size_t n;
-		size_t m;
 	};
 
 	/***************************************************************************************************/
@@ -104,9 +149,9 @@ namespace Nerual
 	{
 	public: // Constructors
 
-		// Constructor (Using Size and Type)
+		// Constructor
 		/// n is the input num of the layer.
-		/// m is the output num of the layer, which of course is the node num in thisn layer.
+		/// m is the output num of the layer, which of course is the node num in this layer.
 		OutputLayer(const size_t _n, const size_t _m);
 
 	public: // Setters
@@ -130,14 +175,17 @@ namespace Nerual
 	public: // BackPropagation Algorithm
 
 		// ForwardPropagation Function
+		/// Calculate the value of each node.
 		void ForwardPropagation(void) override;
 		// BackwardPropagation Function
+		/// Calculate the gradient(delta) of each node.
 		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
 		// Update Function
+		/// Update the weight and bias of each node.
 		void Update(void);
 
 	private:
+
 		vector<OutputNode> _nodes;
-		size_t n, m;
 	};
 }

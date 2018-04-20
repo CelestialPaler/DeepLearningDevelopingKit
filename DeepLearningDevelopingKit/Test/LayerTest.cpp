@@ -32,13 +32,13 @@ int main()
 	target(1) = 0;
 	Vector<double> output(1);
 
-	InputLayer in(2);
+	InputLayer in(2, 2);
 	HiddenLayer hidden1(10, 2);
 	HiddenLayer hidden2(10, 10);
 	HiddenLayer hidden3(10, 10);
 	OutputLayer out(1, 10);
 
-	for (size_t i = 0; i < 100; i++)
+	do
 	{
 		in.SetInput(input);
 		in.ForwardPropagation();
@@ -54,20 +54,20 @@ int main()
 		out.ForwardPropagation();
 
 		out.SetExpectation(target);
-		
-		cout << i << "  Loss :" << out.GetLoss() << endl;
+
+		cout <<"Loss :" << out.GetLoss() << endl;
 
 		Vector<double> tempDelta(10);
 		tempDelta = out.BackwardPropagation(out.GetDelta());
 		tempDelta = hidden3.BackwardPropagation(tempDelta);
 		tempDelta = hidden2.BackwardPropagation(tempDelta);
 		tempDelta = hidden1.BackwardPropagation(tempDelta);
-		
+
 		out.Update();
 		hidden1.Update();
 		hidden2.Update();
 		hidden3.Update();
-	}
+	} while (out.GetLoss() > 0.001);
 
 	system("pause");
 	return 0;
