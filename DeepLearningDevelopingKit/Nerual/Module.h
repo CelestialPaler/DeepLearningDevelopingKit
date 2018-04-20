@@ -74,6 +74,8 @@ namespace Nerual
 		void ForwardPropagation(const Vector<ElemType> & _vec);
 		void BackwardPropagation(const Vector<ElemType> & _vec);
 		void Update(void);
+		void BatchDeltaSumUpdate(const size_t _batchSize);
+		void BatchDeltaSumClear(void);
 
 	private:
 		InputLayer * _inputlayer;

@@ -78,11 +78,14 @@ namespace Nerual
 		/// Used for BP Algorithm
 		ElemType value;
 		ElemType valueDelta;
+		ElemType valueDeltaSum;
 		ElemType bias;
 		ElemType biasDelta;
+		ElemType biasDeltaSum;
 		Vector<ElemType> tempInput;
 		Vector<ElemType> weight;
 		Vector<ElemType> weightDelta;
+		Vector<ElemType> weightDeltaSum;
 	};
 	
 	/**********************************************************************************************************/
@@ -105,12 +108,15 @@ namespace Nerual
 		/// Used for BP Algorithm
 		ElemType value;
 		ElemType valueDelta;
+		ElemType valueDeltaSum;
 		ElemType loss;
 		ElemType bias;
 		ElemType biasDelta;
+		ElemType biasDeltaSum;
 		ElemType expectation;
 		Vector<ElemType> tempInput;
 		Vector<ElemType> weight;
 		Vector<ElemType> weightDelta;
+		Vector<ElemType> weightDeltaSum;
 	};
 }

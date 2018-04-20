@@ -50,6 +50,9 @@ namespace Nerual
 		// Update Function
 		/// Update the weight and bias of each node.
 		virtual void Update(void) = 0;
+		// Sum up the delta of a batch.
+		virtual void BatchDeltaSumUpdate(const size_t _batchSize) = 0;
+		virtual void BatchDeltaSumClear(void) = 0;
 
 	protected:
 
@@ -97,6 +100,9 @@ namespace Nerual
 		// Update Function
 		/// Update the weight and bias of each node.
 		void Update(void) override;
+		// Sum up the delta of a batch.
+		void BatchDeltaSumUpdate(const size_t _batchSize) override;
+		void BatchDeltaSumClear(void) override;
 
 	private:
 
@@ -138,6 +144,9 @@ namespace Nerual
 		// Update Function
 		/// Update the weight and bias of each node.
 		void Update(void);
+		// Sum up the delta of a batch.
+		void BatchDeltaSumUpdate(const size_t _batchSize) override;
+		void BatchDeltaSumClear(void) override;
 
 	private:
 
@@ -185,6 +194,9 @@ namespace Nerual
 		// Update Function
 		/// Update the weight and bias of each node.
 		void Update(void);
+		// Sum up the delta of a batch.
+		void BatchDeltaSumUpdate(const size_t _batchSize) override;
+		void BatchDeltaSumClear(void) override;
 
 	private:
 

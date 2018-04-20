@@ -80,6 +80,14 @@ void Nerual::InputLayer::Update(void)
 {
 }
 
+void Nerual::InputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+{
+}
+
+void Nerual::InputLayer::BatchDeltaSumClear(void)
+{
+}
+
 
 /***************************************************************************************************/
 // Class : HiddenLayer
@@ -158,6 +166,8 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 		}
 		tempVec(i) = tempDelta;
 	}
+
+	for (size_t i = 0; i < m; i++)
 	return tempVec;
 }
 
@@ -168,9 +178,35 @@ void Nerual::HiddenLayer::Update(void)
 	for (size_t i = 0; i < m; i++)
 	{
 		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weight(j) -= _nodes.at(i).weightDelta(j);
-		_nodes.at(i).bias -= _nodes.at(i).biasDelta;
+			_nodes.at(i).weight(j) -= _nodes.at(i).weightDeltaSum(j);
+		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum;
 	}
+}
+
+void Nerual::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+{
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).valueDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
+
+	for (size_t i = 0; i < m; i++)
+		for (size_t j = 0; j < n; j++)
+			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).valueDelta / _batchSize);
+
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
+}
+
+void Nerual::HiddenLayer::BatchDeltaSumClear(void)
+{
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).valueDeltaSum = 0;
+
+	for (size_t i = 0; i < m; i++)
+		for (size_t j = 0; j < n; j++)
+			_nodes.at(i).weightDeltaSum(j) = 0;
+
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).biasDeltaSum = 0;
 }
 
 
@@ -298,9 +334,38 @@ void Nerual::OutputLayer::Update(void)
 	for (size_t i = 0; i < m; i++)
 	{
 		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weight(j) -= _nodes.at(i).weightDelta(j);
-		_nodes.at(i).bias -= _nodes.at(i).biasDelta;
+			_nodes.at(i).weight(j) -= _nodes.at(i).weightDeltaSum(j);
+		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum;
 	}
+}
+
+void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+{
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).valueDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
+
+	for (size_t i = 0; i < m; i++)
+		for (size_t j = 0; j < n; j++)
+			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).valueDelta / _batchSize);
+
+	for (size_t i = 0; i < m; i++)
+	{
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
+		cout << _nodes.at(i).biasDeltaSum<<endl;
+	}
+}
+
+void Nerual::OutputLayer::BatchDeltaSumClear(void)
+{
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).valueDeltaSum = 0;
+
+	for (size_t i = 0; i < m; i++)
+		for (size_t j = 0; j < n; j++)
+			_nodes.at(i).weightDeltaSum(j) = 0;
+
+	for (size_t i = 0; i < m; i++)
+		_nodes.at(i).biasDeltaSum = 0;
 }
 
 // Get the node number of the layers.

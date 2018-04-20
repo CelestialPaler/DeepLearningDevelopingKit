@@ -33,11 +33,14 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->valueDelta = 0.f;
+	this->valueDeltaSum = 0.f;
 	this->bias = RandomSqrt(_n);
 	this->biasDelta = 0.f;
-	this->tempInput.Init(_n);
+	this->biasDeltaSum = 0.f;
+	this->tempInput.Init(_n, VectorType::Zero);
 	this->weight.Init(_n, VectorType::Random);
-	this->weightDelta.Init(_n);
+	this->weightDelta.Init(_n, VectorType::Zero);
+	this->weightDeltaSum.Init(_n, VectorType::Zero);
 }
 
 void Nerual::HiddenNode::Calculate(void)
@@ -64,13 +67,16 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->valueDelta = 0.f;
+	this->valueDeltaSum = 0.f;
 	this->loss = 0.f;
 	this->bias = RandomSqrt(_n);
 	this->biasDelta = 0.f;
+	this->biasDeltaSum = 0.f;
 	this->expectation = 0.f;
-	this->tempInput.Init(_n,VectorType::Zero);
+	this->tempInput.Init(_n, VectorType::Zero);
 	this->weight.Init(_n, VectorType::Random);
 	this->weightDelta.Init(_n, VectorType::Zero);
+	this->weightDeltaSum.Init(_n, VectorType::Zero);
 }
 
 void Nerual::OutputNode::Calculate(void)

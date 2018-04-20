@@ -15,16 +15,7 @@ using namespace Nerual;
 int main()
 {
 	NumaricSet TrainSet;
-
-	Vector<double> input1(2, VectorType::Zero);
-	input1(0) = 0;
-	input1(1) = 0;
-	Vector<double> target1(1, VectorType::Zero);
-	target1(0) = 0;
-	NumaricSet::Sample tempSample1;
-	tempSample1.first = input1;
-	tempSample1.second = target1;
-	TrainSet.AddToSet(tempSample1);
+	TrainSet.InitWithXOR();
 
 	BPNetInitor classicBPN;
 	classicBPN.InputNodeNum = 2;
