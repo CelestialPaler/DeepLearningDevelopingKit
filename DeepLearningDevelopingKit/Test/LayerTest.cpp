@@ -69,8 +69,6 @@ int main()
 		hidden3.Update();
 	}
 
-
-
 	system("pause");
 	return 0;
 }

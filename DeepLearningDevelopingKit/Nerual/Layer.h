@@ -38,7 +38,6 @@ namespace Nerual
 
 	private:
 
-
 	};
 
 	/***************************************************************************************************/
@@ -100,27 +99,45 @@ namespace Nerual
 
 	/***************************************************************************************************/
 	// Class : OutputLayer
-	/// Used for output data.
+	/// Used for output data, quantify the loss of the output.
 	class OutputLayer : public Layer
 	{
-	public:
-		OutputLayer(void);
+	public: // Constructors
+
+		// Constructor (Using Size and Type)
+		/// n is the input num of the layer.
+		/// m is the output num of the layer, which of course is the node num in thisn layer.
 		OutputLayer(const size_t _n, const size_t _m);
 
-	public:
+	public: // Setters
+		
+		// Set the input of the layer.
+		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+		// Set the expectation of the OutputLayer.
 		void SetExpectation(const Vector<ElemType> & _vec);
+
+	public: // Getters
+
+		// Get the output of the layer.
+		/// Which means get the value pf all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
+		// Get the estimated loss between output and expectation.
 		ElemType GetLoss(void);
+		// Get the exact error(Delta) between output and expectation.
 		Vector<ElemType> GetDelta(void);
+
+	public: // BackPropagation Algorithm
+
+		// ForwardPropagation Function
 		void ForwardPropagation(void) override;
+		// BackwardPropagation Function
 		Vector<ElemType> BackwardPropagation(const Vector<ElemType> & _vec) override;
+		// Update Function
 		void Update(void);
 
 	private:
 		vector<OutputNode> _nodes;
-		size_t n;
-		size_t m;
+		size_t n, m;
 	};
-
 }

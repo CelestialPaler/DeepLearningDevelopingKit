@@ -148,6 +148,7 @@
     <ClInclude Include="MathLib\MathLib.h" />
     <ClInclude Include="MathLib\Matrix.h" />
     <ClInclude Include="MathLib\MatrixStatic.h" />
+    <ClInclude Include="MathLib\NodeVector.h" />
     <ClInclude Include="MathLib\ToolFunction.h" />
     <ClInclude Include="MathLib\Vector.h" />
     <ClInclude Include="MathLib\VectorStatic.h" />

@@ -40,6 +40,9 @@
     <ClInclude Include="MathLib\LossFunction.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="MathLib\NodeVector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
