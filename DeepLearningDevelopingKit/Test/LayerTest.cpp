@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define LayerDebug
+#define LayerDebug
 
 #ifdef LayerDebug
 
@@ -14,6 +14,7 @@
 #include "..\MathLib\MathLib.h"
 #include "..\Nerual\NerualLib.h"
 #include "..\Util\Log.h"
+#include <ctime>
 
 // Namespaces
 using namespace std;
@@ -22,43 +23,36 @@ using namespace Nerual;
 
 int main()
 {
+	srand((unsigned)time(NULL));
 	PrintLocalTime();
 	PrintTitle();
 
-	Vector<double> input(2);
-	input(0) = 0;
-	input(1) = 0;
 	Vector<double> target(2, VectorType::Random);
 	target(0) = 0;
 	target(1) = 0;
 	Vector<double> output(1);
 
 	InputLayer in(2, 2);
-	HiddenLayer hidden1(2, 10);
-	HiddenLayer hidden2(10, 15);
-	HiddenLayer hidden3(15, 10);
+	HiddenLayer hidden(2, 10);
 	OutputLayer out(10, 1);
 
 	unsigned count = 0;
 	do
 	{
+		Vector<double> input(2, VectorType::Random);
 		in.SetInput(input);
 		in.ForwardPropagation();
 
-		hidden1.SetInput(in.GetOutput());
-		hidden1.ForwardPropagation();
-		hidden2.SetInput(hidden1.GetOutput());
-		hidden2.ForwardPropagation();
-		hidden3.SetInput(hidden2.GetOutput());
-		hidden3.ForwardPropagation();
-
-		out.SetInput(hidden3.GetOutput());
+		// cout << in.GetOutput()(0) << "  " << in.GetOutput()(1) << endl;
+		 
+		hidden.SetInput(in.GetOutput());
+		hidden.ForwardPropagation();
+		cout << hidden.GetOutput()(0) << "  " << hidden.GetOutput()(1) << endl;
+		out.SetInput(hidden.GetOutput());
 		out.ForwardPropagation();
 
 		out.SetExpectation(target);
-
-		cout << count << "  Loss :" << out.GetLoss() << endl;
-
+		/*
 		Vector<double> tempDelta(10);
 		tempDelta = out.BackwardPropagation(out.GetDelta());
 		tempDelta = hidden3.BackwardPropagation(tempDelta);
@@ -69,7 +63,8 @@ int main()
 		hidden1.Update();
 		hidden2.Update();
 		hidden3.Update();
-
+		*/
+		cout << count << "  Loss :" << out.GetOutput()(0) << endl;
 		count++;
 	} while (out.GetLoss() > 0.00001);
 

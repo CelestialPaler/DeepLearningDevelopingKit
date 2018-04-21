@@ -8,6 +8,8 @@
 // Header files
 #include "Layer.h"
 
+const double learnRate = 0.01;
+
 /***************************************************************************************************/
 // Class : InputLayer
 
@@ -147,14 +149,11 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
+	{
 		_nodes.at(i).valueDelta = _vec(i);
-
-	for (size_t i = 0; i < m; i++)
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weightDelta(j) = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value)) * _nodes.at(i).tempInput(j);
-
-	for (size_t i = 0; i < m; i++) 
+		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
 		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
+	}
 
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
@@ -166,8 +165,6 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 		}
 		tempVec(i) = tempDelta;
 	}
-
-	for (size_t i = 0; i < m; i++)
 	return tempVec;
 }
 
@@ -177,9 +174,8 @@ void Nerual::HiddenLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weight(j) -= _nodes.at(i).weightDeltaSum(j);
-		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum;
+		_nodes.at(i).weight -= _nodes.at(i).weightDelta * learnRate;
+		_nodes.at(i).bias -= _nodes.at(i).biasDelta * learnRate;
 	}
 }
 
@@ -190,10 +186,10 @@ void Nerual::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 
 	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).valueDelta / _batchSize);
+			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).weightDelta(j) / _batchSize);
 
 	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).biasDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta / _batchSize);
 }
 
 void Nerual::HiddenLayer::BatchDeltaSumClear(void)
@@ -305,14 +301,11 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<ElemType> & _vec)
 {
 	for (size_t i = 0; i < m; i++)
+	{
 		_nodes.at(i).valueDelta = _vec(i);
-
-	for (size_t i = 0; i < m; i++) // All the outputNodes
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weightDelta(j) = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value)) * _nodes.at(i).tempInput(j);
-
-	for (size_t i = 0; i < m; i++) // All the outputNodes
+		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
 		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
+	}
 
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
@@ -333,9 +326,8 @@ void Nerual::OutputLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weight(j) -= _nodes.at(i).weightDeltaSum(j);
-		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum;
+		_nodes.at(i).weight -= _nodes.at(i).weightDelta * learnRate;
+		_nodes.at(i).bias -= _nodes.at(i).biasDelta * learnRate;
 	}
 }
 
@@ -345,14 +337,10 @@ void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 		_nodes.at(i).valueDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
 
 	for (size_t i = 0; i < m; i++)
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).valueDelta / _batchSize);
+		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / _batchSize));
 
 	for (size_t i = 0; i < m; i++)
-	{
-		_nodes.at(i).biasDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
-		cout << _nodes.at(i).biasDeltaSum<<endl;
-	}
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta / _batchSize);
 }
 
 void Nerual::OutputLayer::BatchDeltaSumClear(void)
