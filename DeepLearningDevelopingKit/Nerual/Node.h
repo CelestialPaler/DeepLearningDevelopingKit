@@ -29,9 +29,10 @@ namespace Nerual
 
 	public:
 
-		virtual void Calculate(void) = 0;
+		virtual void ForwardPropagation(void) = 0;
 
 	private:
+
 	};
 
 	/**********************************************************************************************************/
@@ -39,22 +40,29 @@ namespace Nerual
 	class InputNode : public Node
 	{
 		friend class InputLayer;
-	public:
-		/// Constructor
+	public: // Constructors
+
+		// Default constructor
+		/// Take no parameters.
 		InputNode(void);
 
 	public:
-		void Calculate(void) override;
 
-	public:
+		void ForwardPropagation(void) override;
+
+	public: // Operator Overloading
+
 		// "<<" operator
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream & _outstream, InputNode & _node);
 
 	private:
-		/// Used for BP Algorithm
+
+		// Basic
 		ElemType value;
+
 		ElemType tempInput;
+
 	};
 
 	/**********************************************************************************************************/
@@ -66,26 +74,37 @@ namespace Nerual
 		/// Constructor
 		HiddenNode(const size_t _n);
 
-	public:
-		void Calculate(void) override;
+	public: // Constructors
 
-	public:
+		// Default constructor
+		/// Take no parameters.
+		void ForwardPropagation(void) override;
+
+	public: // Operator Overloading
+
 		// "<<" operator
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream & _outstream, HiddenNode & _node);
 
 	private:
-		/// Used for BP Algorithm
+
+		// Basic
 		ElemType value;
+		ElemType bias;
+		Vector<ElemType> weight;
+
+		ElemType loss;
+		ElemType expectation;
+		Vector<ElemType> tempInput;
+
+		// Used for BP Algorithm
 		ElemType valueDelta;
 		ElemType valueDeltaSum;
-		ElemType bias;
 		ElemType biasDelta;
 		ElemType biasDeltaSum;
-		Vector<ElemType> tempInput;
-		Vector<ElemType> weight;
 		Vector<ElemType> weightDelta;
 		Vector<ElemType> weightDeltaSum;
+
 	};
 	
 	/**********************************************************************************************************/
@@ -97,26 +116,32 @@ namespace Nerual
 		/// Constructor
 		OutputNode(const size_t _n);
 	public:
-		void Calculate(void) override;
+		void ForwardPropagation(void) override;
 
-	public:
+	public: // Operator Overloading
+
 		// "<<" operator
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream & _outstream, OutputNode & _node);
 
 	private:
-		/// Used for BP Algorithm
+
+		// Basic
 		ElemType value;
-		ElemType valueDelta;
-		ElemType valueDeltaSum;
-		ElemType loss;
 		ElemType bias;
-		ElemType biasDelta;
-		ElemType biasDeltaSum;
+		Vector<ElemType> weight;
+
+		ElemType loss;
 		ElemType expectation;
 		Vector<ElemType> tempInput;
-		Vector<ElemType> weight;
+		
+		// Used for BP Algorithm
+		ElemType valueDelta;
+		ElemType valueDeltaSum;
+		ElemType biasDelta;
+		ElemType biasDeltaSum;
 		Vector<ElemType> weightDelta;
 		Vector<ElemType> weightDeltaSum;
+
 	};
 }

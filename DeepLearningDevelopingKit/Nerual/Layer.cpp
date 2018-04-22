@@ -64,7 +64,7 @@ void Nerual::InputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).Calculate();
+		_nodes.at(i).ForwardPropagation();
 	}
 }
 
@@ -140,7 +140,7 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).Calculate();
+		_nodes.at(i).ForwardPropagation();
 	}
 }
 
@@ -174,8 +174,8 @@ void Nerual::HiddenLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).weight -= _nodes.at(i).weightDelta * learnRate;
-		_nodes.at(i).bias -= _nodes.at(i).biasDelta * learnRate;
+		_nodes.at(i).weight -= _nodes.at(i).weightDeltaSum * learnRate;
+		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum * learnRate;
 	}
 }
 
@@ -292,7 +292,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).Calculate();
+		_nodes.at(i).ForwardPropagation();
 	}
 }
 
@@ -326,8 +326,8 @@ void Nerual::OutputLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).weight -= _nodes.at(i).weightDelta * learnRate;
-		_nodes.at(i).bias -= _nodes.at(i).biasDelta * learnRate;
+		_nodes.at(i).weight -= _nodes.at(i).weightDeltaSum * learnRate;
+		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum * learnRate;
 	}
 }
 
