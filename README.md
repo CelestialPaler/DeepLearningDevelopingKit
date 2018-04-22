@@ -13,16 +13,23 @@ Programing Language: *C++*
 
 Feature:
 
-*   Simple and intuitive.
+*   Simple and intuitive
 *   High-efficiency
 *   Modularization
 *   Expandability
+*   Customization
 
 ## Developing Status
 Under developing:
 *   Data Set Management
 *   Module and Port for flexibility in linking Modules
+*   Activation functions
+*   Data Generator
+
+In further plan (Not in top priority):
+*   Visualization tool using SFML or Python
 *   Acceleration using CUDA
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;This is still an early stage of development. So, it`s welcomed for anyone to contribute to this project. Feel free to upload your code or pull a request. More than anything, please share your idea and give me some precious advices. XD</p>
 
 For more information, check my website [*Celestial Tech*](www.tianshicangxie.com "天师苍邪科技") .
