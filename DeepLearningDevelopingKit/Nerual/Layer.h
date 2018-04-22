@@ -11,6 +11,7 @@
 #include "Node.h"
 #include "..\MathLib\MathLib.h"
 #include "..\MathLib\LossFunction.h"
+#include "..\MathLib\ActivationFunction.h"
 
 // Name space
 using namespace std;
@@ -30,11 +31,13 @@ namespace Nerual
 		// Set the input of the layer.
 		/// Which means set the nodes` tempInput.
 		virtual void SetInput(const Vector<ElemType> & _vec) = 0;
+		// Set the activation function of the layer.
+		virtual void SetActivationFunction(const ActivationFunction _function) = 0;
 
 	public: // Getters
 
 		// Get the output of the layer.
-		/// Which means get the value pf all nodes in Vector.
+		/// Which means get the value of all nodes in Vector.
 		virtual Vector<ElemType> GetOutput(void) = 0;
 		// Get the node number of the layers.
 		size_t GetNodeNum(void);
@@ -55,7 +58,7 @@ namespace Nerual
 		virtual void BatchDeltaSumClear(void) = 0;
 
 	protected:
-
+		ElemType(*activationFunction)(ElemType x);
 		size_t n, m;
 	};
 
@@ -82,11 +85,13 @@ namespace Nerual
 		// Set the input of the layer.
 		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+		// Set the activation function of the layer.
+		virtual void SetActivationFunction(const ActivationFunction _function) override;
 
 	public: // Getters
 
 		// Get the output of the layer.
-		/// Which means get the value pf all nodes in Vector.
+		/// Which means get the value of all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
 
 	public: // BackPropagation Algorithm
@@ -105,7 +110,6 @@ namespace Nerual
 		void BatchDeltaSumClear(void) override;
 
 	private:
-
 		vector<InputNode> _nodes;
 	};
 
@@ -126,11 +130,13 @@ namespace Nerual
 		// Set the input of the layer.
 		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+		// Set the activation function of the layer.
+		virtual void SetActivationFunction(const ActivationFunction _function) override;
 
 	public: // Getters
 
 		// Get the output of the layer.
-		/// Which means get the value pf all nodes in Vector.
+		/// Which means get the value of all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
 
 	public: // BackPropagation Algorithm
@@ -149,7 +155,7 @@ namespace Nerual
 		void BatchDeltaSumClear(void) override;
 
 	private:
-
+		ElemType(*activationFunction)(ElemType x);
 		vector<HiddenNode> _nodes;
 	};
 
@@ -172,11 +178,13 @@ namespace Nerual
 		void SetInput(const Vector<ElemType> & _vec) override;
 		// Set the expectation of the OutputLayer.
 		void SetExpectation(const Vector<ElemType> & _vec);
+		// Set the activation function of the layer.
+		virtual void SetActivationFunction(const ActivationFunction _function) override;
 
 	public: // Getters
 
 		// Get the output of the layer.
-		/// Which means get the value pf all nodes in Vector.
+		/// Which means get the value of all nodes in Vector.
 		Vector<ElemType> GetOutput(void) override;
 		// Get the estimated loss between output and expectation.
 		ElemType GetLoss(void);

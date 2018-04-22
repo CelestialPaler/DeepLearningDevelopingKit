@@ -24,16 +24,10 @@ namespace Nerual
 {
 	typedef double ElemType;
 
-	class Node
-	{
-
-	public:
-
-		virtual void ForwardPropagation(void) = 0;
-
-	private:
-
-	};
+	/**********************************************************************************************************/
+	// Class : Node
+	/// Base class of Nodes.
+	class Node {};
 
 	/**********************************************************************************************************/
 	// Class : InputNode
@@ -45,10 +39,6 @@ namespace Nerual
 		// Default constructor
 		/// Take no parameters.
 		InputNode(void);
-
-	public:
-
-		void ForwardPropagation(void) override;
 
 	public: // Operator Overloading
 
@@ -70,15 +60,11 @@ namespace Nerual
 	class HiddenNode : public Node
 	{
 		friend class HiddenLayer;
-	public:
-		/// Constructor
-		HiddenNode(const size_t _n);
-
 	public: // Constructors
 
 		// Default constructor
 		/// Take no parameters.
-		void ForwardPropagation(void) override;
+		HiddenNode(const size_t _n);
 
 	public: // Operator Overloading
 
@@ -112,11 +98,11 @@ namespace Nerual
 	class OutputNode : public Node
 	{
 		friend class OutputLayer;
-	public:
-		/// Constructor
+	public: // Constructors
+
+		// Default constructor
+		/// Take no parameters.
 		OutputNode(const size_t _n);
-	public:
-		void ForwardPropagation(void) override;
 
 	public: // Operator Overloading
 

@@ -15,6 +15,7 @@
 #include "..\Nerual\NerualLib.h"
 #include "..\Util\Log.h"
 #include <ctime>
+#include "..\MathLib\ActivationFunction.h"
 
 // Namespaces
 using namespace std;
@@ -30,6 +31,10 @@ int main()
 	InputLayer in(2, 2);
 	HiddenLayer hidden(2, 10);
 	OutputLayer out(10, 1);
+
+	in.SetActivationFunction(ActivationFunction::Sigmoid);
+	hidden.SetActivationFunction(ActivationFunction::ReLU);
+	out.SetActivationFunction(ActivationFunction::Sigmoid);
 
 	NumaricSet TrainSet;
 	TrainSet.InitWithXOR();

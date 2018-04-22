@@ -46,6 +46,22 @@ void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
 	}
 }
 
+void Nerual::InputLayer::SetActivationFunction(const ActivationFunction _function)
+{
+	switch (_function)
+	{
+	case ActivationFunction::Sigmoid:
+		this->activationFunction = Sigmoid;
+		break;
+	case ActivationFunction::ReLU:
+		this->activationFunction = ReLU;
+		break;
+	default:
+		this->activationFunction = Sigmoid;
+		break;
+	}
+}
+
 // Get the output of the layer.
 /// Which means get the value pf all nodes in Vector.
 Vector<Nerual::ElemType> Nerual::InputLayer::GetOutput(void)
@@ -64,7 +80,7 @@ void Nerual::InputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).ForwardPropagation();
+		_nodes.at(i).value = _nodes.at(i).tempInput;
 	}
 }
 
@@ -122,6 +138,22 @@ void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 	}
 }
 
+void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _function)
+{
+	switch (_function)
+	{
+	case ActivationFunction::Sigmoid:
+		this->activationFunction = Sigmoid;
+		break;
+	case ActivationFunction::ReLU:
+		this->activationFunction = ReLU;
+		break;
+	default:
+		this->activationFunction = ReLU;
+		break;
+	}
+}
+
 // Get the output of the layer.
 /// Which means get the value pf all nodes in Vector.
 Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
@@ -140,7 +172,7 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).ForwardPropagation();
+		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() - _nodes.at(i).bias);
 	}
 }
 
@@ -246,6 +278,22 @@ void Nerual::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
 	}
 }
 
+void Nerual::OutputLayer::SetActivationFunction(const ActivationFunction _function)
+{
+	switch (_function)
+	{
+	case ActivationFunction::Sigmoid:
+		this->activationFunction = Sigmoid;
+		break;
+	case ActivationFunction::ReLU:
+		this->activationFunction = ReLU;
+		break;
+	default:
+		this->activationFunction = ReLU;
+		break;
+	}
+}
+
 // Get the output of the layer.
 /// Which means get the value pf all nodes in Vector.
 Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
@@ -292,7 +340,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).ForwardPropagation();
+		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() - _nodes.at(i).bias);
 	}
 }
 

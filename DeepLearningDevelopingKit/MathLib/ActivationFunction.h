@@ -16,14 +16,14 @@ using namespace std;
 // Activation functions 
 /// Activation Function Enums
 enum class ActivationFunction {
-	SigmoidFunc,
-	ReLUFunc,
-	LeakyReLUFunc,
-	ELUFunc,
-	SinhFunc,
-	CoshFunc,
-	TanhFunc,
-	SoftplusFunc
+	Sigmoid,
+	ReLU,
+	LeakyReLU,
+	ELU,
+	Sinh,
+	Cosh,
+	Tanh,
+	Softplus
 }; 
 
 // Sigmoid Function
