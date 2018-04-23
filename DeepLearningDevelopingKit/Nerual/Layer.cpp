@@ -96,6 +96,7 @@ Vector<Nerual::ElemType> Nerual::InputLayer::BackwardPropagation(const Vector<El
 /// Update the weight and bias of each node.
 void Nerual::InputLayer::Update(void)
 {
+
 }
 
 void Nerual::InputLayer::BatchDeltaSumUpdate(const size_t _batchSize)

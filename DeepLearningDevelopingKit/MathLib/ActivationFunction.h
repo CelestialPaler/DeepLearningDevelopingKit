@@ -23,7 +23,8 @@ enum class ActivationFunction {
 	Sinh,
 	Cosh,
 	Tanh,
-	Softplus
+	Softplus,
+	Custom
 }; 
 
 // Sigmoid Function

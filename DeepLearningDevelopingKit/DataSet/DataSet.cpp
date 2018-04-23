@@ -42,7 +42,6 @@ void Data::NumaricSet::InitWithXOR(void)
 	target4(0) = 0;
 	NumaricSet::Sample tempSample4 = { input4 , target4 };
 	AddToSet(tempSample4);
-
 }
 
 void Data::NumaricSet::AddToSet(const Sample & _sample)

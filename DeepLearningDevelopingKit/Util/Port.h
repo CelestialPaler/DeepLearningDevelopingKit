@@ -20,7 +20,7 @@ using namespace MathLib;
 
 class PortPointer {};
 
-template<size_t M,size_t N>
+template<size_t M, size_t N>
 class Port : public PortPointer
 {
 public:
