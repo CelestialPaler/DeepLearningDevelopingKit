@@ -9,7 +9,7 @@
 // Header files
 #include "..\MathLib\MathLib.h"
 
-// Name space
+// Namespace
 #ifdef USING_STATIC_MATHLIB
 using namespace MathLibStatic;
 #endif // USING_STATIC_MATHLIB
@@ -22,6 +22,8 @@ using namespace MathLib;
 /// Provide Node for nerual network algorithms.
 namespace Nerual
 {
+	// Define the Element datatype.
+	/// Mainly using float and double.
 	typedef double ElemType;
 
 	/**********************************************************************************************************/
@@ -37,7 +39,7 @@ namespace Nerual
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters.
+		/// Takes no parameters.
 		InputNode(void);
 
 	public: // Operator Overloading
@@ -46,7 +48,7 @@ namespace Nerual
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream & _outstream, InputNode & _node);
 
-	private:
+	private: 
 
 		// Basic
 		ElemType value;
@@ -63,7 +65,7 @@ namespace Nerual
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters.
+		/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 		HiddenNode(const size_t _n);
 
 	public: // Operator Overloading
@@ -101,7 +103,7 @@ namespace Nerual
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters.
+		/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 		OutputNode(const size_t _n);
 
 	public: // Operator Overloading

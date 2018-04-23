@@ -74,3 +74,5 @@ inline double tanh(double x) {
 inline double Softplus(double x) {
 	return logf(1 + exp(x));
 }
+
+

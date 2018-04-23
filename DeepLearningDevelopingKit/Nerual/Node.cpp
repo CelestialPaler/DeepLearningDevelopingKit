@@ -15,11 +15,6 @@ Nerual::InputNode::InputNode(void)
 	this->value = 0.f;
 }
 
-void Nerual::InputNode::ForwardPropagation(void)
-{
-	this->value = Sigmoid(tempInput);
-}
-
 ostream & Nerual::operator<<(ostream & _outstream, InputNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;
@@ -41,11 +36,6 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 	this->weight.Init(_n, VectorType::Random);
 	this->weightDelta.Init(_n, VectorType::Zero);
 	this->weightDeltaSum.Init(_n, VectorType::Zero);
-}
-
-void Nerual::HiddenNode::ForwardPropagation(void)
-{
-	this->value = Sigmoid((tempInput * weight).Sum() + bias);
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
@@ -77,11 +67,6 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 	this->weight.Init(_n, VectorType::Random);
 	this->weightDelta.Init(_n, VectorType::Zero);
 	this->weightDeltaSum.Init(_n, VectorType::Zero);
-}
-
-void Nerual::OutputNode::ForwardPropagation(void)
-{
-	this->value = Sigmoid((tempInput * weight).Sum() + bias);
 }
 
 ostream & Nerual::operator<<(ostream & _outstream, OutputNode & _node)
