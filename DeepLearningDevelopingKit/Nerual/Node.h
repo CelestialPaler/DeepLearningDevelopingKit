@@ -64,7 +64,7 @@ namespace Nerual
 		friend class HiddenLayer;
 	public: // Constructors
 
-		// Default constructor
+		// Constructor
 		/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 		HiddenNode(const size_t _n);
 
@@ -102,7 +102,7 @@ namespace Nerual
 		friend class OutputLayer;
 	public: // Constructors
 
-		// Default constructor
+		// Constructor
 		/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 		OutputNode(const size_t _n);
 

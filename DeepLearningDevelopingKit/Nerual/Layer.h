@@ -60,6 +60,9 @@ namespace Nerual
 
 	protected:
 		ElemType(*activationFunction)(ElemType x);
+		ElemType(*activationFunctionDerivative)(ElemType x);
+		ElemType(*lossFunction)(ElemType x);
+		ElemType(*lossFunctionDerivative)(ElemType x);
 		size_t n, m;
 	};
 
