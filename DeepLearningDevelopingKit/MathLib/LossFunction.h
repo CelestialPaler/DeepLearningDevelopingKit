@@ -11,9 +11,9 @@
 /************************************************************************************************************/
 /* Loss functions */
 enum class LossFunction {
-	MESFunc,
-	ZeroOneFunc,
-	CECFunc
+	MES,
+	ZeroOne,
+	CEC
 };
 
 /// Variance loss function 
