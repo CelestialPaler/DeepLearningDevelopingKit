@@ -171,12 +171,15 @@ void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _functi
 	{
 	case ActivationFunction::Sigmoid:
 		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
 		break;
 	case ActivationFunction::ReLU:
 		this->activationFunction = ReLU;
+		this->activationFunctionDerivative = ReLUDerivative;
 		break;
 	default:
-		this->activationFunction = ReLU;
+		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
 		break;
 	}
 }
@@ -225,16 +228,17 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 	SetExpectation(_vec);
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).valueDelta = _vec(i);
+		_nodes.at(i).valueDelta = _nodes.at(i).value - _nodes.at(i).expectation;
 		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
 		_nodes.at(i).biasDelta = lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
 	}
 
-	/// Calculate the partial derivative of loss to last layer value.
+	/// Calculate the partial derivative of loss to last layer value and return the expectation of last layer.
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
 		for (size_t j = 0; j < m; j++)
-			tempVec(i) += lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value) * _nodes.at(j).weight(i);
+			tempVec(i) += lossFunctionDerivative(_nodes.at(j).value, _nodes.at(j).expectation) * activationFunctionDerivative(_nodes.at(j).value) * _nodes.at(j).weight(i);
+	tempVec += _nodes.at(0).tempInput;
 	return tempVec;
 }
 
@@ -293,10 +297,7 @@ void Nerual::OutputLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		for (size_t j = 0; j < n; j++)
-		{
-			_nodes.at(i).tempInput(j) = _vec(j);
-		}
+		_nodes.at(i).tempInput = _vec;
 	}
 }
 
@@ -315,12 +316,30 @@ void Nerual::OutputLayer::SetActivationFunction(const ActivationFunction _functi
 	{
 	case ActivationFunction::Sigmoid:
 		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
 		break;
 	case ActivationFunction::ReLU:
 		this->activationFunction = ReLU;
+		this->activationFunctionDerivative = ReLUDerivative;
 		break;
 	default:
-		this->activationFunction = ReLU;
+		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
+		break;
+	}
+}
+
+void Nerual::OutputLayer::SetLossFunction(const LossFunction _function)
+{
+	switch (_function)
+	{
+	case LossFunction::MES:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
+		break;
+	default:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
 		break;
 	}
 }
@@ -391,11 +410,9 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<E
 	/// Calculate the partial derivative of loss to last layer value and return the expectation of last layer.
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
-	{
-		tempVec(i) += _nodes.at(i).value;
 		for (size_t j = 0; j < m; j++)
-			tempVec(i) += lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value) * _nodes.at(j).weight(i);
-	}
+			tempVec(i) += lossFunctionDerivative(_nodes.at(j).value, _nodes.at(j).expectation) * activationFunctionDerivative(_nodes.at(j).value) * _nodes.at(j).weight(i);
+	tempVec += _nodes.at(0).tempInput;
 	return tempVec;
 }
 
@@ -405,8 +422,8 @@ void Nerual::OutputLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).weight -= _nodes.at(i).weightDeltaSum * learnRate;
-		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum * learnRate;
+		_nodes.at(i).weight += _nodes.at(i).weightDeltaSum * learnRate;
+		_nodes.at(i).bias += _nodes.at(i).biasDeltaSum * learnRate;
 	}
 }
 

@@ -33,65 +33,51 @@ int main()
 	OutputLayer out(10, 1);
 
 	in.SetActivationFunction(ActivationFunction::Sigmoid);
+	in.SetLossFunction(LossFunction::MES);
 	hidden.SetActivationFunction(ActivationFunction::ReLU);
+	hidden.SetLossFunction(LossFunction::MES);
 	out.SetActivationFunction(ActivationFunction::Sigmoid);
+	out.SetLossFunction(LossFunction::MES);
 
 	NumaricSet TrainSet;
 	TrainSet.InitWithXOR();
 
-	unsigned count = 0;
+	unsigned count = 1;
+	unsigned iterCount = 0;
+	unsigned batchsize = 4;
 	do
 	{
 		NumaricSet::Sample sample = TrainSet.GetBatch();
-		in.SetInput(sample.first);
-		in.ForwardPropagation();
-		//cout << in.GetOutput()(0) << "  " << in.GetOutput()(1) << " | ";
 
-		hidden.SetInput(in.GetOutput());
+		hidden.SetInput(sample.first);
 		hidden.ForwardPropagation();
-
-		//cout << hidden.GetOutput()(0) << "  " << hidden.GetOutput()(1) << " | ";
 
 		out.SetInput(hidden.GetOutput());
 		out.ForwardPropagation();
 
-		//cout << out.GetOutput()(0) << " | ";
 
-		out.SetExpectation(sample.second);
-		Vector<double> tempDelta(10);
-		//cout << out.GetDelta()(0) << endl;
+		hidden.BackwardPropagation(out.BackwardPropagation(sample.second));
 
-		tempDelta = out.BackwardPropagation(out.GetDelta());
-		hidden.BackwardPropagation(tempDelta);
-
-		if (count == 15)
+		if (count == 3)
 		{
 			out.Update();
 			hidden.Update();
+
 			out.BatchDeltaSumClear();
 			hidden.BatchDeltaSumClear();
+
 			count = 0;
+			iterCount++;
 		}
 		else
 		{
-			out.BatchDeltaSumUpdate(16);
-			hidden.BatchDeltaSumUpdate(16);
+			out.BatchDeltaSumUpdate(batchsize);
+			hidden.BatchDeltaSumUpdate(batchsize);
 			count++;
+			cout << "Iter :" << iterCount << "  Loss :" << out.GetLoss() << endl;
 		}
 
-		/*
-		tempDelta = hidden3.BackwardPropagation(tempDelta);
-		tempDelta = hidden2.BackwardPropagation(tempDelta);
-		tempDelta = hidden1.BackwardPropagation(tempDelta);
-
-		out.Update();
-		hidden1.Update();
-		hidden2.Update();
-		hidden3.Update();
-		*/
-
-		cout << count << "  Loss :" << out.GetOutput()(0) << endl;
-		// Sleep(100);
+		Sleep(100);
 	} while (out.GetLoss() > 0.00001);
 	system("pause");
 	return 0;

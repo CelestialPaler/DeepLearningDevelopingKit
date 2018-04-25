@@ -62,7 +62,7 @@ inline double ReLU(double x) {
 // Rectified Linear Units (ReLU)
 /// non-negative rectification
 inline double ReLUDerivative(double x) {
-	return x > 0 ? x : 0;
+	return x > 0 ? 1 : 0;
 }
 
 // Leaky-ReLU

@@ -94,7 +94,7 @@ namespace Nerual
 		// Set the activation function of the layer.
 		virtual void SetActivationFunction(const ActivationFunction _function) override;
 		// Set the loss function of the layer.
-		void SetLossFunction(const LossFunction _function);
+		void SetLossFunction(const LossFunction _function) override;
 
 	public: // Getters
 
@@ -144,7 +144,7 @@ namespace Nerual
 		// Set the activation function of the layer.
 		virtual void SetActivationFunction(const ActivationFunction _function) override;
 		// Set the loss function of the layer.
-		void SetLossFunction(const LossFunction _function);
+		void SetLossFunction(const LossFunction _function) override;
 
 	public: // Getters
 
@@ -192,7 +192,9 @@ namespace Nerual
 		// Set the expectation of the OutputLayer.
 		void SetExpectation(const Vector<ElemType> & _vec);
 		// Set the activation function of the layer.
-		virtual void SetActivationFunction(const ActivationFunction _function) override;
+		void SetActivationFunction(const ActivationFunction _function) override;
+		// Set the loss function of the layer.
+		void SetLossFunction(const LossFunction _function) override;
 
 	public: // Getters
 
