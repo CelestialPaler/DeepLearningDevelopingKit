@@ -16,8 +16,19 @@ enum class LossFunction {
 	CEC
 };
 
+enum class LossFunctionDerivative {
+	MESDerivative,
+	ZeroOneDerivative,
+	CECDerivative
+};
+
 /// Variance loss function 
 inline double MES(double _predict, double _expectation) {
+	return pow(_predict - _expectation, 2);
+}
+
+/// Variance loss function 
+inline double MESDerivative(double _predict, double _expectation) {
 	return pow(_predict - _expectation, 2);
 }
 

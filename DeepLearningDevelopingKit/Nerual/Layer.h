@@ -33,6 +33,8 @@ namespace Nerual
 		virtual void SetInput(const Vector<ElemType> & _vec) = 0;
 		// Set the activation function of the layer.
 		virtual void SetActivationFunction(const ActivationFunction _function) = 0;
+		// Set the loss function of the layer.
+		virtual void SetLossFunction(const LossFunction _function) = 0;
 
 	public: // Getters
 
@@ -61,8 +63,8 @@ namespace Nerual
 	protected:
 		ElemType(*activationFunction)(ElemType x);
 		ElemType(*activationFunctionDerivative)(ElemType x);
-		ElemType(*lossFunction)(ElemType x);
-		ElemType(*lossFunctionDerivative)(ElemType x);
+		ElemType(*lossFunction)(ElemType x, ElemType y);
+		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
 		size_t n, m;
 	};
 
@@ -91,6 +93,8 @@ namespace Nerual
 		void SetInput(const Vector<ElemType> & _vec) override;
 		// Set the activation function of the layer.
 		virtual void SetActivationFunction(const ActivationFunction _function) override;
+		// Set the loss function of the layer.
+		void SetLossFunction(const LossFunction _function);
 
 	public: // Getters
 
@@ -135,8 +139,12 @@ namespace Nerual
 		// Set the input of the layer.
 		/// Which means set the nodes` tempInput.
 		void SetInput(const Vector<ElemType> & _vec) override;
+		// Set the expectation of the OutputLayer.
+		void SetExpectation(const Vector<ElemType> & _vec);
 		// Set the activation function of the layer.
 		virtual void SetActivationFunction(const ActivationFunction _function) override;
+		// Set the loss function of the layer.
+		void SetLossFunction(const LossFunction _function);
 
 	public: // Getters
 
@@ -161,7 +169,6 @@ namespace Nerual
 		void BatchDeltaSumClear(void) override;
 
 	private:
-		ElemType(*activationFunction)(ElemType x);
 		vector<HiddenNode> _nodes;
 	};
 

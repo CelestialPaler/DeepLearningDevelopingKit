@@ -27,6 +27,18 @@ enum class ActivationFunction {
 	Custom
 }; 
 
+enum class ActivationFunctionDerivative {
+	SigmoidDerivative,
+	ReLUDerivative,
+	LeakyReLUDerivative,
+	ELUDerivative,
+	SinhDerivative,
+	CoshDerivative,
+	TanhDerivative,
+	SoftplusDerivative,
+	CustomDerivative
+};
+
 // Sigmoid Function
 /// Logistic activation function
 const double A = 1;
@@ -35,9 +47,21 @@ inline double Sigmoid(double x) {
 	return A / (1 + exp(-x / B));
 }
 
+// Sigmoid Derivative Function
+/// Logistic activation derivative function
+inline double SigmoidDerivative(double x) {
+	return x * (1 - x);
+}
+
 // Rectified Linear Units (ReLU)
 /// non-negative rectification
 inline double ReLU(double x) {
+	return x > 0 ? x : 0;
+}
+
+// Rectified Linear Units (ReLU)
+/// non-negative rectification
+inline double ReLUDerivative(double x) {
 	return x > 0 ? x : 0;
 }
 

@@ -52,12 +52,30 @@ void Nerual::InputLayer::SetActivationFunction(const ActivationFunction _functio
 	{
 	case ActivationFunction::Sigmoid:
 		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
 		break;
 	case ActivationFunction::ReLU:
 		this->activationFunction = ReLU;
+		this->activationFunctionDerivative = ReLUDerivative;
 		break;
 	default:
 		this->activationFunction = Sigmoid;
+		this->activationFunctionDerivative = SigmoidDerivative;
+		break;
+	}
+}
+
+void Nerual::InputLayer::SetLossFunction(const LossFunction _function)
+{
+	switch (_function)
+	{
+	case LossFunction::MES:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
+		break;
+	default:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
 		break;
 	}
 }
@@ -139,6 +157,14 @@ void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 	}
 }
 
+void Nerual::HiddenLayer::SetExpectation(const Vector<ElemType>& _vec)
+{
+	for (size_t i = 0; i < m; i++)
+	{
+		_nodes.at(i).expectation = _vec(i);
+	}
+}
+
 void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _function)
 {
 	switch (_function)
@@ -151,6 +177,21 @@ void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _functi
 		break;
 	default:
 		this->activationFunction = ReLU;
+		break;
+	}
+}
+
+void Nerual::HiddenLayer::SetLossFunction(const LossFunction _function)
+{
+	switch (_function)
+	{
+	case LossFunction::MES:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
+		break;
+	default:
+		this->lossFunction = MES;
+		this->lossFunctionDerivative = MESDerivative;
 		break;
 	}
 }
@@ -181,23 +222,19 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 /// Calculate the gradient(delta) of each node.
 Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
+	SetExpectation(_vec);
 	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).valueDelta = _vec(i);
-		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
-		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
+		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
+		_nodes.at(i).biasDelta = lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
 	}
 
+	/// Calculate the partial derivative of loss to last layer value.
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
-	{
-		ElemType tempDelta = 0;
 		for (size_t j = 0; j < m; j++)
-		{
-			tempDelta += 2 * _nodes.at(j).valueDelta * (_nodes.at(j).value * (1 - _nodes.at(j).value)) * _nodes.at(j).weight(i);
-		}
-		tempVec(i) = tempDelta;
-	}
+			tempVec(i) += lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value) * _nodes.at(j).weight(i);
 	return tempVec;
 }
 
@@ -215,21 +252,14 @@ void Nerual::HiddenLayer::Update(void)
 void Nerual::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).valueDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
-
-	for (size_t i = 0; i < m; i++)
-		for (size_t j = 0; j < n; j++)
-			_nodes.at(i).weightDeltaSum(j) += (_nodes.at(i).weightDelta(j) / _batchSize);
-
-	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta / _batchSize);
+	{
+		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / (double)_batchSize));
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta * (1 / (double)_batchSize));
+	}
 }
 
 void Nerual::HiddenLayer::BatchDeltaSumClear(void)
 {
-	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).valueDeltaSum = 0;
-
 	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weightDeltaSum(j) = 0;
@@ -312,7 +342,7 @@ Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).loss = MES(_nodes.at(i).value, _nodes.at(i).expectation);
+		_nodes.at(i).loss = lossFunction(_nodes.at(i).value, _nodes.at(i).expectation);
 	}
 
 	ElemType temp = 0;
@@ -347,24 +377,24 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 
 // BackwardPropagation Function
 /// Calculate the gradient(delta) of each node.
+/// _vec is the expactation of the layer.
 Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<ElemType> & _vec)
 {
+	SetExpectation(_vec);
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).valueDelta = _vec(i);
-		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
-		_nodes.at(i).biasDelta = 2 * _nodes.at(i).valueDelta * (_nodes.at(i).value * (1 - _nodes.at(i).value));
+		_nodes.at(i).valueDelta = _nodes.at(i).value - _nodes.at(i).expectation;
+		_nodes.at(i).weightDelta = _nodes.at(i).tempInput * lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
+		_nodes.at(i).biasDelta = lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value);
 	}
 
+	/// Calculate the partial derivative of loss to last layer value and return the expectation of last layer.
 	Vector<ElemType> tempVec(n);
 	for (size_t i = 0; i < n; i++)
 	{
-		ElemType tempDelta = 0;
+		tempVec(i) += _nodes.at(i).value;
 		for (size_t j = 0; j < m; j++)
-		{
-			tempDelta += 2 * _nodes.at(j).valueDelta * (_nodes.at(j).value * (1 - _nodes.at(j).value)) * _nodes.at(j).weight(i);
-		}
-		tempVec(i) = tempDelta;
+			tempVec(i) += lossFunctionDerivative(_nodes.at(i).value, _nodes.at(i).expectation) * activationFunctionDerivative(_nodes.at(i).value) * _nodes.at(j).weight(i);
 	}
 	return tempVec;
 }
@@ -383,20 +413,14 @@ void Nerual::OutputLayer::Update(void)
 void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).valueDeltaSum += (_nodes.at(i).valueDelta / _batchSize);
-
-	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / _batchSize));
-
-	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta / _batchSize);
+	{
+		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / (double)_batchSize));
+		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta * (1 / (double)_batchSize));
+	}
 }
 
 void Nerual::OutputLayer::BatchDeltaSumClear(void)
 {
-	for (size_t i = 0; i < m; i++)
-		_nodes.at(i).valueDeltaSum = 0;
-
 	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
 			_nodes.at(i).weightDeltaSum(j) = 0;

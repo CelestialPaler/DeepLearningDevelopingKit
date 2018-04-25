@@ -181,16 +181,6 @@ namespace MathLib
 			return temp;
 		}
 
-		/// Add scalar to each element in this matrix.
-		void operator += (const T & _other)
-		{
-			Matrix<T> & self = *this;
-			Matrix<T> temp(m, n);
-			for (size_t i = 0; i < self.m; i++)
-				for (size_t j = 0; j < self.n; j++)
-					self(i, j) = self(i, j) + _other;
-		}
-
 		// "-=" operator
 		/// Substract another matrix to this matrix.
 		void operator -= (const Matrix<T> & _other)
