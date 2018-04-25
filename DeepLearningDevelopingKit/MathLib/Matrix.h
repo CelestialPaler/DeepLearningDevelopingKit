@@ -38,8 +38,8 @@ namespace MathLib
 	{
 	public: // Constructors
 
-		// Default constructor
-		/// Take no parameters and before use Init() should be involked.
+			// Default constructor
+			/// Take no parameters and before use Init() should be involked.
 		Matrix(void);
 		// Constructor (Using Size and Type)
 		/// Specified the size of vector.
@@ -50,21 +50,21 @@ namespace MathLib
 
 	public: // Pointers
 
-		// Pointer
+			// Pointer
 		T * data() { return this->_data[0]; }
 		// Const pointer
 		const T * data() const { return this->_data[0]; }
 
 	public: // Operator Overloading 
 
-		// "( )" operator
-		/// Used for accessing the element in the matrix.
+			// "( )" operator
+			/// Used for accessing the element in the Matrix.
 		inline T operator()(size_t _i, size_t _j) const
 		{
 			return this->_data[_i][_j];
 		}
 
-		/// Used for referencing the element in the matrix.
+		/// Used for referencing the element in the Matrix.
 		inline T & operator()(size_t _i, size_t _j)
 		{
 			return this->_data[_i][_j];
@@ -97,7 +97,7 @@ namespace MathLib
 		}
 
 		// "+" operator
-		/// Addition of two matrixs.
+		/// Addition of two Matrixs.
 		Matrix<T> operator + (const Matrix<T> & _other) const
 		{
 			const Matrix<T> & self = *this;
@@ -114,7 +114,7 @@ namespace MathLib
 		}
 
 		/// Addition of a matrix and a scalar.
-		/// Add scalar to each element in the matrix.
+		/// Add scalar to each element in the Matrix.
 		Matrix<T> operator + (const T & _other) const
 		{
 			const Matrix<T> & self = *this;
@@ -125,8 +125,35 @@ namespace MathLib
 			return temp;
 		}
 
+		// "+=" operator
+		/// Add another Matrix to this Matrix.
+		void operator += (const Matrix<T> & _other)
+		{
+			Matrix<T> & self = *this;
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) + _other(i, j);
+		}
+
+		/// Add another scalar to this Matrix.
+		void operator += (const T & _other)
+		{
+			Matrix<T> & self = *this;
+			if (self.m != _other.m || self.n != _other.n)
+			{
+				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+			}
+			for (size_t i = 0; i < self.m; i++)
+				for (size_t j = 0; j < self.n; j++)
+					self(i, j) = self(i, j) + _other;
+		}
+
 		// "-" operator
-		/// Substraction of two matrixs.
+		/// Substraction of two Matrixs.
 		Matrix<T> operator - (const Matrix<T> & _other) const
 		{
 			const Matrix<T> & self = *this;
@@ -152,20 +179,6 @@ namespace MathLib
 				for (size_t j = 0; j < self.n; j++)
 					temp(i, j) = self(i, j) - _other;
 			return temp;
-		}
-
-		// "+=" operator
-		/// Add another matrix to this matrix.
-		void operator += (const Matrix<T> & _other)
-		{
-			Matrix<T> & self = *this;
-			if (self.m != _other.m || self.n != _other.n)
-			{
-				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
-			}
-			for (size_t i = 0; i < self.m; i++)
-				for (size_t j = 0; j < self.n; j++)
-					self(i, j) = self(i, j) + _other(i, j);
 		}
 
 		/// Add scalar to each element in this matrix.
@@ -204,11 +217,11 @@ namespace MathLib
 
 		// "*" operator
 		/// Multiplication of two matrixs.
-		Matrix<T> operator * (const Matrix<T> &_other) const
+		Matrix<T> operator * (const Matrix<T> & _other) const
 		{
 			const Matrix<T> &self = *this;
 			Matrix<T> temp(self.m, _other.n);
-			if (self.n!=_other.m)
+			if (self.n != _other.m)
 			{
 				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
 				return temp;
@@ -222,19 +235,15 @@ namespace MathLib
 
 		// "*" operator
 		/// Multiply a scalar to each element in the matrix.
-		Matrix<T> operator * (const T &_other) const
+		Matrix<T> operator * (const T & _other) const
 		{
 			const Matrix<T> &self = *this;
 			Matrix<T> temp(self.m, self.n);
 			for (size_t i = 0; i < self.m; i++)
-					for (size_t j = 0; j < self.n; j++)
-						temp(i, j) += self(i, j) * _other;
+				for (size_t j = 0; j < self.n; j++)
+					temp(i, j) += self(i, j) * _other;
 			return temp;
 		}
-
-	public: // Used for debugging
-
-		void PrintToConsole(void);
 
 	private:
 		vector<vector<T>> _data;
@@ -258,21 +267,5 @@ namespace MathLib
 		m = _m;
 		n = _n;
 	}
-
-	// Used for debugging
-	template<class T>
-	inline void MathLib::Matrix<T>::PrintToConsole(void)
-	{
-		for (size_t i = 0; i < m; i++)
-		{
-			cout << "|";
-			for (size_t j = 0; j < n; j++)
-				cout << _data[i][j] << " ";
-			cout << "|" << endl;
-		}
-		cout << endl;
-	}
-
-
 }
 

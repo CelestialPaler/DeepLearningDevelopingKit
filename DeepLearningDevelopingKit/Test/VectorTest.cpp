@@ -63,6 +63,8 @@ int main()
 	PrintLocalTime();
 	PrintTitle();
 
+	Vector<int> initVec{ {1,2} ,{3,4} };
+
 	Vector<int> input;
 	input.Init(5);
 	for (size_t i = 0; i < 5; i++) 

@@ -12,6 +12,7 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <iterator>
 
 // Namespaces
 using namespace std;
@@ -38,55 +39,55 @@ namespace MathLib
 	{
 	public: // Constructors
 
-		// Default constructor
-		/// Take no parameters.
-		/// After default constructor and before use the Vector object, Init() should be involked.
-		Vector(void);	
+			// Default constructor
+			/// Take no parameters.
+			/// After default constructor and before use the Vector object, Init() should be involked.
+		Vector(void);
 		// Constructor (Using Size and Type)
 		/// Specified the size of Vector.
 		Vector(const size_t _n, const VectorType _type = VectorType::Zero);
 		// Constructor (Using given Data)
 		/// Using data from a given pointer, which is pointed to an array, to initialize the Vector.
-		Vector(const T * _data, size_t n);
+		Vector(const initializer_list<int> & _list);
 
 	public: // Initializing
 
-		// Initializing function
-		/// Initializing the Vector after defined by default constructor.
+			// Initializing function
+			/// Initializing the Vector after defined by default constructor.
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
 	public: // Quantification
 
-		// Sum function
-		/// Add up all the element in the Vector.
+			// Sum function
+			/// Add up all the element in the Vector.
 		T Sum(void) const;
 		// Average function
 		/// Calculate the average value of all the element in the Vector.
 		T Average(void) const;
 		// Max function
 		/// Get the value of the max element in the Vector.
-		T Max(void) const;		
+		T Max(void) const;
 		// Min function
 		/// Get the value of the min element in the Vector.
 		T Min(void) const;
 
 	public: // Pointer
 
-		// Pointer
+			// Pointer
 		T * data() { return this->_data[0]; }
 		// Const pointer
 		const T * data() const { return this->_data[0]; }
 
 	public: // Operator Overloading
 
-		// "( )" operator
-		/// Used for accessing the element in the vector.
+			// "( )" operator
+			/// Used for accessing the element in the Vector.
 		inline T operator()(size_t _j) const
 		{
 			return this->_data[_j];
 		}
 
-		/// Used for referencing the element in the vector.
+		/// Used for referencing the element in the Vector.
 		inline T & operator()(size_t _j)
 		{
 			return this->_data[_j];
@@ -96,7 +97,7 @@ namespace MathLib
 		/// Used for streaming in format.
 		friend ostream & operator<<(ostream& _outstream, Vector<T>& _vec)
 		{
-			// _outstream << typeid(_vec).name() << " ";
+			_outstream << typeid(_vec).name() << " ";
 			_outstream << "|";
 			for (size_t j = 0; j < _vec.n; j++)
 			{
@@ -116,7 +117,7 @@ namespace MathLib
 		}
 
 		// "+" operator
-		/// Addition of two Vector.
+		/// Addition of two Vectors.
 		Vector<T> operator + (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -132,6 +133,7 @@ namespace MathLib
 		}
 
 		/// Addition of a Vector and a scalar.
+		/// Add scalar to each element in the Vector.
 		Vector<T> operator + (const T & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -151,7 +153,7 @@ namespace MathLib
 				cerr << "ERROR : Invalid Vector Self-Addtion!" << endl;
 			}
 			for (size_t j = 0; j < self.n; j++)
-				self(j) = self( j) + _other(j);
+				self(j) = self(j) + _other(j);
 		}
 
 		/// Add another scalar to this Vector.
@@ -163,7 +165,7 @@ namespace MathLib
 		}
 
 		// "-" operator
-		/// Substraction of two Vector.
+		/// Substraction of two Vectors.
 		Vector<T> operator - (const Vector<T> & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -179,6 +181,7 @@ namespace MathLib
 		}
 
 		/// Substraction of a Vector and a scalar.
+		/// Substract a scalar to each element in the Vector.
 		Vector<T> operator - (const T & _other) const
 		{
 			const Vector<T> & self = *this;
@@ -253,9 +256,15 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Vector<T>::Vector(const T * _data, size_t n)
+	inline Vector<T>::Vector(const initializer_list<int> & _list)
 	{
-
+		for (auto iter1 = _list.cbegin(); iter1 != _list.cend(); ++iter1)
+		{
+			for (auto iter2 = (*iter1).cbegin(); iter2 != (*iter1).cend(); ++iter2)
+			{
+				this._data->push_pack(*iter2);
+			}
+		}
 	}
 
 	template<class T>
