@@ -29,13 +29,19 @@ int main()
 	PrintTitle();
 
 	InputLayer in(2, 2);
-	HiddenLayer hidden(2, 10);
-	OutputLayer out(10, 1);
+	HiddenLayer hidden1(2, 5);
+	HiddenLayer hidden2(5, 5);
+	HiddenLayer hidden3(5, 5);
+	OutputLayer out(5, 1);
 
 	in.SetActivationFunction(ActivationFunction::Sigmoid);
 	in.SetLossFunction(LossFunction::MES);
-	hidden.SetActivationFunction(ActivationFunction::Sigmoid);
-	hidden.SetLossFunction(LossFunction::MES);
+	hidden1.SetActivationFunction(ActivationFunction::Sigmoid);
+	hidden1.SetLossFunction(LossFunction::MES);
+	hidden2.SetActivationFunction(ActivationFunction::Sigmoid);
+	hidden2.SetLossFunction(LossFunction::MES);
+	hidden3.SetActivationFunction(ActivationFunction::Sigmoid);
+	hidden3.SetLossFunction(LossFunction::MES);
 	out.SetActivationFunction(ActivationFunction::Sigmoid);
 	out.SetLossFunction(LossFunction::MES);
 
@@ -49,31 +55,36 @@ int main()
 	{
 		NumaricSet::Sample sample = TrainSet.GetBatch();
 
-		cout << sample.first(0)<< sample.first(1)<< " | ";
+		// cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
 
-		hidden.SetInput(sample.first);
-		hidden.ForwardPropagation();
+		hidden1.SetInput(sample.first);
+		hidden1.ForwardPropagation();
+		hidden2.SetInput(hidden1.GetOutput());
+		hidden2.ForwardPropagation();
+		hidden3.SetInput(hidden2.GetOutput());
+		hidden3.ForwardPropagation();
 
-		for (size_t i = 0; i < 10; i++)
-		{
-			cout << hidden.GetOutput()(i) << endl;
-		}
 
-		out.SetInput(hidden.GetOutput());
+		out.SetInput(hidden3.GetOutput());
 		out.ForwardPropagation();
-		
-		cout << out.GetOutput()(0) << endl;
 
-		hidden.BackwardPropagation(out.BackwardPropagation(sample.second));
+		// cout << "  Output : " << out.GetOutput()(0) << endl;
 
 		if (count == 3)
 		{
-			out.Update();
-			hidden.Update();
+			if (true)
+			{
+				hidden1.BackwardPropagation(out.BackwardPropagation(sample.second));
+				out.Update();
+				hidden3.Update();
+				hidden2.Update();
+				hidden1.Update();
 
-			out.BatchDeltaSumClear();
-			hidden.BatchDeltaSumClear();
-
+				out.BatchDeltaSumClear();
+				hidden3.BatchDeltaSumClear();
+				hidden2.BatchDeltaSumClear();
+				hidden1.BatchDeltaSumClear();
+			}
 			count = 0;
 			iterCount++;
 			cout << "Iter :" << iterCount << "  Loss :" << out.GetLoss() << endl;
@@ -81,12 +92,18 @@ int main()
 		else
 		{
 			out.BatchDeltaSumUpdate(batchsize);
-			hidden.BatchDeltaSumUpdate(batchsize);
+			hidden3.BatchDeltaSumUpdate(batchsize);
+			hidden2.BatchDeltaSumUpdate(batchsize);
+			hidden1.BatchDeltaSumUpdate(batchsize);
 			count++;
 		}
 
-		Sleep(125);
-	} while (out.GetLoss() > 0.00001);
+		Sleep(0 / batchsize);
+	} while (out.GetLoss() > 0.001);
+
+
+
+
 	system("pause");
 	return 0;
 }

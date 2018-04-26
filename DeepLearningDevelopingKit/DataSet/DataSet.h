@@ -31,6 +31,7 @@ namespace Data
 		void AddToSet(const Sample & _sample);
 	public:
 		Sample GetBatch(void);
+		Sample GetRandomSample(void);
 	private:
 		vector<Sample> _data;
 	};

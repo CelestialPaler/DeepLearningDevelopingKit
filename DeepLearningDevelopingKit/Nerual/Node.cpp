@@ -28,7 +28,7 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->valueDelta = 0.f;
-	this->bias = Random();
+	this->bias = 0.f;
 	this->biasDelta = 0.f;
 	this->biasDeltaSum = 0.f;
 	this->tempInput.Init(_n, VectorType::Zero);
@@ -57,7 +57,7 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 	this->value = 0.f;
 	this->valueDelta = 0.f;
 	this->loss = 0.f;
-	this->bias = Random();
+	this->bias = 0.f;
 	this->biasDelta = 0.f;
 	this->biasDeltaSum = 0.f;
 	this->expectation = 0.f;

@@ -8,7 +8,7 @@
 // Header files
 #include "Layer.h"
 
-const double learnRate = 0.01;
+const double learnRate = 0.5;
 
 /***************************************************************************************************/
 // Class : InputLayer
