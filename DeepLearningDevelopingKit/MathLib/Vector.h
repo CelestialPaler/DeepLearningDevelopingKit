@@ -292,7 +292,7 @@ namespace MathLib
 			for (size_t j = 0; j < _n; j++)
 			{
 				T tempElem = *new T;
-				tempElem = RandomSqrt(_n);
+				tempElem = Random();
 				_data.push_back(tempElem);
 			}
 			break;

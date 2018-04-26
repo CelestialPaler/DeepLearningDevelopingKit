@@ -34,7 +34,7 @@ int main()
 
 	in.SetActivationFunction(ActivationFunction::Sigmoid);
 	in.SetLossFunction(LossFunction::MES);
-	hidden.SetActivationFunction(ActivationFunction::ReLU);
+	hidden.SetActivationFunction(ActivationFunction::Sigmoid);
 	hidden.SetLossFunction(LossFunction::MES);
 	out.SetActivationFunction(ActivationFunction::Sigmoid);
 	out.SetLossFunction(LossFunction::MES);
@@ -42,19 +42,27 @@ int main()
 	NumaricSet TrainSet;
 	TrainSet.InitWithXOR();
 
-	unsigned count = 1;
+	unsigned count = 0;
 	unsigned iterCount = 0;
 	unsigned batchsize = 4;
 	do
 	{
 		NumaricSet::Sample sample = TrainSet.GetBatch();
 
+		cout << sample.first(0)<< sample.first(1)<< " | ";
+
 		hidden.SetInput(sample.first);
 		hidden.ForwardPropagation();
 
+		for (size_t i = 0; i < 10; i++)
+		{
+			cout << hidden.GetOutput()(i) << endl;
+		}
+
 		out.SetInput(hidden.GetOutput());
 		out.ForwardPropagation();
-
+		
+		cout << out.GetOutput()(0) << endl;
 
 		hidden.BackwardPropagation(out.BackwardPropagation(sample.second));
 
@@ -68,16 +76,16 @@ int main()
 
 			count = 0;
 			iterCount++;
+			cout << "Iter :" << iterCount << "  Loss :" << out.GetLoss() << endl;
 		}
 		else
 		{
 			out.BatchDeltaSumUpdate(batchsize);
 			hidden.BatchDeltaSumUpdate(batchsize);
 			count++;
-			cout << "Iter :" << iterCount << "  Loss :" << out.GetLoss() << endl;
 		}
 
-		Sleep(100);
+		Sleep(125);
 	} while (out.GetLoss() > 0.00001);
 	system("pause");
 	return 0;
