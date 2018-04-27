@@ -10,7 +10,6 @@ import json
 
 test_json = '.\\test.json'
 
-
 class JsonHandler:
     @staticmethod
     def open_file(str):
@@ -19,6 +18,9 @@ class JsonHandler:
                 data = file.read()
             file.close()
             return data
+        else:
+            raise Exception("Invalid file path!")
+            
 
     @staticmethod
     def open_json(str):
@@ -34,8 +36,11 @@ class JsonHandler:
 
 
 if "__name__" == "__main__":
-    data = JsonHandler.open_file(test_json)
-    print
+    try:
+        data = JsonHandler.open_file(test_json)
+    except ValueError:
+        print("Open file failed!")
+        
     print(data)
 
 

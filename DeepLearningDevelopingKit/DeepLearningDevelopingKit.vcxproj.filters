@@ -1,53 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="MathLib\MathLib.h">
+    <ClInclude Include="src\DataSet\DataSet.h">
+      <Filter>src\DataSet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\ActivationFunction.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\ToolFunction.h">
+    <ClInclude Include="src\MathLib\LossFunction.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="Nerual\Layer.h">
+    <ClInclude Include="src\MathLib\MathLib.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Matrix.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\MatrixStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\NodeVector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\ToolFunction.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Vector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\VectorStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nerual\Layer.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="Nerual\Node.h">
+    <ClInclude Include="src\Nerual\Module.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Port.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Nerual\Module.h">
+    <ClInclude Include="src\Nerual\NerualLib.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="MathLib\Matrix.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\Vector.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\MatrixStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\VectorStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Nerual\NerualLib.h">
+    <ClInclude Include="src\Nerual\Node.h">
       <Filter>src\Nerual</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Log.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\LossFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLib\NodeVector.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Json\JsonHandler.h">
+    <ClInclude Include="src\Json\JsonHandler.h">
       <Filter>src\Json</Filter>
     </ClInclude>
-    <ClInclude Include="DataSet\DataSet.h">
-      <Filter>src\DataSet</Filter>
+    <ClInclude Include="src\Util\Log.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\Port.h">
+      <Filter>src\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +66,6 @@
     <Filter Include="src\Util">
       <UniqueIdentifier>{d25435b0-b066-473f-95c2-52faf7c28699}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Test">
-      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\DataSet">
       <UniqueIdentifier>{d5c3cb57-64ad-46f4-bfec-bdbc42a71b33}</UniqueIdentifier>
     </Filter>
@@ -75,49 +75,61 @@
     <Filter Include="src\Visualization">
       <UniqueIdentifier>{0cf8c7d3-0179-40fe-b972-2c4fe339c78a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UintTest">
+      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{c5e04f29-1c3d-4027-bc55-e70dadf9010e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\test">
+      <UniqueIdentifier>{a6e3d778-9666-43bd-b4d9-e53a517beedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI">
+      <UniqueIdentifier>{469a3b11-cc80-4539-8c54-fb1bd64f8fc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Nerual\Node.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="Nerual\Layer.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\VectorTest.cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\LayerTest.cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="MathLib\ActivationFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\ModuleTest.cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Nerual\Module.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\DataSetTest.cpp">
-      <Filter>src\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="DataSet\DataSet.cpp">
+    <ClCompile Include="src\DataSet\DataSet.cpp">
       <Filter>src\DataSet</Filter>
     </ClCompile>
-    <ClCompile Include="Json\JsonHandler.cpp">
+    <ClCompile Include="src\Nerual\Layer.cpp">
+      <Filter>src\Nerual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nerual\Module.cpp">
+      <Filter>src\Nerual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nerual\Node.cpp">
+      <Filter>src\Nerual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Json\JsonHandler.cpp">
       <Filter>src\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\DataSet_test.cpp">
+      <Filter>src\UintTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Layer_test.cpp">
+      <Filter>src\UintTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Module_test.cpp">
+      <Filter>src\UintTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Vector_test.cpp">
+      <Filter>src\UintTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
-    <None Include="Json\test.json">
+    <None Include="data\test\test.json">
+      <Filter>data\test</Filter>
+    </None>
+    <None Include="src\Json\JsonHandler.py">
       <Filter>src\Json</Filter>
     </None>
-    <None Include="Visualizer\Vector.py">
-      <Filter>src\Visualization</Filter>
+    <None Include="src\PythonAPI\Vector.py">
+      <Filter>src\PythonAPI</Filter>
     </None>
-    <None Include="Json\JsonHandler.py">
-      <Filter>src\Json</Filter>
+    <None Include="src\UnitTest\JsonHandler_test.py">
+      <Filter>src\UintTest</Filter>
     </None>
   </ItemGroup>
 </Project>
