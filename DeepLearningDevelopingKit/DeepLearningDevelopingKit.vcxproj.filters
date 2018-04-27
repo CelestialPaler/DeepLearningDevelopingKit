@@ -43,6 +43,9 @@
     <ClInclude Include="MathLib\NodeVector.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="Json\JsonHandler.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
     <ClInclude Include="DataSet\DataSet.h">
       <Filter>src\DataSet</Filter>
     </ClInclude>
@@ -65,6 +68,12 @@
     </Filter>
     <Filter Include="src\DataSet">
       <UniqueIdentifier>{d5c3cb57-64ad-46f4-bfec-bdbc42a71b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Json">
+      <UniqueIdentifier>{a25bc779-a17c-4b41-adbc-5d03a805df6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Visualization">
+      <UniqueIdentifier>{0cf8c7d3-0179-40fe-b972-2c4fe339c78a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,8 +104,20 @@
     <ClCompile Include="DataSet\DataSet.cpp">
       <Filter>src\DataSet</Filter>
     </ClCompile>
+    <ClCompile Include="Json\JsonHandler.cpp">
+      <Filter>src\Json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="Json\test.json">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="Visualizer\Vector.py">
+      <Filter>src\Visualization</Filter>
+    </None>
+    <None Include="Json\JsonHandler.py">
+      <Filter>src\Json</Filter>
+    </None>
   </ItemGroup>
 </Project>

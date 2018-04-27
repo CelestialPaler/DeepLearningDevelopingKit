@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DataSet\DataSet.h" />
+    <ClInclude Include="Json\JsonHandler.h" />
     <ClInclude Include="MathLib\LossFunction.h" />
     <ClInclude Include="MathLib\MathLib.h" />
     <ClInclude Include="MathLib\Matrix.h" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataSet\DataSet.cpp" />
+    <ClCompile Include="Json\JsonHandler.cpp" />
     <ClCompile Include="MathLib\ActivationFunction.h" />
     <ClCompile Include="Nerual\Layer.cpp" />
     <ClCompile Include="Nerual\Module.cpp" />
@@ -173,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="Json\JsonHandler.py" />
+    <None Include="Json\test.json" />
+    <None Include="Visualizer\Vector.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
