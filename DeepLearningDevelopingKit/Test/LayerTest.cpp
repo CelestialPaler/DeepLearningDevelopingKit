@@ -51,30 +51,29 @@ int main()
 	unsigned count = 0;
 	unsigned iterCount = 0;
 	unsigned batchsize = 4;
+	double loss = 0;
 	do
-	{
-		NumaricSet::Sample sample = TrainSet.GetBatch();
-
-		// cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
-
-		hidden1.SetInput(sample.first);
-		hidden1.ForwardPropagation();
-		hidden2.SetInput(hidden1.GetOutput());
-		hidden2.ForwardPropagation();
-		hidden3.SetInput(hidden2.GetOutput());
-		hidden3.ForwardPropagation();
-
-
-		out.SetInput(hidden3.GetOutput());
-		out.ForwardPropagation();
-
-		// cout << "  Output : " << out.GetOutput()(0) << endl;
-
-		if (count == 3)
+	{	
+		for (size_t i = 0; i < 4; i++)
 		{
-			if (true)
+			NumaricSet::Sample sample = TrainSet.GetBatch();
+
+			hidden1.SetInput(sample.first);
+			hidden1.ForwardPropagation();
+			hidden2.SetInput(hidden1.GetOutput());
+			hidden2.ForwardPropagation();
+			hidden3.SetInput(hidden2.GetOutput());
+			hidden3.ForwardPropagation();
+
+			out.SetInput(hidden3.GetOutput());
+			out.ForwardPropagation();
+
+			hidden1.BackwardPropagation(out.BackwardPropagation(sample.second));
+			
+			cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
+			
+			if (count == 3)
 			{
-				hidden1.BackwardPropagation(out.BackwardPropagation(sample.second));
 				out.Update();
 				hidden3.Update();
 				hidden2.Update();
@@ -84,24 +83,49 @@ int main()
 				hidden3.BatchDeltaSumClear();
 				hidden2.BatchDeltaSumClear();
 				hidden1.BatchDeltaSumClear();
+
+				loss = out.GetLoss();
+				out.LossSumClear();
+
+				count = 0;
+				iterCount++;
+				cout << "Iter :" << iterCount << "  Loss :" << loss << endl;
 			}
-			count = 0;
-			iterCount++;
-			cout << "Iter :" << iterCount << "  Loss :" << out.GetLoss() << endl;
+			else
+			{
+				out.BatchDeltaSumUpdate(batchsize);
+				hidden3.BatchDeltaSumUpdate(batchsize);
+				hidden2.BatchDeltaSumUpdate(batchsize);
+				hidden1.BatchDeltaSumUpdate(batchsize);
+
+				out.LossSumUpdate();
+				count++;
+			}
+
+			Sleep(1000 / batchsize);
 		}
-		else
-		{
-			out.BatchDeltaSumUpdate(batchsize);
-			hidden3.BatchDeltaSumUpdate(batchsize);
-			hidden2.BatchDeltaSumUpdate(batchsize);
-			hidden1.BatchDeltaSumUpdate(batchsize);
-			count++;
-		}
+	} while (loss > 0.001);
 
-		Sleep(0 / batchsize);
-	} while (out.GetLoss() > 0.001);
+	NumaricSet TestSet;
+	TestSet.InitWithXOR();
 
+	for (size_t i = 0; i < 4; i++)
+	{
+		NumaricSet::Sample sample = TestSet.GetBatch();
 
+		hidden1.SetInput(sample.first);
+		hidden1.ForwardPropagation();
+		hidden2.SetInput(hidden1.GetOutput());
+		hidden2.ForwardPropagation();
+		hidden3.SetInput(hidden2.GetOutput());
+		hidden3.ForwardPropagation();
+
+		out.SetInput(hidden3.GetOutput());
+		out.ForwardPropagation();
+
+		cout << "Input: " << sample.first(0) << sample.first(1) << "  Expectation: " << sample.second(0) << "  Output: " << out.GetOutput()(0) << endl;
+	}
+	
 
 
 	system("pause");

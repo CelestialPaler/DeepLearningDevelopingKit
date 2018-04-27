@@ -119,6 +119,7 @@ namespace Nerual
 		Vector<ElemType> weight;
 
 		ElemType loss;
+		ElemType lossSum;
 		ElemType expectation;
 		Vector<ElemType> tempInput;
 		

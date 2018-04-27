@@ -115,7 +115,7 @@ namespace Nerual
 		void Update(void) override;
 		// Sum up the delta of a batch.
 		void BatchDeltaSumUpdate(const size_t _batchSize) override;
-		// Clear the sum of sum of delta.
+		// Clear the sumdelta of a batch.
 		void BatchDeltaSumClear(void) override;
 
 	private:
@@ -219,7 +219,12 @@ namespace Nerual
 		void Update(void);
 		// Sum up the delta of a batch.
 		void BatchDeltaSumUpdate(const size_t _batchSize) override;
+		// Clear the sum of sum of delta.
 		void BatchDeltaSumClear(void) override;
+		// 
+		void LossSumUpdate(void);
+		// 
+		void LossSumClear(void);
 
 	private:
 

@@ -248,8 +248,8 @@ void Nerual::HiddenLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).weight -= _nodes.at(i).weightDeltaSum * learnRate;
-		_nodes.at(i).bias -= _nodes.at(i).biasDeltaSum * learnRate;
+		_nodes.at(i).weight += _nodes.at(i).weightDeltaSum * learnRate;
+		_nodes.at(i).bias += _nodes.at(i).biasDeltaSum * learnRate;
 	}
 }
 
@@ -359,15 +359,10 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
 // Get the estimated loss between output and expectation.
 Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
 {
-	for (size_t i = 0; i < m; i++)
-	{
-		_nodes.at(i).loss = lossFunction(_nodes.at(i).value, _nodes.at(i).expectation);
-	}
-
 	ElemType temp = 0;
 	for (size_t i = 0; i < m; i++)
 	{
-		temp += _nodes.at(i).loss;
+		temp += _nodes.at(i).lossSum;
 	}
 	temp = temp / n;
 	return temp;
@@ -390,6 +385,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
+		/// θ(∑ X * W - B)
 		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() - _nodes.at(i).bias);
 	}
 }
@@ -432,6 +428,7 @@ void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / (double)_batchSize));
+		cout << _nodes.at(i).weightDelta << endl;
 		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta * (1 / (double)_batchSize));
 	}
 }
@@ -444,6 +441,23 @@ void Nerual::OutputLayer::BatchDeltaSumClear(void)
 
 	for (size_t i = 0; i < m; i++)
 		_nodes.at(i).biasDeltaSum = 0;
+}
+
+void Nerual::OutputLayer::LossSumUpdate(void)
+{
+	for (size_t i = 0; i < m; i++)
+	{
+		_nodes.at(i).loss = lossFunction(_nodes.at(i).value, _nodes.at(i).expectation);
+		_nodes.at(i).lossSum += _nodes.at(i).loss;
+	}
+}
+
+void Nerual::OutputLayer::LossSumClear(void)
+{
+	for (size_t i = 0; i < m; i++)
+	{
+		_nodes.at(i).lossSum = 0;
+	}
 }
 
 // Get the node number of the layers.
