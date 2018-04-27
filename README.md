@@ -25,12 +25,13 @@ Feature:
 ## Developing Status
 Under developing:
 
+*   Json Handler both in C++ and Python
+*   Basic data visualizer based on python
 *   Data Set Management
-*   Module and Port for flexibility in linking Modules
-*   Activation functions
+*   Util functions for nerual network training
 *   Data Generator
 
-In further plan (Not in top priority):
+Further plan (Not in top priority):
 
 *   Visualization tool using SFML or Python
 *   Acceleration using CUDA
@@ -40,4 +41,4 @@ In further plan (Not in top priority):
 
 For more information, check my website [*Celestial Tech*](www.tianshicangxie.com "天师苍邪科技") .
 
-*Copyright  2015-2018 Celestial Tech Inc.*
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Copyright  2015-2018 Celestial Tech Inc.</p>
