@@ -49,8 +49,14 @@
     <ClInclude Include="src\Util\Log.h">
       <Filter>src\Util</Filter>
     </ClInclude>
+    <ClInclude Include="src\Util\Timer.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
     <ClInclude Include="src\Util\Port.h">
       <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\RandomEngine.h">
+      <Filter>src\MathLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -152,6 +152,7 @@
     <ClInclude Include="src\MathLib\Matrix.h" />
     <ClInclude Include="src\MathLib\MatrixStatic.h" />
     <ClInclude Include="src\MathLib\NodeVector.h" />
+    <ClInclude Include="src\MathLib\RandomEngine.h" />
     <ClInclude Include="src\MathLib\ToolFunction.h" />
     <ClInclude Include="src\MathLib\Vector.h" />
     <ClInclude Include="src\MathLib\VectorStatic.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="src\Nerual\Node.h" />
     <ClInclude Include="src\Util\Log.h" />
     <ClInclude Include="src\Util\Port.h" />
+    <ClInclude Include="src\Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DataSet\DataSet.cpp" />

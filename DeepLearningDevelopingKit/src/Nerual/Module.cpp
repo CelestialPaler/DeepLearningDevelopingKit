@@ -138,11 +138,8 @@ void Nerual::BPNet::Train()
 	{
 		count++;
 		sample = _trainSet->GetBatch();
-
 		ForwardPropagation(sample.first);
-		// BackwardPropagation(sample.second);
-		// Update(); 
-		// cout << "I"<< count<< " | " << sample.first(0) << sample.first(1) << " | " << sample.second(0)<< " | "<< _outputlayer->GetOutput()(0)<< endl;
+		BackwardPropagation();
 	} while (_outputlayer->GetLoss() > 0.001);
 }
 
