@@ -1,36 +1,35 @@
 {
 	"double test": 3.14159265358944276176415278216728537214,
-	"persons" : [
-		{
+	"persons": [{
 			"name": "Celestial Paler",
 			"age": 21,
-			"data":[
-				[1,8],
-				[4,4]
+			"data": [
+				[1, 8],
+				[4, 4]
 			]
 		},
 		{
 			"name": "Hogan Liao",
 			"age": 25,
-			"data":[
-				[7,5],
-				[6,8]
+			"data": [
+				[7, 5],
+				[6, 8]
 			]
 		},
 		{
 			"name": "DDShadow",
 			"age": 26,
-			"data":[
-				[3,2],
-				[8,1]
+			"data": [
+				[3, 2],
+				[8, 1]
 			]
 		},
 		{
 			"name": "Undead Yang",
 			"age": 25,
-			"data":[
-				[7,0],
-				[4,1]
+			"data": [
+				[7, 0],
+				[4, 1]
 			]
 		}
 	]

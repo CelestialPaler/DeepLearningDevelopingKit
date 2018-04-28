@@ -170,6 +170,7 @@
     <ClCompile Include="src\Nerual\Module.cpp" />
     <ClCompile Include="src\Nerual\Node.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
+    <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="data\test\test.json" />
+    <None Include="data\test\vector.json" />
     <None Include="src\Json\JsonHandler.py" />
     <None Include="src\PythonAPI\Vector.py" />
     <None Include="src\UnitTest\JsonHandler_test.py" />

@@ -1,42 +1,32 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 			  Json Handler 	                                                              */
+/*								        		 		 Json Handler Test	                                                              */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-#pragma once
 
+#define JsonHandlerDebug
+
+#ifdef JsonHandlerDebug
 #include <iostream>
-#include <fstream>
-#include <iterator>
 #include <string>
 #include "..\MathLib\MathLib.h"
-#include "..\..\external\rapidjson\document.h"
+#include "..\Json\JsonHandler.h"
 
 using namespace std;
 using namespace MathLib;
-using namespace rapidjson;
 
-/***************************************************************************************************/
-// Class : JsonHandler
-///
-class JsonHandler
+int main() 
 {
-public:
-	JsonHandler()
-	{
-		jsonBuffer = "";
-	}
+	string filePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\vector.json";
+	JsonHandler jsonHandle;
+	jsonHandle.OpenJson(filePath);
+	Vector<double> data = jsonHandle.ParseVector();
+	cout << data << endl;
 
-public:
-	Vector<double> ParseVector(void);
+	system("pause");
+	return 0;
+}
+#endif // JsonHandlerDebug
 
-public:
-	void OpenFile(const string & _filePath);
-	void OpenJson(const string & _filePath);
-	void SaveJson(const string & _filePath);
 
-private:
-	string jsonBuffer;
-	Document doc;
-};

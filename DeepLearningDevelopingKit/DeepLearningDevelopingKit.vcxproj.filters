@@ -128,6 +128,9 @@
     <ClCompile Include="src\UnitTest\Vector_test.cpp">
       <Filter>src\UintTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\UnitTest\JsonHandler_test.cpp">
+      <Filter>src\UintTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -142,6 +145,9 @@
     </None>
     <None Include="src\UnitTest\JsonHandler_test.py">
       <Filter>src\UintTest</Filter>
+    </None>
+    <None Include="data\test\vector.json">
+      <Filter>data\test</Filter>
     </None>
   </ItemGroup>
 </Project>

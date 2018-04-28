@@ -7,6 +7,19 @@
 
 #include "JsonHandler.h"
 
+Vector<double> JsonHandler::ParseVector(void)
+{
+	unsigned size = doc["size"].GetUint();
+	Vector<double> tempVec(size);
+
+	const Value& data = doc["data"];
+	for (SizeType i = 0; i < data.Size(); i++)
+	{
+		tempVec(i) = data[i].GetDouble();
+	}
+	return tempVec;
+}
+
 void JsonHandler::OpenJson(const string & _filePath)
 {
 	ifstream infile;
@@ -16,19 +29,8 @@ void JsonHandler::OpenJson(const string & _filePath)
 	string datatemp;
 	while (getline(infile, datatemp))
 	{
-		fileBuffer += datatemp;
+		jsonBuffer += datatemp;
 	}
 	infile.close();
-
-	Document document;
-	document.Parse(fileBuffer.c_str());
-
-	if (document.HasMember("persons"))
-	{
-		const Value& persons = document["persons"];
-		for (SizeType i = 0; i < persons.Size(); i++)
-		{
-			cout << persons[i]["name"].GetString() << endl;
-		}
-	}
+	doc.Parse(jsonBuffer.c_str());
 }

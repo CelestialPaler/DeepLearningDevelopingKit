@@ -5,9 +5,13 @@
 #                                      Copyright © 2015-2018 Celestial Tech Inc.                                           #
 #**************************************************************************************************#
 
+# modules
 import numpy as np
 
 
+# Class : JsonHandler
+# Used for handling Json files, loading and writing to Json files.
+# Parsing and dumping data from all kinds of dara sources.
 class Vector:
 
         def __init__(self, size_n):
