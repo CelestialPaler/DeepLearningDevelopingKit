@@ -13,6 +13,7 @@
 
 using namespace Nerual;
 
+
 int main()
 {
 	srand((unsigned)time(NULL));
@@ -32,12 +33,13 @@ int main()
 	TrainSet.InitWithXOR();
 
 	NumaricSet TestSet;
-	TestSet.InitWithXOR();
+	TestSet.InitWithXORTest();
 
 	TestBP1.SetTrainSet(&TrainSet);
 	TestBP1.SetTestSet(&TestSet);
 
 	TestBP1.Train();
+	TestBP1.Test();
 
 	system("pause");
 	return 0;

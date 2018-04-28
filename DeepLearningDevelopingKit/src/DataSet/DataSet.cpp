@@ -44,6 +44,44 @@ void Data::NumaricSet::InitWithXOR(void)
 	AddToSet(tempSample4);
 }
 
+void Data::NumaricSet::InitWithXORTest(void)
+{
+	Vector<double> input1(2, VectorType::Zero);
+	input1(0) = -0.02;  input1(1) = 0.13;
+	Vector<double> target1(1, VectorType::Zero);
+	target1(0) = 0;
+	NumaricSet::Sample tempSample1 = { input1 , target1 };
+	AddToSet(tempSample1);
+
+	Vector<double> input2(2, VectorType::Zero);
+	input2(0) = 0.12;  input2(1) = 0.98;
+	Vector<double> target2(1, VectorType::Zero);
+	target2(0) = 1;
+	NumaricSet::Sample tempSample2 = { input2 , target2 };
+	AddToSet(tempSample2);
+
+	Vector<double> input3(2, VectorType::Zero);
+	input3(0) = 0.82;  input3(1) = 0.03;
+	Vector<double> target3(1, VectorType::Zero);
+	target3(0) = 1;
+	NumaricSet::Sample tempSample3= { input3 , target3 };
+	AddToSet(tempSample3);
+
+	Vector<double> input4(2, VectorType::Zero);
+	input4(0) = 0.92;  input4(1) = 1.06;
+	Vector<double> target4(1, VectorType::Zero);
+	target4(0) = 0;
+	NumaricSet::Sample tempSample4 = { input4 , target4 };
+	AddToSet(tempSample4);
+
+	Vector<double> input5(2, VectorType::Zero);
+	input5(0) = 1.02;  input5(1) = -0.03;
+	Vector<double> target5(1, VectorType::Zero);
+	target5(0) = 1;
+	NumaricSet::Sample tempSample5 = { input5 , target5 };
+	AddToSet(tempSample5);
+}
+
 void Data::NumaricSet::AddToSet(const Sample & _sample)
 {
 	_data.push_back(_sample);

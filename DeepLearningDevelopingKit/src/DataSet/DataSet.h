@@ -28,6 +28,7 @@ namespace Data
 		NumaricSet();
 	public:
 		void InitWithXOR(void);
+		void InitWithXORTest(void);
 		void AddToSet(const Sample & _sample);
 	public:
 		Sample GetBatch(void);

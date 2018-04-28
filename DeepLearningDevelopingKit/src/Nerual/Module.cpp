@@ -137,8 +137,10 @@ void Nerual::BPNet::SetTrainSet(NumaricSet * _trainset)
 
 void Nerual::BPNet::SetTestSet(NumaricSet * _testset)
 {
-	this->_testSet = _testSet;
+	this->_testSet = _testset;
 }
+
+
 
 void Nerual::BPNet::Train()
 {
@@ -170,12 +172,23 @@ void Nerual::BPNet::Train()
 
 void Nerual::BPNet::Test()
 {
-	for (size_t i = 0; i < 2; i++)
+	NumaricSet::Sample test;
+	double avrError = 0;
+	cout << "Testing: " << endl;
+	for (size_t i = 0; i < 5; i++)
 	{
-		NumaricSet::Sample test = _testSet->GetBatch();
+		test = _testSet->GetSample(i);
 		ForwardPropagation(test.first);
-		cout << this->GetOutput()(0);
+		cout << "Input :" << fixed << setprecision(3) << test.first(0) << "  " << test.first(1) << " | "
+			<< "Expectation :" << fixed << setprecision(3) << test.second(0) << " | "
+			<< "Output :" << fixed << setprecision(3) << _outputlayer->GetOutput()(0) << " | "
+			<< "Error :" << fixed << setprecision(3) << _outputlayer->GetOutput()(0) - test.second(0) << endl;
+		avrError += _outputlayer->GetOutput()(0) - test.second(0);
+		avrError /= 5;
 	}
+	cout << endl << "Testing: " << endl;
+	cout << fixed << setprecision(10) << "Average Error :" << avrError << endl
+		<< fixed << setprecision(3) << "Error Rate :" << abs(avrError * 100) << "%" << endl;
 }
 
 
