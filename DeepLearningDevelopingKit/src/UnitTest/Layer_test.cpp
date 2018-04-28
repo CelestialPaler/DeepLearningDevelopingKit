@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define LayerDebug
+// #define LayerDebug
 
 #ifdef LayerDebug
 
@@ -54,25 +54,31 @@ int main()
 			{
 				NumaricSet::Sample sample = TrainSet.GetBatch();
 
-				hidden.SetInput(sample.first);
+				in.SetInput(sample.first);
+				in.ForwardPropagation();
+
+				hidden.SetInput(in.GetOutput());
 				hidden.ForwardPropagation();
 
 				out.SetInput(hidden.GetOutput());
 				out.ForwardPropagation();
 
-				hidden.BackwardPropagation(out.BackwardPropagation(sample.second));
+				in.BackwardPropagation(hidden.BackwardPropagation(out.BackwardPropagation(sample.second)));
 
 				cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
 
+				in.BatchDeltaSumUpdate(batchsize);
 				out.BatchDeltaSumUpdate(batchsize);
 				hidden.BatchDeltaSumUpdate(batchsize);
 
 				out.LossSumUpdate();
 			}
 
+			in.Update();
 			out.Update();
 			hidden.Update();
 
+			in.BatchDeltaSumClear();
 			out.BatchDeltaSumClear();
 			hidden.BatchDeltaSumClear();
 

@@ -26,7 +26,7 @@ namespace Util
 
 	public:
 
-		inline double gettime() const { return std::chrono::duration_cast<Duration>(std::chrono::steady_clock::now() - timeBase).count(); }
+		inline double GetTime() const { return std::chrono::duration_cast<Duration>(std::chrono::steady_clock::now() - timeBase).count(); }
 	
 	private:
 	

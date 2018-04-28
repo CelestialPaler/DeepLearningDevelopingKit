@@ -61,6 +61,7 @@ namespace Nerual
 		virtual void BatchDeltaSumClear(void) = 0;
 
 	protected:
+
 		ElemType(*activationFunction)(ElemType x);
 		ElemType(*activationFunctionDerivative)(ElemType x);
 		ElemType(*lossFunction)(ElemType x, ElemType y);
@@ -119,12 +120,13 @@ namespace Nerual
 		void BatchDeltaSumClear(void) override;
 
 	private:
+
 		vector<InputNode> _nodes;
 	};
 
 	/***************************************************************************************************/
 	// Class : HiddenLayer
-	/// 
+	/// Used for adjust weights and bias to fit and minimize the loss.
 	class HiddenLayer : public Layer
 	{
 	public: // Constructors
@@ -221,9 +223,9 @@ namespace Nerual
 		void BatchDeltaSumUpdate(const size_t _batchSize) override;
 		// Clear the sum of sum of delta.
 		void BatchDeltaSumClear(void) override;
-		// 
+		// Sum up the loss of a batch.
 		void LossSumUpdate(void);
-		// 
+		// Clear the sum of loss od a batch.
 		void LossSumClear(void);
 
 	private:

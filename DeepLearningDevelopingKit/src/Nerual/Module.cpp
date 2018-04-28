@@ -14,20 +14,30 @@ Nerual::BPNet::BPNet(void)
 Nerual::BPNet::BPNet(const BPNetInitor & _initor)
 {
 	_inputlayer = new InputLayer(_initor.InputNodeNum, _initor.InputNodeNum);
+	_inputlayer->SetActivationFunction(_initor.InputLayerActivationFunction);
+	_inputlayer->SetLossFunction(_initor.LossFunction);
 
 	for (size_t i = 0; i < _initor.HiddenLayerNum; i++)
 	{
 		if (i==0)
 		{
-			_hiddenlayers.push_back(new HiddenLayer(_initor.InputNodeNum, _initor.HiddenNodeNum));
+			HiddenLayer * tempLayer = new HiddenLayer(_initor.InputNodeNum, _initor.HiddenNodeNum);
+			tempLayer->SetActivationFunction(_initor.HiddenLayerActivationFunction);
+			tempLayer->SetLossFunction(_initor.LossFunction);
+			_hiddenlayers.push_back(tempLayer);
 		}
 		else
 		{
-			_hiddenlayers.push_back(new HiddenLayer(_initor.HiddenNodeNum, _initor.HiddenNodeNum));
+			HiddenLayer * tempLayer = new HiddenLayer(_initor.HiddenNodeNum, _initor.HiddenNodeNum);
+			tempLayer->SetActivationFunction(_initor.HiddenLayerActivationFunction);
+			tempLayer->SetLossFunction(_initor.LossFunction);
+			_hiddenlayers.push_back(tempLayer);
 		}
 	}
 
 	_outputlayer = new OutputLayer(_initor.HiddenNodeNum, _initor.OutputNodeNum);
+	_outputlayer->SetActivationFunction(_initor.OutputLayerActivationFunction);
+	_outputlayer->SetLossFunction(_initor.LossFunction);
 }
 
 void Nerual::BPNet::PushLayer(InputLayer * _newLayer)
@@ -70,14 +80,14 @@ void Nerual::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
 
 void Nerual::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 {
-	_outputlayer->SetExpectation(_vec);
-	Vector<double> tempDelta(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
-	tempDelta = _outputlayer->BackwardPropagation(_outputlayer->GetDelta());
+	Vector<double> tempDelta1(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
+	tempDelta1 = _outputlayer->BackwardPropagation(_vec);
 
-	for (size_t i = _hiddenlayers.size(); i > 0; i--)
+	Vector<double> tempDelta2(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
+	tempDelta2 = _hiddenlayers.at(_hiddenlayers.size() - 1)->BackwardPropagation(tempDelta1);
+	for (size_t i = _hiddenlayers.size() - 1; i > 0; i--)
 	{
-		Vector<double> tempDelta(_hiddenlayers.at(i-1)->GetNodeNum());
-		tempDelta = _hiddenlayers.at(i-1)->BackwardPropagation(tempDelta);
+		tempDelta2 = _hiddenlayers.at(i - 1)->BackwardPropagation(tempDelta2);
 	}
 }
 
@@ -132,15 +142,30 @@ void Nerual::BPNet::SetTestSet(NumaricSet * _testset)
 
 void Nerual::BPNet::Train()
 {
-	int count = 0;
+	Timer<chrono::seconds> trainTimer;
+	int iterCount = 0;
+	double loss = 0;
 	NumaricSet::Sample sample;
 	do
 	{
-		count++;
-		sample = _trainSet->GetBatch();
-		ForwardPropagation(sample.first);
-		BackwardPropagation();
-	} while (_outputlayer->GetLoss() > 0.001);
+		for (size_t i = 0; i < 4; i++)
+		{
+			sample = _trainSet->GetBatch();
+			ForwardPropagation(sample.first);
+			BackwardPropagation(sample.second);
+			BatchDeltaSumUpdate(4);
+			_outputlayer->LossSumUpdate();
+		}
+		iterCount++;
+
+		Update();
+		BatchDeltaSumClear();
+		loss = _outputlayer->GetLoss();
+		_outputlayer->LossSumClear();
+		cout << "Iiteration :" << setw(4) << setfill('0') << iterCount << " | "
+			<< "Time :" << fixed << setprecision(3) << trainTimer.GetTime() << " sec"<< " | "
+			<< "Loss :" << fixed << setprecision(10) << loss << endl;
+	} while (loss > 0.001);
 }
 
 void Nerual::BPNet::Test()

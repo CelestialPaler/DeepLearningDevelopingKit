@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define ModuleDebug
+#define ModuleDebug
 #include <ctime>
 
 #ifdef ModuleDebug
@@ -17,18 +17,26 @@ int main()
 {
 	srand((unsigned)time(NULL));
 
-	NumaricSet TrainSet;
-	TrainSet.InitWithXOR();
-
 	BPNetInitor classicBPN;
 	classicBPN.InputNodeNum = 2;
-	classicBPN.HiddenLayerNum = 2;
+	classicBPN.HiddenLayerNum = 1;
 	classicBPN.HiddenNodeNum = 10;
 	classicBPN.OutputNodeNum = 1;
+	classicBPN.InputLayerActivationFunction = ActivationFunction::Sigmoid;
+	classicBPN.HiddenLayerActivationFunction = ActivationFunction::ReLU;
+	classicBPN.LossFunction = LossFunction::MES;
 
 	BPNet TestBP1(classicBPN);
 
+	NumaricSet TrainSet;
+	TrainSet.InitWithXOR();
+
+	NumaricSet TestSet;
+	TestSet.InitWithXOR();
+
 	TestBP1.SetTrainSet(&TrainSet);
+	TestBP1.SetTestSet(&TestSet);
+
 	TestBP1.Train();
 
 	system("pause");

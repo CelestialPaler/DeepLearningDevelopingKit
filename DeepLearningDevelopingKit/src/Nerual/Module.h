@@ -12,11 +12,14 @@
 #include "Layer.h"
 #include "Node.h"
 #include "..\DataSet\DataSet.h"
+#include "..\Util\Timer.h"
+#include <iomanip>
 
 // Namespaces
 using namespace std;
 using namespace MathLib;
 using namespace Data;
+using namespace Util;
 
 /***************************************************************************************************/
 // Namespace : Nerual
@@ -28,7 +31,6 @@ namespace Nerual
 
 	};
 
-
 	// BPNet Initor
 	/// Used for initialization of a BPNet.
 	struct BPNetInitor
@@ -37,6 +39,12 @@ namespace Nerual
 		size_t HiddenLayerNum;
 		size_t HiddenNodeNum;
 		size_t OutputNodeNum;
+
+		ActivationFunction InputLayerActivationFunction;
+		ActivationFunction HiddenLayerActivationFunction;
+		ActivationFunction OutputLayerActivationFunction;
+
+		LossFunction LossFunction;
 	};
 
 	/***************************************************************************************************/
