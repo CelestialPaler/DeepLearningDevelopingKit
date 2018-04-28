@@ -93,6 +93,12 @@
     <Filter Include="src\PythonAPI">
       <UniqueIdentifier>{469a3b11-cc80-4539-8c54-fb1bd64f8fc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{8917f690-5a89-4d46-9091-33ac0077ebf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\RapidJson">
+      <UniqueIdentifier>{572e125d-b8d4-4ee4-88e1-bf8d6eeefc2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DataSet\DataSet.cpp">

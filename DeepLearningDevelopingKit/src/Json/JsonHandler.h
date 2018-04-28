@@ -7,13 +7,25 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <iterator>
+#include <string>
+#include "..\..\external\rapidjson\document.h"
 
+using namespace std;
+using namespace rapidjson;
 
 class JsonHandler
 {
 public:
 	JsonHandler();
 
-private:
+public:
+	void OpenFile(const string & _filePath);
+	void OpenJson(const string & _filePath);
+	void SaveJson(const string & _filePath);
 
+private:
+	string fileBuffer;
+	string jsonBuffer;
 };
