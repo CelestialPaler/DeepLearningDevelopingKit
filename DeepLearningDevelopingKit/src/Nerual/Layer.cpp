@@ -8,7 +8,7 @@
 // Header files
 #include "Layer.h"
 
-const double learnRate = 0.5;
+const double learnRate = 0.8;
 
 /***************************************************************************************************/
 // Class : InputLayer
@@ -217,7 +217,7 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() - _nodes.at(i).bias);
+		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() + _nodes.at(i).bias);
 	}
 }
 
@@ -386,7 +386,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 	for (size_t i = 0; i < m; i++)
 	{
 		/// θ(∑ X * W - B)
-		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() - _nodes.at(i).bias);
+		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() + _nodes.at(i).bias);
 	}
 }
 
@@ -428,7 +428,6 @@ void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 	for (size_t i = 0; i < m; i++)
 	{
 		_nodes.at(i).weightDeltaSum += (_nodes.at(i).weightDelta * (1 / (double)_batchSize));
-		cout << _nodes.at(i).weightDelta << endl;
 		_nodes.at(i).biasDeltaSum += (_nodes.at(i).biasDelta * (1 / (double)_batchSize));
 	}
 }

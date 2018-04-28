@@ -10,24 +10,34 @@
 
 /**********************************************************************************************************/
 // Class : InputNode
+
+// Default constructor
+/// Takes no parameters.
 Nerual::InputNode::InputNode(void)
 {
 	this->value = 0.f;
+	
+	this->tempInput = 0.f;
 }
 
+// "<<" operator
+/// Used for streaming in format.
 ostream & Nerual::operator<<(ostream & _outstream, InputNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;
-	_outstream << "	Value: " << _node.value << endl;
+	_outstream << "	value: " << _node.value << endl;
 	return _outstream;
 }
 
 /**********************************************************************************************************/
 // Class : HiddenNode
+
+// Constructor
+/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 Nerual::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
-	this->bias = 0.f;
+	this->bias = Random();
 	this->weight.Init(_n, VectorType::Random);
 
 	this->loss = 0.f;
@@ -41,6 +51,8 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 	this->weightDeltaSum.Init(_n, VectorType::Zero);
 }
 
+// "<<" operator
+/// Used for streaming in format.
 ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;
@@ -56,10 +68,13 @@ ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
 
 /**********************************************************************************************************/
 // Class : OutputNode
+
+// Constructor
+/// _n is the input num of the node, which means the size of weight, tempInput, etc.
 Nerual::OutputNode::OutputNode(const size_t _n)
 {
 	this->value = 0.f;
-	this->bias = 0.f;
+	this->bias = Random();
 	this->weight.Init(_n, VectorType::Random);
 
 	this->loss = 0.f;
@@ -74,6 +89,8 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 	this->weightDeltaSum.Init(_n, VectorType::Zero);
 }
 
+// "<<" operator
+/// Used for streaming in format.
 ostream & Nerual::operator<<(ostream & _outstream, OutputNode & _node)
 {
 	_outstream << typeid(_node).name() << endl;

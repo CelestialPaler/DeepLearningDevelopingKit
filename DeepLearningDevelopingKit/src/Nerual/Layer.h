@@ -57,7 +57,7 @@ namespace Nerual
 		virtual void Update(void) = 0;
 		// Sum up the delta of a batch.
 		virtual void BatchDeltaSumUpdate(const size_t _batchSize) = 0;
-		// 
+		// Clear the deltaSum of a batch.
 		virtual void BatchDeltaSumClear(void) = 0;
 
 	protected:

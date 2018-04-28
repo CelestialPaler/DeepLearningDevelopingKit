@@ -32,6 +32,7 @@ namespace Data
 	public:
 		Sample GetBatch(void);
 		Sample GetRandomSample(void);
+		Sample GetSample(const size_t _index);
 	private:
 		vector<Sample> _data;
 	};

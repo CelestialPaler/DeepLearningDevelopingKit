@@ -29,104 +29,79 @@ int main()
 	PrintTitle();
 
 	InputLayer in(2, 2);
-	HiddenLayer hidden1(2, 5);
-	HiddenLayer hidden2(5, 5);
-	HiddenLayer hidden3(5, 5);
-	OutputLayer out(5, 1);
+	HiddenLayer hidden(2, 10);
+	OutputLayer out(10, 1);
 
 	in.SetActivationFunction(ActivationFunction::Sigmoid);
 	in.SetLossFunction(LossFunction::MES);
-	hidden1.SetActivationFunction(ActivationFunction::Sigmoid);
-	hidden1.SetLossFunction(LossFunction::MES);
-	hidden2.SetActivationFunction(ActivationFunction::Sigmoid);
-	hidden2.SetLossFunction(LossFunction::MES);
-	hidden3.SetActivationFunction(ActivationFunction::Sigmoid);
-	hidden3.SetLossFunction(LossFunction::MES);
+	hidden.SetActivationFunction(ActivationFunction::Sigmoid);
+	hidden.SetLossFunction(LossFunction::MES);
 	out.SetActivationFunction(ActivationFunction::Sigmoid);
 	out.SetLossFunction(LossFunction::MES);
 
 	NumaricSet TrainSet;
 	TrainSet.InitWithXOR();
 
-	unsigned count = 0;
 	unsigned iterCount = 0;
 	unsigned batchsize = 4;
 	double loss = 0;
-	do
-	{	
-		for (size_t i = 0; i < 4; i++)
+
+	if (true)
+	{
+		do
 		{
-			NumaricSet::Sample sample = TrainSet.GetBatch();
-
-			hidden1.SetInput(sample.first);
-			hidden1.ForwardPropagation();
-			hidden2.SetInput(hidden1.GetOutput());
-			hidden2.ForwardPropagation();
-			hidden3.SetInput(hidden2.GetOutput());
-			hidden3.ForwardPropagation();
-
-			out.SetInput(hidden3.GetOutput());
-			out.ForwardPropagation();
-
-			hidden1.BackwardPropagation(out.BackwardPropagation(sample.second));
-			
-			cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
-			
-			if (count == 3)
+			for (size_t i = 0; i < 4; i++)
 			{
-				out.Update();
-				hidden3.Update();
-				hidden2.Update();
-				hidden1.Update();
+				NumaricSet::Sample sample = TrainSet.GetBatch();
 
-				out.BatchDeltaSumClear();
-				hidden3.BatchDeltaSumClear();
-				hidden2.BatchDeltaSumClear();
-				hidden1.BatchDeltaSumClear();
+				hidden.SetInput(sample.first);
+				hidden.ForwardPropagation();
 
-				loss = out.GetLoss();
-				out.LossSumClear();
+				out.SetInput(hidden.GetOutput());
+				out.ForwardPropagation();
 
-				count = 0;
-				iterCount++;
-				cout << "Iter :" << iterCount << "  Loss :" << loss << endl;
-			}
-			else
-			{
+				hidden.BackwardPropagation(out.BackwardPropagation(sample.second));
+
+				cout << sample.first(0) << sample.first(1) << " | " << sample.second(0) << " | ";
+
 				out.BatchDeltaSumUpdate(batchsize);
-				hidden3.BatchDeltaSumUpdate(batchsize);
-				hidden2.BatchDeltaSumUpdate(batchsize);
-				hidden1.BatchDeltaSumUpdate(batchsize);
+				hidden.BatchDeltaSumUpdate(batchsize);
 
 				out.LossSumUpdate();
-				count++;
 			}
 
-			Sleep(1000 / batchsize);
-		}
-	} while (loss > 0.001);
+			out.Update();
+			hidden.Update();
+
+			out.BatchDeltaSumClear();
+			hidden.BatchDeltaSumClear();
+
+			loss = out.GetLoss();
+			out.LossSumClear();
+
+			iterCount++;
+			cout << "Iter :" << iterCount << "  Loss :" << loss << endl;
+		} while (loss > 0.001);
+	}
 
 	NumaricSet TestSet;
 	TestSet.InitWithXOR();
 
-	for (size_t i = 0; i < 4; i++)
+	if (true)
 	{
-		NumaricSet::Sample sample = TestSet.GetBatch();
+		for (size_t i = 0; i < 4; i++)
+		{
+			NumaricSet::Sample sample = TestSet.GetBatch();
 
-		hidden1.SetInput(sample.first);
-		hidden1.ForwardPropagation();
-		hidden2.SetInput(hidden1.GetOutput());
-		hidden2.ForwardPropagation();
-		hidden3.SetInput(hidden2.GetOutput());
-		hidden3.ForwardPropagation();
+			hidden.SetInput(sample.first);
+			hidden.ForwardPropagation();
 
-		out.SetInput(hidden3.GetOutput());
-		out.ForwardPropagation();
+			out.SetInput(hidden.GetOutput());
+			out.ForwardPropagation();
 
-		cout << "Input: " << sample.first(0) << sample.first(1) << "  Expectation: " << sample.second(0) << "  Output: " << out.GetOutput()(0) << endl;
+			cout << "Input: " << sample.first(0) << sample.first(1) << "  Expectation: " << sample.second(0) << "  Output: " << out.GetOutput()(0) << endl;
+		}
 	}
-	
-
 
 	system("pause");
 	return 0;

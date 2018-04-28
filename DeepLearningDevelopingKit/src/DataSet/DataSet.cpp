@@ -52,14 +52,19 @@ void Data::NumaricSet::AddToSet(const Sample & _sample)
 Data::NumaricSet::Sample Data::NumaricSet::GetBatch(void)
 {
 	static int x = 0;
-	if (x==4)
-		x = 0;
 	x++;
-	return _data.at(x - 1);
+	if (x==_data.size())
+		x = 0;
+	return _data.at(x);
 }
 
 Data::NumaricSet::Sample Data::NumaricSet::GetRandomSample(void)
 {
 	return _data.at(floor((Random() + 1) * 3 - 1));
+}
+
+Data::NumaricSet::Sample Data::NumaricSet::GetSample(const size_t _index)
+{
+	return _data.at(_index);
 }
 
