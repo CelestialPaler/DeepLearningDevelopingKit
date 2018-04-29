@@ -9,9 +9,9 @@
 import numpy as np
 
 
-# Class : JsonHandler
-# Used for handling Json files, loading and writing to Json files.
-# Parsing and dumping data from all kinds of dara sources.
+# Class : Vector
+# Vector implemented in Numpy
+# Exchange data between C++ and Pyhton
 class Vector:
 
         def __init__(self, size_n):
@@ -33,7 +33,6 @@ class Vector:
         
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
         test = Vector(5)
-        del test
         print(test.data)

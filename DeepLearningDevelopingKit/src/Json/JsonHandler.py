@@ -42,8 +42,8 @@ class JsonHandler:
         file_path_abs = dir_path + file_path
         print(file_path_abs)
         if os.path.exists(file_path_abs):
-            with open(file_path_abs, 'r', encoding='uft-8') as file:
-                file_data = json.load(file) 
+            with open(file_path_abs, 'r', encoding='utf-8') as file:
+                file_data = json.load(file)
                 return file_data
         else:
             raise Exception('Invalid file path!')
@@ -55,11 +55,11 @@ class JsonHandler:
         file_path_abs = dir_path + file_path
         print(file_path_abs)
         if os.path.exists(file_path_abs):
-            with open(file_path_abs, 'w', encoding='uft-8') as file:
+            with open(file_path_abs, 'w', encoding='utf-8') as file:
                 json.dump(file_data, file, indent=2)
         else:
             raise Exception('Invalid file path!')
-
+      
 
 if __name__ == '__main__':
     test_json_path = '\\data\\test\\test.json'

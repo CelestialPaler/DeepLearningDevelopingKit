@@ -149,5 +149,11 @@
     <None Include="data\test\vector.json">
       <Filter>data\test</Filter>
     </None>
+    <None Include="src\PythonAPI\Matrix.py">
+      <Filter>src\PythonAPI</Filter>
+    </None>
+    <None Include="src\PythonAPI\Node.py">
+      <Filter>src\PythonAPI</Filter>
+    </None>
   </ItemGroup>
 </Project>
