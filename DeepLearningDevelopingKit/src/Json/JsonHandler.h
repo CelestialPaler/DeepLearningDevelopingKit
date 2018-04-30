@@ -13,30 +13,25 @@
 #include "..\MathLib\MathLib.h"
 #include "..\..\external\rapidjson\document.h"
 
-using namespace std;
-using namespace MathLib;
-using namespace rapidjson;
-
 /***************************************************************************************************/
 // Class : JsonHandler
 ///
 class JsonHandler
 {
 public:
-	JsonHandler()
-	{
-		jsonBuffer = "";
-	}
+	JsonHandler();
 
 public:
-	Vector<double> ParseVector(void);
+	MathLib::Vector<double> ParseVector(const size_t _index) const;
+	std::vector<MathLib::Vector<double>> ParseAllVector(void) const;
 
 public:
-	void OpenFile(const string & _filePath);
-	void OpenJson(const string & _filePath);
-	void SaveJson(const string & _filePath, const string & _newdata);
+	void OpenFile(const std::string & _filePath);
+	void OpenJson(const std::string & _filePath);
+	void SaveJson(const std::string & _filePath, const std::string & _newdata);
 
 private:
-	string jsonBuffer;
-	Document doc;
+	std::string jsonBuffer;
+	rapidjson::Document document;
+	std::vector<MathLib::Vector<double>> tempBuffer;
 };

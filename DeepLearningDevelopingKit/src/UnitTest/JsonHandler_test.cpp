@@ -21,8 +21,12 @@ int main()
 	string filePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\vector.json";
 	JsonHandler jsonHandle;
 	jsonHandle.OpenJson(filePath);
-	Vector<double> data = jsonHandle.ParseVector();
-	cout << data << endl;
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		Vector<double> data = jsonHandle.ParseVector(i);
+		cout << data;
+	}
 
 	system("pause");
 	return 0;

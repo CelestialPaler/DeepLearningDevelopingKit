@@ -1,5 +1,6 @@
 {
-	"vectors": [{
+	"size":3,
+	"datablock": [{
 			"class": "vector",
 			"size": 5,
 			"data": [

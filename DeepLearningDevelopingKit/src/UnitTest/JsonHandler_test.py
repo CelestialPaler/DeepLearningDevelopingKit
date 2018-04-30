@@ -22,7 +22,7 @@ if __name__ == '__main__':
     test_data = JsonHandler.open_json(test_json_path)
 
     vectors = list()
-    for vector in test_data['vectors']:
+    for vector in test_data['datablock']:
         if vector['class'] == 'vector':
             vec_temp = Vector(vector['size'])
             vec_temp.data = np.array(vector['data'], np.float)
