@@ -12,23 +12,21 @@
 #include <string>
 #include "..\MathLib\MathLib.h"
 #include "..\Json\JsonHandler.h"
+#include "..\Util\Timer.h"
 
 using namespace std;
 using namespace MathLib;
 
 int main()
 {
-	string filePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\vector.json";
+	Util::Timer<chrono::seconds> myTimer;
 	JsonHandler jsonHandle;
-	jsonHandle.OpenJson(filePath);
 
-	Vector<double> data = jsonHandle.ParseVector(0);
-
-	Vector<double> vec(100, MathLib::VectorType::Random);
+	Vector<double> vec(1000, MathLib::VectorType::Random);
 	jsonHandle.AppendVectorToBuffer(vec);
 	string savePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test2.json";
 	jsonHandle.SaveJson(savePath);
-
+	cout << myTimer.GetTime() << endl;
 	system("pause");
 	return 0;
 }

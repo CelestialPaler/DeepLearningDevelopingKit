@@ -1,4 +1,5 @@
 {
+    "class": "vector",
 	"size": 3,
 	"datablock": [{
 			"class": "vector",

@@ -12,25 +12,15 @@ import numpy as np
 
 dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'..\\..'))
 sys.path.append(str(dir_path + '\\src\\Json'))
-from JsonHandler import JsonHandler
+from JsonHandler import *
 
 sys.path.append(str(dir_path + '\\src\\PythonAPI'))
 from Vector import Vector
 
 if __name__ == '__main__':
     test_json_path = '\\data\\test\\test2.json'
-    test_data = JsonHandler.open_json(test_json_path)
-
-    vectors = list()
-    for vector in test_data['datablock']:
-        if vector['class'] == 'vector':
-            vec_temp = Vector(vector['size'])
-            vec_temp.data = np.array(vector['data'], np.float)
-            vectors.append(vec_temp)
-        else:
-            raise Exception('Invalid data class!')
-
-    for vec in vectors:
-        print(vec.data)
+    JsonHandler.open_with_cache(test_json_path)
+    vec = VectorParser.parse(JsonHandler.json_data, 0)
+    print(vec.data)
 
 
