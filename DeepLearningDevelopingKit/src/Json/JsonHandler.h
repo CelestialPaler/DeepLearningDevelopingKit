@@ -51,4 +51,5 @@ private:
 	std::string jsonWriteBuffer;
 	rapidjson::Document documentReadBuffer;
 	rapidjson::Document documentWriteBuffer;
+	rapidjson::StringBuffer stringBuffer;
 };

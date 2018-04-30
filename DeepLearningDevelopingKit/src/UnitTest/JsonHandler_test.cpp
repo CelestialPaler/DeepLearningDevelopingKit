@@ -24,6 +24,8 @@ int main()
 
 	Vector<double> data = jsonHandle.ParseVector(0);
 
+	Vector<double> vec(100, MathLib::VectorType::Random);
+	jsonHandle.AppendVectorToBuffer(vec);
 	string savePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test2.json";
 	jsonHandle.SaveJson(savePath);
 

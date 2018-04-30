@@ -18,7 +18,7 @@ sys.path.append(str(dir_path + '\\src\\PythonAPI'))
 from Vector import Vector
 
 if __name__ == '__main__':
-    test_json_path = '\\data\\test\\vector.json'
+    test_json_path = '\\data\\test\\test2.json'
     test_data = JsonHandler.open_json(test_json_path)
 
     vectors = list()

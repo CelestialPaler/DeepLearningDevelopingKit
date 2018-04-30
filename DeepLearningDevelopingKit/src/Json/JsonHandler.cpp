@@ -79,7 +79,7 @@ void JsonHandler::SaveJson(const string & _filePath)
 	outfile.open(_filePath);
 	if(!outfile.is_open())
 		exit(0);
-
+	outfile << stringBuffer.GetString();
 	
 }
 
@@ -88,19 +88,24 @@ void JsonHandler::AppendVectorToBuffer(const MathLib::Vector<double>& _vec)
 	documentWriteBuffer.SetObject();
 	rapidjson::Document::AllocatorType& allocator = documentWriteBuffer.GetAllocator();
 
-	rapidjson::Value object(rapidjson::kObjectType);
-	object.AddMember("id", i, allocator);
-	object.AddMember("name", "test", allocator);
-	object.AddMember("version", 1.01, allocator);
-	object.AddMember("vip", true, allocator);
+	rapidjson::Value array1(rapidjson::kArrayType);
+	rapidjson::Value array1obj(rapidjson::kObjectType);
+	array1obj.AddMember("class", "vector", allocator);
+	array1obj.AddMember("size", _vec.Size(), allocator);
+
+	rapidjson::Value array2(rapidjson::kArrayType);
+	for (size_t i = 0; i < _vec.Size(); i++)
+	{
+		array2.PushBack(_vec(i), allocator);
+	}
+	array1obj.AddMember("data", array2, allocator);
 
 
-	document.AddMember("size", _vec., allocator);
-	document.AddMember("players", array, allocator);
+	array1.PushBack(array1obj, allocator);
 
-	rapidjson::StringBuffer buffer;
-	rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-	document.Accept(writer);
+	documentWriteBuffer.AddMember("size", 1, allocator);
+	documentWriteBuffer.AddMember("datablock", array1, allocator);
 
-	outfile << buffer.GetString();
+	rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+	documentWriteBuffer.Accept(writer);
 }
