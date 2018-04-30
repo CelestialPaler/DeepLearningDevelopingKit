@@ -34,7 +34,7 @@ public:
 public:
 	void OpenFile(const string & _filePath);
 	void OpenJson(const string & _filePath);
-	void SaveJson(const string & _filePath);
+	void SaveJson(const string & _filePath, const string & _newdata);
 
 private:
 	string jsonBuffer;

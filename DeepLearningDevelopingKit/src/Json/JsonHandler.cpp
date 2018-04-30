@@ -20,17 +20,31 @@ Vector<double> JsonHandler::ParseVector(void)
 	return tempVec;
 }
 
+void JsonHandler::OpenFile(const string & _filePath)
+{
+	
+}
+
 void JsonHandler::OpenJson(const string & _filePath)
 {
 	ifstream infile;
 	infile.open(_filePath);
 	if (!infile.is_open())
 		exit(0);
-	string datatemp;
-	while (getline(infile, datatemp))
+	string dataTemp;
+	while (getline(infile, dataTemp))
 	{
-		jsonBuffer += datatemp;
+		jsonBuffer += dataTemp;
 	}
 	infile.close();
 	doc.Parse(jsonBuffer.c_str());
+}
+
+void JsonHandler::SaveJson(const string & _filePath, const string & _newdata)
+{
+	ofstream outfile;
+	outfile.open(_filePath);
+	if(!outfile.is_open())
+		exit(0);
+	string data;
 }
