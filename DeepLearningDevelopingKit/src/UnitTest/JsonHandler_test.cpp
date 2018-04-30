@@ -16,17 +16,16 @@
 using namespace std;
 using namespace MathLib;
 
-int main() 
+int main()
 {
 	string filePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\vector.json";
 	JsonHandler jsonHandle;
 	jsonHandle.OpenJson(filePath);
 
-	for (size_t i = 0; i < 3; i++)
-	{
-		Vector<double> data = jsonHandle.ParseVector(i);
-		cout << data;
-	}
+	Vector<double> data = jsonHandle.ParseVector(0);
+
+	string savePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test2.json";
+	jsonHandle.SaveJson(savePath);
 
 	system("pause");
 	return 0;

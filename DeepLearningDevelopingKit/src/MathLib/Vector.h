@@ -39,9 +39,9 @@ namespace MathLib
 	{
 	public: // Constructors
 
-			// Default constructor
-			/// Take no parameters.
-			/// After default constructor and before use the Vector object, Init() should be involked.
+		// Default constructor
+		/// Take no parameters.
+		/// After default constructor and before use the Vector object, Init() should be involked.
 		Vector(void);
 		// Constructor (Using Size and Type)
 		/// Specified the size of Vector.
@@ -52,14 +52,17 @@ namespace MathLib
 
 	public: // Initializing
 
-			// Initializing function
-			/// Initializing the Vector after defined by default constructor.
+		// Initializing function
+		/// Initializing the Vector after defined by default constructor.
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
 	public: // Quantification
 
-			// Sum function
-			/// Add up all the element in the Vector.
+		// Size function
+		/// Return the size of the Vector.
+		const size_t Size(void) const;
+		// Sum function
+		/// Add up all the element in the Vector.
 		T Sum(void) const;
 		// Average function
 		/// Calculate the average value of all the element in the Vector.
@@ -73,15 +76,15 @@ namespace MathLib
 
 	public: // Pointer
 
-			// Pointer
+		// Pointer
 		T * data() { return this->_data[0]; }
 		// Const pointer
 		const T * data() const { return this->_data[0]; }
 
 	public: // Operator Overloading
 
-			// "( )" operator
-			/// Used for accessing the element in the Vector.
+		// "( )" operator
+		/// Used for accessing the element in the Vector.
 		inline T operator()(size_t _j) const
 		{
 			return this->_data[_j];
@@ -300,6 +303,12 @@ namespace MathLib
 			break;
 		}
 		n = _n;
+	}
+
+	template<class T>
+	inline const size_t Vector<T>::Size(void) const
+	{
+		return n;
 	}
 
 	template<class T>

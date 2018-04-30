@@ -12,13 +12,20 @@
 #include <string>
 #include "..\MathLib\MathLib.h"
 #include "..\..\external\rapidjson\document.h"
+#include "..\..\external\rapidjson\prettywriter.h"
+#include "..\..\external\rapidjson\stringbuffer.h"
 
 /***************************************************************************************************/
 // Class : JsonHandler
-///
+/// Used for exchange data with other application or api.
+/// Loading a json file and parsing data into other classes.
+/// Saving data of other classes to json file.
 class JsonHandler
 {
-public:
+public: // Constructors
+
+	// Default constructor
+	/// Take no parameters.
 	JsonHandler();
 
 public:
@@ -26,12 +33,22 @@ public:
 	std::vector<MathLib::Vector<double>> ParseAllVector(void) const;
 
 public:
+	//  Open a plain text file.
 	void OpenFile(const std::string & _filePath);
+	//  Open a Json file.
 	void OpenJson(const std::string & _filePath);
-	void SaveJson(const std::string & _filePath, const std::string & _newdata);
+	// Save data to a Json file.
+	void SaveJson(const std::string & _filePath);
+	
+	void AppendVectorToBuffer(const MathLib::Vector<double> & _vec);
+	
+public:
+	// Clear the buffer.
+	void ClearBuffer(void);
 
 private:
-	std::string jsonBuffer;
-	rapidjson::Document document;
-	std::vector<MathLib::Vector<double>> tempBuffer;
+	std::string jsonReadBuffer;
+	std::string jsonWriteBuffer;
+	rapidjson::Document documentReadBuffer;
+	rapidjson::Document documentWriteBuffer;
 };
