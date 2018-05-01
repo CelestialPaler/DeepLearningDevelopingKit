@@ -40,7 +40,7 @@ public:
 	// Save data to a Json file.
 	void SaveJson(const std::string & _filePath);
 	
-	void AppendVectorToBuffer(const MathLib::Vector<double> & _vec);
+	void AppendVectorsToBuffer(const std::vector<MathLib::Vector<double>> & _vec);
 	
 public:
 	// Clear the buffer.

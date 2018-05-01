@@ -21,9 +21,19 @@ int main()
 {
 	Util::Timer<chrono::seconds> myTimer;
 	JsonHandler jsonHandle;
+	string openPath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test.json";
+	jsonHandle.OpenJson(openPath);
+	vector<Vector<double>> tempReadVecs = jsonHandle.ParseAllVector();
+	for (auto & vec : tempReadVecs)
+		cout << vec << endl;
 
-	Vector<double> vec(1000, MathLib::VectorType::Random);
-	jsonHandle.AppendVectorToBuffer(vec);
+	Vector<double> vec1(5, MathLib::VectorType::Random);
+	Vector<double> vec2(3, MathLib::VectorType::Random);
+	Vector<double> vec3(10, MathLib::VectorType::Random);
+	Vector<double> vec4(2, MathLib::VectorType::Random);
+	Vector<double> vec5(7, MathLib::VectorType::Random);
+	vector<Vector<double>> tempWriteVecs{ vec1, vec2, vec3, vec4, vec5 };
+	jsonHandle.AppendVectorsToBuffer(tempWriteVecs);
 	string savePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test2.json";
 	jsonHandle.SaveJson(savePath);
 	cout << myTimer.GetTime() << endl;

@@ -32,7 +32,6 @@ class Vector:
                 self._data = new_data
         
 
-
 if __name__ == '__main__':
         test = Vector(5)
         print(test.data)

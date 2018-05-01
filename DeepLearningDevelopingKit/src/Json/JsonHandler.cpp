@@ -83,29 +83,31 @@ void JsonHandler::SaveJson(const string & _filePath)
 	
 }
 
-void JsonHandler::AppendVectorToBuffer(const MathLib::Vector<double>& _vec)
+void JsonHandler::AppendVectorsToBuffer(const std::vector<MathLib::Vector<double>> & _vec)
 {
 	documentWriteBuffer.SetObject();
 	rapidjson::Document::AllocatorType& allocator = documentWriteBuffer.GetAllocator();
 
+	documentWriteBuffer.AddMember("class", "vector", allocator);
+	documentWriteBuffer.AddMember("size", _vec.size(), allocator);
+
 	rapidjson::Value array1(rapidjson::kArrayType);
-	rapidjson::Value array1obj(rapidjson::kObjectType);
-	array1obj.AddMember("class", "vector", allocator);
-	array1obj.AddMember("size", _vec.Size(), allocator);
-
-	rapidjson::Value array2(rapidjson::kArrayType);
-	for (size_t i = 0; i < _vec.Size(); i++)
+	for (auto & vec : _vec)
 	{
-		array2.PushBack(_vec(i), allocator);
+		rapidjson::Value array1obj(rapidjson::kObjectType);
+		array1obj.AddMember("class", "vector", allocator);
+		array1obj.AddMember("size", vec.Size(), allocator);
+
+		rapidjson::Value array2(rapidjson::kArrayType);
+		for (size_t i = 0; i < vec.Size(); i++)
+		{
+			array2.PushBack(vec(i), allocator);
+		}
+		array1obj.AddMember("data", array2, allocator);
+		array1.PushBack(array1obj, allocator);
 	}
-	array1obj.AddMember("data", array2, allocator);
-
-
-	array1.PushBack(array1obj, allocator);
-
-	documentWriteBuffer.AddMember("size", 1, allocator);
 	documentWriteBuffer.AddMember("datablock", array1, allocator);
 
-	rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(stringBuffer);
 	documentWriteBuffer.Accept(writer);
 }
