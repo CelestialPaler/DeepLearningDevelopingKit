@@ -1,6 +1,6 @@
 ﻿#**************************************************************************************************#
 #                                               Deep Learning Developing Kit                                                    #
-#								        		 	              Vector   	                                                                   #
+#                                                                 Vector                                                                      #
 #                                                   www.tianshicangxie.com                                                         #
 #                                      Copyright © 2015-2018 Celestial Tech Inc.                                           #
 #**************************************************************************************************#
@@ -18,11 +18,12 @@ class Vector:
                 self._data = np.zeros(size_n)
 
         def __repr__(self):
-                return 'Vector( {} )'.format(np.size(self._data) )
+                return 'Vector( {} )'.format(np.size(self._data))
 
         def __str__(self):
                 return 'A Vector from DeepLearningDevelopingKit.'
 
+        # Data stored in vector
         @property
         def data(self):
                 return self._data

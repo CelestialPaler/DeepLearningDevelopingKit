@@ -58,6 +58,9 @@
     <ClInclude Include="src\MathLib\RandomEngine.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="src\Json\JsonParser.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -130,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp">
       <Filter>src\UintTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Json\JsonParser.cpp">
+      <Filter>src\Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

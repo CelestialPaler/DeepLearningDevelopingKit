@@ -4,7 +4,7 @@
 ## Build status
 | **`Documentation`** | **`Windows CPU`** | **`Windows GPU`** |
 |-----------------|---------------------|------------------|
-| [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tianshicangxie.com/deeplearningdevelopingkit/apidoc) | ![Build Status](https://img.shields.io/badge/build-success-brightgreen.svg) | ![Build Status](https://img.shields.io/vso/build/larsbrinkhoff/953a34b9-5966-4923-a48a-c41874cfb5f5/1.svg) 
+| [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tianshicangxie.com/deeplearningdevelopingkit/apidoc) | ![Build Status](https://img.shields.io/badge/build-success-brightgreen.svg) | ![Build Status](https://img.shields.io/vso/build/larsbrinkhoff/953a34b9-5966-4923-a48a-c41874cfb5f5/1.svg)
 
 ## Brief Introduction
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Powerful modularization and expandability provide a great tool to learn about machine learning, especially deep learning.You can explore as you wish, build your dream software, without being bothered by intricate codes. You can build your own AI model quickly and train it through iterator in high-efficiency.Like Lego building blocks, you can assemble or transplant your models and apply them to your AI applications within several minutes.</p> 

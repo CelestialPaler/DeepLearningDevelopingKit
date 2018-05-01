@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="src\DataSet\DataSet.h" />
     <ClInclude Include="src\Json\JsonHandler.h" />
+    <ClInclude Include="src\Json\JsonParser.h" />
     <ClInclude Include="src\MathLib\ActivationFunction.h" />
     <ClInclude Include="src\MathLib\LossFunction.h" />
     <ClInclude Include="src\MathLib\MathLib.h" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="src\DataSet\DataSet.cpp" />
     <ClCompile Include="src\Json\JsonHandler.cpp" />
+    <ClCompile Include="src\Json\JsonParser.cpp" />
     <ClCompile Include="src\Nerual\Layer.cpp" />
     <ClCompile Include="src\Nerual\Module.cpp" />
     <ClCompile Include="src\Nerual\Node.cpp" />

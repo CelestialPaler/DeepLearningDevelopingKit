@@ -22,33 +22,20 @@
 /// Saving data of other classes to json file.
 class JsonHandler
 {
-public: // Constructors
-
-	// Default constructor
-	/// Take no parameters.
-	JsonHandler();
-
+	friend class VectorParser;
 public:
-	MathLib::Vector<double> ParseVector(const size_t _index) const;
-	std::vector<MathLib::Vector<double>> ParseAllVector(void) const;
 
-public:
-	//  Open a plain text file.
-	void OpenFile(const std::string & _filePath);
-	//  Open a Json file.
+	// Open a Json file.
 	void OpenJson(const std::string & _filePath);
 	// Save data to a Json file.
 	void SaveJson(const std::string & _filePath);
-	
-	void AppendVectorsToBuffer(const std::vector<MathLib::Vector<double>> & _vec);
 	
 public:
 	// Clear the buffer.
 	void ClearBuffer(void);
 
 private:
-	std::string jsonReadBuffer;
-	std::string jsonWriteBuffer;
+
 	rapidjson::Document documentReadBuffer;
 	rapidjson::Document documentWriteBuffer;
 	rapidjson::StringBuffer stringBuffer;

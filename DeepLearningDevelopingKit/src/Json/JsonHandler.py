@@ -8,12 +8,13 @@
 # modules
 import os  
 import json
-import numpy as np
+
 
 # Class : JsonHandler
 # Used for handling Json files, loading and writing to Json files.
 # Parsing and dumping data from all kinds of dara sources.
 class JsonHandler:
+    
     json_data = str()
 
     def __repr__(self):
@@ -65,11 +66,3 @@ class JsonHandler:
     @staticmethod
     def open_with_cache(file_path):
         JsonHandler.json_data = JsonHandler.open_json(file_path)
-
-
-if __name__ == '__main__':
-    print('Class : JsonHandler run as main.')
-
-
-
-  
