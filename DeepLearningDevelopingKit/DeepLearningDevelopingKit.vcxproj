@@ -180,9 +180,12 @@
     <None Include="data\test\test.json" />
     <None Include="data\test\vector.json" />
     <None Include="src\Json\JsonHandler.py" />
+    <None Include="src\Json\JsonParser.py" />
+    <None Include="src\Json\__init__.py" />
     <None Include="src\PythonAPI\Matrix.py" />
     <None Include="src\PythonAPI\Node.py" />
     <None Include="src\PythonAPI\Vector.py" />
+    <None Include="src\PythonAPI\__init__.py" />
     <None Include="src\UnitTest\JsonHandler_test.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

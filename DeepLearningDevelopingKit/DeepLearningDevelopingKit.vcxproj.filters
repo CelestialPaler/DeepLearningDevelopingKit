@@ -155,5 +155,14 @@
     <None Include="src\PythonAPI\Node.py">
       <Filter>src\PythonAPI</Filter>
     </None>
+    <None Include="src\Json\__init__.py">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="src\Json\JsonParser.py">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="src\PythonAPI\__init__.py">
+      <Filter>src\PythonAPI</Filter>
+    </None>
   </ItemGroup>
 </Project>
