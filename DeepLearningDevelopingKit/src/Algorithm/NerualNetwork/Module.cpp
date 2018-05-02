@@ -130,12 +130,12 @@ Vector<Nerual::ElemType> Nerual::BPNet::GetOutput(void)
 	return _outputlayer->GetOutput();
 }
 
-void Nerual::BPNet::SetTrainSet(NumaricSet * _trainset)
+void Nerual::BPNet::SetTrainSet(NumericSet * _trainset)
 {
 	this->_trainSet = _trainset;
 }
 
-void Nerual::BPNet::SetTestSet(NumaricSet * _testset)
+void Nerual::BPNet::SetTestSet(NumericSet * _testset)
 {
 	this->_testSet = _testset;
 }
@@ -147,7 +147,7 @@ void Nerual::BPNet::Train()
 	Timer<std::chrono::seconds> trainTimer;
 	int iterCount = 0;
 	double loss = 0;
-	NumaricSet::Sample sample;
+	NumericSet::Sample sample;
 	do
 	{
 		for (size_t i = 0; i < 4; i++)
@@ -172,7 +172,7 @@ void Nerual::BPNet::Train()
 
 void Nerual::BPNet::Test()
 {
-	NumaricSet::Sample test;
+	NumericSet::Sample test;
 	double avrError = 0;
 	std::cout << "Testing: " << std::endl;
 	for (size_t i = 0; i < 5; i++)

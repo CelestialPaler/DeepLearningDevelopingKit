@@ -70,6 +70,15 @@
     <Filter Include="data\exmaple">
       <UniqueIdentifier>{e698858f-7733-467e-9d32-e6fe246b38c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\DataManager\Dataset">
+      <UniqueIdentifier>{46e568e3-5509-49a4-b7e8-9b9340a16eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI\SaveLoad">
+      <UniqueIdentifier>{016fac86-9a04-46f2-b6fe-2881b5de5541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DataManager\Saver">
+      <UniqueIdentifier>{39f3abbf-feda-4562-a6d6-f98d62fc1207}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -118,6 +127,12 @@
     <None Include="data\test\test2.json">
       <Filter>data\test</Filter>
     </None>
+    <None Include="src\PythonAPI\SaveLoad\__init__.py">
+      <Filter>src\PythonAPI\SaveLoad</Filter>
+    </None>
+    <None Include="src\PythonAPI\SaveLoad\SaveLoad.py">
+      <Filter>src\PythonAPI\SaveLoad</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h">
@@ -137,9 +152,6 @@
     </ClInclude>
     <ClInclude Include="src\Algorithm\NerualNetwork\Node.h">
       <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DataManager\DataSet.h">
-      <Filter>src\DataManager</Filter>
     </ClInclude>
     <ClInclude Include="src\Util\Json\JsonHandler.h">
       <Filter>src\Util\Json</Filter>
@@ -183,6 +195,12 @@
     <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h">
       <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
     </ClInclude>
+    <ClInclude Include="src\DataManager\Dataset\DataSet.h">
+      <Filter>src\DataManager\Dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataManager\SaveLoad\Saver.h">
+      <Filter>src\DataManager\Saver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
@@ -193,9 +211,6 @@
     </ClCompile>
     <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp">
       <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DataManager\DataSet.cpp">
-      <Filter>src\DataManager</Filter>
     </ClCompile>
     <ClCompile Include="src\Util\Json\JsonHandler.cpp">
       <Filter>src\Util\Json</Filter>
@@ -226,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp">
       <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataManager\Dataset\DataSet.cpp">
+      <Filter>src\DataManager\Dataset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp">
+      <Filter>src\DataManager\Saver</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

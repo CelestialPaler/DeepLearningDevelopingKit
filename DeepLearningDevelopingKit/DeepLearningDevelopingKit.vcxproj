@@ -154,6 +154,8 @@
     <None Include="src\PythonAPI\Math\Node.py" />
     <None Include="src\PythonAPI\Math\Vector.py" />
     <None Include="src\PythonAPI\Math\__init__.py" />
+    <None Include="src\PythonAPI\SaveLoad\SaveLoad.py" />
+    <None Include="src\PythonAPI\SaveLoad\__init__.py" />
     <None Include="src\PythonAPI\Unittest\JsonHandler_test.py" />
     <None Include="src\PythonAPI\Unittest\__init__.py" />
     <None Include="src\PythonAPI\__init__.py" />
@@ -170,7 +172,8 @@
     <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Node.h" />
     <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h" />
-    <ClInclude Include="src\DataManager\DataSet.h" />
+    <ClInclude Include="src\DataManager\Dataset\DataSet.h" />
+    <ClInclude Include="src\DataManager\SaveLoad\Saver.h" />
     <ClInclude Include="src\MathLib\MathLib.h" />
     <ClInclude Include="src\MathLib\Matrix.h" />
     <ClInclude Include="src\MathLib\MatrixStatic.h" />
@@ -190,7 +193,8 @@
     <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp" />
     <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp" />
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />
-    <ClCompile Include="src\DataManager\DataSet.cpp" />
+    <ClCompile Include="src\DataManager\Dataset\DataSet.cpp" />
+    <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />

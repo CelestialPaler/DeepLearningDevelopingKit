@@ -11,7 +11,7 @@
 #include <iomanip>
 
 #include "..\..\MathLib\MathLib.h"
-#include "..\..\DataManager\DataSet.h"
+#include "..\..\DataManager\Dataset\DataSet.h"
 #include "..\..\Util\Timer\Timer.h"
 
 #include "Layer.h"
@@ -67,8 +67,8 @@ namespace Nerual
 		Vector<ElemType> GetOutput(void);
 
 	public:
-		void SetTrainSet(NumaricSet * _trainset);
-		void SetTestSet(NumaricSet * _testset);
+		void SetTrainSet(NumericSet * _trainset);
+		void SetTestSet(NumericSet * _testset);
 
 	public: // Train and Test
 		
@@ -111,8 +111,8 @@ namespace Nerual
 		std::vector<HiddenLayer *> _hiddenlayers;
 		OutputLayer * _outputlayer;
 
-		NumaricSet * _trainSet;
-		NumaricSet * _testSet;
+		NumericSet * _trainSet;
+		NumericSet * _testSet;
 
 	private:
 

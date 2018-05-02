@@ -5,23 +5,23 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define DataSetDebug
+#define DataSetDebug
 
 #ifdef DataSetDebug
 #include <iostream>
-// #include "..\DataSet\DataSet.h"
+#include <string>
+#include "..\DataManager\Dataset\DataSet.h"
 
 using namespace Data;
 
 int main()
 {
-	NumaricSet trainSet;
-	NumaricSample sample1 = {
-		Vector<double>(2, VectorType::Random), 
-		Vector<double>(2, VectorType::Random) 
-	};
+	std::string openPath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\exmaple\\XOR.json";
 
-	trainSet.AddToSet(sample1);
+	NumericSet trainSet;
+	trainSet.LoadFromJson(openPath);
+
+	trainSet.PrintToConsole();
 
 	system("pause");
 	return 0;

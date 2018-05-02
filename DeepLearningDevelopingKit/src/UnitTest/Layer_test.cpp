@@ -39,7 +39,7 @@ int main()
 	out.SetActivationFunction(ActivationFunction::Sigmoid);
 	out.SetLossFunction(LossFunction::MES);
 
-	NumaricSet TrainSet;
+	NumericSet TrainSet;
 	TrainSet.InitWithXOR();
 
 	unsigned iterCount = 0;
@@ -52,7 +52,7 @@ int main()
 		{
 			for (size_t i = 0; i < 4; i++)
 			{
-				NumaricSet::Sample sample = TrainSet.GetBatch();
+				NumericSet::Sample sample = TrainSet.GetBatch();
 
 				in.SetInput(sample.first);
 				in.ForwardPropagation();
@@ -90,14 +90,14 @@ int main()
 		} while (loss > 0.001);
 	}
 
-	NumaricSet TestSet;
+	NumericSet TestSet;
 	TestSet.InitWithXOR();
 
 	if (true)
 	{
 		for (size_t i = 0; i < 4; i++)
 		{
-			NumaricSet::Sample sample = TestSet.GetBatch();
+			NumericSet::Sample sample = TestSet.GetBatch();
 
 			hidden.SetInput(sample.first);
 			hidden.ForwardPropagation();

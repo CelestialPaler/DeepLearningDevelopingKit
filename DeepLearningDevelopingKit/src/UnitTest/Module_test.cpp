@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define ModuleDebug
+// #define ModuleDebug
 #include <ctime>
 
 #ifdef ModuleDebug
@@ -29,10 +29,10 @@ int main()
 
 	BPNet TestBP1(classicBPN);
 
-	NumaricSet TrainSet;
+	NumericSet TrainSet;
 	TrainSet.InitWithXOR();
 
-	NumaricSet TestSet;
+	NumericSet TestSet;
 	TestSet.InitWithXORTest();
 
 	TestBP1.SetTrainSet(&TrainSet);

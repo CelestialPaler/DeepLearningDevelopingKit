@@ -22,7 +22,6 @@
 /// Saving data of other classes to json file.
 class JsonHandler
 {
-	friend class VectorParser;
 public:
 
 	// Open a Json file.
@@ -34,7 +33,7 @@ public:
 	// Clear the buffer.
 	void ClearBuffer(void);
 
-private:
+public:
 
 	rapidjson::Document documentReadBuffer;
 	rapidjson::Document documentWriteBuffer;

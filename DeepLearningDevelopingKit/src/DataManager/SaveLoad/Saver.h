@@ -1,6 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 			  Json Parser 	                                                              */
+/*								        		 			    Data Saver                                                                  */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -8,20 +8,11 @@
 
 #include <iostream>
 #include <string>
-#include "..\..\MathLib\MathLib.h"
-#include "JsonHandler.h"
-#include "..\..\Algorithm\NerualNetwork\Node.h"
 
-using namespace Nerual;
+#include "..\..\Util\Json\JsonParser.h"
 
-class JsonParser {};
-
-class VectorParser : public JsonParser
+class Save
 {
 public:
-
-	static void Serialize(const std::string & _filePath, const std::vector<MathLib::Vector<double>> & _vectors);
-	static std::vector<MathLib::Vector<double>> Deserialize(const std::string & _filePath);
-
+	static void SaveNode(const std::string & _filePath, const InputNode & _node);
 };
-

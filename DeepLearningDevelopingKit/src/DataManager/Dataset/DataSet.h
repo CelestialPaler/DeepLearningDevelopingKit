@@ -7,7 +7,11 @@
 
 // Header files
 #include <vector>
-#include "..\MathLib\MathLib.h"
+#include <iomanip>
+#include <string>
+
+#include "..\..\MathLib\MathLib.h"
+#include "..\..\Util\Json\JsonHandler.h"
 
 // Namespaces
 using namespace MathLib;
@@ -16,25 +20,47 @@ namespace Data
 {
 	class DataSet
 	{
-		
+		virtual void LoadFromJson(const std::string & _filePath) = 0;
 	};
 
-	class NumaricSet : public DataSet
+	class NumericSet : public DataSet
 	{
 	public:
+
 		typedef std::pair<Vector<double>, Vector<double>> Sample;
+
 	public:
-		NumaricSet();
+
+		NumericSet();
+
 	public:
-		void InitWithXOR(void);
-		void InitWithXORTest(void);
+
+		void LoadFromJson(const std::string & _filePath);
 		void AddToSet(const Sample & _sample);
+
 	public:
-		Sample GetBatch(void);
-		Sample GetRandomSample(void);
-		Sample GetSample(const size_t _index);
+
+		void Serialize(const std::string & _filePath, const std::vector<Sample> & _samples) const;
+		void Deserialize(const std::string & _filePath);
+
+	public:
+
+		const Sample GetBatch(void) const;
+		const Sample GetRandomSample(void) const;
+		const Sample GetSample(const size_t _index) const;
+
+	public:
+
+		void PrintToConsole(void);
+
 	private:
-		std::vector<Sample> _data;
+
+		std::string name;
+		size_t sampleSize;
+		size_t inputSize;
+		size_t lableSize;
+
+		std::vector<Sample> _sample;
 	};
 
 	class ImageSet : public DataSet

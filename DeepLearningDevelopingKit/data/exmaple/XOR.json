@@ -1,0 +1,28 @@
+{
+    "name": "XOR Problem",
+	"class": "numeric_set",
+    "sample_size": 4,
+    "input_size": 2,
+    "lable_size": 1,
+	"datablock": [{
+			"class": "numeric_set::sample",
+			"input": [0, 0],
+			"lable": [0]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [0, 1],
+			"lable": [1]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [1, 0],
+			"lable": [1]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [1, 1],
+			"lable": [0]
+		}
+	]
+}
