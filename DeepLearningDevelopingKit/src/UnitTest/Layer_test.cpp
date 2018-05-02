@@ -86,7 +86,7 @@ int main()
 			out.LossSumClear();
 
 			iterCount++;
-			cout << "Iter :" << iterCount << "  Loss :" << loss << endl;
+			cout << "Iter :" << iterCount << "  Loss :" << loss << std::endl;
 		} while (loss > 0.001);
 	}
 
@@ -105,7 +105,7 @@ int main()
 			out.SetInput(hidden.GetOutput());
 			out.ForwardPropagation();
 
-			cout << "Input: " << sample.first(0) << sample.first(1) << "  Expectation: " << sample.second(0) << "  Output: " << out.GetOutput()(0) << endl;
+			cout << "Input: " << sample.first(0) << sample.first(1) << "  Expectation: " << sample.second(0) << "  Output: " << out.GetOutput()(0) << std::endl;
 		}
 	}
 

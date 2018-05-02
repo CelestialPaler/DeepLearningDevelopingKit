@@ -6,7 +6,4 @@
 /***************************************************************************************************/
 #pragma once
 
-#include "ActivationFunction.h"
-#include "LossFunction.h"
-
 #include "RandomEngine.h"

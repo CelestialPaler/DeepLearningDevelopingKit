@@ -11,9 +11,6 @@
 #include <iostream>
 #include <vector>
 
-// Namespaces
-using namespace std;
-
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
@@ -72,7 +69,7 @@ namespace MathLib
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream& operator<<(ostream& _outstream, Matrix<T>& _mat)
+		friend std::ostream& operator<<(std::ostream& _outstream, Matrix<T>& _mat)
 		{
 			_outstream << typeid(_mat).name() << endl;
 			for (size_t i = 0; i < _mat.m; i++)
@@ -236,7 +233,7 @@ namespace MathLib
 		}
 
 	private:
-		vector<vector<T>> _data;
+		std::vector<std::vector<T>> _data;
 		size_t m, n;
 	};
 
@@ -245,7 +242,7 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < _m; i++)
 		{
-			vector<T> tempVec = *new vector<T>;
+			std::vector<T> tempVec = *new std::vector<T>;
 			for (size_t j = 0; j < _n; j++)
 			{
 				T tempElem = *new T;

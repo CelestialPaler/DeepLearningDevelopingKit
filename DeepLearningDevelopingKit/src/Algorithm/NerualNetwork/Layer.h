@@ -9,12 +9,9 @@
 // Header files
 #include <vector>
 #include "Node.h"
-#include "..\MathLib\MathLib.h"
-#include "..\MathLib\LossFunction.h"
-#include "..\MathLib\ActivationFunction.h"
-
-// Name space
-using namespace std;
+#include "ActivationFunction.h"
+#include "LossFunction.h"
+#include "..\..\MathLib\MathLib.h"
 
 /***************************************************************************************************/
 // Namespace : Nerual
@@ -85,7 +82,7 @@ namespace Nerual
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream & operator<<(ostream & _outstream, InputLayer &  _layer);
+		friend std::ostream & operator<<(std::ostream & _outstream, InputLayer &  _layer);
 
 	public: // Setters
 
@@ -121,7 +118,7 @@ namespace Nerual
 
 	private:
 
-		vector<InputNode> _nodes;
+		std::vector<InputNode> _nodes;
 	};
 
 	/***************************************************************************************************/
@@ -171,7 +168,7 @@ namespace Nerual
 		void BatchDeltaSumClear(void) override;
 
 	private:
-		vector<HiddenNode> _nodes;
+		std::vector<HiddenNode> _nodes;
 	};
 
 	/***************************************************************************************************/
@@ -230,6 +227,6 @@ namespace Nerual
 
 	private:
 
-		vector<OutputNode> _nodes;
+		std::vector<OutputNode> _nodes;
 	};
 }

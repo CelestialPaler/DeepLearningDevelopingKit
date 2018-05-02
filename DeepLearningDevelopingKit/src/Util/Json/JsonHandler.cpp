@@ -7,9 +7,9 @@
 
 #include "JsonHandler.h"
 
-void JsonHandler::OpenJson(const string & _filePath)
+void JsonHandler::OpenJson(const std::string & _filePath)
 {
-	ifstream infile;
+	std::ifstream infile;
 	infile.open(_filePath);
 	if (!infile.is_open()) exit(0);
 	std::string dataTemp;	
@@ -20,9 +20,9 @@ void JsonHandler::OpenJson(const string & _filePath)
 	documentReadBuffer.Parse(jsonReadBuffer.c_str());
 }
 
-void JsonHandler::SaveJson(const string & _filePath)
+void JsonHandler::SaveJson(const std::string & _filePath)
 {
-	ofstream outfile;
+	std::ofstream outfile;
 	outfile.open(_filePath);
 	if(!outfile.is_open()) exit(0);
 	outfile << stringBuffer.GetString();

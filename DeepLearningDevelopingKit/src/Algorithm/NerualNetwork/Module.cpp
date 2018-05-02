@@ -144,7 +144,7 @@ void Nerual::BPNet::SetTestSet(NumaricSet * _testset)
 
 void Nerual::BPNet::Train()
 {
-	Timer<chrono::seconds> trainTimer;
+	Timer<std::chrono::seconds> trainTimer;
 	int iterCount = 0;
 	double loss = 0;
 	NumaricSet::Sample sample;
@@ -164,9 +164,9 @@ void Nerual::BPNet::Train()
 		BatchDeltaSumClear();
 		loss = _outputlayer->GetLoss();
 		_outputlayer->LossSumClear();
-		cout << "Iiteration :" << setw(4) << setfill('0') << iterCount << " | "
-			<< "Time :" << fixed << setprecision(3) << trainTimer.GetTime() << " sec"<< " | "
-			<< "Loss :" << fixed << setprecision(10) << loss << endl;
+		std::cout << "Iiteration :" << std::setw(4) << std::setfill('0') << iterCount << " | "
+			<< "Time :" << std::fixed << std::setprecision(3) << trainTimer.GetTime() << " sec"<< " | "
+			<< "Loss :" << std::fixed << std::setprecision(10) << loss << std::endl;
 	} while (loss > 0.001);
 }
 
@@ -174,21 +174,21 @@ void Nerual::BPNet::Test()
 {
 	NumaricSet::Sample test;
 	double avrError = 0;
-	cout << "Testing: " << endl;
+	std::cout << "Testing: " << std::endl;
 	for (size_t i = 0; i < 5; i++)
 	{
 		test = _testSet->GetSample(i);
 		ForwardPropagation(test.first);
-		cout << "Input :" << fixed << setprecision(3) << test.first(0) << "  " << test.first(1) << " | "
-			<< "Expectation :" << fixed << setprecision(3) << test.second(0) << " | "
-			<< "Output :" << fixed << setprecision(3) << _outputlayer->GetOutput()(0) << " | "
-			<< "Error :" << fixed << setprecision(3) << _outputlayer->GetOutput()(0) - test.second(0) << endl;
+		std::cout << "Input :" << std::fixed << std::setprecision(3) << test.first(0) << "  " << test.first(1) << " | "
+			<< "Expectation :" << std::fixed << std::setprecision(3) << test.second(0) << " | "
+			<< "Output :" << std::fixed << std::setprecision(3) << _outputlayer->GetOutput()(0) << " | "
+			<< "Error :" << std::fixed << std::setprecision(3) << _outputlayer->GetOutput()(0) - test.second(0) << std::endl;
 		avrError += _outputlayer->GetOutput()(0) - test.second(0);
 		avrError /= 5;
 	}
-	cout << endl << "Testing: " << endl;
-	cout << fixed << setprecision(10) << "Average Error :" << avrError << endl
-		<< fixed << setprecision(3) << "Error Rate :" << abs(avrError * 100) << "%" << endl;
+	std::cout << std::endl << "Testing: " << std::endl;
+	std::cout << std::fixed << std::setprecision(10) << "Average Error :" << avrError << std::endl
+		<< std::fixed << std::setprecision(3) << "Error Rate :" << abs(avrError * 100) << "%" << std::endl;
 }
 
 

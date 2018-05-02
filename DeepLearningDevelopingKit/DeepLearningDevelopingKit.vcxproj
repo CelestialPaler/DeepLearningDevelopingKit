@@ -161,22 +161,35 @@
     <None Include="src\Visualizer\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Algorithm\LinearRegression\LinearRegression.h" />
+    <ClInclude Include="src\Algorithm\LogisticRegression\LogisticRegression.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Module.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Node.h" />
+    <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h" />
     <ClInclude Include="src\DataManager\DataSet.h" />
+    <ClInclude Include="src\MathLib\MathLib.h" />
+    <ClInclude Include="src\MathLib\Matrix.h" />
+    <ClInclude Include="src\MathLib\MatrixStatic.h" />
+    <ClInclude Include="src\MathLib\RandomEngine.h" />
+    <ClInclude Include="src\MathLib\ToolFunction.h" />
+    <ClInclude Include="src\MathLib\Vector.h" />
+    <ClInclude Include="src\MathLib\VectorStatic.h" />
     <ClInclude Include="src\Util\Json\JsonHandler.h" />
     <ClInclude Include="src\Util\Json\JsonParser.h" />
     <ClInclude Include="src\Util\LogManager\Log.h" />
     <ClInclude Include="src\Util\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Algorithm\LinearRegression\LinearRegression.cpp" />
+    <ClCompile Include="src\Algorithm\LogisticRegression\LogisticRegression.cpp" />
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp" />
     <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp" />
     <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp" />
+    <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />
     <ClCompile Include="src\DataManager\DataSet.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />

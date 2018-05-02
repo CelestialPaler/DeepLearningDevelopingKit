@@ -7,7 +7,7 @@
 #pragma once
 
 // Header files
-#include "..\MathLib\MathLib.h"
+#include "..\..\MathLib\MathLib.h"
 
 // Namespace
 #ifdef USING_STATIC_MATHLIB
@@ -46,7 +46,7 @@ namespace Nerual
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream & operator<<(ostream & _outstream, InputNode & _node);
+		friend std::ostream & operator<<(std::ostream & _outstream, InputNode & _node);
 
 	private: 
 
@@ -72,7 +72,7 @@ namespace Nerual
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream & operator<<(ostream & _outstream, HiddenNode & _node);
+		friend std::ostream & operator<<(std::ostream & _outstream, HiddenNode & _node);
 
 	private:
 
@@ -109,7 +109,7 @@ namespace Nerual
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream & operator<<(ostream & _outstream, OutputNode & _node);
+		friend std::ostream & operator<<(std::ostream & _outstream, OutputNode & _node);
 
 	private:
 

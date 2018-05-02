@@ -9,16 +9,12 @@
 #define USING_STANDARD_MATHLIB
 
 #ifdef USING_STATIC_MATHLIB
-#include "..\MathLib\MatrixStatic.h"
-#include "..\MathLib\VectorStatic.h"
+#include "MatrixStatic.h"
+#include "VectorStatic.h"
 #endif // USING_STATIC_MATHLIB
 
 #ifdef USING_STANDARD_MATHLIB
-#include "..\MathLib\Matrix.h"
-#include "..\MathLib\Vector.h"
+#include "Matrix.h"
+#include "Vector.h"
+#include "RandomEngine.h"
 #endif // USING_DYNAMIC_MATHLIB
-
-#include "..\MathLib\ToolFunction.h"
-#include "..\MathLib\ActivationFunction.h"
-// #include "..\Util\Log.h"
-

@@ -79,10 +79,10 @@ int main()
 
 	input = input * 2;
 
-	cout << input << weight << bias << endl;
+	cout << input << weight << bias << std::endl;
 
 	ans = (input * weight).Sum() + bias;
-	cout << ans << endl;
+	cout << ans << std::endl;
 
 	Vector<double> test(5, VectorType::Random);
 	cout << test<< test.Sum();

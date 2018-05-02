@@ -153,6 +153,36 @@
     <ClInclude Include="src\Util\LogManager\Log.h">
       <Filter>src\Util\LogManager</Filter>
     </ClInclude>
+    <ClInclude Include="src\MathLib\MathLib.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Matrix.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\MatrixStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\RandomEngine.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\ToolFunction.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Vector.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\VectorStatic.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\LinearRegression\LinearRegression.h">
+      <Filter>src\Algorithm\LinearRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\LogisticRegression\LogisticRegression.h">
+      <Filter>src\Algorithm\LogisticRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h">
+      <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
@@ -187,6 +217,15 @@
     </ClCompile>
     <ClCompile Include="src\UnitTest\Vector_test.cpp">
       <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\LinearRegression\LinearRegression.cpp">
+      <Filter>src\Algorithm\LinearRegression</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\LogisticRegression\LogisticRegression.cpp">
+      <Filter>src\Algorithm\LogisticRegression</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp">
+      <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

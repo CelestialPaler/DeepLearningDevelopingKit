@@ -14,9 +14,6 @@
 #include <numeric>
 #include <iterator>
 
-// Namespaces
-using namespace std;
-
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
@@ -48,7 +45,7 @@ namespace MathLib
 		Vector(const size_t _n, const VectorType _type = VectorType::Zero);
 		// Constructor (Using given Data)
 		/// Using data from a given pointer, which is pointed to an array, to initialize the Vector.
-		Vector(const initializer_list<int> & _list);
+		Vector(const std::initializer_list<int> & _list);
 
 	public: // Initializing
 
@@ -98,7 +95,7 @@ namespace MathLib
 
 		// "<<" operator
 		/// Used for streaming in format.
-		friend ostream & operator<<(ostream& _outstream, Vector<T>& _vec)
+		friend std::ostream & operator<<(std::ostream& _outstream, Vector<T>& _vec)
 		{
 			_outstream << typeid(_vec).name() << " ";
 			_outstream << "|";
@@ -107,7 +104,7 @@ namespace MathLib
 				_outstream << _vec(j);
 				if (j != _vec.n - 1)	_outstream << " ";
 			}
-			_outstream << "|" << endl;
+			_outstream << "|" << std::endl;
 			return _outstream;
 		}
 
@@ -153,7 +150,7 @@ namespace MathLib
 			Vector<T> & self = *this;
 			if (self.n != _other.n)
 			{
-				cerr << "ERROR : Invalid Vector Self-Addtion!" << endl;
+				std::cerr << "ERROR : Invalid Vector Self-Addtion!" << std::endl;
 			}
 			for (size_t j = 0; j < self.n; j++)
 				self(j) = self(j) + _other(j);
@@ -223,7 +220,7 @@ namespace MathLib
 			Vector<T> temp(n);
 			if (self.n != _other.n)
 			{
-				cerr << "ERROR : Invalid Vector Multiplication!" << endl;
+				std::cerr << "ERROR : Invalid Vector Multiplication!" << std::endl;
 				return temp;
 			}
 			for (size_t j = 0; j < self.n; j++)
@@ -242,7 +239,7 @@ namespace MathLib
 		}
 
 	private:
-		vector<T> _data;
+		std::vector<T> _data;
 		size_t n;
 	};
 
@@ -259,7 +256,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Vector<T>::Vector(const initializer_list<int> & _list)
+	inline Vector<T>::Vector(const std::initializer_list<int> & _list)
 	{
 		for (auto iter1 = _list.cbegin(); iter1 != _list.cend(); ++iter1)
 		{

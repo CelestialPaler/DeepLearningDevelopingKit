@@ -40,10 +40,10 @@ Nerual::InputLayer::InputLayer(const size_t _n, const size_t _m)
 
 // "<<" operator
 /// Used for streaming in format.
-ostream & Nerual::operator<<(ostream & _outstream, InputLayer & _layer)
+std::ostream & Nerual::operator<<(std::ostream & _outstream, InputLayer & _layer)
 {
-	_outstream << typeid(_layer).name() << endl;
-	_outstream << "	Node Num : " << _layer.m << endl;
+	_outstream << typeid(_layer).name() << std::endl;
+	_outstream << "	Node Num : " << _layer.m << std::endl;
 	return _outstream;
 }
 

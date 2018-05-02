@@ -5,11 +5,11 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define ModuleDebug
+#define ModuleDebug
 #include <ctime>
 
 #ifdef ModuleDebug
-#include "..\Nerual\NerualLib.h"
+#include "..\Algorithm\NerualNetwork\Module.h"
 
 using namespace Nerual;
 

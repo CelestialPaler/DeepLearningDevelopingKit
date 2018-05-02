@@ -8,8 +8,8 @@
 
 #include <iostream>
 #include <string>
-#include "..\MathLib\MathLib.h"
-#include "..\Json\JsonHandler.h"
+#include "..\..\MathLib\MathLib.h"
+#include "JsonHandler.h"
 
 class JsonParser {};
 

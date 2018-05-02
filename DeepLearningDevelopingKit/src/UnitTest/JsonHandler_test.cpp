@@ -5,15 +5,15 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define JsonHandlerDebug
+// #define JsonHandlerDebug
 
 #ifdef JsonHandlerDebug
 #include <iostream>
 #include <string>
 #include "..\MathLib\MathLib.h"
-#include "..\Json\JsonHandler.h"
-#include "..\Json\JsonParser.h"
-#include "..\Util\Timer.h"
+#include "..\Util\Json\JsonHandler.h"
+#include "..\Util\Json\JsonParser.h"
+#include "..\Util\Timer\Timer.h"
 
 using namespace std;
 using namespace MathLib;
@@ -26,7 +26,7 @@ int main()
 	vector<Vector<double>> tempReadVecs = debugParser.Deserialize(openPath);
 
 	for (auto & vec : tempReadVecs)
-		cout << vec << endl;
+		cout << vec << std::endl;
 
 	Vector<double> vec1(5, MathLib::VectorType::Random);
 	Vector<double> vec2(3, MathLib::VectorType::Random);
@@ -37,7 +37,7 @@ int main()
 
 	string savePath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test2.json";
 	debugParser.Serialize(savePath, tempWriteVecs);
-	cout << "Time consume : " << myTimer.GetTime() << " ms " << endl;
+	cout << "Time consume : " << myTimer.GetTime() << " ms " << std::endl;
 	system("pause");
 	return 0;
 }

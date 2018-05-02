@@ -22,10 +22,10 @@ Nerual::InputNode::InputNode(void)
 
 // "<<" operator
 /// Used for streaming in format.
-ostream & Nerual::operator<<(ostream & _outstream, InputNode & _node)
+std::ostream & Nerual::operator<<(std::ostream & _outstream, InputNode & _node)
 {
-	_outstream << typeid(_node).name() << endl;
-	_outstream << "	value: " << _node.value << endl;
+	_outstream << typeid(_node).name() << std::endl;
+	_outstream << "	value: " << _node.value << std::endl;
 	return _outstream;
 }
 
@@ -53,13 +53,13 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 
 // "<<" operator
 /// Used for streaming in format.
-ostream & Nerual::operator<<(ostream & _outstream, HiddenNode & _node)
+std::ostream & Nerual::operator<<(std::ostream & _outstream, HiddenNode & _node)
 {
-	_outstream << typeid(_node).name() << endl;
-	_outstream << "	value: " << _node.value << endl;
-	_outstream << "	delta: " << _node.valueDelta << endl;
-	_outstream << "	bias: " << _node.bias << endl;
-	_outstream << "	biasDelta: " << _node.biasDelta << endl;
+	_outstream << typeid(_node).name() << std::endl;
+	_outstream << "	value: " << _node.value << std::endl;
+	_outstream << "	delta: " << _node.valueDelta << std::endl;
+	_outstream << "	bias: " << _node.bias << std::endl;
+	_outstream << "	biasDelta: " << _node.biasDelta << std::endl;
 	_outstream << "	tempInput: " << _node.tempInput;
 	_outstream << "	weight: " << _node.weight;
 	_outstream << "	weightDelta: " << _node.weightDelta;
@@ -91,15 +91,15 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 
 // "<<" operator
 /// Used for streaming in format.
-ostream & Nerual::operator<<(ostream & _outstream, OutputNode & _node)
+std::ostream & Nerual::operator<<(std::ostream & _outstream, OutputNode & _node)
 {
-	_outstream << typeid(_node).name() << endl;
-	_outstream << "	value: " << _node.value << endl;
-	_outstream << "	valueDelta: " << _node.valueDelta << endl;
-	_outstream << "	loss: " << _node.loss << endl;
-	_outstream << "	bias: " << _node.bias << endl;
-	_outstream << "	biasDelta: " << _node.biasDelta << endl;
-	_outstream << "	expectation: " << _node.expectation << endl;
+	_outstream << typeid(_node).name() << std::endl;
+	_outstream << "	value: " << _node.value << std::endl;
+	_outstream << "	valueDelta: " << _node.valueDelta << std::endl;
+	_outstream << "	loss: " << _node.loss << std::endl;
+	_outstream << "	bias: " << _node.bias << std::endl;
+	_outstream << "	biasDelta: " << _node.biasDelta << std::endl;
+	_outstream << "	expectation: " << _node.expectation << std::endl;
 	_outstream << "	tempInput: " << _node.tempInput;
 	_outstream << "	weight: " << _node.weight;
 	_outstream << "	weightDelta: " << _node.weightDelta;

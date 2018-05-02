@@ -206,8 +206,8 @@ namespace MathLibStatic
 			cout << "|";
 			for (size_t j = 0; j < N; j++)
 				cout << _data[i][j] << " ";
-			cout << "|" << endl;
+			cout << "|" << std::endl;
 		}
-		cout << endl;
+		cout << std::endl;
 	}
 }

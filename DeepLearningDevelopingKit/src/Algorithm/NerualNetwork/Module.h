@@ -8,15 +8,16 @@
 
 // Header files
 #include <vector>
-#include "..\MathLib\MathLib.h"
-#include "Layer.h"
-#include "Node.h"
-#include "..\DataSet\DataSet.h"
-#include "..\Util\Timer.h"
 #include <iomanip>
 
+#include "..\..\MathLib\MathLib.h"
+#include "..\..\DataManager\DataSet.h"
+#include "..\..\Util\Timer\Timer.h"
+
+#include "Layer.h"
+#include "Node.h"
+
 // Namespaces
-using namespace std;
 using namespace MathLib;
 using namespace Data;
 using namespace Util;
@@ -107,7 +108,7 @@ namespace Nerual
 	private:
 
 		InputLayer * _inputlayer;
-		vector<HiddenLayer *> _hiddenlayers;
+		std::vector<HiddenLayer *> _hiddenlayers;
 		OutputLayer * _outputlayer;
 
 		NumaricSet * _trainSet;

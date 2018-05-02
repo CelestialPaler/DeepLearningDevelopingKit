@@ -10,7 +10,6 @@
 #include "..\MathLib\MathLib.h"
 
 // Namespaces
-using namespace std;
 using namespace MathLib;
 
 namespace Data
@@ -23,7 +22,7 @@ namespace Data
 	class NumaricSet : public DataSet
 	{
 	public:
-		typedef pair<Vector<double>, Vector<double>> Sample;
+		typedef std::pair<Vector<double>, Vector<double>> Sample;
 	public:
 		NumaricSet();
 	public:
@@ -35,7 +34,7 @@ namespace Data
 		Sample GetRandomSample(void);
 		Sample GetSample(const size_t _index);
 	private:
-		vector<Sample> _data;
+		std::vector<Sample> _data;
 	};
 
 	class ImageSet : public DataSet

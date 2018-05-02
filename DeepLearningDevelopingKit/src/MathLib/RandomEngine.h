@@ -9,7 +9,6 @@
 #include <iostream>
 #include <random>
 #include <chrono>
-#include "..\Nerual\Node.h"
 
 template<class T>
 class RandomEngine
@@ -35,6 +34,8 @@ private:
 inline double Random(double _lowerLimit = -1, double _upperLimit = 1) {
 	if (double width = (_upperLimit - _lowerLimit) > 0)
 		return width * ((double)rand() / RAND_MAX + (_upperLimit + _lowerLimit) / 2 - 0.5);
+	else
+		return 0.f;
 }
 
 // Generate a random value within (-1/sqrt(m),1/sqrt(m))
