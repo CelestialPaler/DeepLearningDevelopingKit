@@ -20,7 +20,7 @@ void Data::NumericSet::LoadFromJson(const std::string & _filePath)
 
 void Data::NumericSet::AddToSet(const Sample & _sample)
 {
-	_sample.push_back(_sample);
+	_samples.push_back(_sample);
 }
 
 void Data::NumericSet::Serialize(const std::string & _filePath, const std::vector<Sample>& _samples) const
@@ -55,7 +55,7 @@ void Data::NumericSet::Deserialize(const std::string & _filePath)
 			lable(i) = data2[i].GetDouble();
 
 		Sample tempSample = { input, lable };
-		_sample.push_back(tempSample);
+		_samples.push_back(tempSample);
 	}
 }
 
@@ -63,32 +63,33 @@ const Data::NumericSet::Sample Data::NumericSet::GetBatch(void) const
 {
 	static int x = 0;
 	x++;
-	if (x==_sample.size())
+	if (x==_samples.size())
 		x = 0;
-	return _sample.at(x);
+	return _samples.at(x);
 }
 
 const Data::NumericSet::Sample Data::NumericSet::GetRandomSample(void) const
 {
-	return _sample.at(floor((Random() + 1) * 3 - 1));
+	return _samples.at(floor((Random() + 1) * 3 - 1));
 }
 
 const Data::NumericSet::Sample Data::NumericSet::GetSample(const size_t _index) const
 {
-	return _sample.at(_index);
+	return _samples.at(_index);
 }
 
 void Data::NumericSet::PrintToConsole(void)
 {
+	std::cout << "Dataset Name: " << name << std::endl;
 	std::cout << std::fixed << std::setprecision(5) << std::endl;
 	for (size_t i = 0; i < sampleSize; i++)
 	{
 		std::cout << "No. "<< std::setw(4) << std::setfill('0') << i << "  Input: [";
 		for (size_t j = 0; j < inputSize; j++)
-			std::cout << _sample[i].first(j) << " ";
+			std::cout << _samples[i].first(j) << " ";
 		std::cout << "]  |  Lable: [";
 		for (size_t j = 0; j < lableSize; j++)
-			std::cout << _sample[i].second(j) << " ";
+			std::cout << _samples[i].second(j) << " ";
 		std::cout << "]" << std::endl;
 	}
 }

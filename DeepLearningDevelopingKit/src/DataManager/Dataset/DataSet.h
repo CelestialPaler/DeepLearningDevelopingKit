@@ -60,7 +60,7 @@ namespace Data
 		size_t inputSize;
 		size_t lableSize;
 
-		std::vector<Sample> _sample;
+		std::vector<Sample> _samples;
 	};
 
 	class ImageSet : public DataSet
