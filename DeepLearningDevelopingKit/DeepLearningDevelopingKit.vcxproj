@@ -143,52 +143,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\DataSet\DataSet.h" />
-    <ClInclude Include="src\Json\JsonHandler.h" />
-    <ClInclude Include="src\Json\JsonParser.h" />
-    <ClInclude Include="src\MathLib\ActivationFunction.h" />
-    <ClInclude Include="src\MathLib\LossFunction.h" />
-    <ClInclude Include="src\MathLib\MathLib.h" />
-    <ClInclude Include="src\MathLib\Matrix.h" />
-    <ClInclude Include="src\MathLib\MatrixStatic.h" />
-    <ClInclude Include="src\MathLib\NodeVector.h" />
-    <ClInclude Include="src\MathLib\RandomEngine.h" />
-    <ClInclude Include="src\MathLib\ToolFunction.h" />
-    <ClInclude Include="src\MathLib\Vector.h" />
-    <ClInclude Include="src\MathLib\VectorStatic.h" />
-    <ClInclude Include="src\Nerual\Layer.h" />
-    <ClInclude Include="src\Nerual\Module.h" />
-    <ClInclude Include="src\Nerual\NerualLib.h" />
-    <ClInclude Include="src\Nerual\Node.h" />
-    <ClInclude Include="src\Util\Log.h" />
-    <ClInclude Include="src\Util\Port.h" />
-    <ClInclude Include="src\Util\Timer.h" />
+    <None Include="..\README.md" />
+    <None Include="data\exmaple\vector.json" />
+    <None Include="data\test\test.json" />
+    <None Include="data\test\test2.json" />
+    <None Include="src\PythonAPI\Json\JsonHandler.py" />
+    <None Include="src\PythonAPI\Json\JsonParser.py" />
+    <None Include="src\PythonAPI\Json\__init__.py" />
+    <None Include="src\PythonAPI\Math\Matrix.py" />
+    <None Include="src\PythonAPI\Math\Node.py" />
+    <None Include="src\PythonAPI\Math\Vector.py" />
+    <None Include="src\PythonAPI\Math\__init__.py" />
+    <None Include="src\PythonAPI\Unittest\JsonHandler_test.py" />
+    <None Include="src\PythonAPI\Unittest\__init__.py" />
+    <None Include="src\PythonAPI\__init__.py" />
+    <None Include="src\Visualizer\VectorPlotTest.py" />
+    <None Include="src\Visualizer\__init__.py" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DataSet\DataSet.cpp" />
-    <ClCompile Include="src\Json\JsonHandler.cpp" />
-    <ClCompile Include="src\Json\JsonParser.cpp" />
-    <ClCompile Include="src\Nerual\Layer.cpp" />
-    <ClCompile Include="src\Nerual\Module.cpp" />
-    <ClCompile Include="src\Nerual\Node.cpp" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\Module.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\Node.h" />
+    <ClInclude Include="src\DataManager\DataSet.h" />
+    <ClInclude Include="src\Util\Json\JsonHandler.h" />
+    <ClInclude Include="src\Util\Json\JsonParser.h" />
+    <ClInclude Include="src\Util\LogManager\Log.h" />
+    <ClInclude Include="src\Util\Timer\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp" />
+    <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp" />
+    <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp" />
+    <ClCompile Include="src\DataManager\DataSet.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
-    <None Include="data\test\test.json" />
-    <None Include="data\test\vector.json" />
-    <None Include="src\Json\JsonHandler.py" />
-    <None Include="src\Json\JsonParser.py" />
-    <None Include="src\Json\__init__.py" />
-    <None Include="src\PythonAPI\Matrix.py" />
-    <None Include="src\PythonAPI\Node.py" />
-    <None Include="src\PythonAPI\Vector.py" />
-    <None Include="src\PythonAPI\__init__.py" />
-    <None Include="src\UnitTest\JsonHandler_test.py" />
+    <ClCompile Include="src\Util\Json\JsonHandler.cpp" />
+    <ClCompile Include="src\Util\Json\JsonParser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,100 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="src\DataSet\DataSet.h">
-      <Filter>src\DataSet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\ActivationFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\LossFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\MathLib.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\Matrix.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\MatrixStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\NodeVector.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\ToolFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\Vector.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\VectorStatic.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Nerual\Layer.h">
-      <Filter>src\Nerual</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Nerual\Module.h">
-      <Filter>src\Nerual</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Nerual\NerualLib.h">
-      <Filter>src\Nerual</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Nerual\Node.h">
-      <Filter>src\Nerual</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Json\JsonHandler.h">
-      <Filter>src\Json</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Util\Log.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Util\Timer.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Util\Port.h">
-      <Filter>src\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\RandomEngine.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Json\JsonParser.h">
-      <Filter>src\Json</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{74312593-2d6c-4f01-b797-d1e37fe6664f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\MathLib">
-      <UniqueIdentifier>{b5504acd-7a39-484a-854c-c85bb3f86f44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Nerual">
-      <UniqueIdentifier>{63d5b91e-3c6b-48b4-85bd-f77e19d7af85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Util">
-      <UniqueIdentifier>{d25435b0-b066-473f-95c2-52faf7c28699}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\DataSet">
-      <UniqueIdentifier>{d5c3cb57-64ad-46f4-bfec-bdbc42a71b33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Json">
-      <UniqueIdentifier>{a25bc779-a17c-4b41-adbc-5d03a805df6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Visualization">
-      <UniqueIdentifier>{0cf8c7d3-0179-40fe-b972-2c4fe339c78a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\UintTest">
-      <UniqueIdentifier>{76d18959-f9a6-4d67-87a3-8da9b2eadf83}</UniqueIdentifier>
-    </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{c5e04f29-1c3d-4027-bc55-e70dadf9010e}</UniqueIdentifier>
     </Filter>
     <Filter Include="data\test">
       <UniqueIdentifier>{a6e3d778-9666-43bd-b4d9-e53a517beedb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\PythonAPI">
-      <UniqueIdentifier>{469a3b11-cc80-4539-8c54-fb1bd64f8fc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="external">
       <UniqueIdentifier>{8917f690-5a89-4d46-9091-33ac0077ebf1}</UniqueIdentifier>
@@ -102,73 +13,180 @@
     <Filter Include="external\RapidJson">
       <UniqueIdentifier>{572e125d-b8d4-4ee4-88e1-bf8d6eeefc2a}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\DataSet\DataSet.cpp">
-      <Filter>src\DataSet</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Nerual\Layer.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Nerual\Module.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Nerual\Node.cpp">
-      <Filter>src\Nerual</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Json\JsonHandler.cpp">
-      <Filter>src\Json</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitTest\DataSet_test.cpp">
-      <Filter>src\UintTest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitTest\Layer_test.cpp">
-      <Filter>src\UintTest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitTest\Module_test.cpp">
-      <Filter>src\UintTest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitTest\Vector_test.cpp">
-      <Filter>src\UintTest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UnitTest\JsonHandler_test.cpp">
-      <Filter>src\UintTest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Json\JsonParser.cpp">
-      <Filter>src\Json</Filter>
-    </ClCompile>
+    <Filter Include="src">
+      <UniqueIdentifier>{7e234ec0-0964-4f67-97fc-91cc9f104de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm">
+      <UniqueIdentifier>{6f36316d-1884-4e74-917b-952eab77be94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\LinearRegression">
+      <UniqueIdentifier>{7c22934c-07b6-4aad-8451-a9a32da465c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\LogisticRegression">
+      <UniqueIdentifier>{d7fb88eb-b3e4-414b-a7dd-ba624b117ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\SupportedVectorMachine %28SVM%29">
+      <UniqueIdentifier>{5a4d7be5-acfb-4dce-9665-f755be52f9d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\NerualNetwork %28ANN%29">
+      <UniqueIdentifier>{2a409afc-1ce6-4a93-9058-450c1685adef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DataManager">
+      <UniqueIdentifier>{fcd12a39-6f7c-4ac2-9243-49ace177cbed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MathLib">
+      <UniqueIdentifier>{2559dd14-dc93-4590-bd0e-034265cd1068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI">
+      <UniqueIdentifier>{9eaf9cb0-fd6c-445b-a6f6-eb49f425f2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UnitTest">
+      <UniqueIdentifier>{71b4e290-eac6-42cf-b509-40f701625bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Visualizer">
+      <UniqueIdentifier>{06474452-7810-48a2-ade4-92043dd3d469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util">
+      <UniqueIdentifier>{c2d77568-f3db-4b58-804e-4b37fe225559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util\Json">
+      <UniqueIdentifier>{517366ca-94d3-4274-ade7-cd0a1bc0925b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util\Timer">
+      <UniqueIdentifier>{747171e8-2ee5-4d45-aea1-515f15e8343b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util\LogManager">
+      <UniqueIdentifier>{83268b83-ab68-4aa1-a0f0-1d8d990265cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI\Json">
+      <UniqueIdentifier>{8ecb1c15-ef19-41dc-b8d9-29d024d89eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI\Math">
+      <UniqueIdentifier>{402ebc35-c4bb-4371-81a6-5e56c0380a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PythonAPI\Unittest">
+      <UniqueIdentifier>{c57d6673-b137-4b17-a7b2-d1a433a81fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\exmaple">
+      <UniqueIdentifier>{e698858f-7733-467e-9d32-e6fe246b38c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="data\test\test.json">
       <Filter>data\test</Filter>
     </None>
-    <None Include="src\Json\JsonHandler.py">
-      <Filter>src\Json</Filter>
+    <None Include="src\PythonAPI\Json\__init__.py">
+      <Filter>src\PythonAPI\Json</Filter>
     </None>
-    <None Include="src\PythonAPI\Vector.py">
-      <Filter>src\PythonAPI</Filter>
+    <None Include="src\PythonAPI\Json\JsonHandler.py">
+      <Filter>src\PythonAPI\Json</Filter>
     </None>
-    <None Include="src\UnitTest\JsonHandler_test.py">
-      <Filter>src\UintTest</Filter>
+    <None Include="src\PythonAPI\Json\JsonParser.py">
+      <Filter>src\PythonAPI\Json</Filter>
     </None>
-    <None Include="data\test\vector.json">
-      <Filter>data\test</Filter>
+    <None Include="src\PythonAPI\Math\__init__.py">
+      <Filter>src\PythonAPI\Math</Filter>
     </None>
-    <None Include="src\PythonAPI\Matrix.py">
-      <Filter>src\PythonAPI</Filter>
+    <None Include="src\PythonAPI\Math\Matrix.py">
+      <Filter>src\PythonAPI\Math</Filter>
     </None>
-    <None Include="src\PythonAPI\Node.py">
-      <Filter>src\PythonAPI</Filter>
+    <None Include="src\PythonAPI\Math\Node.py">
+      <Filter>src\PythonAPI\Math</Filter>
     </None>
-    <None Include="src\Json\__init__.py">
-      <Filter>src\Json</Filter>
+    <None Include="src\PythonAPI\Math\Vector.py">
+      <Filter>src\PythonAPI\Math</Filter>
     </None>
-    <None Include="src\Json\JsonParser.py">
-      <Filter>src\Json</Filter>
+    <None Include="src\PythonAPI\Unittest\JsonHandler_test.py">
+      <Filter>src\PythonAPI\Unittest</Filter>
+    </None>
+    <None Include="src\PythonAPI\Unittest\__init__.py">
+      <Filter>src\PythonAPI\Unittest</Filter>
     </None>
     <None Include="src\PythonAPI\__init__.py">
       <Filter>src\PythonAPI</Filter>
     </None>
+    <None Include="src\Visualizer\VectorPlotTest.py">
+      <Filter>src\Visualizer</Filter>
+    </None>
+    <None Include="src\Visualizer\__init__.py">
+      <Filter>src\Visualizer</Filter>
+    </None>
+    <None Include="data\exmaple\vector.json">
+      <Filter>data\exmaple</Filter>
+    </None>
+    <None Include="data\test\test2.json">
+      <Filter>data\test</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\Module.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\Node.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataManager\DataSet.h">
+      <Filter>src\DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\Json\JsonHandler.h">
+      <Filter>src\Util\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\Json\JsonParser.h">
+      <Filter>src\Util\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\Timer\Timer.h">
+      <Filter>src\Util\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\LogManager\Log.h">
+      <Filter>src\Util\LogManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataManager\DataSet.cpp">
+      <Filter>src\DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Util\Json\JsonHandler.cpp">
+      <Filter>src\Util\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Util\Json\JsonParser.cpp">
+      <Filter>src\Util\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\DataSet_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\JsonHandler_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Layer_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Module_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Vector_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
