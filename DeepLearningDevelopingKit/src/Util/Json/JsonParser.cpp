@@ -29,6 +29,7 @@ void VectorParser::Serialize(const std::string & _filePath, const std::vector<Ma
 		{
 			array2.PushBack(vec(i), allocator);
 		}
+
 		array1obj.AddMember("data", array2, allocator);
 		array1.PushBack(array1obj, allocator);
 	}

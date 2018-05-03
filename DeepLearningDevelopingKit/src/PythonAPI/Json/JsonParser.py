@@ -86,7 +86,55 @@ class VectorParser:
                 raise Exception('Invalid data class!')
         return vectors
 
+class DataSetParser:
 
+    def __repr__(self):
+        return 'DataSetParser()'
 
+    def __str__(self):
+        return 'A Dataset Parser from DeepLearningDevelopingKit.'
 
+    # Encode the a list of samples into styled dictionary format.
+    @staticmethod
+    def encode(vectors):
+        dict1 = {}
+        dict1['class'] = 'vector'
+        dict1['size'] = len(vectors)
+        dict1['datablock'] = []
+        for vector in vectors:
+            dict2 = {}
+            dict2['class'] = 'vector'
+            dict2['size'] = len(vector.data)
+            dict2['data'] = []
+            for num in vector.data:
+                dict2['data'].append(num)
+            dict1['datablock'].append(dict2)
+        return dict1
+
+    # Decode styled dictionary back into a list of samples.
+    @staticmethod
+    def decode(json_data):
+        vectors = list()
+        for i in range(json_data['size']):
+            vector = json_data['datablock'][i]
+            if vector['class'] == 'vector':
+                vec_temp = Vector(vector['size'])
+                vec_temp.data = np.array(vector['data'], np.float)
+                vectors.append(vec_temp)
+            else:
+                raise Exception('Invalid data class!')
+        return vectors
+
+    # Save a list of samples into a .json file.
+    @staticmethod
+    def serialize(file_path, vectors):
+        vec_dict = VectorParser.encode(vectors)
+        JsonHandler.save_json(file_path, vec_dict);
+
+    # Load a list of samples from a .json file.
+    @staticmethod
+    def deserialize(file_path):
+        json_data = JsonHandler.open_json(file_path)
+        vectors = VectorParser.decode(json_data)
+        return vectors
     

@@ -56,7 +56,7 @@ void Data::NumericSet::Deserialize(const std::string & _filePath)
 
 		Sample tempSample = { input, lable };
 		_samples.push_back(tempSample);
-	}
+	}	
 }
 
 const Data::NumericSet::Sample Data::NumericSet::GetBatch(void) const

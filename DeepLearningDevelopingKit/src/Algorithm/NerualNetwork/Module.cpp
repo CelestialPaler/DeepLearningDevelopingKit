@@ -9,6 +9,7 @@
 
 Nerual::BPNet::BPNet(void)
 {
+
 }
 
 Nerual::BPNet::BPNet(const BPNetInitor & _initor)
