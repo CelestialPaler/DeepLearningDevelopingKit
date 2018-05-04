@@ -16,13 +16,22 @@
 // Namespaces
 using namespace MathLib;
 
+/***************************************************************************************************/
+// Namespace : Data
+/// Used for management of data.
 namespace Data
 {
+	/***************************************************************************************************/
+	// Class : DataSet
+	/// Base class of all datasets.
 	class DataSet
 	{
 		virtual void LoadFromJson(const std::string & _filePath) = 0;
 	};
 
+	/***************************************************************************************************/
+	// Class : NumericSet
+	/// Stores all 
 	class NumericSet : public DataSet
 	{
 	public:
@@ -45,6 +54,10 @@ namespace Data
 
 	public:
 
+		inline size_t GetSize(void) const { return sampleSize; }
+
+	public:
+
 		const Sample GetBatch(void) const;
 		const Sample GetRandomSample(void) const;
 		const Sample GetSample(const size_t _index) const;
@@ -63,6 +76,8 @@ namespace Data
 		std::vector<Sample> _samples;
 	};
 
+	/***************************************************************************************************/
+	// Class : ImageSet
 	class ImageSet : public DataSet
 	{
 	public:
@@ -70,6 +85,8 @@ namespace Data
 	private:
 	};
 
+	/***************************************************************************************************/
+	// Class : AudioSet
 	class AudioSet : public DataSet
 	{
 	public:
@@ -77,6 +94,8 @@ namespace Data
 	private:
 	};
 
+	/***************************************************************************************************/
+	// Class : VideoSet
 	class VideoSet : public DataSet
 	{
 	public:

@@ -145,6 +145,7 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="data\exmaple\vector.json" />
+    <None Include="data\exmaple\XOR.json" />
     <None Include="data\test\test.json" />
     <None Include="data\test\test2.json" />
     <None Include="src\PythonAPI\Json\JsonHandler.py" />
@@ -170,6 +171,7 @@
     <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Module.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h" />
+    <ClInclude Include="src\Algorithm\NerualNetwork\NerualNetwork.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Node.h" />
     <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h" />
     <ClInclude Include="src\DataManager\Dataset\DataSet.h" />

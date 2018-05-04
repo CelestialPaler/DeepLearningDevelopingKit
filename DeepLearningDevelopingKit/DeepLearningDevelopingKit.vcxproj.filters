@@ -133,6 +133,9 @@
     <None Include="src\PythonAPI\SaveLoad\SaveLoad.py">
       <Filter>src\PythonAPI\SaveLoad</Filter>
     </None>
+    <None Include="data\exmaple\XOR.json">
+      <Filter>data\exmaple</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h">
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="src\DataManager\SaveLoad\Saver.h">
       <Filter>src\DataManager\Saver</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NerualNetwork\NerualNetwork.h">
+      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
