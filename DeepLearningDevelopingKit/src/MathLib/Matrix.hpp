@@ -35,8 +35,8 @@ namespace MathLib
 	{
 	public: // Constructors
 
-			// Default constructor
-			/// Take no parameters and before use Init() should be involked.
+		// Default constructor
+		/// Take no parameters and before use Init() should be involked.
 		Matrix(void);
 		// Constructor (Using Size and Type)
 		/// Specified the size of vector.
@@ -45,17 +45,45 @@ namespace MathLib
 		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the matrix
 		// Matrix(const T ** _data, size_t m, size_t n);
 
+	public: // Initializing
+
+		// Initializing function
+		/// Initializing the Vector after defined by default constructor.
+		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
+
+	public: // Quantification
+
+		// Size function
+		/// Return the size of the Matrix.
+		const size_t Size(void) const;
+		// Sum function
+		/// Add up all the element in the Matrix.
+		T Sum(void) const;
+		// Average function
+		/// Calculate the average value of all the element in the Matrix.
+		T Average(void) const;
+		// Max function
+		/// Get the value of the max element in the Matrix.
+		T Max(void) const;
+		// Min function
+		/// Get the value of the min element in the Matrix.
+		T Min(void) const;
+
+		// Rank function
+		/// Get the value of the rank in the Matrix.
+		int Rank(void);
+
 	public: // Pointers
 
-			// Pointer
+		// Pointer
 		T * data() { return this->_data[0]; }
 		// Const pointer
 		const T * data() const { return this->_data[0]; }
 
 	public: // Operator Overloading 
 
-			// "( )" operator
-			/// Used for accessing the element in the Matrix.
+		// "( )" operator
+		/// Used for accessing the element in the Matrix.
 		inline T operator()(size_t _i, size_t _j) const
 		{
 			return this->_data[_i][_j];
@@ -253,6 +281,58 @@ namespace MathLib
 		}
 		m = _m;
 		n = _n;
+	}
+	
+
+	template<class T>
+	inline T Matrix<T>::Sum(void) const
+	{
+		const Vector<T> & self = *this;
+		T Sum = 0;
+		for (size_t i = 0; i < m; i++)
+		{
+			for (size_t j = 0; j < n; j++)
+			{
+				Sum += self(i, j);
+			}
+		}
+		return Sum;
+	}
+
+	template<class T>
+	inline T Matrix<T>::Average(void) const
+	{
+		return Sum()/ (m*n);
+	}
+
+	template<class T>
+	inline T Matrix<T>::Max(void) const
+	{
+		const Vector<T> & self = *this;
+		T temp = 0;
+		for (size_t i = 0; i < m; i++)
+			for (size_t j = 0; j < n; j++)
+				if (self(i, j) > temp)
+					temp = self(i, j);
+		return temp;
+	}
+
+	template<class T>
+	inline T Matrix<T>::Min(void) const
+	{
+		const Vector<T> & self = *this;
+		T temp = 0;
+		for (size_t i = 0; i < m; i++)
+			for (size_t j = 0; j < n; j++)
+				if (self(i, j) > temp)
+					temp = self(i, j);
+		return temp;
+	}
+
+	template<class T>
+	inline int Matrix<T>::Rank(void)
+	{
+		return 0;
 	}
 }
 

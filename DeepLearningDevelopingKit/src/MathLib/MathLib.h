@@ -14,7 +14,7 @@
 #endif // USING_STATIC_MATHLIB
 
 #ifdef USING_STANDARD_MATHLIB
-#include "Matrix.h"
-#include "Vector.h"
+#include "Matrix.hpp"
+#include "Vector.hpp"
 #include "RandomEngine.h"
 #endif // USING_DYNAMIC_MATHLIB

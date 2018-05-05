@@ -4,7 +4,7 @@
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-// #define VectorDebug
+#define VectorDebug
 
 #ifdef MathStaticDebug
 int main()
@@ -53,22 +53,18 @@ int main()
 // Header FIle
 #include <iostream>
 #include "..\MathLib\MathLib.h"
-#include "..\Util\Log.h"
 
 using namespace std;
 using namespace MathLib;
 
 int main()
 {
-	PrintLocalTime();
-	PrintTitle();
-
-	Vector<int> initVec{ {1,2} ,{3,4} };
-
 	Vector<int> input;
 	input.Init(5);
 	for (size_t i = 0; i < 5; i++) 
 		input(i) = i;
+	Matrix<int> temp = input.Matrixize();
+	cout << temp << endl;
 
 	Vector<int> weight;
 	weight.Init(5);
@@ -81,7 +77,7 @@ int main()
 
 	cout << input << weight << bias << std::endl;
 
-	ans = (input * weight).Sum() + bias;
+	ans = Vector<int>::DotProduct(input, weight) + bias;
 	cout << ans << std::endl;
 
 	Vector<double> test(5, VectorType::Random);

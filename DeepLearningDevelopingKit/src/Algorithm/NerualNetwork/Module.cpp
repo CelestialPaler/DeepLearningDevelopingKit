@@ -176,7 +176,7 @@ void Nerual::BPNet::Test()
 	NumericSet::Sample test;
 	double avrError = 0;
 	std::cout << "Testing: " << std::endl;
-	for (size_t i = 0; i < 5; i++)
+	for (size_t i = 0; i < 4; i++)
 	{
 		test = _testSet->GetSample(i);
 		ForwardPropagation(test.first);

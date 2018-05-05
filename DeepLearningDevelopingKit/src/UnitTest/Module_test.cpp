@@ -29,14 +29,13 @@ int main()
 
 	BPNet TestBP1(classicBPN);
 
-	NumericSet TrainSet;
-	TrainSet.InitWithXOR();
+	std::string openPath = "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\exmaple\\XOR.json";
 
-	NumericSet TestSet;
-	TestSet.InitWithXORTest();
+	NumericSet trainSet;
+	trainSet.LoadFromJson(openPath);
 
-	TestBP1.SetTrainSet(&TrainSet);
-	TestBP1.SetTestSet(&TestSet);
+	TestBP1.SetTrainSet(&trainSet);
+	TestBP1.SetTestSet(&trainSet);
 
 	TestBP1.Train();
 	TestBP1.Test();

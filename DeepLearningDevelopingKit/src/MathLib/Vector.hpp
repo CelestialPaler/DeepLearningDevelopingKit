@@ -14,6 +14,8 @@
 #include <numeric>
 #include <iterator>
 
+#include "Matrix.hpp"
+
 /***************************************************************************************************/
 // Namespace : MathLib
 /// Provide mathematic support and calculation tools for different algorithms.
@@ -53,6 +55,18 @@ namespace MathLib
 		/// Initializing the Vector after defined by default constructor.
 		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
 
+	public: // Arithmatic
+
+		// Inner product function
+		/// 
+		static T InnerProduct(const Vector<T> & _first, const Vector<T> & _second);
+		// Dot product function
+		/// 
+		static T DotProduct(const Vector<T> & _first, const Vector<T> & _second);
+		// Outer product function
+		/// 
+		static T OuterProduct(const Vector<T> & _first, const Vector<T> & _second);
+
 	public: // Quantification
 
 		// Size function
@@ -70,6 +84,10 @@ namespace MathLib
 		// Min function
 		/// Get the value of the min element in the Vector.
 		T Min(void) const;
+
+	public: // Transformation
+
+		Matrix<T> Matrixize(void);
 
 	public: // Pointer
 
@@ -213,21 +231,6 @@ namespace MathLib
 		}
 
 		// "*" operator
-		/// Multiplication of two Vector.
-		Vector<T> operator * (const Vector<T> & _other) const
-		{
-			const Vector<T> & self = *this;
-			Vector<T> temp(n);
-			if (self.n != _other.n)
-			{
-				std::cerr << "ERROR : Invalid Vector Multiplication!" << std::endl;
-				return temp;
-			}
-			for (size_t j = 0; j < self.n; j++)
-				temp(j) = self(j) * _other(j);
-			return temp;
-		}
-
 		/// Multiplication of a Vector and a scalar.
 		Vector<T> operator * (const T & _other) const
 		{
@@ -242,7 +245,10 @@ namespace MathLib
 		std::vector<T> _data;
 		size_t n;
 	};
+}
 
+namespace MathLib
+{
 	template<class T>
 	inline Vector<T>::Vector(void)
 	{
@@ -303,6 +309,25 @@ namespace MathLib
 	}
 
 	template<class T>
+	inline T Vector<T>::InnerProduct(const Vector<T>& _first, const Vector<T>& _second)
+	{
+		T temp = 0;
+		if (_first.Size() != _second.Size())
+			return 0;
+		for (size_t i = 0; i < _first.Size(); i++)
+		{
+			temp += _first(i) * _second(i);
+		}
+		return temp;
+	}
+
+	template<class T>
+	inline T Vector<T>::DotProduct(const Vector<T>& _first, const Vector<T>& _second)
+	{
+		return InnerProduct(_first, _second);
+	}
+
+	template<class T>
 	inline const size_t Vector<T>::Size(void) const
 	{
 		return n;
@@ -317,7 +342,6 @@ namespace MathLib
 		{
 			Sum += self(i);
 		}
-		Sum = Sum / n;
 		return Sum;
 	}
 
@@ -325,6 +349,40 @@ namespace MathLib
 	inline T Vector<T>::Average(void) const
 	{
 		return Sum() / n;
+	}
+
+	template<class T>
+	inline T Vector<T>::Max(void) const
+	{
+		const Vector<T> & self = *this;
+		T temp = 0;
+		for (size_t i = 0; i < n; i++)
+			if (self(i) > temp)
+				temp = self(i);
+		return temp;
+	}
+	
+	template<class T>
+	inline T Vector<T>::Min(void) const
+	{
+		const Vector<T> & self = *this;
+		T temp = 0;
+		for (size_t i = 0; i < n; i++)
+			if (self(i) < temp)
+				temp = self(i);
+		return temp;
+	}
+	
+	template<class T>
+	inline Matrix<T> Vector<T>::Matrixize(void)
+	{
+		const Vector<T> & self = *this;
+		Matrix<T> temp(1, n);
+		for (size_t i = 0; i < n; i++)
+		{
+			temp(0, i) = self(i);
+		}
+		return temp;
 	}
 }
 

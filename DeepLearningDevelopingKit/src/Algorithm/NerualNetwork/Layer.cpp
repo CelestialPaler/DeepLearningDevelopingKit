@@ -235,7 +235,7 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
-		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() + _nodes.at(i).bias);
+		_nodes.at(i).value = activationFunction(Vector<double>::DotProduct(_nodes.at(i).tempInput, _nodes.at(i).weight) + _nodes.at(i).bias);
 	}
 }
 
@@ -408,7 +408,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 	for (size_t i = 0; i < m; i++)
 	{
 		/// θ(∑ X * W - B)
-		_nodes.at(i).value = activationFunction((_nodes.at(i).tempInput * _nodes.at(i).weight).Sum() + _nodes.at(i).bias);
+		_nodes.at(i).value = activationFunction(Vector<double>::DotProduct(_nodes.at(i).tempInput, _nodes.at(i).weight) + _nodes.at(i).bias);
 	}
 }
 

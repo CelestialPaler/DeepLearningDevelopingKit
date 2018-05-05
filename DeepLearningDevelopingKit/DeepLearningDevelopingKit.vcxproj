@@ -178,11 +178,11 @@
     <ClInclude Include="src\DataManager\Dataset\DataSet.h" />
     <ClInclude Include="src\DataManager\SaveLoad\Saver.h" />
     <ClInclude Include="src\MathLib\MathLib.h" />
-    <ClInclude Include="src\MathLib\Matrix.h" />
+    <ClInclude Include="src\MathLib\Matrix.hpp" />
     <ClInclude Include="src\MathLib\MatrixStatic.h" />
     <ClInclude Include="src\MathLib\RandomEngine.h" />
     <ClInclude Include="src\MathLib\ToolFunction.h" />
-    <ClInclude Include="src\MathLib\Vector.h" />
+    <ClInclude Include="src\MathLib\Vector.hpp" />
     <ClInclude Include="src\MathLib\VectorStatic.h" />
     <ClInclude Include="src\Util\Json\JsonHandler.h" />
     <ClInclude Include="src\Util\Json\JsonParser.h" />

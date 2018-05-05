@@ -174,9 +174,6 @@
     <ClInclude Include="src\MathLib\MathLib.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="src\MathLib\Matrix.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
     <ClInclude Include="src\MathLib\MatrixStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
@@ -184,9 +181,6 @@
       <Filter>src\MathLib</Filter>
     </ClInclude>
     <ClInclude Include="src\MathLib\ToolFunction.h">
-      <Filter>src\MathLib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathLib\Vector.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
     <ClInclude Include="src\MathLib\VectorStatic.h">
@@ -212,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="src\Algorithm\RegressionAnalysis\RegressionAnalysis.h">
       <Filter>src\Algorithm\RegressionAnalysis %28RA%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Vector.hpp">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathLib\Matrix.hpp">
+      <Filter>src\MathLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
