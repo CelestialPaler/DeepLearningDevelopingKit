@@ -12,17 +12,16 @@
 #include <chrono>
 #include <windows.h>
 
-// Namespaces
-using namespace std;
-
-void PrintTitle(void)
+void PrintInfo(void)
 {
-	string temp;
+	std::string temp;
 	temp += "Project : Deep Learning Developing Kit\n";
 	temp += "Branch  : Master\n";
 	temp += "Version : Windows-x64-0.1.0-CPU\n";
 	temp += "Copyright 2015-2018 Celestial Tech Inc.\nFor more check www.tianshicangxie.com\n";
-	cout << temp << std::endl;
+	std::cout << temp << std::endl;
+	std::cout << "Current time : ";
+	PrintLocalTime();
 }
 
 void PrintLocalTime(void)

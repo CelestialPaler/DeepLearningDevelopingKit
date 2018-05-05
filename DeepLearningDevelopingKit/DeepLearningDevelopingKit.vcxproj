@@ -178,6 +178,7 @@
     <ClInclude Include="src\DataManager\Dataset\DataSet.h" />
     <ClInclude Include="src\DataManager\SaveLoad\Saver.h" />
     <ClInclude Include="src\MathLib\MathLib.h" />
+    <ClInclude Include="src\MathLib\MathLibError.h" />
     <ClInclude Include="src\MathLib\Matrix.hpp" />
     <ClInclude Include="src\MathLib\MatrixStatic.h" />
     <ClInclude Include="src\MathLib\RandomEngine.h" />
@@ -198,10 +199,12 @@
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />
     <ClCompile Include="src\DataManager\Dataset\DataSet.cpp" />
     <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp" />
+    <ClCompile Include="src\MathLib\MathLibError.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />
     <ClCompile Include="src\UnitTest\LinearRegression_test.cpp" />
+    <ClCompile Include="src\UnitTest\Matrix_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
     <ClCompile Include="src\Util\Json\JsonHandler.cpp" />

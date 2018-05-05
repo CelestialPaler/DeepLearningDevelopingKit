@@ -10,15 +10,13 @@
 // Header files
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <numeric>
-#include <iterator>
 
+#include "MathLibError.h"
 #include "Matrix.hpp"
 
 /***************************************************************************************************/
 // Namespace : MathLib
-/// Provide mathematic support and calculation tools for different algorithms.
+/// Provide basic mathematic support and calculation tools for different algorithms.
 namespace MathLib
 {
 	// Type of Vector.
@@ -32,7 +30,7 @@ namespace MathLib
 	/***************************************************************************************************/
 	// Class : Vector
 	/// Implemented in std::vector.
-	/// Specialized for deep learning purpose. (Maybe...) 
+	/// Specialized for mechine learning purpose.
 	template<class T>
 	class Vector
 	{
@@ -58,14 +56,17 @@ namespace MathLib
 	public: // Arithmatic
 
 		// Inner product function
-		/// 
+		/// Calculate the inner product of two Vectors.
 		static T InnerProduct(const Vector<T> & _first, const Vector<T> & _second);
 		// Dot product function
-		/// 
+		/// Dot product is simply another name of inner product.
 		static T DotProduct(const Vector<T> & _first, const Vector<T> & _second);
 		// Outer product function
-		/// 
+		/// Calculate the outer product of two Vectors.
 		static T OuterProduct(const Vector<T> & _first, const Vector<T> & _second);
+		// Scalar product function
+		/// Calculate the Scalar product of a Vector and a scalar.
+		static T ScalarProduct(const T & _first, const Vector<T> & _second);
 
 	public: // Quantification
 
@@ -87,7 +88,9 @@ namespace MathLib
 
 	public: // Transformation
 
-		Matrix<T> Matrixize(void);
+		// Represent a Vector in form of Matrix.
+		/// A Vector is interpreted as a 1xn Martix.
+		// Matrix<T> Matrixize(void);
 
 	public: // Pointer
 
@@ -129,8 +132,15 @@ namespace MathLib
 		// "=" operator
 		Vector<T> & operator = (const Vector<T> & _other)
 		{
-			if (this != &_other)
-				_data = _other._data;
+			try
+			{
+				if (this->n != _other.n)
+					throw unmatched_size();
+				else
+					if (this != &_other)
+						_data = _other._data;
+			}
+			catch (std::exception& except) { ExceptionHandle(except); }
 			return (*this);
 		}
 
@@ -140,13 +150,15 @@ namespace MathLib
 		{
 			const Vector<T> & self = *this;
 			Vector<T> temp(n);
-			if (self.n != _other.n)
+			try
 			{
-				cerr << "ERROR : Invalid Vector Addtion!" << endl;
-				return temp;
+				if (self.n != _other.n)
+					throw unmatched_size();
+				else
+					for (size_t j = 0; j < self.n; j++)
+						temp(j) = self(j) + _other(j);
 			}
-			for (size_t j = 0; j < self.n; j++)
-				temp(j) = self(j) + _other(j);
+			catch (std::exception& except) { ExceptionHandle(except); }
 			return temp;
 		}
 
@@ -166,13 +178,17 @@ namespace MathLib
 		void operator += (const Vector<T> & _other)
 		{
 			Vector<T> & self = *this;
-			if (self.n != _other.n)
+			try
 			{
-				std::cerr << "ERROR : Invalid Vector Self-Addtion!" << std::endl;
+				if (self.n != _other.n)
+					throw unmatched_size();
+				else
+					for (size_t j = 0; j < self.n; j++)
+						self(j) = self(j) + _other(j);
 			}
-			for (size_t j = 0; j < self.n; j++)
-				self(j) = self(j) + _other(j);
+			catch (std::exception& except) { ExceptionHandle(except); }
 		}
+
 
 		/// Add another scalar to this Vector.
 		void operator += (const T & _other)
@@ -188,13 +204,15 @@ namespace MathLib
 		{
 			const Vector<T> & self = *this;
 			Vector<T> temp(n);
-			if (self.n != _other.n)
+			try
 			{
-				cerr << "ERROR : Invalid Vector Substraction!" << endl;
-				return temp;
+				if (self.n != _other.n)
+					throw unmatched_size();
+				else
+					for (size_t j = 0; j < self.n; j++)
+						temp(j) = self(j) - _other(j);
 			}
-			for (size_t j = 0; j < self.n; j++)
-				temp(j) = self(j) - _other(j);
+			catch (std::exception& except) { ExceptionHandle(except); }
 			return temp;
 		}
 
@@ -214,12 +232,15 @@ namespace MathLib
 		void operator -= (const Vector<T> & _other)
 		{
 			Vector<T> & self = *this;
-			if (self.n != _other.n)
+			try
 			{
-				cerr << "ERROR : Invalid Vector Self-Substraction!" << endl;
+				if (self.n != _other.n)
+					throw unmatched_size();
+				else
+					for (size_t j = 0; j < self.n; j++)
+						self(j) = self(j) - _other(j);
 			}
-			for (size_t j = 0; j < self.n; j++)
-				self(j) = self(j) - _other(j);
+			catch (std::exception& except) { ExceptionHandle(except); }
 		}
 
 		/// Substract another scalar to this Vector.
@@ -242,25 +263,35 @@ namespace MathLib
 		}
 
 	private:
+
 		std::vector<T> _data;
 		size_t n;
+
 	};
 }
 
+
 namespace MathLib
 {
+	// Default constructor
+	/// Take no parameters.
+	/// After default constructor and before use the Vector object, Init() should be involked.
 	template<class T>
 	inline Vector<T>::Vector(void)
 	{
 
 	}
 
+	// Constructor (Using Size and Type)
+	/// Specified the size of Vector.
 	template<class T>
 	inline Vector<T>::Vector(const size_t _n, const VectorType _type)
 	{
 		Init(_n, _type);
 	}
 
+	// Constructor (Using given Data)
+	/// Using data from a given pointer, which is pointed to an array, to initialize the Vector.
 	template<class T>
 	inline Vector<T>::Vector(const std::initializer_list<int> & _list)
 	{
@@ -273,6 +304,8 @@ namespace MathLib
 		}
 	}
 
+	// Initializing function
+	/// Initializing the Vector after defined by default constructor.
 	template<class T>
 	inline void Vector<T>::Init(const size_t _n, const VectorType _type)
 	{
@@ -308,6 +341,8 @@ namespace MathLib
 		n = _n;
 	}
 
+	// Inner product function
+	/// Calculate the inner product of two Vectors.
 	template<class T>
 	inline T Vector<T>::InnerProduct(const Vector<T>& _first, const Vector<T>& _second)
 	{
@@ -321,18 +356,35 @@ namespace MathLib
 		return temp;
 	}
 
+	// Dot product function
+	/// Dot product is simply another name of inner product.
 	template<class T>
 	inline T Vector<T>::DotProduct(const Vector<T>& _first, const Vector<T>& _second)
 	{
 		return InnerProduct(_first, _second);
 	}
 
+	// Scalar product function
+	/// Calculate the Scalar product of a Vector and a scalar.
+	template<class T>
+	inline T Vector<T>::ScalarProduct(const T & _first, const Vector<T>& _second)
+	{
+		Vector<T> temp(_second.Size());
+		for (size_t j = 0; j < _second.Size(); j++)
+			temp(j) = _second(j) * _first;
+		return temp;
+	}
+
+	// Size function
+	/// Return the size of the Vector.
 	template<class T>
 	inline const size_t Vector<T>::Size(void) const
 	{
 		return n;
 	}
 
+	// Sum function
+	/// Add up all the element in the Vector.
 	template<class T>
 	T Vector<T>::Sum(void) const
 	{
@@ -345,12 +397,16 @@ namespace MathLib
 		return Sum;
 	}
 
+	// Average function
+	/// Calculate the average value of all the element in the Vector.
 	template<class T>
 	inline T Vector<T>::Average(void) const
 	{
 		return Sum() / n;
 	}
 
+	// Max function
+	/// Get the value of the max element in the Vector.
 	template<class T>
 	inline T Vector<T>::Max(void) const
 	{
@@ -361,7 +417,9 @@ namespace MathLib
 				temp = self(i);
 		return temp;
 	}
-	
+
+	// Min function
+	/// Get the value of the min element in the Vector.
 	template<class T>
 	inline T Vector<T>::Min(void) const
 	{
@@ -372,7 +430,10 @@ namespace MathLib
 				temp = self(i);
 		return temp;
 	}
-	
+
+		/*
+	// Represent a Vector in form of Matrix.
+	/// A Vector is interpreted as a 1xn Martix.
 	template<class T>
 	inline Matrix<T> Vector<T>::Matrixize(void)
 	{
@@ -384,5 +445,6 @@ namespace MathLib
 		}
 		return temp;
 	}
+		*/
 }
 

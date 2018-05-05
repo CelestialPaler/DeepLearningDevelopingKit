@@ -213,6 +213,9 @@
     <ClInclude Include="src\MathLib\Matrix.hpp">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="src\MathLib\MathLibError.h">
+      <Filter>src\MathLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
@@ -262,6 +265,12 @@
     </ClCompile>
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp">
       <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LogisticRegression</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MathLib\MathLibError.cpp">
+      <Filter>src\MathLib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Matrix_test.cpp">
+      <Filter>src\UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

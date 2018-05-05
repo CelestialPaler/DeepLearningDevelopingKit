@@ -11,9 +11,12 @@
 #include <iostream>
 #include <vector>
 
+#include "MathLibError.h"
+#include "Vector.hpp"
+
 /***************************************************************************************************/
 // Namespace : MathLib
-/// Provide mathematic support and calculation tools for different algorithms.
+/// Provide basic mathematic support and calculation tools for different algorithms.
 namespace MathLib
 {
 	// Type of Matrix.
@@ -21,37 +24,65 @@ namespace MathLib
 		Zero,
 		Ones,
 		Random,
-		Identity,
-		Diagonal,
-		Triangle
+		Identity
 	};
 
 	/***************************************************************************************************/
 	// Class : Matrix
 	/// Implemented in std::vector.
-	/// Specialized for deep learning purpose. (Maybe...) 
+	/// Specialized for mechine learning purpose.
 	template<class T>
 	class Matrix
 	{
 	public: // Constructors
 
 		// Default constructor
-		/// Take no parameters and before use Init() should be involked.
+		/// Take no parameters.
+		/// After default constructor and before use the Matrix object, Init() should be involked.
 		Matrix(void);
 		// Constructor (Using Size and Type)
-		/// Specified the size of vector.
+		/// Specified the size of Matrix.
 		Matrix(const size_t _m, const size_t _n, const MatrixType _type = MatrixType::Zero);
 		// Constructor (Using given Data)
-		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the matrix
-		// Matrix(const T ** _data, size_t m, size_t n);
+		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the Matrix.
+		Matrix(const std::initializer_list<int> & _list);
 
 	public: // Initializing
 
 		// Initializing function
-		/// Initializing the Vector after defined by default constructor.
-		void Init(const size_t _n, const VectorType _type = VectorType::Zero);
+		/// Initializing the Matrix after defined by default constructor.
+		void Init(const size_t _m, const size_t _n, const MatrixType _type = MatrixType::Zero);
+
+	public: // Arithmatic
+
 
 	public: // Quantification
+
+		//	Determinant function
+		T Determinant(void) const;
+		// Trace
+		T Trace(void) const;
+		// Cofactor function
+		T Cofactor(size_t _i, size_t _j);
+		// Cofactor function
+		T AlgebraicCofactor(size_t _i, size_t _j);
+		// Rank function
+		/// Get the value of the rank in the Matrix.
+		int Rank(void);
+
+	public: // Transformation
+
+		// GaussianElimination
+		Matrix<T> GaussianElimination(void) const;
+		// Transposition
+		Matrix<T> Transpostion(void) const;
+
+
+	private:
+
+		void SwapColumn(const size_t _i, const size_t _j);
+		void Resize(const size_t _m, const size_t _n);
+
 
 		// Size function
 		/// Return the size of the Matrix.
@@ -68,10 +99,6 @@ namespace MathLib
 		// Min function
 		/// Get the value of the min element in the Matrix.
 		T Min(void) const;
-
-		// Rank function
-		/// Get the value of the rank in the Matrix.
-		int Rank(void);
 
 	public: // Pointers
 
@@ -264,25 +291,102 @@ namespace MathLib
 		std::vector<std::vector<T>> _data;
 		size_t m, n;
 	};
+}
 
+namespace MathLib
+{
+	// Default constructor
+	/// Take no parameters.
+	/// After default constructor and before use the Matrix object, Init() should be involked.
+	template<class T>
+	inline Matrix<T>::Matrix(void)
+	{
+
+	}
+
+	// Constructor (Using Size and Type)
+	/// Specified the size of Matrix.
 	template<class T>
 	inline Matrix<T>::Matrix(const size_t _m, const size_t _n, const MatrixType _type)
 	{
-		for (size_t i = 0; i < _m; i++)
-		{
-			std::vector<T> tempVec = *new std::vector<T>;
-			for (size_t j = 0; j < _n; j++)
-			{
-				T tempElem = *new T;
-				tempElem = 0;
-				tempVec.push_back(tempElem);
-			}
-			this->_data.push_back(tempVec);
-		}
-		m = _m;
-		n = _n;
+		Init(_m, _n, _type);
 	}
-	
+
+	// Constructor (Using given Data)
+	/// Using data from a given pointer, which is pointed to a 2D array, to initialize the Matrix.
+	template<class T>
+	inline Matrix<T>::Matrix(const std::initializer_list<int>& _list)
+	{
+	}
+
+	// Initializing function
+	/// Initializing the Matrix after defined by default constructor.
+	template<class T>
+	inline void Matrix<T>::Init(const size_t _m, const size_t _n, const MatrixType _type)
+	{
+		switch (_type)
+		{
+		case MatrixType::Zero:
+			for (size_t i = 0; i < _m; i++)
+			{
+				std::vector<T> tempVec;
+				for (size_t j = 0; j < _n; j++)
+				{
+					T tempElem = *new T;
+					tempElem = 0.f;
+					tempVec.push_back(tempElem);
+				}
+				_data.push_back(tempVec);
+			}
+			break;
+		case MatrixType::Ones:
+			for (size_t i = 0; i < _m; i++)
+			{
+				std::vector<T> tempVec;
+				for (size_t j = 0; j < _n; j++)
+				{
+					T tempElem = *new T;
+					tempElem = 1.f;
+					tempVec.push_back(tempElem);
+				}
+				_data.push_back(tempVec);
+			}
+			break;
+		case MatrixType::Random:
+			for (size_t i = 0; i < _m; i++)
+			{
+				std::vector<T> tempVec;
+				for (size_t j = 0; j < _n; j++)
+				{
+					T tempElem = *new T;
+					tempElem = Random();
+					tempVec.push_back(tempElem);
+				}
+				_data.push_back(tempVec);
+			}
+			break;
+		case MatrixType::Identity:
+			for (size_t i = 0; i < _m; i++)
+			{
+				std::vector<T> tempVec;
+				for (size_t j = 0; j < _n; j++)
+				{
+					T tempElem = *new T;
+					if (i == j)
+						tempElem = 1.f;
+					else
+						tempElem = 0.f;
+					tempVec.push_back(tempElem);
+				}
+				_data.push_back(tempVec);
+			}
+			break;
+		default:
+			break;
+		}
+		n = _n;
+		m = _m;
+	}
 
 	template<class T>
 	inline T Matrix<T>::Sum(void) const
@@ -302,13 +406,13 @@ namespace MathLib
 	template<class T>
 	inline T Matrix<T>::Average(void) const
 	{
-		return Sum()/ (m*n);
+		return Sum() / (m*n);
 	}
 
 	template<class T>
 	inline T Matrix<T>::Max(void) const
 	{
-		const Vector<T> & self = *this;
+		const Matrix<T> & self = *this;
 		T temp = 0;
 		for (size_t i = 0; i < m; i++)
 			for (size_t j = 0; j < n; j++)
@@ -320,7 +424,7 @@ namespace MathLib
 	template<class T>
 	inline T Matrix<T>::Min(void) const
 	{
-		const Vector<T> & self = *this;
+		const Matrix<T> & self = *this;
 		T temp = 0;
 		for (size_t i = 0; i < m; i++)
 			for (size_t j = 0; j < n; j++)
@@ -330,9 +434,140 @@ namespace MathLib
 	}
 
 	template<class T>
+	inline T Matrix<T>::Determinant(void) const
+	{
+		Matrix<T> tempMat = *this;
+		int iter = 0;
+		T det = 1, multiple;
+
+		for (size_t i = 0; i < n; i++)
+		{
+			if (tempMat(i, i) == 0)
+			{
+				for (size_t j = i; j < n; j++)
+				{ 
+					if (tempMat(j, i) != 0)
+					{
+						tempMat.SwapColumn(i, j);
+						iter++;
+					}
+				}
+			}
+			else
+			{
+				for (size_t k = i + 1; k < n; k++)
+				{
+					multiple = -1 * tempMat(k, i) / tempMat(i, i);
+					for (size_t u = 0; u < n; u++)
+						tempMat(k, u) += tempMat(i, u) * multiple;
+				}
+			}
+		}
+
+		det = tempMat.Trace();
+		if (iter % 2)
+			det = -det;
+		return det;
+	}
+
+	template<class T>
+	inline T Matrix<T>::Trace(void) const
+	{
+		const Matrix<T> & self = *this;
+		T trace = 1;
+		for (size_t i = 0; i < n; i++)
+		{
+			trace = trace * self(i, i);
+		}
+		return trace;
+	}
+
+	template<class T>
+	inline Matrix<T> Matrix<T>::GaussianElimination(void) const
+	{
+		Matrix<T> tempMat = *this;
+		T multiple;
+
+		for (size_t i = 0; i < n; i++)
+		{
+			if (tempMat(i, i) == 0)
+			{
+				for (size_t j = i; j < n; j++)
+				{
+					if (tempMat(j, i) != 0)
+					{
+						tempMat.SwapColumn(i, j);
+					}
+				}
+			}
+			else
+			{
+				for (size_t k = i + 1; k < n; k++)
+				{
+					multiple = -1 * tempMat(k, i) / tempMat(i, i);
+					for (size_t u = 0; u < n; u++)
+						tempMat(k, u) += tempMat(i, u) * multiple;
+				}
+			}
+		}
+		return tempMat;
+	}
+
+	template<class T>
+	inline Matrix<T> Matrix<T>::Transpostion(void) const
+	{
+		const Matrix<T> & self = *this;
+		Matrix<T> tempMat(n, n);
+		for (size_t i = 0; i < n; i++)
+			for (size_t j = 0; j < n; j++)
+				tempMat(i, j) = self(j, i);
+		return tempMat;
+	}
+
+	template<class T>
+	inline T Matrix<T>::Cofactor(size_t _i, size_t _j)
+	{
+		Matrix<T> tempMat = *this;
+		auto iter1 = tempMat._data.begin() + _i;
+		tempMat._data.erase(iter1);
+		for (size_t i = 0; i < m-1; i++)
+		{
+			auto iter2 = tempMat._data.at(i).begin() + _j;
+			tempMat._data.at(i).erase(iter2);
+		}
+		tempMat.Resize(m - 1, n - 1);
+		return tempMat.Determinant();
+	}
+
+	template<class T>
+	inline T Matrix<T>::AlgebraicCofactor(size_t _i, size_t _j)
+	{
+		return T();
+	}
+
+	template<class T>
 	inline int Matrix<T>::Rank(void)
 	{
-		return 0;
+		Matrix<T> tempMat = *this;
+		tempMat = tempMat.GaussianElimination();
+		int rank = 0;
+		for (size_t i = 0; i < n; i++)
+			if (tempMat(i, i)!=0)
+				rank++;
+
+		return rank;
+	}
+
+	template<class T>
+	inline void Matrix<T>::SwapColumn(const size_t _i, const size_t _j)
+	{
+		swap(_data.at(_i), _data.at(_j));
+	}
+
+	template<class T>
+	inline void Matrix<T>::Resize(const size_t _m, const size_t _n)
+	{
+		m = _m;
+		n = _n;
 	}
 }
-

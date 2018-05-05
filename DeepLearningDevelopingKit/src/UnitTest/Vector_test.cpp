@@ -4,7 +4,7 @@
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-#define VectorDebug
+// #define VectorDebug
 
 #ifdef MathStaticDebug
 int main()
@@ -50,7 +50,7 @@ int main()
 
 #ifdef VectorDebug
 
-// Header FIle
+// Header files
 #include <iostream>
 #include "..\MathLib\MathLib.h"
 
@@ -59,12 +59,17 @@ using namespace MathLib;
 
 int main()
 {
+	/*
+	Vector<int> debug1(6);
+	Vector<int> debug2(3);
+	debug1 - debug2;
+	*/
+
+
 	Vector<int> input;
 	input.Init(5);
 	for (size_t i = 0; i < 5; i++) 
 		input(i) = i;
-	Matrix<int> temp = input.Matrixize();
-	cout << temp << endl;
 
 	Vector<int> weight;
 	weight.Init(5);
