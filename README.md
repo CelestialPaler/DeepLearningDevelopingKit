@@ -1,49 +1,68 @@
-# Deep Learning Developing Kit
-### A library for deep learning.
+<h1>Deep Learning Developing Kit</h1>
+<h3>An algorithm library for deep learning.</h3>
 
-## Build status
+<h2>Build status</h2>
+
 | **`Documentation`** | **`Windows CPU`** | **`Windows GPU`** |
 |-----------------|---------------------|------------------|
 | [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tianshicangxie.com/deeplearningdevelopingkit/apidoc) | ![Build Status](https://img.shields.io/badge/build-success-brightgreen.svg) | ![Build Status](https://img.shields.io/vso/build/larsbrinkhoff/953a34b9-5966-4923-a48a-c41874cfb5f5/1.svg)
 
-## Brief Introduction
+<h2>Brief Introduction</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Powerful modularization and expandability provide a great tool to learn about machine learning, especially deep learning.You can explore as you wish, build your dream software, without being bothered by intricate codes. You can build your own AI model quickly and train it through iterator in high-efficiency.Like Lego building blocks, you can assemble or transplant your models and apply them to your AI applications within several minutes.</p> 
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Programing Language:</p> 
-
-*   C/C++
-*   Python
+<ul>
+    <li><p>C/C++</p></li>
+    <li><p>Python</p></li>
+</ul>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Data-interchange Format:</p>
  
- *   Json
+<ul>
+    <li><p>Simple and intuitive</p></li>
+    <li><p>High-efficiency</p></li>
+    <li><p>Modularization</p></li>
+    <li><p>Expandability</p></li>
+    <li><p>Customization</p></li>
+</ul>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Feature:</p> 
 
-*   Simple and intuitive
-*   High-efficiency
-*   Modularization
-*   Expandability
-*   Customization
+<ul>
+    <li><p>Json</p></li>
+</ul>
 
-## Developing Status
-Under developing:
+<h2>Algorithms</h2>
+<ul>
+    <li><p>Regresstion Analysis</p></li>
+    <li><p>Decision Tree</p></li>
+    <li><p>Nerual Network</p></li>
+    <li><p>Supported Vector Machine</p></li>
+    <li><p>Expectation Maximization</p></li>
+    <li><p>Clustering</p></li>
+    <li><p>Decision Tree</p></li>
+</ul>
 
-*   Json Handler both in C++ and Python
-*   Basic data visualizer based on python
-*   Data Set Management
-*   Save and load trained module.
-*   Util functions for nerual network training
-*   Data Generator
+<h2>Developing Status</h2>
 
-Further plan (Not in top priority):
+<h3>Under developing:</h3>
+<ul>
+    <li><p>Advanced Math Library</p></li>
+    <li><p>LinearRegression in Regression Analysis</p></li>
+    <li><p>Save and load data using .json</p></li>
+    <li><p>Data Generator</p></li>
+</ul>
 
-*   Visualization tool using SFML or Python
-*   Acceleration using CUDA
+<h3>Further plan (Not top priority):</h3>
+<ul>
+    <li><p>Visualization tool using SFML or Python</p></li>
+    <li><p>Acceleration using CUDA</p></li>
+</ul>
 
-## About this project
+<h2>About this project</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;This is still an early stage of development. So, it`s welcomed for anyone to contribute to this project. Feel free to upload your code or pull a request. More than anything, please share your idea and give me some precious advices. XD</p>
 
-For more information, check my website [*Celestial Tech*](www.tianshicangxie.com "天师苍邪科技") .
+<p>&nbsp;&nbsp;&nbsp;&nbsp;For more information, check my website.
+<a href="www.tianshicangxie.com" target="_blank">Celestial Tech</a></p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Copyright  © 2015-2018 Celestial Tech Inc.</p>
