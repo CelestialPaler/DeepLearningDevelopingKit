@@ -19,12 +19,6 @@
     <Filter Include="src\Algorithm">
       <UniqueIdentifier>{6f36316d-1884-4e74-917b-952eab77be94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Algorithm\LinearRegression">
-      <UniqueIdentifier>{7c22934c-07b6-4aad-8451-a9a32da465c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Algorithm\LogisticRegression">
-      <UniqueIdentifier>{d7fb88eb-b3e4-414b-a7dd-ba624b117ad9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Algorithm\SupportedVectorMachine %28SVM%29">
       <UniqueIdentifier>{5a4d7be5-acfb-4dce-9665-f755be52f9d0}</UniqueIdentifier>
     </Filter>
@@ -78,6 +72,15 @@
     </Filter>
     <Filter Include="src\DataManager\Saver">
       <UniqueIdentifier>{39f3abbf-feda-4562-a6d6-f98d62fc1207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\RegressionAnalysis %28RA%29">
+      <UniqueIdentifier>{1b4135a8-8ee2-4a9a-beb8-440e6fad7a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\RegressionAnalysis %28RA%29\LinearRegression">
+      <UniqueIdentifier>{d8818f89-3243-41ce-acfc-c8b29e00de69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\RegressionAnalysis %28RA%29\LogisticRegression">
+      <UniqueIdentifier>{f27301c6-bc96-409e-b671-c2fcf7401e4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -189,12 +192,6 @@
     <ClInclude Include="src\MathLib\VectorStatic.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
-    <ClInclude Include="src\Algorithm\LinearRegression\LinearRegression.h">
-      <Filter>src\Algorithm\LinearRegression</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\LogisticRegression\LogisticRegression.h">
-      <Filter>src\Algorithm\LogisticRegression</Filter>
-    </ClInclude>
     <ClInclude Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.h">
       <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
     </ClInclude>
@@ -206,6 +203,15 @@
     </ClInclude>
     <ClInclude Include="src\Algorithm\NerualNetwork\NerualNetwork.h">
       <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h">
+      <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LinearRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.h">
+      <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LogisticRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\RegressionAnalysis\RegressionAnalysis.h">
+      <Filter>src\Algorithm\RegressionAnalysis %28RA%29</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,12 +245,6 @@
     <ClCompile Include="src\UnitTest\Vector_test.cpp">
       <Filter>src\UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="src\Algorithm\LinearRegression\LinearRegression.cpp">
-      <Filter>src\Algorithm\LinearRegression</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Algorithm\LogisticRegression\LogisticRegression.cpp">
-      <Filter>src\Algorithm\LogisticRegression</Filter>
-    </ClCompile>
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp">
       <Filter>src\Algorithm\SupportedVectorMachine %28SVM%29</Filter>
     </ClCompile>
@@ -253,6 +253,15 @@
     </ClCompile>
     <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp">
       <Filter>src\DataManager\Saver</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\LinearRegression_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.cpp">
+      <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LinearRegression</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp">
+      <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LogisticRegression</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

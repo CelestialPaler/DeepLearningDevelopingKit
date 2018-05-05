@@ -81,10 +81,11 @@ const Data::NumericSet::Sample Data::NumericSet::GetSample(const size_t _index) 
 void Data::NumericSet::PrintToConsole(void)
 {
 	std::cout << "Dataset Name: " << name << std::endl;
+	std::cout << "Dataset Sample Size: " << sampleSize << std::endl;
 	std::cout << std::fixed << std::setprecision(5) << std::endl;
 	for (size_t i = 0; i < sampleSize; i++)
 	{
-		std::cout << "No. "<< std::setw(4) << std::setfill('0') << i << "  Input: [";
+		std::cout << "ID: "<< std::setw(4) << std::setfill('0') << i << " |  Input: [";
 		for (size_t j = 0; j < inputSize; j++)
 			std::cout << _samples[i].first(j) << " ";
 		std::cout << "]  |  Lable: [";

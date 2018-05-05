@@ -1,0 +1,58 @@
+{
+    "name": "LinearRegressionTest",
+	"class": "numeric_set",
+    "sample_size": 10,
+    "input_size": 1,
+    "lable_size": 1,
+	"datablock": [{
+			"class": "numeric_set::sample",
+			"input": [0.5623],
+			"lable": [1.5953]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [6.2351],
+			"lable": [6.2264]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [5.3265],
+			"lable": [5.3240]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [2.0326],
+			"lable": [2.0123]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [7.6589],
+			"lable": [7.6103]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [0.2367],
+			"lable": [0.2002]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [7.9856],
+			"lable": [8.0325]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [10.3269],
+			"lable": [10.8562]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [3.2365],
+			"lable": [3.8562]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [12.2658],
+			"lable": [12.7841]
+		}
+	]
+}

@@ -7,15 +7,15 @@
 
 #include "LinearRegression.h"
 
-LinearModel::LinearRegression::LinearRegression()
+Regression::LinearRegression::LinearRegression()
 {
 }
 
-LinearModel::LinearRegression::~LinearRegression()
+Regression::LinearRegression::~LinearRegression()
 {
 }
 
-void LinearModel::LinearRegression::Train(void)
+void Regression::LinearRegression::Train(void)
 {
 	switch (this->_method)
 	{
@@ -28,29 +28,49 @@ void LinearModel::LinearRegression::Train(void)
 	}
 }
 
-void LinearModel::LinearRegression::SetTrainSet(Data::NumericSet * _trainset)
+void Regression::LinearRegression::Test(void)
+{
+	size_t testSetSize = _testset->GetSize();
+	for (int i = 0; i < testSetSize; i++)
+	{
+		Data::NumericSet::Sample sample = _testset->GetSample(i);
+		double x = sample.first(0);
+		double predict = _weight * x + _bias;
+		double y = sample.second(0);
+	}
+}
+
+double Regression::LinearRegression::Predict(void)
+{
+	return 0;
+}
+
+void Regression::LinearRegression::SetTrainSet(Data::NumericSet * _trainset)
 {
 	this->_trainset = _trainset;
 }
 
-void LinearModel::LinearRegression::SetTestSet(Data::NumericSet * _testset)
+void Regression::LinearRegression::SetTestSet(Data::NumericSet * _testset)
 {
 	this->_testset = _testset;
 }
 
-void LinearModel::LinearRegression::SetValidationSet(Data::NumericSet * _validationset)
+void Regression::LinearRegression::SetValidationSet(Data::NumericSet * _validationset)
 {
 	this->_validationset = _validationset;
 }
 
-void LinearModel::LinearRegression::SetMethod(const LinearRegressionMethod _method)
+void Regression::LinearRegression::SetMethod(const LinearRegressionMethod _method)
 {
 	this->_method = _method;
 }
 
-void LinearModel::LinearRegression::OrdinaryLeastSquares(void)
+void Regression::LinearRegression::OrdinaryLeastSquares(void)
 {
-	double sumX, sumY, sumXSquared, sumXY;
+	double sumX = 0; 
+	double sumY = 0;
+	double 	sumXSquared = 0;
+	double 	sumXY = 0;
 
 	size_t tarinsetSize = _trainset->GetSize();
 	for (int i = 0; i < tarinsetSize; i++)
