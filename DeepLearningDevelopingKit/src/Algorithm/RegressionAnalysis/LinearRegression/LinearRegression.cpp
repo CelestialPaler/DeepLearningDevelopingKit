@@ -7,28 +7,18 @@
 
 #include "LinearRegression.h"
 
-Regression::LinearRegression::LinearRegression()
+Regression::LinearRegression::LinearRegression(void)
 {
-}
-
-Regression::LinearRegression::~LinearRegression()
-{
+	this->_weight = 0.f;
+	this->_bias = 0.f;
 }
 
 void Regression::LinearRegression::Train(void)
 {
-	switch (this->_method)
-	{
-	case LinearRegressionMethod::OrdinaryLeastSquares:
-		OrdinaryLeastSquares();
-		break;
-	default:
-		OrdinaryLeastSquares();
-		break;
-	}
+	OrdinaryLeastSquares();
 }
 
-void Regression::LinearRegression::Test(void)
+void Regression::LinearRegression::Test(void) const
 {
 	size_t testSetSize = _testset->GetSize();
 	for (int i = 0; i < testSetSize; i++)
@@ -40,9 +30,10 @@ void Regression::LinearRegression::Test(void)
 	}
 }
 
-double Regression::LinearRegression::Predict(void)
+const double Regression::LinearRegression::Predict(const double _x) const 
 {
-	return 0;
+	double predict = _weight * _x + _bias;
+	return predict;
 }
 
 void Regression::LinearRegression::SetTrainSet(Data::NumericSet * _trainset)
@@ -60,17 +51,12 @@ void Regression::LinearRegression::SetValidationSet(Data::NumericSet * _validati
 	this->_validationset = _validationset;
 }
 
-void Regression::LinearRegression::SetMethod(const LinearRegressionMethod _method)
-{
-	this->_method = _method;
-}
-
 void Regression::LinearRegression::OrdinaryLeastSquares(void)
 {
-	double sumX = 0; 
-	double sumY = 0;
-	double 	sumXSquared = 0;
-	double 	sumXY = 0;
+	double sumX{ 0.f };
+	double sumY{ 0.f };
+	double 	sumXSquared{ 0.f };
+	double 	sumXY{ 0.f };
 
 	size_t tarinsetSize = _trainset->GetSize();
 	for (int i = 0; i < tarinsetSize; i++)
@@ -94,4 +80,22 @@ void Regression::LinearRegression::OrdinaryLeastSquares(void)
 		this->_weight = 0;
 		this->_bias = 0;
 	}
+}
+
+Regression::MultivariateLinearRegression::MultivariateLinearRegression(const size_t _inputNum)
+{
+	this->_weight.Init(_inputNum, 1, MathLib::MatrixType::Random);
+	this->_bias = Random();
+}
+
+void Regression::MultivariateLinearRegression::Train(void)
+{
+	MathLib::Matrix<double> w_hat(_weight.ColumeSize() + 1, 1);
+	for (size_t i = 0; i < _weight.ColumeSize(); i++)
+	{
+		w_hat(i, 0) = _weight(i, 0);
+	}
+	w_hat(_weight.ColumeSize(), 0) = _bias;
+
+	std::cout << _weight << _bias << w_hat << std::endl;
 }

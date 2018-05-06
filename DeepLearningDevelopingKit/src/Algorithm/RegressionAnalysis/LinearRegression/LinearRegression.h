@@ -8,34 +8,48 @@
 #include "..\..\..\DataManager\Dataset\DataSet.h"
 #include "..\..\..\MathLib\MathLib.h"
 
+/***************************************************************************************************/
+// Namespace : Regression
 namespace Regression
 {
-	enum class LinearRegressionMethod
+	// Regression Methods
+	enum class RegressionMethod
 	{
 		OrdinaryLeastSquares,
 		GradientDescent
 	};
 
+	/***************************************************************************************************/
+	// Class : LinearRegression
+	/// One variable linear resgression.
 	class LinearRegression
 	{
-	public:
-		LinearRegression();
-		~LinearRegression();
+	public: // Constructors
 
-	public:
+		// Default constructor
+		/// Take no parameters.
+		LinearRegression(void);
+
+	public: 
+
+		// Tarin the model
 		void Train(void);
-		void Test(void);
-		double Predict(void);
+		// Test the model
+		void Test(void) const;
+		// Use the model to predict
+		const double Predict(const double _x) const;
 
-	public:
+	public: // Configurations
+
+		// Set dataset for training
 		void SetTrainSet(Data::NumericSet * _trainset);
+		// Set dataset for testing
 		void SetTestSet(Data::NumericSet * _testset);
+		// Set dataset for validation
 		void SetValidationSet(Data::NumericSet * _validationset);
-		void SetMethod(const LinearRegressionMethod _method);
 
 	private:
 		void OrdinaryLeastSquares(void);
-		void GradientDescent(void);
 
 	public:
 		// Basic
@@ -44,14 +58,15 @@ namespace Regression
 		Data::NumericSet * _trainset;
 		Data::NumericSet * _testset;
 		Data::NumericSet * _validationset;
-		LinearRegressionMethod _method;
 	};
 	
+	/***************************************************************************************************/
+	// Class : LinearRegression
+	/// One variable linear resgression.
 	class MultivariateLinearRegression
 	{
 	public:
-		MultivariateLinearRegression();
-		~MultivariateLinearRegression();
+		MultivariateLinearRegression(const size_t _inputNum);
 
 	public:
 		void Train(void);
@@ -62,17 +77,17 @@ namespace Regression
 		void SetTrainSet(Data::NumericSet * _trainset);
 		void SetTestSet(Data::NumericSet * _testset);
 		void SetValidationSet(Data::NumericSet * _validationset);
-		void SetMethod(const LinearRegressionMethod _method);
+		void SetMethod(const RegressionMethod _method);
 
 	private:
 
 	public:
 		// Basic
-		double _weight;
+		MathLib::Matrix<double> _weight;
 		double _bias;
 		Data::NumericSet * _trainset;
 		Data::NumericSet * _testset;
 		Data::NumericSet * _validationset;
-		LinearRegressionMethod _method;
+		RegressionMethod _method;
 	};
 }

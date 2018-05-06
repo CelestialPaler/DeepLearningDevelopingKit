@@ -146,7 +146,7 @@ namespace MathLib
 		/// Used for streaming in format.
 		friend std::ostream& operator<<(std::ostream& _outstream, Matrix<T>& _mat)
 		{
-			_outstream << typeid(_mat).name() << endl;
+			_outstream << typeid(_mat).name() << std::endl;
 			_outstream << std::fixed << std::setprecision(3);
 			for (size_t i = 0; i < _mat.m; i++)
 			{
@@ -156,7 +156,7 @@ namespace MathLib
 					_outstream << _mat(i, j);
 					if (j != _mat.n - 1)	_outstream << " ";
 				}
-				_outstream << "|" << endl;
+				_outstream << "|" << std::endl;
 			}
 			return _outstream;
 		}
