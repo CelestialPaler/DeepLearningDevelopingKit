@@ -82,6 +82,9 @@
     <Filter Include="src\Algorithm\RegressionAnalysis %28RA%29\LogisticRegression">
       <UniqueIdentifier>{f27301c6-bc96-409e-b671-c2fcf7401e4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Algorithm\MatrixAnalysis">
+      <UniqueIdentifier>{8f4dd424-214f-4e66-81b6-eb4a31960138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -216,6 +219,12 @@
     <ClInclude Include="src\MathLib\MathLibError.h">
       <Filter>src\MathLib</Filter>
     </ClInclude>
+    <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp">
+      <Filter>src\Algorithm\MatrixAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp">
+      <Filter>src\Algorithm\MatrixAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
@@ -271,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="src\UnitTest\Matrix_test.cpp">
       <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\MatrixDecomposition_test.cpp">
+      <Filter>src\MathLib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

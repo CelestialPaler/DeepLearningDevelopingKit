@@ -164,6 +164,8 @@
     <None Include="src\Visualizer\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp" />
+    <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp" />
     <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h" />
     <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h" />
@@ -204,6 +206,7 @@
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />
     <ClCompile Include="src\UnitTest\LinearRegression_test.cpp" />
+    <ClCompile Include="src\UnitTest\MatrixDecomposition_test.cpp" />
     <ClCompile Include="src\UnitTest\Matrix_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />

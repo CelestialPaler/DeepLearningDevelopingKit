@@ -10,6 +10,7 @@
 // Headerfiles
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 #include "MathLibError.h"
 #include "Vector.hpp"
@@ -53,40 +54,13 @@ namespace MathLib
 		/// Initializing the Matrix after defined by default constructor.
 		void Init(const size_t _m, const size_t _n, const MatrixType _type = MatrixType::Zero);
 
-	public: // Arithmatic
-
-
 	public: // Quantification
-
-		//	Determinant function
-		T Determinant(void) const;
-		// Trace
-		T Trace(void) const;
-		// Cofactor function
-		T Cofactor(size_t _i, size_t _j);
-		// Cofactor function
-		T AlgebraicCofactor(size_t _i, size_t _j);
-		// Rank function
-		/// Get the value of the rank in the Matrix.
-		int Rank(void);
-
-	public: // Transformation
-
-		// GaussianElimination
-		Matrix<T> GaussianElimination(void) const;
-		// Transposition
-		Matrix<T> Transpostion(void) const;
-
-
-	private:
-
-		void SwapColumn(const size_t _i, const size_t _j);
-		void Resize(const size_t _m, const size_t _n);
-
 
 		// Size function
 		/// Return the size of the Matrix.
-		const size_t Size(void) const;
+		inline const size_t ColumeSize(void) const { return m; }
+		inline const size_t RowSize(void) const { return n; }
+		inline const size_t Size(void) const;
 		// Sum function
 		/// Add up all the element in the Matrix.
 		T Sum(void) const;
@@ -100,12 +74,48 @@ namespace MathLib
 		/// Get the value of the min element in the Matrix.
 		T Min(void) const;
 
+	public: // Advanced Quantification
+
+		//	Determinant function
+		/// Calcutate the determinant of the Matrix.
+		T Determinant(void) const;
+		// Trace
+		/// Calcutate the trace of the Matrix.
+		T Trace(void) const;
+		// Cofactor function
+		/// Calcutate the cofactor of the Matrix.
+		T Cofactor(const size_t _i, const size_t _j) const;
+		// Algebraic Cofactor function
+		/// Calcutate the algebraic cofactor of the Matrix.
+		T AlgebraicCofactor(const size_t _i, const size_t _j) const;
+		// Rank function
+		/// Calcutate the value of the rank of the Matrix.
+		int Rank(void) const;
+
+	public: // Transformation
+
+		// Gaussian Elimination
+		Matrix<T> GaussianElimination(void) const;
+		// Transposition matrix
+		Matrix<T> Transpostion(void) const;
+		// Adjoint matrix
+		Matrix<T> Adjoint(void) const;
+		// Inverse matrix
+		Matrix<T> Inverse(void) const;
+
+	private: // Inner woking functions
+
+		// Swap two columns
+		void SwapColumn(const size_t _i, const size_t _j);
+		// Resize the matrix
+		void Resize(const size_t _m, const size_t _n);
+
 	public: // Pointers
 
 		// Pointer
-		T * data() { return this->_data[0]; }
+		T * Data() { return this->_data[0]; }
 		// Const pointer
-		const T * data() const { return this->_data[0]; }
+		const T * Data() const { return this->_data[0]; }
 
 	public: // Operator Overloading 
 
@@ -127,6 +137,7 @@ namespace MathLib
 		friend std::ostream& operator<<(std::ostream& _outstream, Matrix<T>& _mat)
 		{
 			_outstream << typeid(_mat).name() << endl;
+			_outstream << std::fixed << std::setprecision(3);
 			for (size_t i = 0; i < _mat.m; i++)
 			{
 				_outstream << "|";
@@ -359,7 +370,7 @@ namespace MathLib
 				for (size_t j = 0; j < _n; j++)
 				{
 					T tempElem = *new T;
-					tempElem = Random();
+					tempElem = Random() * 10;
 					tempVec.push_back(tempElem);
 				}
 				_data.push_back(tempVec);
@@ -386,6 +397,15 @@ namespace MathLib
 		}
 		n = _n;
 		m = _m;
+	}
+
+	template<class T>
+	inline const size_t Matrix<T>::Size(void) const
+	{
+		if (m == n)
+			return m;
+		else
+			return 0;
 	}
 
 	template<class T>
@@ -525,12 +545,32 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Cofactor(size_t _i, size_t _j)
+	inline Matrix<T> Matrix<T>::Adjoint(void) const
+	{
+		Matrix<T> self = *this;
+		Matrix<T> tempMat(n, n);
+		for (size_t i = 0; i < n; i++)
+			for (size_t j = 0; j < n; j++)
+				tempMat(i, j) = self.AlgebraicCofactor(j, i);
+		return tempMat;
+	}
+
+	template<class T>
+	inline Matrix<T> Matrix<T>::Inverse(void) const
+	{
+		Matrix<T> self = *this;
+		Matrix<T> tempMat(n, n);
+		tempMat = self.Adjoint() * (1 / self.Determinant());
+		return tempMat;
+	}
+
+	template<class T>
+	inline T MathLib::Matrix<T>::Cofactor(const size_t _i, const size_t _j) const
 	{
 		Matrix<T> tempMat = *this;
 		auto iter1 = tempMat._data.begin() + _i;
 		tempMat._data.erase(iter1);
-		for (size_t i = 0; i < m-1; i++)
+		for (size_t i = 0; i < m - 1; i++)
 		{
 			auto iter2 = tempMat._data.at(i).begin() + _j;
 			tempMat._data.at(i).erase(iter2);
@@ -540,13 +580,19 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::AlgebraicCofactor(size_t _i, size_t _j)
+	inline T MathLib::Matrix<T>::AlgebraicCofactor(const size_t _i, const size_t _j) const
 	{
-		return T();
+		T temp = Cofactor(_i, _j);
+		if (temp<DBL_EPSILON && temp >(-1)*DBL_EPSILON)
+			return 0.f;
+		else if ((_i + _j) % 2 == 0)
+			return temp;
+		else
+			return (-1) * temp;
 	}
 
 	template<class T>
-	inline int Matrix<T>::Rank(void)
+	inline int Matrix<T>::Rank(void) const
 	{
 		Matrix<T> tempMat = *this;
 		tempMat = tempMat.GaussianElimination();
