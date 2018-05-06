@@ -1,12 +1,12 @@
 {
-    "name": "LinearRegressionTest",
+    "name": "LinearRegression Test",
 	"class": "numeric_set",
     "sample_size": 10,
     "input_size": 1,
     "lable_size": 1,
 	"datablock": [{
 			"class": "numeric_set::sample",
-			"input": [0.5623],
+			"input": [1.5623],
 			"lable": [1.5953]
 		},
 		{

@@ -97,5 +97,20 @@ void Regression::MultivariateLinearRegression::Train(void)
 	}
 	w_hat(_weight.ColumeSize(), 0) = _bias;
 
+	MathLib::Matrix<double> X(_trainset->GetSize(), _weight.ColumeSize() + 1);
+	for (size_t i = 0; i < _trainset->GetSize(); i++)
+	{
+		Data::NumericSet::Sample sample = _trainset->GetSample(i);
+		for (size_t j = 0; j < sample.first.Size(); j++)
+			X(i, j) = sample.first(j);
+		X(i, sample.first.Size()) = 1;
+	}
+
 	std::cout << _weight << _bias << w_hat << std::endl;
+	std::cout << X;
+}
+
+void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * _trainset)
+{
+	this->_trainset = _trainset;
 }

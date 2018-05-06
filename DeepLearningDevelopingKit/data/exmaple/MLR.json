@@ -1,0 +1,58 @@
+{
+    "name": "MultivariateLinearRegression Test",
+	"class": "numeric_set",
+    "sample_size": 10,
+    "input_size": 2,
+    "lable_size": 1,
+	"datablock": [{
+			"class": "numeric_set::sample",
+			"input": [1.5623, 1.2358],
+			"lable": [2.7965]
+		},
+		{
+			"class": "numeric_set::sample",
+            "input": [6.2351, 2.8545],
+			"lable": [9.0254]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [5.3265, 2.3025],
+			"lable": [7.5378]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [2.0326, 5.2154],
+			"lable": [7.5236]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [7.6589, 3.2365],
+			"lable": [10.9562]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [0.2367, 7.3698],
+			"lable": [7.6235]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [7.9856, 0.2365],
+			"lable": [8.2653]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [10.3269, 5.2366],
+			"lable": [15.8562]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [3.2365, 8.2365],
+			"lable": [11.4562]
+		},
+		{
+			"class": "numeric_set::sample",
+			"input": [12.2658, 8.2365],
+			"lable": [20.5232]
+		}
+	]
+}
