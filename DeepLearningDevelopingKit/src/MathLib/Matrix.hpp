@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <cmath>
 
 #include "MathLibError.h"
 #include "Vector.hpp"
@@ -63,45 +64,54 @@ namespace MathLib
 		inline const size_t Size(void) const;
 		// Sum function
 		/// Add up all the element in the Matrix.
-		T Sum(void) const;
+		const T Sum(void) const;
 		// Average function
 		/// Calculate the average value of all the element in the Matrix.
-		T Average(void) const;
+		const T Average(void) const;
 		// Max function
 		/// Get the value of the max element in the Matrix.
-		T Max(void) const;
+		const T Max(void) const;
 		// Min function
 		/// Get the value of the min element in the Matrix.
-		T Min(void) const;
+		const T Min(void) const;
 
 	public: // Advanced Quantification
 
 		//	Determinant function
 		/// Calcutate the determinant of the Matrix.
-		T Determinant(void) const;
+		const T Determinant(void) const;
 		// Trace
 		/// Calcutate the trace of the Matrix.
-		T Trace(void) const;
+		const T Trace(void) const;
 		// Cofactor function
 		/// Calcutate the cofactor of the Matrix.
-		T Cofactor(const size_t _i, const size_t _j) const;
+		const T Cofactor(const size_t _i, const size_t _j) const;
 		// Algebraic Cofactor function
 		/// Calcutate the algebraic cofactor of the Matrix.
-		T AlgebraicCofactor(const size_t _i, const size_t _j) const;
+		const T AlgebraicCofactor(const size_t _i, const size_t _j) const;
 		// Rank function
-		/// Calcutate the value of the rank of the Matrix.
-		int Rank(void) const;
-
+		/// Calcutate the rank of the Matrix.
+		const unsigned int Rank(void) const;
+		// 1-Norm
+		/// Calcutate the 1-norm of the Matrix.
+		const T OneNorm(void) const;
+		// Forbenivs Norm
+		/// Calcutate the Forbenivs norm of the Matrix.
+		const T ForbenivsNorm(void) const;
+		// P-Norm
+		/// Calcutate the P-Norm of the Matrix.
+		const T PNorm(const unsigned int _p) const;
+		
 	public: // Transformation
 
 		// Gaussian Elimination
-		Matrix<T> GaussianElimination(void) const;
+		const Matrix<T> GaussianElimination(void) const;
 		// Transposition matrix
-		Matrix<T> Transpostion(void) const;
+		const Matrix<T> Transpostion(void) const;
 		// Adjoint matrix
-		Matrix<T> Adjoint(void) const;
+		const Matrix<T> Adjoint(void) const;
 		// Inverse matrix
-		Matrix<T> Inverse(void) const;
+		const Matrix<T> Inverse(void) const;
 
 	private: // Inner woking functions
 
@@ -409,7 +419,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Sum(void) const
+	inline const T Matrix<T>::Sum(void) const
 	{
 		const Vector<T> & self = *this;
 		T Sum = 0;
@@ -424,13 +434,13 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Average(void) const
+	inline const T Matrix<T>::Average(void) const
 	{
 		return Sum() / (m*n);
 	}
 
 	template<class T>
-	inline T Matrix<T>::Max(void) const
+	inline const T Matrix<T>::Max(void) const
 	{
 		const Matrix<T> & self = *this;
 		T temp = 0;
@@ -442,7 +452,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Min(void) const
+	inline const T Matrix<T>::Min(void) const
 	{
 		const Matrix<T> & self = *this;
 		T temp = 0;
@@ -454,7 +464,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Determinant(void) const
+	inline const T Matrix<T>::Determinant(void) const
 	{
 		Matrix<T> tempMat = *this;
 		int iter = 0;
@@ -491,7 +501,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T Matrix<T>::Trace(void) const
+	inline const T Matrix<T>::Trace(void) const
 	{
 		const Matrix<T> & self = *this;
 		T trace = 1;
@@ -503,7 +513,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Matrix<T> Matrix<T>::GaussianElimination(void) const
+	inline const Matrix<T> Matrix<T>::GaussianElimination(void) const
 	{
 		Matrix<T> tempMat = *this;
 		T multiple;
@@ -534,7 +544,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Matrix<T> Matrix<T>::Transpostion(void) const
+	inline const Matrix<T> Matrix<T>::Transpostion(void) const
 	{
 		const Matrix<T> & self = *this;
 		Matrix<T> tempMat(n, n);
@@ -545,7 +555,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Matrix<T> Matrix<T>::Adjoint(void) const
+	inline const Matrix<T> Matrix<T>::Adjoint(void) const
 	{
 		Matrix<T> self = *this;
 		Matrix<T> tempMat(n, n);
@@ -556,7 +566,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline Matrix<T> Matrix<T>::Inverse(void) const
+	inline const Matrix<T> Matrix<T>::Inverse(void) const
 	{
 		Matrix<T> self = *this;
 		Matrix<T> tempMat(n, n);
@@ -565,7 +575,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T MathLib::Matrix<T>::Cofactor(const size_t _i, const size_t _j) const
+	inline const T MathLib::Matrix<T>::Cofactor(const size_t _i, const size_t _j) const
 	{
 		Matrix<T> tempMat = *this;
 		auto iter1 = tempMat._data.begin() + _i;
@@ -580,7 +590,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline T MathLib::Matrix<T>::AlgebraicCofactor(const size_t _i, const size_t _j) const
+	inline const T MathLib::Matrix<T>::AlgebraicCofactor(const size_t _i, const size_t _j) const
 	{
 		T temp = Cofactor(_i, _j);
 		if (temp<DBL_EPSILON && temp >(-1)*DBL_EPSILON)
@@ -592,7 +602,7 @@ namespace MathLib
 	}
 
 	template<class T>
-	inline int Matrix<T>::Rank(void) const
+	inline const unsigned int Matrix<T>::Rank(void) const
 	{
 		Matrix<T> tempMat = *this;
 		tempMat = tempMat.GaussianElimination();
@@ -602,6 +612,44 @@ namespace MathLib
 				rank++;
 
 		return rank;
+	}
+
+	template<class T>
+	inline const T Matrix<T>::OneNorm(void) const
+	{
+		const Matrix<T> & self = *this;
+		T tempMax{0.f}, sum{0.f};
+		for (size_t i = 0; i < n; i++)
+		{
+			for (size_t j = 0; j < n; j++)
+				sum += self(i, j);
+			if (sum>tempMax)
+				tempMax = sum;
+			sum = 0;
+		}
+		return tempMax;
+	}
+
+	template<class T>
+	inline const T Matrix<T>::ForbenivsNorm(void) const
+	{
+		const Matrix<T> & self = *this;
+		T sum{ 0.f };
+		for (size_t i = 0; i < n; i++)
+			for (size_t j = 0; j < n; j++)
+				sum += self(i, j) * self(i, j);
+		return std::sqrtf(sum);
+	}
+
+	template<class T>
+	inline const T Matrix<T>::PNorm(const unsigned int _p) const
+	{
+		const Matrix<T> & self = *this;
+		T sum{ 0.f };
+		for (size_t i = 0; i < n; i++)
+			for (size_t j = 0; j < n; j++)
+				sum += std::powf(self(i, j), _p);
+		return std::powf(sum, 1 / _p);
 	}
 
 	template<class T>

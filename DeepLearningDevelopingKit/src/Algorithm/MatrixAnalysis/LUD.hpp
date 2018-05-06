@@ -55,7 +55,6 @@ namespace MathLib
 				return Crout(_mat);
 				break;
 			case MathLib::MatrixDecomposition::LUDMethod::Cholesky:
-				return Cholesky(_mat);
 				break;
 			default:
 				return Doolittle(_mat);

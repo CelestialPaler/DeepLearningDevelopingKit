@@ -4,7 +4,8 @@
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-#define MatrixDecompostionDebug
+
+//#define MatrixDecompostionDebug
 
 #ifdef MatrixDecompostionDebug
 
@@ -16,6 +17,7 @@
 
 using namespace std;
 using namespace MathLib;
+using namespace MatrixDecomposition;
 
 int main()
 {
@@ -23,7 +25,8 @@ int main()
 	Matrix<double> L(3, 3, MatrixType::Random);
 	Matrix<double> U(3, 3, MatrixType::Random);
 	Matrix<double> A(3, 3, MatrixType::Random);
-	auto temp1 = MatrixDecomposition::LUD(A, MatrixDecomposition::LUDMethod::Doolittle);
+	cout << "Matrix A OneNorm : " << A.PNorm(2) << endl;
+	auto temp1 = LUD(A, LUDMethod::Doolittle);
 	L = temp1.first;
 	U = temp1.second;
 
