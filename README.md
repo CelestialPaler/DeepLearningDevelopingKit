@@ -10,14 +10,14 @@
 <h2>Brief Introduction</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Powerful modularization and expandability provide a great tool to learn about machine learning, especially deep learning.You can explore as you wish, build your dream software, without being bothered by intricate codes. You can build your own AI model quickly and train it through iterator in high-efficiency.Like Lego building blocks, you can assemble or transplant your models and apply them to your AI applications within several minutes.</p> 
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Programing Language:</p> 
+<p>&nbsp;&nbsp;Programing Language:</p> 
 <ul>
     <li><p>C/C++</p></li>
     <li><p>Python</p></li>
 </ul>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Data-interchange Format:</p>
- 
+
+ <p>&nbsp;&nbsp;Feature:</p> 
 <ul>
     <li><p>Simple and intuitive</p></li>
     <li><p>High-efficiency</p></li>
@@ -26,8 +26,7 @@
     <li><p>Customization</p></li>
 </ul>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Feature:</p> 
-
+<p>&nbsp;&nbsp;Data-interchange Format:</p>
 <ul>
     <li><p>Json</p></li>
 </ul>
@@ -45,7 +44,7 @@
 
 <h2>Developing Status</h2>
 
-<h3>Under developing:</h3>
+<h3>&nbsp;&nbsp;Under developing:</h3>
 <ul>
     <li><p>Advanced Math Library</p></li>
     <li><p>LinearRegression in Regression Analysis</p></li>
@@ -53,7 +52,7 @@
     <li><p>Data Generator</p></li>
 </ul>
 
-<h3>Further plan (Not top priority):</h3>
+<h3>&nbsp;&nbsp;Further plan (Not top priority):</h3>
 <ul>
     <li><p>Visualization tool using SFML or Python</p></li>
     <li><p>Acceleration using CUDA</p></li>
