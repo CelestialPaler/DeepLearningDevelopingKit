@@ -5,14 +5,17 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define LinearRegressionDebug
+// #define LinearRegressionDebug
 
 #ifdef LinearRegressionDebug
 #include <iostream>
 #include "..\Algorithm\RegressionAnalysis\RegressionAnalysis.h"
+#include "..\Util\Timer\Time.hpp"
 
 int main()
 {
+	Util::Timer<std::chrono::seconds> debugTimer;
+	debugTimer.Start();
 	std::cout << "/***********************************************************/" << std::endl;
 	std::cout << "Linear Regression Test : \n" << std::endl;
 	Data::NumericSet trainset1;
@@ -24,7 +27,8 @@ int main()
 
 	debugLR.Train();
 
-	std::cout << "\ny = " << debugLR._weight <<" x + "<< debugLR._bias << std::endl;
+	std::cout << "\nTime used:" << debugTimer.GetTime() << " sec" << std::endl;
+	std::cout << "y = " << debugLR._weight <<" x + "<< debugLR._bias << std::endl;
 	std::cout << "Predict value for 5.3698 is " << debugLR.Predict(5.3698) << "\n\n" << std::endl;
 
 	std::cout << "/***********************************************************/" << std::endl;

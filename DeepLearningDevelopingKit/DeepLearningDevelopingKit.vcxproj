@@ -190,7 +190,7 @@
     <ClInclude Include="src\Util\Json\JsonHandler.h" />
     <ClInclude Include="src\Util\Json\JsonParser.h" />
     <ClInclude Include="src\Util\LogManager\Log.h" />
-    <ClInclude Include="src\Util\Timer\Timer.h" />
+    <ClInclude Include="src\Util\Timer\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp" />
@@ -209,6 +209,7 @@
     <ClCompile Include="src\UnitTest\MatrixDecomposition_test.cpp" />
     <ClCompile Include="src\UnitTest\Matrix_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
+    <ClCompile Include="src\UnitTest\Timer_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
     <ClCompile Include="src\Util\Json\JsonHandler.cpp" />
     <ClCompile Include="src\Util\Json\JsonParser.cpp" />

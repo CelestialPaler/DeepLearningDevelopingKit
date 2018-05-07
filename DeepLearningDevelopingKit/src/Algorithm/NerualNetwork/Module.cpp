@@ -145,7 +145,6 @@ void Nerual::BPNet::SetTestSet(NumericSet * _testset)
 
 void Nerual::BPNet::Train()
 {
-	Timer<std::chrono::seconds> trainTimer;
 	int iterCount = 0;
 	double loss = 0;
 	NumericSet::Sample sample;
@@ -166,7 +165,6 @@ void Nerual::BPNet::Train()
 		loss = _outputlayer->GetLoss();
 		_outputlayer->LossSumClear();
 		std::cout << "Iiteration :" << std::setw(4) << std::setfill('0') << iterCount << " | "
-			<< "Time :" << std::fixed << std::setprecision(3) << trainTimer.GetTime() << " sec"<< " | "
 			<< "Loss :" << std::fixed << std::setprecision(10) << loss << std::endl;
 	} while (loss > 0.001);
 }

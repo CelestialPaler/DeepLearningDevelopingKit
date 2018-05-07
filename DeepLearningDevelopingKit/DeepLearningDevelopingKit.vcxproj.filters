@@ -168,9 +168,6 @@
     <ClInclude Include="src\Util\Json\JsonParser.h">
       <Filter>src\Util\Json</Filter>
     </ClInclude>
-    <ClInclude Include="src\Util\Timer\Timer.h">
-      <Filter>src\Util\Timer</Filter>
-    </ClInclude>
     <ClInclude Include="src\Util\LogManager\Log.h">
       <Filter>src\Util\LogManager</Filter>
     </ClInclude>
@@ -224,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp">
       <Filter>src\Algorithm\MatrixAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\Timer\Time.hpp">
+      <Filter>src\Util\Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="src\UnitTest\MatrixDecomposition_test.cpp">
       <Filter>src\MathLib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UnitTest\Timer_test.cpp">
+      <Filter>src\UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

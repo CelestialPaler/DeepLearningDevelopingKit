@@ -12,7 +12,7 @@
 
 #include "..\..\MathLib\MathLib.h"
 #include "..\..\DataManager\Dataset\DataSet.h"
-#include "..\..\Util\Timer\Timer.h"
+#include "..\..\Util\Timer\Time.hpp"
 
 #include "Layer.h"
 #include "Node.h"
