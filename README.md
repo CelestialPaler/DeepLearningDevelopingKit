@@ -1,5 +1,5 @@
 <h1>Deep Learning Developing Kit</h1>
-<h3>An algorithm library for deep learning.</h3>
+<h3>&nbsp;&nbsp;An algorithm library for deep learning.</h3>
 
 <h2>Build status</h2>
 
