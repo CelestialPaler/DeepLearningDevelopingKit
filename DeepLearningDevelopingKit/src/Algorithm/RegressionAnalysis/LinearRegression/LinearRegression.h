@@ -7,6 +7,7 @@
 
 #include "..\..\..\DataManager\Dataset\DataSet.h"
 #include "..\..\..\MathLib\MathLib.h"
+#include <Windows.h>
 
 /***************************************************************************************************/
 // Namespace : Regression
@@ -51,7 +52,7 @@ namespace Regression
 	private:
 		void OrdinaryLeastSquares(void);
 
-	public:
+	private:
 		// Basic
 		double _weight;
 		double _bias;
@@ -61,11 +62,12 @@ namespace Regression
 	};
 	
 	/***************************************************************************************************/
-	// Class : LinearRegression
+	// Class : MultivariateLinearRegression (MLR)
 	/// One variable linear resgression.
 	class MultivariateLinearRegression
 	{
-	public:
+	public: // Constructors
+
 		MultivariateLinearRegression(const size_t _inputNum);
 
 	public:
@@ -81,10 +83,11 @@ namespace Regression
 
 	private:
 
-	public:
+		const double LossFunction(const MathLib::Matrix<double> & _predict, const MathLib::Matrix<double> & _lable) const;
+
+	private:
 		// Basic
-		MathLib::Matrix<double> _weight;
-		double _bias;
+		MathLib::Matrix<double> _theta;
 		Data::NumericSet * _trainset;
 		Data::NumericSet * _testset;
 		Data::NumericSet * _validationset;

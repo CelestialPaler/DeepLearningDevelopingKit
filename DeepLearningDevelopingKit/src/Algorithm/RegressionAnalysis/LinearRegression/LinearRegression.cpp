@@ -84,33 +84,56 @@ void Regression::LinearRegression::OrdinaryLeastSquares(void)
 
 Regression::MultivariateLinearRegression::MultivariateLinearRegression(const size_t _inputNum)
 {
-	this->_weight.Init(_inputNum, 1, MathLib::MatrixType::Random);
-	this->_bias = Random();
+	this->_theta.Init(_inputNum + 1, 1, MathLib::MatrixType::Random);
 }
 
 void Regression::MultivariateLinearRegression::Train(void)
 {
-	MathLib::Matrix<double> w_hat(_weight.ColumeSize() + 1, 1);
-	for (size_t i = 0; i < _weight.ColumeSize(); i++)
-	{
-		w_hat(i, 0) = _weight(i, 0);
-	}
-	w_hat(_weight.ColumeSize(), 0) = _bias;
-
-	MathLib::Matrix<double> X(_trainset->GetSize(), _weight.ColumeSize() + 1);
+	static const double learn_rate{ 0.001 };
+	MathLib::Matrix<double> X(_trainset->GetSize(), _theta.ColumeSize());
+	MathLib::Matrix<double> y_lable(_trainset->GetSize(), 1);
 	for (size_t i = 0; i < _trainset->GetSize(); i++)
 	{
 		Data::NumericSet::Sample sample = _trainset->GetSample(i);
 		for (size_t j = 0; j < sample.first.Size(); j++)
 			X(i, j) = sample.first(j);
 		X(i, sample.first.Size()) = 1;
+		y_lable(i, 0) = sample.second(0);
 	}
+	MathLib::Matrix<double> temp(X.ColumeSize(), _theta.RowSize());
 
-	std::cout << _weight << _bias << w_hat << std::endl;
-	std::cout << X;
+	MathLib::Matrix<double> sum(_theta.ColumeSize(), 1);
+	do
+	{
+		for (size_t i = 0; i < _theta.ColumeSize(); i++)
+		{
+			sum(i, 0) = 0;
+			for (size_t j = 0; j < X.ColumeSize(); j++)
+				sum(i, 0) += (temp(j, 0) - y_lable(j, 0)) * X(j, i) / X.ColumeSize();
+		}
+
+		_theta -= sum * learn_rate;
+		temp = X * _theta;
+	} while (LossFunction(temp, y_lable) > 0.1);
+}
+
+void Regression::MultivariateLinearRegression::Test(void)
+{
+	std::cout << "y = " << _theta(0, 0) << " x1 + " << _theta(1, 0) << " x2 + " << _theta(2, 0) << std::endl;
+	std::cout << "Predict : " << _theta(0, 0) * 2.3659 + _theta(1, 0) * 6.3265 + _theta(2, 0) << "    Label : " << 2.3659 + 6.3265 << std::endl;
 }
 
 void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * _trainset)
 {
 	this->_trainset = _trainset;
+}
+
+const double Regression::MultivariateLinearRegression::LossFunction(const MathLib::Matrix<double>& _predict, const MathLib::Matrix<double>& _lable) const
+{
+	double sum{ 0.f };
+	for (size_t i = 0; i < _predict.ColumeSize(); i++)
+	{
+		sum += (_predict(i, 0) - _lable(i, 0)) * (_predict(i, 0) - _lable(i, 0)) / _predict.ColumeSize();
+	}
+	return sum;
 }

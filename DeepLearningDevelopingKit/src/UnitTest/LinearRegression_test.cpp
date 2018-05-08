@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define LinearRegressionDebug
+#define LinearRegressionDebug
 
 #ifdef LinearRegressionDebug
 #include <iostream>
@@ -14,7 +14,7 @@
 
 int main()
 {
-	Util::Timer<std::chrono::seconds> debugTimer;
+	Util::Timer debugTimer;
 	debugTimer.Start();
 	std::cout << "/***********************************************************/" << std::endl;
 	std::cout << "Linear Regression Test : \n" << std::endl;
@@ -27,7 +27,7 @@ int main()
 
 	debugLR.Train();
 
-	std::cout << "\nTime used:" << debugTimer.GetTime() << " sec" << std::endl;
+	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
 	std::cout << "y = " << debugLR._weight <<" x + "<< debugLR._bias << std::endl;
 	std::cout << "Predict value for 5.3698 is " << debugLR.Predict(5.3698) << "\n\n" << std::endl;
 
@@ -37,9 +37,12 @@ int main()
 	trainset2.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\exmaple\\MLR.json");
 	trainset2.PrintToConsole();
 
+	debugTimer.Reset();
 	Regression::MultivariateLinearRegression debugMLR(2);
 	debugMLR.SetTrainSet(&trainset2);
 	debugMLR.Train();
+	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
+	debugMLR.Test();
 	system("pause");
 	return 0;
 }

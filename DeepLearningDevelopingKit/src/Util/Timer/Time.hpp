@@ -51,7 +51,7 @@ namespace Util
 
 	public:
 
-		inline const double GetTime() const {
+		inline const int GetTime() const {
 			return std::chrono::duration_cast<Duration>(std::chrono::steady_clock::now() - _timeBase).count();
 		}
 
