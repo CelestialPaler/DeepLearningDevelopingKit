@@ -35,7 +35,7 @@ int main()
 	trainset2.PrintToConsole();
 
 	debugTimer.Reset();
-	Regression::MultivariateLinearRegression debugMLR(5);
+	Regression::MultivariateLinearRegression debugMLR(8);
 	debugMLR.SetTrainSet(&trainset2);
 	debugMLR.Train();
 	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;

@@ -46,9 +46,7 @@ class DataSetGenerator:
 
 if __name__ == '__main__':
     file_path = '\\data\\test\\MLR.json'
-    # theta = [1.2, 2.9, 0.3, 0.35, 2.6, 1.36, 2.36, 3.26, 2.36]
-    # theta = [1, 2, 3]
-    theta = [1, 2, 3, 4, 5, 6]
-    result = DataSetGenerator.MLR(10, 5, 1, theta)
+    theta = [1.2, 2.9, 0.3, 0.35, 2.6, 1.36, 2.36, 3.26, 2.36]
+    result = DataSetGenerator.MLR(100, 8, 1, theta)
     JsonHandler.save_json(file_path, result);
     

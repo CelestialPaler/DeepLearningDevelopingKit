@@ -110,14 +110,13 @@ void Regression::MultivariateLinearRegression::Train(void)
 		_theta -= sum * learn_rate;
 		temp = X * _theta;
 		std::cout << CostFunction(temp, y_lable) << std::endl;
-	} while (CostFunction(temp, y_lable) > 1);
+	} while (CostFunction(temp, y_lable) > 0.5);
 	std::cout << X << std::endl;
 }
 
 void Regression::MultivariateLinearRegression::Test(void)
 {
-	std::cout << "y = " << _theta(0, 0) << " x1 + " << _theta(1, 0) << " x2 + " << _theta(2, 0) << std::endl;
-	std::cout << "Predict : " << _theta(0, 0) * 2.3659 + _theta(1, 0) * 6.3265 + _theta(2, 0) << "    Label : " << 2.3659 + 6.3265 << std::endl;
+	std::cout << _theta << std::endl;
 }
 
 void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * const _trainset)
