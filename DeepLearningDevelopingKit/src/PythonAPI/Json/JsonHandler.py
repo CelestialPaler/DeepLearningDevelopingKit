@@ -53,7 +53,7 @@ class JsonHandler:
     # Dump serialized python object into a Json file.
     @staticmethod
     def save_json(file_path, file_data):
-        dir_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__),'..\\..')))
+        dir_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__),'..\\..\\..')))
         file_path_abs = dir_path + file_path
         print(file_path_abs)
         if os.path.exists(file_path_abs):

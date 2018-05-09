@@ -24,12 +24,9 @@ int main()
 
 	Regression::LinearRegression debugLR;
 	debugLR.SetTrainSet(&trainset1);
-
 	debugLR.Train();
-
 	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
-	std::cout << "y = " << debugLR._weight <<" x + "<< debugLR._bias << std::endl;
-	std::cout << "Predict value for 5.3698 is " << debugLR.Predict(5.3698) << "\n\n" << std::endl;
+	debugLR.Test();
 
 	std::cout << "/***********************************************************/" << std::endl;
 	std::cout << "Multivariate Linear Regression Test : \n" << std::endl;

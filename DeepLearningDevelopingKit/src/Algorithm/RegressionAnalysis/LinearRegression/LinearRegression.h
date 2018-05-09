@@ -33,7 +33,7 @@ namespace Regression
 
 	public: 
 
-		// Tarin the model
+		// Train the model
 		void Train(void);
 		// Test the model
 		void Test(void) const;
@@ -63,7 +63,7 @@ namespace Regression
 	
 	/***************************************************************************************************/
 	// Class : MultivariateLinearRegression (MLR)
-	/// One variable linear resgression.
+	/// Multi variable linear resgression.
 	class MultivariateLinearRegression
 	{
 	public: // Constructors
@@ -71,19 +71,21 @@ namespace Regression
 		MultivariateLinearRegression(const size_t _inputNum);
 
 	public:
+
 		void Train(void);
 		void Test(void);
 		double Predict(void);
 
 	public:
-		void SetTrainSet(Data::NumericSet * _trainset);
-		void SetTestSet(Data::NumericSet * _testset);
-		void SetValidationSet(Data::NumericSet * _validationset);
+
+		void SetTrainSet(Data::NumericSet *  const _trainset);
+		void SetTestSet(Data::NumericSet * const _testset);
+		void SetValidationSet(Data::NumericSet * const _validationset);
 		void SetMethod(const RegressionMethod _method);
 
 	private:
 
-		const double LossFunction(const MathLib::Matrix<double> & _predict, const MathLib::Matrix<double> & _lable) const;
+		const double CostFunction(const MathLib::Matrix<double> & _predict, const MathLib::Matrix<double> & _lable) const;
 
 	private:
 		// Basic

@@ -20,14 +20,8 @@ void Regression::LinearRegression::Train(void)
 
 void Regression::LinearRegression::Test(void) const
 {
-	size_t testSetSize = _testset->GetSize();
-	for (int i = 0; i < testSetSize; i++)
-	{
-		Data::NumericSet::Sample sample = _testset->GetSample(i);
-		double x = sample.first(0);
-		double predict = _weight * x + _bias;
-		double y = sample.second(0);
-	}
+	std::cout << "y = " << _weight << " x + " << _bias << std::endl;
+	std::cout << "Predict value for 5.3698 is " << Predict(5.3698) << "\n\n" << std::endl;
 }
 
 const double Regression::LinearRegression::Predict(const double _x) const 
@@ -92,6 +86,7 @@ void Regression::MultivariateLinearRegression::Train(void)
 	static const double learn_rate{ 0.001 };
 	MathLib::Matrix<double> X(_trainset->GetSize(), _theta.ColumeSize());
 	MathLib::Matrix<double> y_lable(_trainset->GetSize(), 1);
+
 	for (size_t i = 0; i < _trainset->GetSize(); i++)
 	{
 		Data::NumericSet::Sample sample = _trainset->GetSample(i);
@@ -114,7 +109,7 @@ void Regression::MultivariateLinearRegression::Train(void)
 
 		_theta -= sum * learn_rate;
 		temp = X * _theta;
-	} while (LossFunction(temp, y_lable) > 0.1);
+	} while (CostFunction(temp, y_lable) > 0.1);
 }
 
 void Regression::MultivariateLinearRegression::Test(void)
@@ -123,12 +118,12 @@ void Regression::MultivariateLinearRegression::Test(void)
 	std::cout << "Predict : " << _theta(0, 0) * 2.3659 + _theta(1, 0) * 6.3265 + _theta(2, 0) << "    Label : " << 2.3659 + 6.3265 << std::endl;
 }
 
-void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * _trainset)
+void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * const _trainset)
 {
 	this->_trainset = _trainset;
 }
 
-const double Regression::MultivariateLinearRegression::LossFunction(const MathLib::Matrix<double>& _predict, const MathLib::Matrix<double>& _lable) const
+const double Regression::MultivariateLinearRegression::CostFunction(const MathLib::Matrix<double>& _predict, const MathLib::Matrix<double>& _lable) const
 {
 	double sum{ 0.f };
 	for (size_t i = 0; i < _predict.ColumeSize(); i++)
