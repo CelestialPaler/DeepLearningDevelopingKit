@@ -144,6 +144,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="data\exmaple\LR.json" />
+    <None Include="data\exmaple\MLR.json" />
     <None Include="data\exmaple\vector.json" />
     <None Include="data\exmaple\XOR.json" />
     <None Include="data\test\test.json" />

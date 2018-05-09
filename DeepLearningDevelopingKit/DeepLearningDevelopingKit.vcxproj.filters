@@ -142,6 +142,12 @@
     <None Include="data\exmaple\XOR.json">
       <Filter>data\exmaple</Filter>
     </None>
+    <None Include="data\exmaple\LR.json">
+      <Filter>data\exmaple</Filter>
+    </None>
+    <None Include="data\exmaple\MLR.json">
+      <Filter>data\exmaple</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h">

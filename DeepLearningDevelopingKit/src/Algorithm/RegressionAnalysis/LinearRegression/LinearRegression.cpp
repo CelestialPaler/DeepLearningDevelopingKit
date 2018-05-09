@@ -83,7 +83,7 @@ Regression::MultivariateLinearRegression::MultivariateLinearRegression(const siz
 
 void Regression::MultivariateLinearRegression::Train(void)
 {
-	static const double learn_rate{ 0.001 };
+	static const double learn_rate{ 0.00005 };
 	MathLib::Matrix<double> X(_trainset->GetSize(), _theta.ColumeSize());
 	MathLib::Matrix<double> y_lable(_trainset->GetSize(), 1);
 
@@ -111,7 +111,6 @@ void Regression::MultivariateLinearRegression::Train(void)
 		temp = X * _theta;
 		std::cout << CostFunction(temp, y_lable) << std::endl;
 	} while (CostFunction(temp, y_lable) > 0.5);
-	std::cout << X << std::endl;
 }
 
 void Regression::MultivariateLinearRegression::Test(void)
