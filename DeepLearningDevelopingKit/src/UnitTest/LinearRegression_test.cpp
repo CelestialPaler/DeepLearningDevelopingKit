@@ -31,11 +31,11 @@ int main()
 	std::cout << "/***********************************************************/" << std::endl;
 	std::cout << "Multivariate Linear Regression Test : \n" << std::endl;
 	Data::NumericSet trainset2;
-	trainset2.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\exmaple\\MLR.json");
+	trainset2.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\MLR.json");
 	trainset2.PrintToConsole();
 
 	debugTimer.Reset();
-	Regression::MultivariateLinearRegression debugMLR(2);
+	Regression::MultivariateLinearRegression debugMLR(5);
 	debugMLR.SetTrainSet(&trainset2);
 	debugMLR.Train();
 	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
