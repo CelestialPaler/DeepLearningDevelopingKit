@@ -84,6 +84,7 @@ Regression::MultivariateLinearRegression::MultivariateLinearRegression(const siz
 void Regression::MultivariateLinearRegression::Train(void)
 {
 	static const double learn_rate{ 0.00005 };
+	unsigned int iterCount{ 0 };
 	MathLib::Matrix<double> X(_trainset->GetSize(), _theta.ColumeSize());
 	MathLib::Matrix<double> y_lable(_trainset->GetSize(), 1);
 
@@ -95,7 +96,7 @@ void Regression::MultivariateLinearRegression::Train(void)
 		X(i, sample.first.Size()) = 1;
 		y_lable(i, 0) = sample.second(0);
 	}
-	MathLib::Matrix<double> temp(X.ColumeSize(), _theta.RowSize());
+	MathLib::Matrix<double> x_hat(X.ColumeSize(), _theta.RowSize());
 
 	MathLib::Matrix<double> sum(_theta.ColumeSize(), 1);
 	do
@@ -104,23 +105,44 @@ void Regression::MultivariateLinearRegression::Train(void)
 		{
 			sum(i, 0) = 0;
 			for (size_t j = 0; j < X.ColumeSize(); j++)
-				sum(i, 0) += (temp(j, 0) - y_lable(j, 0)) * X(j, i) / X.ColumeSize();
+				sum(i, 0) += (x_hat(j, 0) - y_lable(j, 0)) * X(j, i) / X.ColumeSize();
 		}
 
 		_theta -= sum * learn_rate;
-		temp = X * _theta;
-		std::cout << CostFunction(temp, y_lable) << std::endl;
-	} while (CostFunction(temp, y_lable) > 0.5);
+		x_hat = X * _theta;
+		iterCount++;
+
+		if (iterCount % 100 == 0)
+		{
+			system("cls");
+			std::cout << "/***********************************************************/" << std::endl;
+			std::cout << "Multivariate Linear Regression Test : " << std::endl;
+			std::cout << std::fixed << std::setprecision(3) << "Iteration : " << iterCount << " | "
+				<< std::fixed << std::setprecision(3) << "Cost : " << CostFunction(x_hat, y_lable) << " | "
+				<< "Percentage : " << 1 / CostFunction(x_hat, y_lable) << " % " << " | "
+				// << std::fixed << std::setprecision(3) << "Time used : " << trainTimer.GetTime() << " ms" << " | "
+				<< std::endl;
+		}
+	} while (CostFunction(x_hat, y_lable) > 0.5);
 }
 
-void Regression::MultivariateLinearRegression::Test(void)
+void Regression::MultivariateLinearRegression::Test(void) const
 {
-	std::cout << _theta << std::endl;
 }
 
 void Regression::MultivariateLinearRegression::SetTrainSet(Data::NumericSet * const _trainset)
 {
 	this->_trainset = _trainset;
+}
+
+void Regression::MultivariateLinearRegression::SetTestSet(Data::NumericSet * const _testset)
+{
+	this->_testset = _testset;
+}
+
+void Regression::MultivariateLinearRegression::SetValidationSet(Data::NumericSet * const _validationset)
+{
+	this->_validationset = _validationset;
 }
 
 const double Regression::MultivariateLinearRegression::CostFunction(const MathLib::Matrix<double>& _predict, const MathLib::Matrix<double>& _lable) const

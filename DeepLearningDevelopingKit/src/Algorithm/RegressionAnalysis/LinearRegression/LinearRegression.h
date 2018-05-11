@@ -7,7 +7,7 @@
 
 #include "..\..\..\DataManager\Dataset\DataSet.h"
 #include "..\..\..\MathLib\MathLib.h"
-#include <Windows.h>
+#include <iosfwd>
 
 /***************************************************************************************************/
 // Namespace : Regression
@@ -50,6 +50,8 @@ namespace Regression
 		void SetValidationSet(Data::NumericSet * _validationset);
 
 	private:
+
+		// Ordinary least squares method
 		void OrdinaryLeastSquares(void);
 
 	private:
@@ -72,19 +74,25 @@ namespace Regression
 
 	public:
 
+		// Train the model
 		void Train(void);
-		void Test(void);
-		double Predict(void);
+		// Test the model
+		void Test(void) const;
+		// Use the model to predict
+		const double Predict(void) const;
 
 	public:
 
+		// Set dataset for training
 		void SetTrainSet(Data::NumericSet *  const _trainset);
+		// Set dataset for testing
 		void SetTestSet(Data::NumericSet * const _testset);
+		// Set dataset for validation
 		void SetValidationSet(Data::NumericSet * const _validationset);
-		void SetMethod(const RegressionMethod _method);
 
 	private:
 
+		// Cost Function
 		const double CostFunction(const MathLib::Matrix<double> & _predict, const MathLib::Matrix<double> & _lable) const;
 
 	private:

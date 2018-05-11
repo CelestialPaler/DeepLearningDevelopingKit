@@ -10,12 +10,9 @@
 #ifdef LinearRegressionDebug
 #include <iostream>
 #include "..\Algorithm\RegressionAnalysis\RegressionAnalysis.h"
-#include "..\Util\Timer\Time.hpp"
 
 int main()
 {
-	Util::Timer debugTimer;
-	debugTimer.Start();
 	std::cout << "/***********************************************************/" << std::endl;
 	std::cout << "Linear Regression Test : \n" << std::endl;
 	Data::NumericSet trainset1;
@@ -25,7 +22,6 @@ int main()
 	Regression::LinearRegression debugLR;
 	debugLR.SetTrainSet(&trainset1);
 	debugLR.Train();
-	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
 	debugLR.Test();
 
 	std::cout << "/***********************************************************/" << std::endl;
@@ -34,11 +30,9 @@ int main()
 	trainset2.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test.json");
 	trainset2.PrintToConsole();
 
-	debugTimer.Reset();
 	Regression::MultivariateLinearRegression debugMLR(10);
 	debugMLR.SetTrainSet(&trainset2);
 	debugMLR.Train();
-	std::cout << "\nTime used:" << debugTimer.GetTime() << " ms" << std::endl;
 	debugMLR.Test();
 	system("pause");
 	return 0;
