@@ -25,7 +25,7 @@ using namespace Util;
 /***************************************************************************************************/
 // Namespace : Nerual
 /// Provide Node for nerual network algorithms.
-namespace Nerual
+namespace Neural
 {
 	class Module
 	{

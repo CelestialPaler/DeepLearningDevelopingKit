@@ -13,7 +13,7 @@
 
 // Default constructor
 /// Takes no parameters.
-Nerual::InputNode::InputNode(void)
+Neural::InputNode::InputNode(void)
 {
 	this->value = 0.f;
 	
@@ -22,7 +22,7 @@ Nerual::InputNode::InputNode(void)
 
 // "<<" operator
 /// Used for streaming in format.
-std::ostream & Nerual::operator<<(std::ostream & _outstream, InputNode & _node)
+std::ostream & Neural::operator<<(std::ostream & _outstream, InputNode & _node)
 {
 	_outstream << typeid(_node).name() << std::endl;
 	_outstream << "	value: " << _node.value << std::endl;
@@ -34,7 +34,7 @@ std::ostream & Nerual::operator<<(std::ostream & _outstream, InputNode & _node)
 
 // Constructor
 /// _n is the input num of the node, which means the size of weight, tempInput, etc.
-Nerual::HiddenNode::HiddenNode(const size_t _n)
+Neural::HiddenNode::HiddenNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->bias = Random();
@@ -53,7 +53,7 @@ Nerual::HiddenNode::HiddenNode(const size_t _n)
 
 // "<<" operator
 /// Used for streaming in format.
-std::ostream & Nerual::operator<<(std::ostream & _outstream, HiddenNode & _node)
+std::ostream & Neural::operator<<(std::ostream & _outstream, HiddenNode & _node)
 {
 	_outstream << typeid(_node).name() << std::endl;
 	_outstream << "	value: " << _node.value << std::endl;
@@ -71,7 +71,7 @@ std::ostream & Nerual::operator<<(std::ostream & _outstream, HiddenNode & _node)
 
 // Constructor
 /// _n is the input num of the node, which means the size of weight, tempInput, etc.
-Nerual::OutputNode::OutputNode(const size_t _n)
+Neural::OutputNode::OutputNode(const size_t _n)
 {
 	this->value = 0.f;
 	this->bias = Random();
@@ -91,7 +91,7 @@ Nerual::OutputNode::OutputNode(const size_t _n)
 
 // "<<" operator
 /// Used for streaming in format.
-std::ostream & Nerual::operator<<(std::ostream & _outstream, OutputNode & _node)
+std::ostream & Neural::operator<<(std::ostream & _outstream, OutputNode & _node)
 {
 	_outstream << typeid(_node).name() << std::endl;
 	_outstream << "	value: " << _node.value << std::endl;

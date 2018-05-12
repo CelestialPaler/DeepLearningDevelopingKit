@@ -15,7 +15,7 @@ const double learnRate = 0.8;
 /// Base class of the layer class.
 // Get the node number of the layers.
 
-size_t Nerual::Layer::GetNodeNum(void)
+size_t Neural::Layer::GetNodeNum(void)
 {
 	return m;
 }
@@ -27,7 +27,7 @@ size_t Nerual::Layer::GetNodeNum(void)
 // Constructor
 /// n is the input num of the layer.
 /// m is the output num of the layer, which of course is the node num in this layer.
-Nerual::InputLayer::InputLayer(const size_t _n, const size_t _m)
+Neural::InputLayer::InputLayer(const size_t _n, const size_t _m)
 {
 	for (size_t i = 0; i < _m; i++)
 	{
@@ -40,7 +40,7 @@ Nerual::InputLayer::InputLayer(const size_t _n, const size_t _m)
 
 // "<<" operator
 /// Used for streaming in format.
-std::ostream & Nerual::operator<<(std::ostream & _outstream, InputLayer & _layer)
+std::ostream & Neural::operator<<(std::ostream & _outstream, InputLayer & _layer)
 {
 	_outstream << typeid(_layer).name() << std::endl;
 	_outstream << "	Node Num : " << _layer.m << std::endl;
@@ -49,7 +49,7 @@ std::ostream & Nerual::operator<<(std::ostream & _outstream, InputLayer & _layer
 
 // Set the input of the layer.
 /// Which means set the nodes` tempInput.
-void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
+void Neural::InputLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < n; i++)
 	{
@@ -58,7 +58,7 @@ void Nerual::InputLayer::SetInput(const Vector<ElemType>& _vec)
 }
 
 // Set the activation function of the layer.
-void Nerual::InputLayer::SetActivationFunction(const ActivationFunction _function)
+void Neural::InputLayer::SetActivationFunction(const ActivationFunction _function)
 {
 	switch (_function)
 	{
@@ -78,7 +78,7 @@ void Nerual::InputLayer::SetActivationFunction(const ActivationFunction _functio
 }
 
 // Set the loss function of the layer.
-void Nerual::InputLayer::SetLossFunction(const LossFunction _function)
+void Neural::InputLayer::SetLossFunction(const LossFunction _function)
 {
 	switch (_function)
 	{
@@ -95,7 +95,7 @@ void Nerual::InputLayer::SetLossFunction(const LossFunction _function)
 
 // Get the output of the layer.
 /// Which means get the value of all nodes in Vector.
-Vector<Nerual::ElemType> Nerual::InputLayer::GetOutput(void)
+Vector<Neural::ElemType> Neural::InputLayer::GetOutput(void)
 {
 	Vector<ElemType> temp(m);
 	for (size_t i = 0; i < m; i++)
@@ -107,7 +107,7 @@ Vector<Nerual::ElemType> Nerual::InputLayer::GetOutput(void)
 
 // ForwardPropagation Function
 /// Calculate the value of each node.
-void Nerual::InputLayer::ForwardPropagation(void)
+void Neural::InputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -117,7 +117,7 @@ void Nerual::InputLayer::ForwardPropagation(void)
 
 // BackwardPropagation Function
 /// Calculate the gradient(delta) of each node.
-Vector<Nerual::ElemType> Nerual::InputLayer::BackwardPropagation(const Vector<ElemType>& _vec)
+Vector<Neural::ElemType> Neural::InputLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	Vector<ElemType> temp(n);
 	return temp;
@@ -125,18 +125,18 @@ Vector<Nerual::ElemType> Nerual::InputLayer::BackwardPropagation(const Vector<El
 
 // Update Function
 /// Update the weight and bias of each node.
-void Nerual::InputLayer::Update(void)
+void Neural::InputLayer::Update(void)
 {
 
 }
 
 // Sum up the delta of a batch.
-void Nerual::InputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+void Neural::InputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 }
 
 // Clear the sumdelta of a batch.
-void Nerual::InputLayer::BatchDeltaSumClear(void)
+void Neural::InputLayer::BatchDeltaSumClear(void)
 {
 }
 
@@ -148,7 +148,7 @@ void Nerual::InputLayer::BatchDeltaSumClear(void)
 // Constructor
 /// n is the input num of the layer.
 /// m is the output num of the layer, which of course is the node num in this layer.
-Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
+Neural::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 {
 	for (size_t i = 0; i < _m; i++)
 	{
@@ -161,7 +161,7 @@ Nerual::HiddenLayer::HiddenLayer(const size_t _n, const size_t _m)
 
 // Set the input of the layer.
 /// Which means set the nodes` tempInput.
-void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
+void Neural::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -173,7 +173,7 @@ void Nerual::HiddenLayer::SetInput(const Vector<ElemType>& _vec)
 }
 
 // Set the expectation of the HiddenLayer.
-void Nerual::HiddenLayer::SetExpectation(const Vector<ElemType>& _vec)
+void Neural::HiddenLayer::SetExpectation(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -182,7 +182,7 @@ void Nerual::HiddenLayer::SetExpectation(const Vector<ElemType>& _vec)
 }
 
 // Set the activation function of the layer.
-void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _function)
+void Neural::HiddenLayer::SetActivationFunction(const ActivationFunction _function)
 {
 	switch (_function)
 	{
@@ -202,7 +202,7 @@ void Nerual::HiddenLayer::SetActivationFunction(const ActivationFunction _functi
 }
 
 // Set the loss function of the layer.
-void Nerual::HiddenLayer::SetLossFunction(const LossFunction _function)
+void Neural::HiddenLayer::SetLossFunction(const LossFunction _function)
 {
 	switch (_function)
 	{
@@ -219,7 +219,7 @@ void Nerual::HiddenLayer::SetLossFunction(const LossFunction _function)
 
 // Get the output of the layer.
 /// Which means get the value of all nodes in Vector.
-Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
+Vector<Neural::ElemType> Neural::HiddenLayer::GetOutput(void)
 {
 	Vector<ElemType> temp(m);
 	for (size_t i = 0; i < m; i++)
@@ -231,7 +231,7 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::GetOutput(void)
 
 // ForwardPropagation Function
 /// Calculate the value of each node.
-void Nerual::HiddenLayer::ForwardPropagation(void)
+void Neural::HiddenLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -241,7 +241,7 @@ void Nerual::HiddenLayer::ForwardPropagation(void)
 
 // BackwardPropagation Function
 /// Calculate the gradient(delta) of each node.
-Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<ElemType>& _vec)
+Vector<Neural::ElemType> Neural::HiddenLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	SetExpectation(_vec);
 	for (size_t i = 0; i < m; i++)
@@ -262,7 +262,7 @@ Vector<Nerual::ElemType> Nerual::HiddenLayer::BackwardPropagation(const Vector<E
 
 // Update Function
 /// Update the weight and bias of each node.
-void Nerual::HiddenLayer::Update(void)
+void Neural::HiddenLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -272,7 +272,7 @@ void Nerual::HiddenLayer::Update(void)
 }
 
 // Sum up the delta of a batch.
-void Nerual::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+void Neural::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -282,7 +282,7 @@ void Nerual::HiddenLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 }
 
 // Clear the sum of sum of delta.
-void Nerual::HiddenLayer::BatchDeltaSumClear(void)
+void Neural::HiddenLayer::BatchDeltaSumClear(void)
 {
 	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
@@ -300,7 +300,7 @@ void Nerual::HiddenLayer::BatchDeltaSumClear(void)
 // Constructor
 /// n is the input num of the layer.
 /// m is the output num of the layer, which of course is the node num in this layer.
-Nerual::OutputLayer::OutputLayer(const size_t _n, const size_t _m)
+Neural::OutputLayer::OutputLayer(const size_t _n, const size_t _m)
 {
 	for (size_t i = 0; i < _m; i++)
 	{
@@ -313,7 +313,7 @@ Nerual::OutputLayer::OutputLayer(const size_t _n, const size_t _m)
 
 // Set the input of the layer.
 /// Which means set the nodes` tempInput.
-void Nerual::OutputLayer::SetInput(const Vector<ElemType>& _vec)
+void Neural::OutputLayer::SetInput(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -322,7 +322,7 @@ void Nerual::OutputLayer::SetInput(const Vector<ElemType>& _vec)
 }
 
 // Set the expectation of the OutputLayer.
-void Nerual::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
+void Neural::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -331,7 +331,7 @@ void Nerual::OutputLayer::SetExpectation(const Vector<ElemType>& _vec)
 }
 
 // Set the activation function of the layer.
-void Nerual::OutputLayer::SetActivationFunction(const ActivationFunction _function)
+void Neural::OutputLayer::SetActivationFunction(const ActivationFunction _function)
 {
 	switch (_function)
 	{
@@ -351,7 +351,7 @@ void Nerual::OutputLayer::SetActivationFunction(const ActivationFunction _functi
 }
 
 // Set the loss function of the layer.
-void Nerual::OutputLayer::SetLossFunction(const LossFunction _function)
+void Neural::OutputLayer::SetLossFunction(const LossFunction _function)
 {
 	switch (_function)
 	{
@@ -368,7 +368,7 @@ void Nerual::OutputLayer::SetLossFunction(const LossFunction _function)
 
 // Get the output of the layer.
 /// Which means get the value pf all nodes in Vector.
-Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
+Vector<Neural::ElemType> Neural::OutputLayer::GetOutput(void)
 {
 	Vector<ElemType> temp(n);
 	for (size_t i = 0; i < m; i++)
@@ -379,7 +379,7 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::GetOutput(void)
 }
 
 // Get the estimated loss between output and expectation.
-Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
+Neural::ElemType Neural::OutputLayer::GetLoss(void)
 {
 	ElemType temp = 0;
 	for (size_t i = 0; i < m; i++)
@@ -391,7 +391,7 @@ Nerual::ElemType Nerual::OutputLayer::GetLoss(void)
 }
 
 // Get the exact error(Delta) between output and expectation.
-Vector<Nerual::ElemType> Nerual::OutputLayer::GetDelta(void)
+Vector<Neural::ElemType> Neural::OutputLayer::GetDelta(void)
 {
 	Vector<ElemType> temp(m);
 	for (size_t i = 0; i < m; i++)
@@ -403,7 +403,7 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::GetDelta(void)
 
 // ForwardPropagation Function
 /// Calculate the value of each node.
-void Nerual::OutputLayer::ForwardPropagation(void)
+void Neural::OutputLayer::ForwardPropagation(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -414,7 +414,7 @@ void Nerual::OutputLayer::ForwardPropagation(void)
 
 // BackwardPropagation Function
 /// Calculate the gradient(delta) of each node.
-Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<ElemType> & _vec)
+Vector<Neural::ElemType> Neural::OutputLayer::BackwardPropagation(const Vector<ElemType> & _vec)
 {
 	SetExpectation(_vec);
 	for (size_t i = 0; i < m; i++)
@@ -435,7 +435,7 @@ Vector<Nerual::ElemType> Nerual::OutputLayer::BackwardPropagation(const Vector<E
 
 // Update Function
 /// Update the weight and bias of each node.
-void Nerual::OutputLayer::Update(void)
+void Neural::OutputLayer::Update(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -445,7 +445,7 @@ void Nerual::OutputLayer::Update(void)
 }
 
 // Sum up the delta of a batch.
-void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+void Neural::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -455,7 +455,7 @@ void Nerual::OutputLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 }
 
 // Clear the sum of sum of delta.
-void Nerual::OutputLayer::BatchDeltaSumClear(void)
+void Neural::OutputLayer::BatchDeltaSumClear(void)
 {
 	for (size_t i = 0; i < m; i++)
 		for (size_t j = 0; j < n; j++)
@@ -466,7 +466,7 @@ void Nerual::OutputLayer::BatchDeltaSumClear(void)
 }
 
 // Sum up the loss of a batch.
-void Nerual::OutputLayer::LossSumUpdate(void)
+void Neural::OutputLayer::LossSumUpdate(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{
@@ -476,7 +476,7 @@ void Nerual::OutputLayer::LossSumUpdate(void)
 }
 
 // Clear the sum of loss od a batch.
-void Nerual::OutputLayer::LossSumClear(void)
+void Neural::OutputLayer::LossSumClear(void)
 {
 	for (size_t i = 0; i < m; i++)
 	{

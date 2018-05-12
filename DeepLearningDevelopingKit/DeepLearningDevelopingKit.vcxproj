@@ -168,13 +168,14 @@
   <ItemGroup>
     <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp" />
     <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\Module.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\NerualNetwork.h" />
-    <ClInclude Include="src\Algorithm\NerualNetwork\Node.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ActivationFunction.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Efficient\Layer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Layer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Module.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralNetwork.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Node.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\RegressionAnalysis.h" />
@@ -195,9 +196,9 @@
     <ClInclude Include="src\Util\Timer\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp" />
-    <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp" />
-    <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Layer.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Module.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Node.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp" />
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />

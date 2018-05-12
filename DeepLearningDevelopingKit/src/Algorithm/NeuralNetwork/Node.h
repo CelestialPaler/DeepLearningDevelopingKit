@@ -20,7 +20,7 @@ using namespace MathLib;
 /***************************************************************************************************/
 // Namespace : Nerual
 /// Provide Node for nerual network algorithms.
-namespace Nerual
+namespace Neural
 {
 	// Define the Element datatype.
 	/// Mainly using float and double.

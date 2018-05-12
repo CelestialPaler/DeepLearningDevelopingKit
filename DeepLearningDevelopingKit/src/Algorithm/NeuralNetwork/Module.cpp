@@ -7,12 +7,12 @@
 
 #include "Module.h"
 
-Nerual::BPNet::BPNet(void)
+Neural::BPNet::BPNet(void)
 {
 
 }
 
-Nerual::BPNet::BPNet(const BPNetInitor & _initor)
+Neural::BPNet::BPNet(const BPNetInitor & _initor)
 {
 	_inputlayer = new InputLayer(_initor.InputNodeNum, _initor.InputNodeNum);
 	_inputlayer->SetActivationFunction(_initor.InputLayerActivationFunction);
@@ -41,22 +41,22 @@ Nerual::BPNet::BPNet(const BPNetInitor & _initor)
 	_outputlayer->SetLossFunction(_initor.LossFunction);
 }
 
-void Nerual::BPNet::PushLayer(InputLayer * _newLayer)
+void Neural::BPNet::PushLayer(InputLayer * _newLayer)
 {
 	this->_inputlayer = _newLayer;
 }
 
-void Nerual::BPNet::PushLayer(HiddenLayer * _newLayer)
+void Neural::BPNet::PushLayer(HiddenLayer * _newLayer)
 {
 	this->_hiddenlayers.push_back(_newLayer);
 }
 
-void Nerual::BPNet::PushLayer(OutputLayer * _newLayer)
+void Neural::BPNet::PushLayer(OutputLayer * _newLayer)
 {
 	this->_outputlayer = _newLayer;
 }
 
-void Nerual::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
+void Neural::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
 {
 	_inputlayer->SetInput(_vec);
 	_inputlayer->ForwardPropagation();
@@ -79,7 +79,7 @@ void Nerual::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
 	_outputlayer->ForwardPropagation();
 }
 
-void Nerual::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
+void Neural::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	Vector<double> tempDelta1(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
 	tempDelta1 = _outputlayer->BackwardPropagation(_vec);
@@ -92,7 +92,7 @@ void Nerual::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 	}
 }
 
-void Nerual::BPNet::Update(void)
+void Neural::BPNet::Update(void)
 {
 	_inputlayer->Update();
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -100,7 +100,7 @@ void Nerual::BPNet::Update(void)
 	_outputlayer->Update();
 }
 
-void Nerual::BPNet::BatchDeltaSumUpdate(const size_t _batchSize)
+void Neural::BPNet::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	_inputlayer->BatchDeltaSumUpdate(_batchSize);
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -108,7 +108,7 @@ void Nerual::BPNet::BatchDeltaSumUpdate(const size_t _batchSize)
 	_outputlayer->BatchDeltaSumUpdate(_batchSize);
 }
 
-void Nerual::BPNet::BatchDeltaSumClear(void)
+void Neural::BPNet::BatchDeltaSumClear(void)
 {
 	_inputlayer->BatchDeltaSumClear();
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -116,34 +116,34 @@ void Nerual::BPNet::BatchDeltaSumClear(void)
 	_outputlayer->BatchDeltaSumClear();
 }
 
-void Nerual::BPNet::SetExpection(const Vector<ElemType>& _vec)
+void Neural::BPNet::SetExpection(const Vector<ElemType>& _vec)
 {
 	_outputlayer->SetExpectation(_vec);
 }
 
-Nerual::ElemType Nerual::BPNet::GetLoss(void)
+Neural::ElemType Neural::BPNet::GetLoss(void)
 {
 	return _outputlayer->GetLoss();
 }
 
-Vector<Nerual::ElemType> Nerual::BPNet::GetOutput(void)
+Vector<Neural::ElemType> Neural::BPNet::GetOutput(void)
 {
 	return _outputlayer->GetOutput();
 }
 
-void Nerual::BPNet::SetTrainSet(NumericSet * _trainset)
+void Neural::BPNet::SetTrainSet(NumericSet * _trainset)
 {
 	this->_trainSet = _trainset;
 }
 
-void Nerual::BPNet::SetTestSet(NumericSet * _testset)
+void Neural::BPNet::SetTestSet(NumericSet * _testset)
 {
 	this->_testSet = _testset;
 }
 
 
 
-void Nerual::BPNet::Train()
+void Neural::BPNet::Train()
 {
 	int iterCount = 0;
 	double loss = 0;
@@ -169,7 +169,7 @@ void Nerual::BPNet::Train()
 	} while (loss > 0.001);
 }
 
-void Nerual::BPNet::Test()
+void Neural::BPNet::Test()
 {
 	NumericSet::Sample test;
 	double avrError = 0;

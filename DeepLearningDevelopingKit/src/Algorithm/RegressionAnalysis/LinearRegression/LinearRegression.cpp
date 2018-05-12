@@ -7,6 +7,9 @@
 
 #include "LinearRegression.h"
 
+/***************************************************************************************************/
+// Class : LinearRegression
+/// One variable linear resgression
 Regression::LinearRegression::LinearRegression(void)
 {
 	this->_weight = 0.f;
@@ -76,6 +79,9 @@ void Regression::LinearRegression::OrdinaryLeastSquares(void)
 	}
 }
 
+/***************************************************************************************************/
+// Class : MultivariateLinearRegression (MLR)
+/// Multi variable linear resgression
 Regression::MultivariateLinearRegression::MultivariateLinearRegression(const size_t _inputNum)
 {
 	this->_theta.Init(_inputNum + 1, 1, MathLib::MatrixType::Random);

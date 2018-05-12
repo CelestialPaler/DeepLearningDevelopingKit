@@ -22,9 +22,6 @@
     <Filter Include="src\Algorithm\SupportedVectorMachine %28SVM%29">
       <UniqueIdentifier>{5a4d7be5-acfb-4dce-9665-f755be52f9d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Algorithm\NerualNetwork %28ANN%29">
-      <UniqueIdentifier>{2a409afc-1ce6-4a93-9058-450c1685adef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\DataManager">
       <UniqueIdentifier>{fcd12a39-6f7c-4ac2-9243-49ace177cbed}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,12 @@
     </Filter>
     <Filter Include="src\Algorithm\MatrixAnalysis">
       <UniqueIdentifier>{8f4dd424-214f-4e66-81b6-eb4a31960138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29">
+      <UniqueIdentifier>{2a409afc-1ce6-4a93-9058-450c1685adef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\Efficient">
+      <UniqueIdentifier>{18aae843-d79e-4187-979a-97e5820a3f77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,24 +153,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Algorithm\NerualNetwork\ActivationFunction.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\Layer.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\LossFunction.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\Module.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\NerualLib.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\Node.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
     <ClInclude Include="src\Util\Json\JsonHandler.h">
       <Filter>src\Util\Json</Filter>
     </ClInclude>
@@ -201,9 +186,6 @@
     <ClInclude Include="src\DataManager\SaveLoad\Saver.h">
       <Filter>src\DataManager\Saver</Filter>
     </ClInclude>
-    <ClInclude Include="src\Algorithm\NerualNetwork\NerualNetwork.h">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClInclude>
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h">
       <Filter>src\Algorithm\RegressionAnalysis %28RA%29\LinearRegression</Filter>
     </ClInclude>
@@ -231,17 +213,32 @@
     <ClInclude Include="src\Util\Timer\Time.hpp">
       <Filter>src\Util\Timer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ActivationFunction.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Layer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Module.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralNetwork.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Node.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Efficient\Layer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Efficient</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Algorithm\NerualNetwork\Layer.cpp">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Algorithm\NerualNetwork\Module.cpp">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Algorithm\NerualNetwork\Node.cpp">
-      <Filter>src\Algorithm\NerualNetwork %28ANN%29</Filter>
-    </ClCompile>
     <ClCompile Include="src\Util\Json\JsonHandler.cpp">
       <Filter>src\Util\Json</Filter>
     </ClCompile>
@@ -292,6 +289,15 @@
     </ClCompile>
     <ClCompile Include="src\UnitTest\Timer_test.cpp">
       <Filter>src\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Layer.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Module.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\Node.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
