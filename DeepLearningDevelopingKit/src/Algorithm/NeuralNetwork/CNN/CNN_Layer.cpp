@@ -17,7 +17,7 @@ Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 	this->_samplingMethod = _initor.SamplingMethod;
 	for (size_t i = 0; i < _kernalNum; i++)
 	{
-		ConvKernal newKernal = *new ConvKernal(_kernalSize.m, _kernalSize.n);
+		ConvKernal newKernal = *new ConvKernal(_initor.KernalSize);
 		this->_kernals.push_back(newKernal);
 	}
 	switch (_initor.SamplingMethod)
@@ -25,8 +25,8 @@ Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 	default:
 		for (size_t i = 0; i < _kernalNum; i++)
 		{
-			ConvFeature newKernal = *new ConvFeature(_kernalSize.m, _kernalSize.n);
-			this->_kernals.push_back(newKernal);
+			ConvFeature newFeature = *new ConvFeature(_initor.KernalSize);
+			this->_features.push_back(newFeature);
 		}
 		break;
 	}
@@ -44,7 +44,7 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		for (size_t i = 0; i < _kernalSize.m; i++)
 			for (size_t j = 0; j < _kernalSize.n; j++)
 				sum += _kernals.at(k).weight(i, j) * _input(i + mBias, j + nBias);
-		_features.at(k)._data(m, n) = sum;
+		_features.at(k).data(m, n) = sum;
 
 		if (mBias + _kernalSize.m < _input.RowSize())
 		{

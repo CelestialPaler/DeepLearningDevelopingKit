@@ -18,8 +18,17 @@ namespace Neural
 	/// Mainly using float and double.
 	typedef double ElemType;
 
-	struct ConvFeature
+	class ConvFeature
 	{
-		MathLib::Matrix<ElemType> _data;
+	public:
+		ConvFeature(const MathLib::Size _size);
+		MathLib::Matrix<ElemType> data;
+		MathLib::Size size;
 	};
+
+	Neural::ConvFeature::ConvFeature(const MathLib::Size _size)
+	{
+		this->size = _size;
+		weight.Init(size.m, size.n, MathLib::MatrixType::Zero);
+	}
 }

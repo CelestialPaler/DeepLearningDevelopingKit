@@ -11,9 +11,18 @@
 #include "..\Algorithm\NeuralNetwork\CNN\CNN.h"
 
 
-int main(int arg,char * args[])
+int main(int argc, char ** argv)
 {
-	Neural::ConvLayerInitor debuginitor;
+	Neural::ConvLayerInitor testInitor;
+	testInitor.InputSize = MathLib::Size(3, 3);
+	testInitor.KernalNum = 2;
+	testInitor.KernalSize = MathLib::Size(2, 2);
+	testInitor.SamplingMethod = Neural::SamplingMethod::NoPadding;
+	testInitor.Stride = 1;
+
+	Neural::ConvolutionalLayer tstLayer(testInitor);
+
+
 	system("pause");
 	return 0;
 }

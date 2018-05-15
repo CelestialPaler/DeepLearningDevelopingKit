@@ -85,11 +85,11 @@
     <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29">
       <UniqueIdentifier>{2a409afc-1ce6-4a93-9058-450c1685adef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\CNN">
-      <UniqueIdentifier>{7bbcf35e-ea6d-4fa2-8cb8-de875b7e03c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\BNN">
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29">
       <UniqueIdentifier>{54758120-11bd-4a6b-9cd9-653f2b57a475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29">
+      <UniqueIdentifier>{7bbcf35e-ea6d-4fa2-8cb8-de875b7e03c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -226,25 +226,25 @@
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Feature.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\CNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Layer.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\CNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN_Layer.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN_Node.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Kernal.hpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\CNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN.h">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\CNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
     <ClInclude Include="src\MathLib\MathTool.hpp">
       <Filter>src\MathLib</Filter>
@@ -303,16 +303,16 @@
       <Filter>src\UnitTest</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\CNN\CNN_Layer.cpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\CNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN_Layer.cpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN_Node.cpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN.cpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\CNN\CNN_Kernal.cpp" />
     <ClCompile Include="src\UnitTest\ConvNN_test.cpp">

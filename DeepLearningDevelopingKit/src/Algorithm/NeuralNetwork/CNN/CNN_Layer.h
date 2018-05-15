@@ -13,7 +13,6 @@
 
 /***************************************************************************************************/
 // Namespace : Neural
-/// Provide Node for nerual network algorithms.
 namespace Neural
 {
 	enum class SamplingMethod {
@@ -71,8 +70,6 @@ namespace Neural
 		RandomPooling
 	};
 
-	}
-
 	class PoolingLayer
 	{
 	public:
@@ -80,7 +77,5 @@ namespace Neural
 		PoolingLayer(void);
 
 	private:
-		
-		MathLib::Size 
 	};
 }
