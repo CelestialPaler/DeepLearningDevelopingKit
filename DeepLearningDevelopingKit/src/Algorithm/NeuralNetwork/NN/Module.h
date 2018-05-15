@@ -10,9 +10,9 @@
 #include <vector>
 #include <iomanip>
 
-#include "..\..\MathLib\MathLib.h"
-#include "..\..\DataManager\Dataset\DataSet.h"
-#include "..\..\Util\Timer\Time.hpp"
+#include "..\..\..\MathLib\MathLib.h"
+#include "..\..\..\DataManager\Dataset\DataSet.h"
+#include "..\..\..\Util\Timer\Time.hpp"
 
 #include "Layer.h"
 #include "Node.h"
@@ -23,12 +23,14 @@ using namespace Data;
 using namespace Util;
 
 /***************************************************************************************************/
-// Namespace : Nerual
+// Namespace : Neural
 /// Provide Node for nerual network algorithms.
 namespace Neural
 {
 	class Module
 	{
+	public:
+	private:
 
 	};
 

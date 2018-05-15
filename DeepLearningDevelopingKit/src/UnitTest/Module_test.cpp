@@ -9,9 +9,9 @@
 #include <ctime>
 
 #ifdef ModuleDebug
-#include "..\Algorithm\NerualNetwork\Module.h"
+#include "..\Algorithm\NeuralNetwork\Module.h"
 
-using namespace Nerual;
+using namespace Neural;
 
 
 int main()

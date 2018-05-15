@@ -9,12 +9,12 @@
 // Header files
 #include <vector>
 #include "Node.h"
-#include "ActivationFunction.h"
-#include "LossFunction.h"
-#include "..\..\MathLib\MathLib.h"
+#include "..\ActivationFunction.h"
+#include "..\LossFunction.h"
+#include "..\..\..\MathLib\MathLib.h"
 
 /***************************************************************************************************/
-// Namespace : Nerual
+// Namespace : Neural
 /// Provide Node for nerual network algorithms.
 namespace Neural
 {
@@ -228,5 +228,19 @@ namespace Neural
 	private:
 
 		std::vector<OutputNode> _nodes;
+	};
+
+	/***************************************************************************************************/
+	// Class : ConvolutionalLayer
+	/// Convelutional Layer
+	class ConvelutionalLayer
+	{
+	public:
+
+		ConvelutionalLayer(void);
+
+	private:
+
+		std::vector<InputNode> _nodes;
 	};
 }

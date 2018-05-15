@@ -35,7 +35,7 @@
 <ul>
     <li><p>Regresstion Analysis</p></li>
     <li><p>Decision Tree</p></li>
-    <li><p>Nerual Network</p></li>
+    <li><p>Neural Network</p></li>
     <li><p>Supported Vector Machine</p></li>
     <li><p>Expectation Maximization</p></li>
     <li><p>Clustering</p></li>

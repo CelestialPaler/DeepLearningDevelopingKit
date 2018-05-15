@@ -12,7 +12,7 @@
 // Header files
 #include <iostream>
 #include "..\MathLib\MathLib.h"
-#include "..\Nerual\NerualLib.h"
+#include "..\Neural\NeuralLib.h"
 #include "..\Util\Log.h"
 #include <ctime>
 #include "..\MathLib\ActivationFunction.h"
@@ -20,7 +20,7 @@
 // Namespaces
 using namespace std;
 using namespace MathLib;
-using namespace Nerual;
+using namespace Neural;
 
 int main()
 {

@@ -7,7 +7,7 @@
 #pragma once
 
 // Header files
-#include "..\..\MathLib\MathLib.h"
+#include "..\..\..\MathLib\MathLib.h"
 
 // Namespace
 #ifdef USING_STATIC_MATHLIB
@@ -18,7 +18,7 @@ using namespace MathLib;
 #endif // USING_STANDARD_MATHLIB
 
 /***************************************************************************************************/
-// Namespace : Nerual
+// Namespace : Neural
 /// Provide Node for nerual network algorithms.
 namespace Neural
 {

@@ -10,9 +10,9 @@
 #include <string>
 #include "..\..\MathLib\MathLib.h"
 #include "JsonHandler.h"
-#include "..\..\Algorithm\NerualNetwork\Node.h"
+#include "..\..\Algorithm\NeuralNetwork\Node.h"
 
-using namespace Nerual;
+using namespace Neural;
 
 class JsonParser {};
 

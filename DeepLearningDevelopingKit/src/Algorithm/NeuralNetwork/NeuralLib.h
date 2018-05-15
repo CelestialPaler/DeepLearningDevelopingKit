@@ -1,12 +1,22 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	            NerualLib 	                                                                  */
+/*								        		 	            NeuralLib 	                                                                  */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 #pragma once
 
+#define NeuralNetwork
+#define ConvolutionalNeuralNetwork
+
+
+#ifdef NeuralNetwork
 // Header files
-#include "Node.h"
-#include "Layer.h"
-#include "Module.h"
+#include "NN\Node.h"
+#include "NN\Layer.h"
+#include "NN\Module.h"
+#endif // NeuralNetwork
+
+#ifdef ConvolutionalNeuralNetwork
+
+#endif // ConvolutionalNeuralNetwork
