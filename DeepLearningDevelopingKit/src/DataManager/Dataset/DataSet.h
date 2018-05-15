@@ -82,7 +82,16 @@ namespace Data
 	{
 	public:
 
+		ImageSet();
+
+	public:
+
+		void LoadFromImage(const std::string & _filePath);
+
 	private:
+
+
+
 	};
 
 	/***************************************************************************************************/
