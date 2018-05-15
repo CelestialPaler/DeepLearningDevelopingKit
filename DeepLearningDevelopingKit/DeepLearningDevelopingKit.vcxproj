@@ -169,13 +169,15 @@
     <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp" />
     <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ActivationFunction.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\ConvolutionalKernal.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\Layer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN_Layer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\BNN\BNN_Node.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Feature.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Kernal.hpp" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\CNN\CNN_Layer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\NN\Layer.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\NN\Module.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\NN\Node.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\RegressionAnalysis.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="src\DataManager\SaveLoad\Saver.h" />
     <ClInclude Include="src\MathLib\MathLib.h" />
     <ClInclude Include="src\MathLib\MathLibError.h" />
+    <ClInclude Include="src\MathLib\MathTool.hpp" />
     <ClInclude Include="src\MathLib\Matrix.hpp" />
     <ClInclude Include="src\MathLib\MatrixStatic.h" />
     <ClInclude Include="src\MathLib\RandomEngine.h" />
@@ -196,9 +199,11 @@
     <ClInclude Include="src\Util\Timer\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\NN\Layer.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\NN\Module.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\NN\Node.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN_Layer.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\BNN\BNN_Node.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\CNN\CNN_Kernal.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\CNN\CNN_Layer.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp" />
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />

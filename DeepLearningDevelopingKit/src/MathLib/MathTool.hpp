@@ -1,21 +1,21 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	              MathLib 	                                                                  */
+/*								        		 	           Math Library 	                                                              */
+/*								        		 	                Matrix   	                                                              */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 #pragma once
 
-#define USING_STANDARD_MATHLIB
-
-#ifdef USING_STATIC_MATHLIB
-#include "MatrixStatic.h"
-#include "VectorStatic.h"
-#endif // USING_STATIC_MATHLIB
-
-#ifdef USING_STANDARD_MATHLIB
-#include "Matrix.hpp"
-#include "Vector.hpp"
-#include "MathTool.hpp"
-#include "RandomEngine.h"
-#endif // USING_DYNAMIC_MATHLIB
+/***************************************************************************************************/
+// Namespace : MathLib
+/// Provide basic mathematic support and calculation tools for different algorithms.
+namespace MathLib
+{
+	struct Size
+	{
+		Size(size_t _m, size_t _n) : m(_m), n(_n) {}
+		size_t m;
+		size_t n;
+	};
+}

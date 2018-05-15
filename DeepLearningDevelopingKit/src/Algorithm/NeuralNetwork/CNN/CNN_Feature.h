@@ -1,21 +1,25 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	              MathLib 	                                                                  */
+/*								        		 	           Feature Map     	                                                          */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 #pragma once
 
-#define USING_STANDARD_MATHLIB
+// Header files
+#include "..\..\..\MathLib\MathLib.h"
 
-#ifdef USING_STATIC_MATHLIB
-#include "MatrixStatic.h"
-#include "VectorStatic.h"
-#endif // USING_STATIC_MATHLIB
+/***************************************************************************************************/
+// Namespace : Neural
+/// Provide Node for nerual network algorithms.
+namespace Neural
+{
+	// Define the Element datatype.
+	/// Mainly using float and double.
+	typedef double ElemType;
 
-#ifdef USING_STANDARD_MATHLIB
-#include "Matrix.hpp"
-#include "Vector.hpp"
-#include "MathTool.hpp"
-#include "RandomEngine.h"
-#endif // USING_DYNAMIC_MATHLIB
+	struct ConvFeature
+	{
+		MathLib::Matrix<ElemType> _data;
+	};
+}

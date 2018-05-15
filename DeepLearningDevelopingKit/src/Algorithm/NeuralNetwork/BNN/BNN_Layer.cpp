@@ -6,7 +6,7 @@
 /***************************************************************************************************/
 
 // Header files
-#include "Layer.h"
+#include "BNN_Layer.h"
 
 const double learnRate = 0.8;
 

@@ -1,6 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	              Module     	                                                               */
+/*								        	   Backpropagation Neural Network     	                                           */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -14,8 +14,8 @@
 #include "..\..\..\DataManager\Dataset\DataSet.h"
 #include "..\..\..\Util\Timer\Time.hpp"
 
-#include "Layer.h"
-#include "Node.h"
+#include "BNN_Layer.h"
+#include "BNN_Node.h"
 
 // Namespaces
 using namespace MathLib;
@@ -27,16 +27,9 @@ using namespace Util;
 /// Provide Node for nerual network algorithms.
 namespace Neural
 {
-	class Module
-	{
-	public:
-	private:
-
-	};
-
 	// BPNet Initor
 	/// Used for initialization of a BPNet.
-	struct BPNetInitor
+	struct BNNInitor
 	{
 		size_t InputNodeNum;
 		size_t HiddenLayerNum;
@@ -54,14 +47,14 @@ namespace Neural
 	// Class : BPNet
 	/// BackPropagation Network.
 	/// It will be a built-in Module.
-	class BPNet : public Module
+	class BNN
 	{
 	public: // Constructors
 
 		// Default constructor
-		BPNet(void);
+		BNN(void);
 		// Constructor (Using Initor)
-		BPNet(const BPNetInitor & _initor);
+		BNN(const BNNInitor & _initor);
 
 	public:
 		void SetExpection(const Vector<ElemType> & _vec);

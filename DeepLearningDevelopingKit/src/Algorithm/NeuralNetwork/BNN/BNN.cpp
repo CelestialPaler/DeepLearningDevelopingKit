@@ -1,18 +1,18 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	              Module     	                                                               */
+/*								        	   Backpropagation Neural Network     	                                           */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#include "Module.h"
+#include "BNN.h"
 
-Neural::BPNet::BPNet(void)
+Neural::BNN::BNN(void)
 {
 
 }
 
-Neural::BPNet::BPNet(const BPNetInitor & _initor)
+Neural::BNN::BNN(const BNNInitor & _initor)
 {
 	_inputlayer = new InputLayer(_initor.InputNodeNum, _initor.InputNodeNum);
 	_inputlayer->SetActivationFunction(_initor.InputLayerActivationFunction);
@@ -41,22 +41,22 @@ Neural::BPNet::BPNet(const BPNetInitor & _initor)
 	_outputlayer->SetLossFunction(_initor.LossFunction);
 }
 
-void Neural::BPNet::PushLayer(InputLayer * _newLayer)
+void Neural::BNN::PushLayer(InputLayer * _newLayer)
 {
 	this->_inputlayer = _newLayer;
 }
 
-void Neural::BPNet::PushLayer(HiddenLayer * _newLayer)
+void Neural::BNN::PushLayer(HiddenLayer * _newLayer)
 {
 	this->_hiddenlayers.push_back(_newLayer);
 }
 
-void Neural::BPNet::PushLayer(OutputLayer * _newLayer)
+void Neural::BNN::PushLayer(OutputLayer * _newLayer)
 {
 	this->_outputlayer = _newLayer;
 }
 
-void Neural::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
+void Neural::BNN::ForwardPropagation(const Vector<ElemType> & _vec)
 {
 	_inputlayer->SetInput(_vec);
 	_inputlayer->ForwardPropagation();
@@ -79,7 +79,7 @@ void Neural::BPNet::ForwardPropagation(const Vector<ElemType> & _vec)
 	_outputlayer->ForwardPropagation();
 }
 
-void Neural::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
+void Neural::BNN::BackwardPropagation(const Vector<ElemType>& _vec)
 {
 	Vector<double> tempDelta1(_hiddenlayers.at(_hiddenlayers.size() - 1)->GetNodeNum());
 	tempDelta1 = _outputlayer->BackwardPropagation(_vec);
@@ -92,7 +92,7 @@ void Neural::BPNet::BackwardPropagation(const Vector<ElemType>& _vec)
 	}
 }
 
-void Neural::BPNet::Update(void)
+void Neural::BNN::Update(void)
 {
 	_inputlayer->Update();
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -100,7 +100,7 @@ void Neural::BPNet::Update(void)
 	_outputlayer->Update();
 }
 
-void Neural::BPNet::BatchDeltaSumUpdate(const size_t _batchSize)
+void Neural::BNN::BatchDeltaSumUpdate(const size_t _batchSize)
 {
 	_inputlayer->BatchDeltaSumUpdate(_batchSize);
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -108,7 +108,7 @@ void Neural::BPNet::BatchDeltaSumUpdate(const size_t _batchSize)
 	_outputlayer->BatchDeltaSumUpdate(_batchSize);
 }
 
-void Neural::BPNet::BatchDeltaSumClear(void)
+void Neural::BNN::BatchDeltaSumClear(void)
 {
 	_inputlayer->BatchDeltaSumClear();
 	for (size_t i = 0; i < _hiddenlayers.size(); i++)
@@ -116,34 +116,34 @@ void Neural::BPNet::BatchDeltaSumClear(void)
 	_outputlayer->BatchDeltaSumClear();
 }
 
-void Neural::BPNet::SetExpection(const Vector<ElemType>& _vec)
+void Neural::BNN::SetExpection(const Vector<ElemType>& _vec)
 {
 	_outputlayer->SetExpectation(_vec);
 }
 
-Neural::ElemType Neural::BPNet::GetLoss(void)
+Neural::ElemType Neural::BNN::GetLoss(void)
 {
 	return _outputlayer->GetLoss();
 }
 
-Vector<Neural::ElemType> Neural::BPNet::GetOutput(void)
+Vector<Neural::ElemType> Neural::BNN::GetOutput(void)
 {
 	return _outputlayer->GetOutput();
 }
 
-void Neural::BPNet::SetTrainSet(NumericSet * _trainset)
+void Neural::BNN::SetTrainSet(NumericSet * _trainset)
 {
 	this->_trainSet = _trainset;
 }
 
-void Neural::BPNet::SetTestSet(NumericSet * _testset)
+void Neural::BNN::SetTestSet(NumericSet * _testset)
 {
 	this->_testSet = _testset;
 }
 
 
 
-void Neural::BPNet::Train()
+void Neural::BNN::Train()
 {
 	int iterCount = 0;
 	double loss = 0;
@@ -169,7 +169,7 @@ void Neural::BPNet::Train()
 	} while (loss > 0.001);
 }
 
-void Neural::BPNet::Test()
+void Neural::BNN::Test()
 {
 	NumericSet::Sample test;
 	double avrError = 0;

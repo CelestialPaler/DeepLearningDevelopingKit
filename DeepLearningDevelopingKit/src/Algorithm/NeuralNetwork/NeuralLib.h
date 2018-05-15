@@ -12,9 +12,9 @@
 
 #ifdef NeuralNetwork
 // Header files
-#include "NN\Node.h"
-#include "NN\Layer.h"
-#include "NN\Module.h"
+#include "BNN\BNN_Node.h"
+#include "BNN\BNN_Layer.h"
+#include "BNN\BNN_Module.h"
 #endif // NeuralNetwork
 
 #ifdef ConvolutionalNeuralNetwork

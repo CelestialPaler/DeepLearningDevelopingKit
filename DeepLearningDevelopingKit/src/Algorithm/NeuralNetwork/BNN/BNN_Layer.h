@@ -8,7 +8,7 @@
 
 // Header files
 #include <vector>
-#include "Node.h"
+#include "BNN_Node.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
 #include "..\..\..\MathLib\MathLib.h"
