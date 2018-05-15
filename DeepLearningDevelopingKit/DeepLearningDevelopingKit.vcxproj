@@ -210,6 +210,7 @@
     <ClCompile Include="src\DataManager\Dataset\DataSet.cpp" />
     <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp" />
     <ClCompile Include="src\MathLib\MathLibError.cpp" />
+    <ClCompile Include="src\UnitTest\ConvNN_test.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />
     <ClCompile Include="src\UnitTest\Layer_test.cpp" />

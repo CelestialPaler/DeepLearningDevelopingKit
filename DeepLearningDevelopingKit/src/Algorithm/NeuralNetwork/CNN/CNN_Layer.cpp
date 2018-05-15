@@ -31,3 +31,40 @@ Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 		break;
 	}
 }
+
+void Neural::ConvolutionalLayer::ForwardPropagation(void)
+{
+	size_t mBias{ 0 };
+	size_t nBias{ 0 };
+	size_t m{ 0 };
+	size_t n{ 0 };
+	for (size_t k = 0; k < _kernalNum; k++)
+	{
+		ElemType sum{ 0.f };
+		for (size_t i = 0; i < _kernalSize.m; i++)
+			for (size_t j = 0; j < _kernalSize.n; j++)
+				sum += _kernals.at(k).weight(i, j) * _input(i + mBias, j + nBias);
+		_features.at(k)._data(m, n) = sum;
+
+		if (mBias + _kernalSize.m < _input.RowSize())
+		{
+			mBias += _stride;
+			m++;
+		}
+		else 
+		{
+			mBias = 0; 
+			m = 0;
+			if (nBias + _kernalSize.n < _input.ColumeSize())
+			{
+				nBias += _stride;
+				n++;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+}

@@ -315,5 +315,8 @@
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BNN</Filter>
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\CNN\CNN_Kernal.cpp" />
+    <ClCompile Include="src\UnitTest\ConvNN_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

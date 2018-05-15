@@ -39,7 +39,21 @@ namespace Neural
 
 		ConvolutionalLayer(const ConvLayerInitor & _initor);
 
+	public:
+
+		inline const ConvFeature GetFeature(const size_t _index) const { return _features.at(_index); }
+		inline const std::vector<ConvFeature> GetFeatureAll(const size_t _index) const { return _features; }
+		inline const ConvKernal GetKernal(const size_t _index) const { return _kernals.at(_index); }
+		inline const std::vector<ConvKernal> GetKernalAll(const size_t _index) const { return _kernals; }
+
+	public:
+
+		void ForwardPropagation(void);
+		void BackwardPropagation(void);
+
 	private:
+
+		MathLib::Matrix<ElemType> _input;
 
 		std::vector<ConvKernal> _kernals;
 		std::vector<ConvFeature> _features;
