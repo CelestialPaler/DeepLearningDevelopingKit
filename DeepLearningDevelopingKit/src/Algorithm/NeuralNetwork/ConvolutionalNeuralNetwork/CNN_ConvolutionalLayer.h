@@ -10,6 +10,7 @@
 #include "..\..\..\MathLib\MathLib.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
+#include "CNN_Padding.h"
 
 /***************************************************************************************************/
 // Namespace : Neural
@@ -20,8 +21,8 @@ namespace Neural
 	/// Mainly using float and double.
 	typedef double ElemType;
 	
-	// Define Kernal and Feature.
-	typedef MathLib::Matrix<ElemType> ConvKernal;
+	// Define Kernel and Feature.
+	typedef MathLib::Matrix<ElemType> ConvKernel;
 	typedef MathLib::Matrix<ElemType> ConvFeature;
 
 	// Method of appending paddings to original data
@@ -41,27 +42,18 @@ namespace Neural
 		RandomPadding
 	};
 
-	// Method of pooling
-	/// For most situation, Max Pooling is the most common practice.
-	enum class PoolingMethod {
-		MaxPooling,
-		MinPooling,
-		MeanPooling,
-		RandomPooling
-	};
-
 	// Convolutional Layer Initor
 	/// Used for initialization of a ConvLayer.
 	struct ConvLayerInitor
 	{
 		// Stride
 		size_t Stride;
-		// The numner of kernals.
-		size_t KernalNum;
+		// The numner of kernels.
+		size_t KernelNum;
 		// Size of input matrix. 
 		MathLib::Size InputSize;
-		// Size of convolutional kernal.
-		MathLib::Size KernalSize;
+		// Size of convolutional kernel.
+		MathLib::Size KernelSize;
 		PaddingNum PaddingNum;
 		PaddingMethod PaddingMethod;
 		LossFunction LossFunction;
@@ -78,8 +70,8 @@ namespace Neural
 
 		inline const ConvFeature GetFeature(const size_t _index) const { return _features.at(_index); }
 		inline const std::vector<ConvFeature> GetFeatureAll(void) const { return _features; }
-		inline const ConvKernal GetKernal(const size_t _index) const { return _kernals.at(_index); }
-		inline const std::vector<ConvKernal> GetKernalAll(void) const { return _kernals; }
+		inline const ConvKernel GetKernel(const size_t _index) const { return _kernels.at(_index); }
+		inline const std::vector<ConvKernel> GetKernelAll(void) const { return _kernels; }
 
 	public:
 
@@ -101,18 +93,18 @@ namespace Neural
 	private:
 
 		ElemType Convolution(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2);
-		ElemType Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernal, const size_t _m, const size_t _n);
+		ElemType Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel, const size_t _m, const size_t _n);
 
 	public:
 
 		MathLib::Matrix<ElemType> _originalInput;
 		MathLib::Matrix<ElemType> _paddedInput;
 
-		std::vector<ConvKernal> _kernals;
+		std::vector<ConvKernel> _kernels;
 		std::vector<ConvFeature> _features;
 
-		size_t _kernalNum;
-		MathLib::Size _kernalSize;
+		size_t _kernelNum;
+		MathLib::Size _kernelSize;
 		size_t _stride;
 		PaddingMethod _paddingMethod;
 		PaddingNum _paddingNum;
@@ -121,37 +113,5 @@ namespace Neural
 		ElemType(*activationFunctionDerivative)(ElemType x);
 		ElemType(*lossFunction)(ElemType x, ElemType y);
 		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
-	};
-
-	// Convolutional Layer Initor
-	/// Used for initialization of a ConvLayer.
-	struct ConvLayerInitor
-	{
-		// Stride
-		size_t Stride;
-		// The numner of kernals.
-		size_t KernalNum;
-		// Size of input matrix. 
-		MathLib::Size InputSize;
-		// Size of convolutional kernal.
-		MathLib::Size KernalSize;
-		PaddingNum PaddingNum;
-		PaddingMethod PaddingMethod;
-		LossFunction LossFunction;
-		ActivationFunction ActivationFunction;
-	};
-
-	class PoolingLayer
-	{
-	public:
-
-		PoolingLayer(void);
-
-	private:
-		
-		MathLib::Matrix<ElemType> _input;
-		MathLib::Matrix<ElemType> _output;
-
-		PoolingMethod _poolingMethod;
 	};
 }

@@ -20,25 +20,11 @@ namespace Neural
 	/// Mainly using float and double.
 	typedef double ElemType;
 
-	// Define Kernal and Feature.
-	typedef MathLib::Matrix<ElemType> PoolKernal;
+	// Define Kernel and Feature.
+	typedef MathLib::Matrix<ElemType> Feature;
 
-	// Method of appending paddings to original data
-	/// For most situation, Right Down is the most common practice.
-	enum class PaddingMethod {
-		LeftUp,
-		LeftDown,
-		RightUp,
-		RightDown,
-		Surround
-	};
-
-	// What data is going to be appended original data as a padding.
-	enum class PaddingNum {
-		ZeroPadding,
-		OnePadding,
-		RandomPadding
-	};
+	extern enum class PaddingMethod;
+	extern enum class PaddingNum;
 
 	// Method of pooling
 	/// For most situation, Max Pooling is the most common practice.
@@ -55,27 +41,44 @@ namespace Neural
 	{
 		// Stride
 		size_t Stride;
-		// The numner of kernals.
-		size_t KernalNum;
 		// Size of input matrix. 
 		MathLib::Size InputSize;
+		// Size of pool
+		MathLib::Size PoolSize;
 		PaddingNum PaddingNum;
 		PaddingMethod PaddingMethod;
+		PoolingMethod  PoolingMethod;
 	};
 
 	class PoolingLayer
 	{
 	public:
 
-		PoolingLayer(const PoolLayerInitor _initor);
+		PoolingLayer(const PoolLayerInitor & _initor);
 
-	private:
+	public:
 
-		PoolKernal _poolKernal;
+		void SetInput(const std::vector<Feature> & _input);
 
-		MathLib::Matrix<ElemType> _input;
-		MathLib::Matrix<ElemType> _output;
+		inline const Feature GetFeature(const size_t _index) const { return _output.at(_index); }
+		inline const std::vector<Feature> GetFeatureAll(void) const { return _output; }
 
+	public:
+
+		void DownSampling(void);
+
+	private :
+
+		ElemType MaxPool(const Feature & _feature, const size_t m, const size_t n);
+
+	public:
+
+		std::vector<Feature> _input;
+		std::vector<Feature> _output;
+
+		size_t _stride;
+		MathLib::Size _poolSize;
+		MathLib::Size _inputSize;
 		PoolingMethod _poolingMethod;
 	};
 }

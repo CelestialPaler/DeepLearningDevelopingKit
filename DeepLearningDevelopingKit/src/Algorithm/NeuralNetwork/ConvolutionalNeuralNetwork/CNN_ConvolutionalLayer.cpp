@@ -11,21 +11,21 @@
 
 Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 {
-	this->_kernalNum = _initor.KernalNum;
-	this->_kernalSize = _initor.KernalSize;
+	this->_kernelNum = _initor.KernelNum;
+	this->_kernelSize = _initor.KernelSize;
 	this->_stride = _initor.Stride;
 	this->_paddingMethod = _initor.PaddingMethod;
 	this->_paddingNum = _initor.PaddingNum;
 	this->_originalInput.Init(_initor.InputSize.m, _initor.InputSize.n);
-	for (size_t i = 0; i < _kernalNum; i++)
+	for (size_t i = 0; i < _kernelNum; i++)
 	{
-		ConvKernal newKernal = *new ConvKernal(_kernalSize.m, _kernalSize.n, MathLib::MatrixType::Random);
-		this->_kernals.push_back(newKernal);
+		ConvKernel newKernel = *new ConvKernel(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
+		this->_kernels.push_back(newKernel);
 	}
 	switch (_initor.PaddingMethod)
 	{
 	default:
-		for (size_t i = 0; i < _kernalNum; i++)
+		for (size_t i = 0; i < _kernelNum; i++)
 		{
 			ConvFeature newFeature = *new ConvFeature(_originalInput.GetSize().m / _stride, _originalInput.GetSize().n / _stride);
 			this->_features.push_back(newFeature);
@@ -77,20 +77,20 @@ void Neural::ConvolutionalLayer::SetLossFunction(const LossFunction _function)
 
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
-	// Travesing every kernal in the layer.
-	for (size_t k = 0; k < _kernalNum; k++)
+	// Travesing every kernel in the layer.
+	for (size_t k = 0; k < _kernelNum; k++)
 	{
 		ElemType sum{ 0.f };
-		size_t kernalOffsetM{ 0 }, kernalOffsetN{ 0 };
+		size_t kernelOffsetM{ 0 }, kernelOffsetN{ 0 };
 		for (size_t a = 0; a < _features.at(0).GetSize().m; a++)
 		{
 			for (size_t b = 0; b < _features.at(0).GetSize().n; b++)
 			{
-				_features.at(k)(a, b) = activationFunction(Convolution(_paddedInput, _kernals.at(k), kernalOffsetM, kernalOffsetN));
-				kernalOffsetM += _stride;
+				_features.at(k)(a, b) = activationFunction(Convolution(_paddedInput, _kernels.at(k), kernelOffsetM, kernelOffsetN));
+				kernelOffsetM += _stride;
 			}
-			kernalOffsetM = 0;
-			kernalOffsetN += _stride;
+			kernelOffsetM = 0;
+			kernelOffsetN += _stride;
 		}
 	}
 }
@@ -264,12 +264,12 @@ Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<E
 	return sum;
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _input, const MathLib::Matrix<ElemType>& _kernal, const size_t _m, const size_t _n)
+Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _input, const MathLib::Matrix<ElemType>& _kernel, const size_t _m, const size_t _n)
 {
 	ElemType sum{ 0.f };
-	MathLib::Size size = _kernal.GetSize();
+	MathLib::Size size = _kernel.GetSize();
 	for (size_t i = 0; i < size.m; i++)
 		for (size_t j = 0; j < size.n; j++)
-			sum += _input(_m + i, _n + j)* _kernal(i, j);
+			sum += _input(_m + i, _n + j)* _kernel(i, j);
 	return sum;
 }
