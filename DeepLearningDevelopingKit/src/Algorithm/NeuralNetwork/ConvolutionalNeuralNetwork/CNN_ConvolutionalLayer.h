@@ -1,6 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	    Convolutional Kernal     	                                                  */
+/*								        		 	    Convolutional Layer     	                                                      */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -16,8 +16,16 @@
 /// Provide Neural Network algorithm library.
 namespace Neural
 {
+	// Define the Element datatype.
+	/// Mainly using float and double.
 	typedef double ElemType;
+	
+	// Define Kernal and Feature.
+	typedef MathLib::Matrix<ElemType> ConvKernal;
+	typedef MathLib::Matrix<ElemType> ConvFeature;
 
+	// Method of appending paddings to original data
+	/// For most situation, Right Down is the most common practice.
 	enum class PaddingMethod {
 		LeftUp,
 		LeftDown,
@@ -26,12 +34,15 @@ namespace Neural
 		Surround
 	};
 
+	// What data is going to be appended original data as a padding.
 	enum class PaddingNum {
 		ZeroPadding,
 		OnePadding,
-		NoPadding
+		RandomPadding
 	};
 
+	// Method of pooling
+	/// For most situation, Max Pooling is the most common practice.
 	enum class PoolingMethod {
 		MaxPooling,
 		MinPooling,
@@ -39,21 +50,22 @@ namespace Neural
 		RandomPooling
 	};
 
-	typedef MathLib::Matrix<ElemType> ConvKernal;
-	typedef MathLib::Matrix<ElemType> ConvFeature;
-
-	// ConvLayer Initor
+	// Convolutional Layer Initor
 	/// Used for initialization of a ConvLayer.
 	struct ConvLayerInitor
 	{
-		MathLib::Size InputSize;
-		size_t KernalNum;
-		MathLib::Size KernalSize;
+		// Stride
 		size_t Stride;
-		PaddingMethod PaddingMethod;
+		// The numner of kernals.
+		size_t KernalNum;
+		// Size of input matrix. 
+		MathLib::Size InputSize;
+		// Size of convolutional kernal.
+		MathLib::Size KernalSize;
 		PaddingNum PaddingNum;
-		ActivationFunction ActivationFunction;
+		PaddingMethod PaddingMethod;
 		LossFunction LossFunction;
+		ActivationFunction ActivationFunction;
 	};
 
 	class ConvolutionalLayer
@@ -79,14 +91,15 @@ namespace Neural
 
 	public:
 
+		// ForwardPropagation function
 		void ForwardPropagation(void);
+		// BackwardPropagation function
 		void BackwardPropagation(void);
+		// Padding function
 		void Padding(void);
 
 	private:
 
-		void ZeroPadding(const size_t _paddingSize);
-		void OnePadding(const size_t _paddingSize);
 		ElemType Convolution(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2);
 		ElemType Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernal, const size_t _m, const size_t _n);
 
@@ -110,6 +123,24 @@ namespace Neural
 		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
 	};
 
+	// Convolutional Layer Initor
+	/// Used for initialization of a ConvLayer.
+	struct ConvLayerInitor
+	{
+		// Stride
+		size_t Stride;
+		// The numner of kernals.
+		size_t KernalNum;
+		// Size of input matrix. 
+		MathLib::Size InputSize;
+		// Size of convolutional kernal.
+		MathLib::Size KernalSize;
+		PaddingNum PaddingNum;
+		PaddingMethod PaddingMethod;
+		LossFunction LossFunction;
+		ActivationFunction ActivationFunction;
+	};
+
 	class PoolingLayer
 	{
 	public:
@@ -117,5 +148,10 @@ namespace Neural
 		PoolingLayer(void);
 
 	private:
+		
+		MathLib::Matrix<ElemType> _input;
+		MathLib::Matrix<ElemType> _output;
+
+		PoolingMethod _poolingMethod;
 	};
 }

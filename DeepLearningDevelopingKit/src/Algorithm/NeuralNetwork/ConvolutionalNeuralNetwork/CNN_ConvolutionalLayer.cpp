@@ -1,12 +1,12 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	                Layer     	                                                               */
+/*								        		 	    Convolutional Layer     	                                                      */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
 // Header files
-#include "CNN_Layer.h"
+#include "CNN_ConvolutionalLayer.h"
 
 
 Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
@@ -120,7 +120,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -144,7 +144,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -168,7 +168,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -192,7 +192,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -216,7 +216,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -240,7 +240,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 					case Neural::PaddingNum::OnePadding:
 						_paddedInput(i, j) = 1;
 						break;
-					case Neural::PaddingNum::NoPadding:
+					case Neural::PaddingNum::RandomPadding:
 						break;
 					default:
 						break;
@@ -252,36 +252,6 @@ void Neural::ConvolutionalLayer::Padding(void)
 		break;
 	}
 
-}
-
-void Neural::ConvolutionalLayer::ZeroPadding(const size_t _paddingSize)
-{
-	size_t paddingSize = _paddingSize;
-	_paddedInput.Init(_originalInput.GetSize().m + paddingSize * 2, _originalInput.GetSize().n + paddingSize * 2);
-
-	for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-		for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-			if (i< paddingSize || i > _paddedInput.GetSize().m - paddingSize || j< paddingSize || j > _paddedInput.GetSize().n - paddingSize)
-				_paddedInput(i, j) = 0;
-
-	for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-		for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-			_paddedInput(i + paddingSize, j + paddingSize) = _originalInput(i, j);
-}
-
-void Neural::ConvolutionalLayer::OnePadding(const size_t _paddingSize)
-{
-	size_t paddingSize = _paddingSize;
-	_paddedInput.Init(_originalInput.GetSize().m + paddingSize * 2, _originalInput.GetSize().n + paddingSize * 2);
-
-	for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-		for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-			if (i< paddingSize || i > _paddedInput.GetSize().m - paddingSize || j< paddingSize || j > _paddedInput.GetSize().n - paddingSize)
-				_paddedInput(i, j) = 1.f;
-
-	for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-		for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-			_paddedInput(i + paddingSize, j + paddingSize) = _originalInput(i, j);
 }
 
 Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2)

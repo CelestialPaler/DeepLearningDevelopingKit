@@ -240,7 +240,10 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
-    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_Layer.h">
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
   </ItemGroup>
@@ -308,7 +311,10 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Node.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\BackpropagationNeuralNetwork %28BNN%29</Filter>
     </ClCompile>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_Layer.cpp">
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClCompile>
   </ItemGroup>
