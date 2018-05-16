@@ -12,11 +12,5 @@
 /// Provide basic mathematic support and calculation tools for different algorithms.
 namespace MathLib
 {
-	struct Size
-	{
-		Size() = default;
-		Size(size_t _m, size_t _n) : m(_m), n(_n) {}
-		size_t m;
-		size_t n;
-	};
+
 }

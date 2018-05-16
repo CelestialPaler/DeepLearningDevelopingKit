@@ -11,7 +11,7 @@
 
 /***************************************************************************************************/
 // Namespace : Neural
-/// Provide Node for nerual network algorithms.
+/// Provide Neural Network algorithm library.
 namespace Neural
 {
 	class CNN

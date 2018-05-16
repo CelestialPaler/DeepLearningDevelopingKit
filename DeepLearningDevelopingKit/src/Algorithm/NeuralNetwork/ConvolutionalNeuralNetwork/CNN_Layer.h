@@ -8,28 +8,52 @@
 
 // Header files
 #include "..\..\..\MathLib\MathLib.h"
-#include "CNN_Kernal.hpp"
-#include "CNN_Feature.h"
+#include "..\ActivationFunction.h"
+#include "..\LossFunction.h"
 
 /***************************************************************************************************/
 // Namespace : Neural
+/// Provide Neural Network algorithm library.
 namespace Neural
 {
-	enum class SamplingMethod {
+	typedef double ElemType;
+
+	enum class PaddingMethod {
+		LeftUp,
+		LeftDown,
+		RightUp,
+		RightDown,
+		Surround
+	};
+
+	enum class PaddingNum {
 		ZeroPadding,
 		OnePadding,
 		NoPadding
 	};
 
-	// CNN Initor
-	/// Used for initialization of a BPNet.
+	enum class PoolingMethod {
+		MaxPooling,
+		MinPooling,
+		MeanPooling,
+		RandomPooling
+	};
+
+	typedef MathLib::Matrix<ElemType> ConvKernal;
+	typedef MathLib::Matrix<ElemType> ConvFeature;
+
+	// ConvLayer Initor
+	/// Used for initialization of a ConvLayer.
 	struct ConvLayerInitor
 	{
 		MathLib::Size InputSize;
 		size_t KernalNum;
 		MathLib::Size KernalSize;
 		size_t Stride;
-		SamplingMethod SamplingMethod;
+		PaddingMethod PaddingMethod;
+		PaddingNum PaddingNum;
+		ActivationFunction ActivationFunction;
+		LossFunction LossFunction;
 	};
 
 	class ConvolutionalLayer
@@ -47,12 +71,28 @@ namespace Neural
 
 	public:
 
+		void SetInput(const MathLib::Matrix<ElemType> & _input);
+		// Set the activation function of the layer.
+		void SetActivationFunction(const ActivationFunction _function);
+		// Set the loss function of the layer.
+		void SetLossFunction(const LossFunction _function);
+
+	public:
+
 		void ForwardPropagation(void);
 		void BackwardPropagation(void);
+		void Padding(void);
 
 	private:
 
-		MathLib::Matrix<ElemType> _input;
+		void ZeroPadding(const size_t _paddingSize);
+		void OnePadding(const size_t _paddingSize);
+		ElemType Convolution(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2);
+
+	public:
+
+		MathLib::Matrix<ElemType> _originalInput;
+		MathLib::Matrix<ElemType> _paddedInput;
 
 		std::vector<ConvKernal> _kernals;
 		std::vector<ConvFeature> _features;
@@ -60,14 +100,13 @@ namespace Neural
 		size_t _kernalNum;
 		MathLib::Size _kernalSize;
 		size_t _stride;
-		SamplingMethod _samplingMethod;
-	};
+		PaddingMethod _paddingMethod;
+		PaddingNum _paddingNum;
 
-	enum class PoolingMethod {
-		MaxPooling,
-		MinPooling,
-		MeanPooling,
-		RandomPooling
+		ElemType(*activationFunction)(ElemType x);
+		ElemType(*activationFunctionDerivative)(ElemType x);
+		ElemType(*lossFunction)(ElemType x, ElemType y);
+		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
 	};
 
 	class PoolingLayer

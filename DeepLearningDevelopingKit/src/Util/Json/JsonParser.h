@@ -10,7 +10,7 @@
 #include <string>
 #include "..\..\MathLib\MathLib.h"
 #include "JsonHandler.h"
-#include "..\..\Algorithm\NeuralNetwork\Node.h"
+#include "..\..\Algorithm\NeuralNetwork\NeuralLib.h"
 
 using namespace Neural;
 

@@ -8,7 +8,8 @@
 #define CNNDebug
 
 #ifdef CNNDebug
-#include "..\Algorithm\NeuralNetwork\CNN\CNN.h"
+
+#include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_Layer.h"
 
 
 int main(int argc, char ** argv)
@@ -17,10 +18,25 @@ int main(int argc, char ** argv)
 	testInitor.InputSize = MathLib::Size(3, 3);
 	testInitor.KernalNum = 2;
 	testInitor.KernalSize = MathLib::Size(2, 2);
-	testInitor.SamplingMethod = Neural::SamplingMethod::NoPadding;
+	testInitor.PaddingMethod = Neural::PaddingMethod::LeftUp;
+	testInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	testInitor.Stride = 1;
+	testInitor.ActivationFunction = ActivationFunction::ReLU;
+	testInitor.LossFunction = LossFunction::MES;
 
-	Neural::ConvolutionalLayer tstLayer(testInitor);
+	Neural::ConvolutionalLayer testLayer(testInitor);
+
+	MathLib::Matrix<double> input(3, 3, MathLib::MatrixType::Random);
+	
+	testLayer.SetInput(input);
+	testLayer.Padding();
+
+	std::cout << input << std::endl;
+	MathLib::Matrix<double> temp(testLayer._paddedInput.GetSize().m, testLayer._paddedInput.GetSize().n);
+	temp = testLayer._paddedInput;
+	std::cout << temp << std::endl;
+
+	testLayer.ForwardPropagation();
 
 
 	system("pause");

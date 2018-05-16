@@ -29,6 +29,15 @@ namespace MathLib
 		Identity
 	};
 
+	// Size of Matrix.
+	struct Size
+	{
+		Size() = default;
+		Size(size_t _m, size_t _n) : m(_m), n(_n) {}
+		size_t m;
+		size_t n;
+	};
+
 	/***************************************************************************************************/
 	// Class : Matrix
 	/// Implemented in std::vector.
@@ -61,7 +70,7 @@ namespace MathLib
 		/// Return the size of the Matrix.
 		inline const size_t ColumeSize(void) const { return m; }
 		inline const size_t RowSize(void) const { return n; }
-		inline const size_t Size(void) const;
+		inline const Size GetSize(void) const { return size; }
 		// Sum function
 		/// Add up all the element in the Matrix.
 		const T Sum(void) const;
@@ -311,6 +320,7 @@ namespace MathLib
 	private:
 		std::vector<std::vector<T>> _data;
 		size_t m, n;
+		Size size;
 	};
 }
 
@@ -405,17 +415,10 @@ namespace MathLib
 		default:
 			break;
 		}
-		n = _n;
 		m = _m;
-	}
-
-	template<class T>
-	inline const size_t Matrix<T>::Size(void) const
-	{
-		if (m == n)
-			return m;
-		else
-			return 0;
+		n = _n;
+		size.m = _m;
+		size.n = _n;
 	}
 
 	template<class T>
