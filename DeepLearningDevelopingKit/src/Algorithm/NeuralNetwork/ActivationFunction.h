@@ -14,6 +14,7 @@
 // Activation functions 
 /// Activation Function Enums
 enum class ActivationFunction {
+	Linear,
 	Sigmoid,
 	ReLU,
 	LeakyReLU,
@@ -26,6 +27,7 @@ enum class ActivationFunction {
 }; 
 
 enum class ActivationFunctionDerivative {
+	LinearDerivative,
 	SigmoidDerivative,
 	ReLUDerivative,
 	LeakyReLUDerivative,

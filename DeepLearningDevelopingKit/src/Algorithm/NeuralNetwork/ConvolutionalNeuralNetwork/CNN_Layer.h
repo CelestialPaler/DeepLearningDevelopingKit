@@ -65,9 +65,9 @@ namespace Neural
 	public:
 
 		inline const ConvFeature GetFeature(const size_t _index) const { return _features.at(_index); }
-		inline const std::vector<ConvFeature> GetFeatureAll(const size_t _index) const { return _features; }
+		inline const std::vector<ConvFeature> GetFeatureAll(void) const { return _features; }
 		inline const ConvKernal GetKernal(const size_t _index) const { return _kernals.at(_index); }
-		inline const std::vector<ConvKernal> GetKernalAll(const size_t _index) const { return _kernals; }
+		inline const std::vector<ConvKernal> GetKernalAll(void) const { return _kernals; }
 
 	public:
 
@@ -88,6 +88,7 @@ namespace Neural
 		void ZeroPadding(const size_t _paddingSize);
 		void OnePadding(const size_t _paddingSize);
 		ElemType Convolution(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2);
+		ElemType Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernal, const size_t _m, const size_t _n);
 
 	public:
 

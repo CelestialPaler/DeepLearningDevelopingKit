@@ -83,23 +83,26 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		ElemType sum{ 0.f };
 		size_t kernalOffsetM{ 0 }, kernalOffsetN{ 0 };
 		for (size_t a = 0; a < _features.at(0).GetSize().m; a++)
+		{
 			for (size_t b = 0; b < _features.at(0).GetSize().n; b++)
 			{
-				MathLib::Size size = _kernals.at(k).GetSize();
-				for (size_t i = 0; i < size.m; i++)
-					for (size_t j = 0; j < size.n; j++)
-						sum += _kernals.at(k)(i, j)* _paddedInput(i + kernalOffsetM, j + kernalOffsetN);
-
-				_features.at(k)(a, b) = activationFunction(sum);
+				_features.at(k)(a, b) = activationFunction(Convolution(_paddedInput, _kernals.at(k), kernalOffsetM, kernalOffsetN));
 				kernalOffsetM += _stride;
-				kernalOffsetN += _stride;
 			}
+			kernalOffsetM = 0;
+			kernalOffsetN += _stride;
+		}
 	}
+}
+
+void Neural::ConvolutionalLayer::BackwardPropagation(void)
+{
+
 }
 
 void Neural::ConvolutionalLayer::Padding(void)
 {
-	size_t paddingSize = 1;
+	size_t paddingSize = 2;
 
 	switch (this->_paddingMethod)
 	{
@@ -288,6 +291,15 @@ Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<E
 	for (size_t i = 0; i < size.m; i++)
 		for (size_t j = 0; j < size.n; j++)
 			sum += _mat1(i, j)* _mat2(i, j);
-	sum = activationFunction(sum);
+	return sum;
+}
+
+Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _input, const MathLib::Matrix<ElemType>& _kernal, const size_t _m, const size_t _n)
+{
+	ElemType sum{ 0.f };
+	MathLib::Size size = _kernal.GetSize();
+	for (size_t i = 0; i < size.m; i++)
+		for (size_t j = 0; j < size.n; j++)
+			sum += _input(_m + i, _n + j)* _kernal(i, j);
 	return sum;
 }
