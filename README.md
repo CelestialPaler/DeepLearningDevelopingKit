@@ -36,20 +36,20 @@
     <li><p>Regresstion Analysis</p></li>
     <li><p>Decision Tree</p></li>
     <li><p>Neural Network</p></li>
-    <li><p>Supported Vector Machine</p></li>
-    <li><p>Expectation Maximization</p></li>
-    <li><p>Clustering</p></li>
+    <li><p>Supported Vector Machine (Todo)</p></li>
+    <li><p>Expectation Maximization (Todo)</p></li>
+    <li><p>Clustering (Todo)</p></li>
     <li><p>Decision Tree</p></li>
 </ul>
+<p>&nbsp;&nbsp;This project is mainly focusing on Deeplearning for now. </p>
 
 <h2>Developing Status</h2>
 
 <h3>&nbsp;&nbsp;Under developing:</h3>
 <ul>
-    <li><p>Advanced Math Library</p></li>
-    <li><p>LinearRegression in Regression Analysis</p></li>
-    <li><p>Save and load data using .json</p></li>
-    <li><p>Data Generator</p></li>
+    <li><p>Convolutional Neural Network</p></li>
+    <li><p>Refine Backpropagation Neural Network</p></li>
+    <li><p>MultiThread for acceleration</p></li>
 </ul>
 
 <h3>&nbsp;&nbsp;Further plan (Not top priority):</h3>
