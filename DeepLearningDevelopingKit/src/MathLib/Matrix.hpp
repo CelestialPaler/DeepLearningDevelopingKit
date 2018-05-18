@@ -57,6 +57,9 @@ namespace MathLib
 		// Constructor (Using given Data)
 		/// Using data from a given pointer, which is pointed to a 2D array, to initialize the Matrix.
 		Matrix(const std::initializer_list<int> & _list);
+		// Copy constructor
+		Matrix(const Matrix& _mat);
+
 
 	public: // Initializing
 
@@ -174,7 +177,12 @@ namespace MathLib
 		Matrix<T> & operator = (const Matrix<T> & _other)
 		{
 			if (this != &_other)
+			{
 				_data = _other._data;
+				size = _other.size;
+				m = _other.m;
+				n = _other.n;
+			}
 			return (*this);
 		}
 
@@ -348,6 +356,16 @@ namespace MathLib
 	template<class T>
 	inline Matrix<T>::Matrix(const std::initializer_list<int>& _list)
 	{
+	}
+
+	// Copy constructor
+	template<class T>
+	inline Matrix<T>::Matrix(const Matrix & _mat)
+	{
+		this->_data = _mat._data;
+		this->size = _mat.size;
+		this->m = _mat.m;
+		this->n = _mat.n;
 	}
 
 	// Initializing function

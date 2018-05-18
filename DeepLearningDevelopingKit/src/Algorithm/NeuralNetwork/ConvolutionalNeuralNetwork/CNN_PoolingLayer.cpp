@@ -12,6 +12,7 @@ Neural::PoolingLayer::PoolingLayer(const PoolLayerInitor & _initor)
 	this->_stride = _initor.Stride;
 	this->_poolSize = _initor.PoolSize;
 	this->_inputSize = _initor.InputSize;
+	this->_paddingNum = _initor.PaddingNum;
 }
 
 void Neural::PoolingLayer::SetInput(const std::vector<Feature> & _input)
@@ -45,5 +46,13 @@ void Neural::PoolingLayer::DownSampling(void)
 			kernelOffsetM = 0;
 			kernelOffsetN += _stride;
 		}
+	}
+}
+
+void Neural::PoolingLayer::Padding(void)
+{
+	for (size_t i = 0; i < _input.size(); i++)
+	{
+		_input.at(i) = Pad::Padding(_input.at(i), _paddingMethod, _paddingNum);
 	}
 }

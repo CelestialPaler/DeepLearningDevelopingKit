@@ -10,6 +10,7 @@
 #include "..\..\..\MathLib\MathLib.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
+#include "CNN_Padding.h"
 
 /***************************************************************************************************/
 // Namespace : Neural
@@ -66,6 +67,7 @@ namespace Neural
 	public:
 
 		void DownSampling(void);
+		void Padding(void);
 
 	private :
 
@@ -80,5 +82,7 @@ namespace Neural
 		MathLib::Size _poolSize;
 		MathLib::Size _inputSize;
 		PoolingMethod _poolingMethod;
+		PaddingNum _paddingNum;
+		PaddingMethod _paddingMethod;
 	};
 }

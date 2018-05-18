@@ -11,34 +11,25 @@
 
 Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 {
-	this->_kernelNum = _initor.KernelNum;
+	this->_convNodeNum = _initor.KernelNum;
 	this->_kernelSize = _initor.KernelSize;
-	this->_stride = _initor.Stride;
-	this->_paddingMethod = _initor.PaddingMethod;
-	this->_paddingNum = _initor.PaddingNum;
-	this->_originalInput.Init(_initor.InputSize.m, _initor.InputSize.n);
-	for (size_t i = 0; i < _kernelNum; i++)
+	this->_strideM = _initor.StrideM;
+	this->_strideN = _initor.StrideN;
+	this->_inputSize = _initor.InputSize;
+
+	for (size_t i = 0; i < _convNodeNum; i++)
 	{
-		ConvKernel newKernel = *new ConvKernel(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
-		this->_kernels.push_back(newKernel);
+		ConvNode newConvNode = *new ConvNode(_kernelSize);
+		this->_convNodes.push_back(newConvNode);
 	}
-	switch (_initor.PaddingMethod)
-	{
-	default:
-		for (size_t i = 0; i < _kernelNum; i++)
-		{
-			ConvFeature newFeature = *new ConvFeature(_originalInput.GetSize().m / _stride, _originalInput.GetSize().n / _stride);
-			this->_features.push_back(newFeature);
-		}
-		break;
-	}
+
 	SetActivationFunction(_initor.ActivationFunction);
 	SetLossFunction(_initor.LossFunction);
 }
 
-void Neural::ConvolutionalLayer::SetInput(const MathLib::Matrix<ElemType>& _input)
+void Neural::ConvolutionalLayer::SetInput(const std::vector<MathLib::Matrix<ElemType>>& _input)
 {
-	this->_originalInput = _input;
+	this->_input = _input;
 }
 
 void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction _function)
@@ -77,180 +68,28 @@ void Neural::ConvolutionalLayer::SetLossFunction(const LossFunction _function)
 
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
-	// Travesing every kernel in the layer.
-	for (size_t k = 0; k < _kernelNum; k++)
+	// Travesing every input feature in the layer.
+	for (size_t i = 0; i < _input.size(); i++)
 	{
-		ElemType sum{ 0.f };
-		size_t kernelOffsetM{ 0 }, kernelOffsetN{ 0 };
-		for (size_t a = 0; a < _features.at(0).GetSize().m; a++)
+		size_t kernelOffsetM = 0;
+		size_t kernelOffsetN = 0;
+		// Travesing every kernel in the layer.
+		for (size_t k = 0; k < _convNodeNum; k++)
 		{
-			for (size_t b = 0; b < _features.at(0).GetSize().n; b++)
+			for (size_t a = 0; a < _inputSize.m; a++)
 			{
-				_features.at(k)(a, b) = activationFunction(Convolution(_paddedInput, _kernels.at(k), kernelOffsetM, kernelOffsetN));
-				kernelOffsetM += _stride;
+				for (size_t b = 0; b < _inputSize.n; b++)
+					_features.at(i * _convNodeNum + k)(a, b) = activationFunction(Convolution(_input.at(i), _convNodes.at(k).kernal, kernelOffsetM, kernelOffsetN));
+				kernelOffsetM += _strideM;
 			}
+			kernelOffsetN += _strideN;
 			kernelOffsetM = 0;
-			kernelOffsetN += _stride;
 		}
 	}
 }
 
 void Neural::ConvolutionalLayer::BackwardPropagation(void)
 {
-
-}
-
-void Neural::ConvolutionalLayer::Padding(void)
-{
-	size_t paddingSize = 2;
-
-	switch (this->_paddingMethod)
-	{
-	case Neural::PaddingMethod::LeftUp:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize, _originalInput.GetSize().n + paddingSize);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i< paddingSize || j< paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i + paddingSize, j + paddingSize) = _originalInput(i, j);
-		break;
-	case Neural::PaddingMethod::LeftDown:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize, _originalInput.GetSize().n + paddingSize);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i> _paddedInput.GetSize().m - paddingSize || j< paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i, j + paddingSize) = _originalInput(i, j);
-		break;
-	case Neural::PaddingMethod::RightUp:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize, _originalInput.GetSize().n + paddingSize);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i< paddingSize || j> _paddedInput.GetSize().n - paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i + paddingSize, j) = _originalInput(i, j);
-		break;
-	case Neural::PaddingMethod::RightDown:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize, _originalInput.GetSize().n + paddingSize);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i> _paddedInput.GetSize().m - paddingSize|| j> _paddedInput.GetSize().n - paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i, j) = _originalInput(i, j);
-		break;
-	case Neural::PaddingMethod::Surround:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize * 2, _originalInput.GetSize().n + paddingSize * 2);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i< paddingSize || j< paddingSize|| i> _paddedInput.GetSize().m - paddingSize || j> _paddedInput.GetSize().n - paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i + paddingSize, j + paddingSize) = _originalInput(i, j);
-		break;
-	default:
-		_paddedInput.Init(_originalInput.GetSize().m + paddingSize, _originalInput.GetSize().n + paddingSize);
-
-		for (size_t i = 0; i < _paddedInput.GetSize().m; i++)
-			for (size_t j = 0; j < _paddedInput.GetSize().n; j++)
-				if (i> _paddedInput.GetSize().m - paddingSize || j> _paddedInput.GetSize().n - paddingSize)
-					switch (this->_paddingNum)
-					{
-					case Neural::PaddingNum::ZeroPadding:
-						_paddedInput(i, j) = 0;
-						break;
-					case Neural::PaddingNum::OnePadding:
-						_paddedInput(i, j) = 1;
-						break;
-					case Neural::PaddingNum::RandomPadding:
-						break;
-					default:
-						break;
-					}
-
-		for (size_t i = 0; i < _originalInput.GetSize().m; i++)
-			for (size_t j = 0; j < _originalInput.GetSize().n; j++)
-				_paddedInput(i + paddingSize, j + paddingSize) = _originalInput(i, j);
-		break;
-	}
 
 }
 

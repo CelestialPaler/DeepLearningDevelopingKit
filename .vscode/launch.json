@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug X64",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\x64\\Debug\\DeepLearningDevelopingKit.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\x64\\Debug\\",
+            "environment": [],
+            "externalConsole": true
+        }
+    ]
+}

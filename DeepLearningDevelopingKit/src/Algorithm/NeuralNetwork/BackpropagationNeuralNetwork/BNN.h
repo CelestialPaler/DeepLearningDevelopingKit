@@ -46,7 +46,6 @@ namespace Neural
 	/***************************************************************************************************/
 	// Class : BPNet
 	/// BackPropagation Network.
-	/// It will be a built-in Module.
 	class BNN
 	{
 	public: // Constructors

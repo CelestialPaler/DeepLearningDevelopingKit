@@ -14,55 +14,33 @@
 
 
 int main(int argc, char ** argv)
-{
-	Neural::ConvLayerInitor testInitor;
-	testInitor.InputSize = MathLib::Size(10, 10);
-	testInitor.KernelNum = 5;
-	testInitor.KernelSize = MathLib::Size(3, 3);
-	testInitor.PaddingMethod = Neural::PaddingMethod::RightDown;
-	testInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
-	testInitor.Stride = 1;
-	testInitor.ActivationFunction = ActivationFunction::ReLU;
-	testInitor.LossFunction = LossFunction::MES;
-
-	Neural::ConvolutionalLayer testLayer(testInitor);
-
+{	
+	/***************************************************************************************************/
+	// Input
 	MathLib::Matrix<double> input(10, 10, MathLib::MatrixType::Random);
-	
-	testLayer.SetInput(input);
-	testLayer.Padding();
 
-	std::cout << input << std::endl;
-	MathLib::Matrix<double> temp1(testLayer._paddedInput.GetSize().m, testLayer._paddedInput.GetSize().n);
-	temp1 = testLayer._paddedInput;
-	std::cout << temp1 << std::endl;
+	/***************************************************************************************************/
+	// Initializing Convolutional Layer
+	Neural::ConvLayerInitor convInitor;
+	convInitor.KernelSize = MathLib::Size(3, 3);
+	convInitor.InputSize = MathLib::Size(10, 10);
+	convInitor.StrideM = 1;
+	convInitor.StrideN = 1;
+	convInitor.KernelNum = 5;
+	convInitor.LossFunction = LossFunction::MES;
+	convInitor.ActivationFunction = ActivationFunction::ReLU;
+	Neural::ConvolutionalLayer testLayer(convInitor);
 
-	testLayer.ForwardPropagation();
-
-	std::vector<MathLib::Matrix<double>> features= testLayer.GetFeatureAll();
-	for (auto & vec : features)
-		std::cout << vec << std::endl;
-
-	std::vector<MathLib::Matrix<double>> kernels = testLayer.GetKernelAll();
-	for (auto & vec : kernels)
-		std::cout << vec << std::endl;
-
-	Neural::PoolLayerInitor poolinitor;
-	poolinitor.InputSize = MathLib::Size(10, 10);
-	poolinitor.Stride = 2;
-	poolinitor.PoolSize = MathLib::Size(2, 2);
-	poolinitor.PaddingMethod = Neural::PaddingMethod::RightDown;
-	poolinitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
-	poolinitor.PoolingMethod = Neural::PoolingMethod::MaxPooling;
-
-	Neural::PoolingLayer testPooling(poolinitor);
-
-	testPooling.SetInput(features);
-	testPooling.DownSampling();
-
-	std::vector<MathLib::Matrix<double>> smallerFeature = testPooling.GetFeatureAll();
-	for (auto & vec : smallerFeature)
-		std::cout << vec << std::endl;
+	/***************************************************************************************************/
+	// Initializing Pooling Layer
+	Neural::PoolLayerInitor poolInitor;
+	poolInitor.InputSize = MathLib::Size(10, 10);
+	poolInitor.Stride = 2;
+	poolInitor.PoolSize = MathLib::Size(2, 2);
+	poolInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	poolInitor.PoolingMethod = Neural::PoolingMethod::MaxPooling;
+	poolInitor.PaddingMethod = Neural::PaddingMethod::RightDown;
+	Neural::PoolingLayer testPooling(poolInitor);
 
 	system("pause");
 	return 0;
