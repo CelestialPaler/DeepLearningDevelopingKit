@@ -64,6 +64,11 @@ namespace Util
 
 namespace Util
 {
+	inline Timer::Timer(void)
+	{
+
+	}
+
 	inline void Timer::Start(void)
 	{
 		_timeBase = std::chrono::time_point_cast<Duration>(std::chrono::steady_clock::now());

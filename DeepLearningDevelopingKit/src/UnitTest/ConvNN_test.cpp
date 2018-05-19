@@ -11,13 +11,17 @@
 
 #include <fstream>
 
+#include "..\Util\Timer\Time.hpp"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h"
 
 int main(int argc, char ** argv)
-{	
+{
+	Util::Timer debugTimer;
+	debugTimer.Start();
+
 	/***************************************************************************************************/
 	// Input
 	MathLib::Matrix<double> input1(16, 16, MathLib::MatrixType::Random);
@@ -81,7 +85,7 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Serialize Layer
 	Neural::SerializeLayerInitor serialInitor;
-	serialInitor.SerializeSize = MathLib::Size(4*4*10, 1);
+	serialInitor.SerializeSize = MathLib::Size(4 * 4 * 10, 1);
 	serialInitor.DeserializeSize = MathLib::Size(4, 4);
 	Neural::SerializeLayer serial(serialInitor);
 
@@ -92,7 +96,6 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Forward Propagation
 	conv1.SetInput(input);
-	conv1.Padding();
 	conv1.ForwardPropagation();
 	std::vector<Neural::ConvKernel> conv1kernals = conv1.GetKernelAll();
 	std::vector<Neural::ConvFeature> conv1features = conv1.GetFeatureAll();
@@ -102,7 +105,6 @@ int main(int argc, char ** argv)
 	std::vector<Neural::Feature> pool1features = pool1.GetFeatureAll();
 
 	conv2.SetInput(pool1features);
-	conv2.Padding();
 	conv2.ForwardPropagation();
 	std::vector<Neural::ConvKernel> conv2kernals = conv2.GetKernelAll();
 	std::vector<Neural::ConvFeature> conv2features = conv2.GetFeatureAll();
@@ -124,7 +126,7 @@ int main(int argc, char ** argv)
 	/*
 	*
 	*					Classifier Thingy
-	*	
+	*
 	*			Linear Regression			(MLR).
 	*			Logistic Regression			(LR)
 	*			Supported Vector Machine		(SVM)
@@ -139,13 +141,13 @@ int main(int argc, char ** argv)
   \	*  /
    \*/
 
-	/***************************************************************************************************/
-	// Delta
-	MathLib::Matrix<double> delta(4*4*10, 1, MathLib::MatrixType::Random);
+   /***************************************************************************************************/
+   // Delta
+	MathLib::Matrix<double> delta(4 * 4 * 10, 1, MathLib::MatrixType::Random);
+
 
 	/***************************************************************************************************/
 	// Backward Propagation
-
 	serial.SetSerializedMat(delta);
 	serial.Deserialize();
 	std::vector<MathLib::Matrix<double>> deserialized = serial.GetDeserializedMat();
@@ -160,22 +162,18 @@ int main(int argc, char ** argv)
 
 	conv2.SetDelta(pool2Delta);
 	conv2.BackwardPropagation();
+	std::vector<MathLib::Matrix<double>> conv2Delta = conv2._deltaDeconved;
 
+	pool1.SetDelta(conv2Delta);
+	pool1.BackwardPropagation();
+	std::vector<MathLib::Matrix<double>> pool1Delta = pool1.GetDelta();
 
+	conv1.SetDelta(pool1Delta);
+	conv1.BackwardPropagation();
+	std::vector<MathLib::Matrix<double>> conv1Delta = conv1._deltaDeconved;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	MathLib::Matrix<double> result(16, 16);
+	for (auto mat : conv1Delta) result += mat;
 
 
 
@@ -190,6 +188,7 @@ int main(int argc, char ** argv)
 		temp += "Version : Windows-x64-0.2.1-CPU\n";
 		temp += "Copyright 2015-2018 Celestial Tech Inc.\nFor more check www.tianshicangxie.com\n";
 		log << temp.c_str() << std::endl;
+		log << "Time used : " << debugTimer.GetTime() << "ms" << std::endl << std::endl;
 
 		log << "/***************************************************************************************************/"
 			<< std::endl << "Input Data" << std::endl;
@@ -247,6 +246,24 @@ int main(int argc, char ** argv)
 		for (auto mat : pool2Delta)
 			log << mat << std::endl;
 
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Convolutional Layer 2" << std::endl;
+		for (auto mat : conv2Delta)
+			log << mat << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Pooling Layer 1" << std::endl;
+		for (auto mat : pool1Delta)
+			log << mat << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Convolutional Layer 1" << std::endl;
+		for (auto mat : conv1Delta)
+			log << mat << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Out from CNN-FNN" << std::endl;
+		log << result << std::endl;
 
 		log.close();
 	}

@@ -67,10 +67,6 @@ namespace Neural
 		ConvKernel kernel;
 		ElemType bias;
 		ConvFeature feature;
-
-		ConvKernel krenelDelta;
-		ElemType biasDelta;
-		ConvFeature featureDelta;
 	};
 
 	/***************************************************************************************************/
@@ -86,8 +82,7 @@ namespace Neural
 	public: // Getter and Setter
 
 		inline const ConvFeature GetFeature(const size_t _index) const { return _convNodes.at(_index).kernel; }
-		inline const std::vector<ConvFeature> GetFeatureAll(void) const
-		{
+		inline const std::vector<ConvFeature> GetFeatureAll(void) const {
 			std::vector<ConvFeature> features;
 			for (const ConvNode & node : _convNodes)
 				features.push_back(node.feature);
@@ -95,40 +90,48 @@ namespace Neural
 		}
 
 		inline const ConvKernel GetKernel(const size_t _index) const { return _convNodes.at(_index).kernel; }
-		inline const std::vector<ConvKernel> GetKernelAll(void) const 
-		{ 
+		inline const std::vector<ConvKernel> GetKernelAll(void) const { 
 			std::vector<ConvKernel> kernels;
 			for (const ConvNode & node : _convNodes)
 				kernels.push_back(node.kernel);
 			return kernels;
 		}
 
-	public:
+	public: // Getter and Setter
 
 		// Set the input of the ConvLayer.
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _input);
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
-
+		// Set the delta propagate from next layer.
 		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
 
-	public:
+	public: // BackPropagation Algorithm
 
 		// ForwardPropagation function
 		void ForwardPropagation(void);
 		// BackwardPropagation function
 		void BackwardPropagation(void);
+		// Update function
+		void Update(void);
+
+	private: // Working functions
+
 		// Padding function
 		void Padding(void);
-
-	private:
-
-		ElemType MatrixConvSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
+		// Convolution between two matrix.
 		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel);
 
-		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
-		MathLib::Matrix<ElemType> MatrixConvolution(MathLib::Matrix<ElemType> _mat1, MathLib::Matrix<ElemType> _mat2);
+	private: // Math Stuff
 
+		// Rotate a Matrix with 180° 
+		/// Used for calculating the delta -> correlation(A, B) = rot180°(A * rot180°(B))
+		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
+
+		// Sum of the product of corresponding elements.
+		ElemType MatrixConvSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
+		// Mathematical convolution of two Matrix.
+		MathLib::Matrix<ElemType> MatrixConvolution(MathLib::Matrix<ElemType> _mat1, MathLib::Matrix<ElemType> _mat2);
 
 	public:
 
