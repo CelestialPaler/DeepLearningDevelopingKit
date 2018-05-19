@@ -91,6 +91,9 @@
     <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29">
       <UniqueIdentifier>{30e6fa16-0826-4ccd-8c06-cc2a1adfe174}</UniqueIdentifier>
     </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{e0338e69-24f6-46cb-aaab-5bce22cd9da7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -332,5 +335,10 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\CNN_debug_output.txt">
+      <Filter>log</Filter>
+    </Text>
   </ItemGroup>
 </Project>

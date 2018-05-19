@@ -227,6 +227,9 @@
     <ClCompile Include="src\Util\Json\JsonHandler.cpp" />
     <ClCompile Include="src\Util\Json\JsonParser.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\CNN_debug_output.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
