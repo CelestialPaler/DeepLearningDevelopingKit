@@ -27,4 +27,18 @@ void Neural::ProcessLayer::Process(void)
 	}
 }
 
+void Neural::ProcessLayer::Deprocess(void)
+{
+	for (size_t i = 0; i < _data.size(); i++)
+	{
+		for (size_t a = 0; a < _inputSize.m; a++)
+		{
+			for (size_t b = 0; b < _inputSize.n; b++)
+			{
+				_data.at(i)(a, b) = processFunctionDerivative(_data.at(i)(a, b)) * _data.at(i)(a, b);
+			}
+		}
+	}
+}
+
 

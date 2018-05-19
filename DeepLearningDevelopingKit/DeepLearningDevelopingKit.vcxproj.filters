@@ -94,6 +94,12 @@
     <Filter Include="log">
       <UniqueIdentifier>{e0338e69-24f6-46cb-aaab-5bce22cd9da7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\RecurrentNeuralNetwork %28RNN%29">
+      <UniqueIdentifier>{f877d3a2-8146-4591-b0b9-1a6e82e69cd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\Long Short Term Memory %28LSTM%29">
+      <UniqueIdentifier>{0de3b305-8910-4153-be77-036b2a1ee394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

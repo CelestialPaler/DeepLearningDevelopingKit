@@ -39,4 +39,18 @@ void Neural::SerializeLayer::Serialize(void)
 
 void Neural::SerializeLayer::Deserialize(void)
 {
+	_deserializedMat.clear();
+	size_t deserializedNum = _serializedSize.m / (_deserializedSize.m * _deserializedSize.n);
+	for (size_t i = 0; i < deserializedNum; i++)
+	{
+		MathLib::Matrix<ElemType> tempMat(_deserializedSize.m, _deserializedSize.n);
+		for (size_t a = 0; a <_deserializedSize.m; a++)
+		{
+			for (size_t b = 0; b < _deserializedSize.n; b++)
+			{
+				tempMat(a, b) = _serializedMat(i * _deserializedSize.m * _deserializedSize.n + a * _deserializedSize.m + b, 0);
+			}
+		}
+		_deserializedMat.push_back(tempMat);
+	}
 }

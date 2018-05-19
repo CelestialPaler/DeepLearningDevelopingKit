@@ -26,6 +26,11 @@ void Neural::PoolingLayer::SetInput(const std::vector<Feature> & _input)
 	this->_input = _input;
 }
 
+void Neural::PoolingLayer::SetDelta(const std::vector<Feature>& _delta)
+{
+	this->_delta = _delta;
+}
+
 Neural::Feature Neural::PoolingLayer::MaxPool(const Feature & _feature)
 {
 	Feature tempFeature(_outputSize.m, _outputSize.n,MathLib::MatrixType::Zero);
@@ -58,6 +63,21 @@ Neural::ElemType Neural::PoolingLayer::MaxPoolPart(const Feature & _feature, con
 	return max;
 }
 
+void Neural::PoolingLayer::ForwardPropagation(void)
+{
+	Padding();
+	DownSampling();
+}
+
+void Neural::PoolingLayer::BackwardPropagation(void)
+{
+	UpSampling();
+}
+
+void Neural::PoolingLayer::Update(void)
+{
+}
+
 void Neural::PoolingLayer::DownSampling(void)
 {
 	for (size_t i = 0; i < _input.size(); i++)
@@ -69,7 +89,24 @@ void Neural::PoolingLayer::DownSampling(void)
 
 void Neural::PoolingLayer::UpSampling(void)
 {
-
+	for (size_t i = 0; i < _delta.size(); i++)
+	{
+		MathLib::Matrix<ElemType> deltaDepoolMat(_outputSize.m * _poolSize.m, _outputSize.n * _poolSize.n);
+		for (size_t a = 0; a < _outputSize.m; a++)
+		{
+			for (size_t b = 0; b < _outputSize.n; b++)
+			{
+				for (size_t m = 0; m < _poolSize.m; m++)
+				{
+					for (size_t n = 0; n < _poolSize.n; n++)
+					{
+						deltaDepoolMat(a * _poolSize.m + m, b * _poolSize.n + n) = _delta.at(i)(a, b);
+					}
+				}
+			}
+		}
+		_deltaDepooled.push_back(deltaDepoolMat);
+	}
 }
 
 void Neural::PoolingLayer::Padding(void)

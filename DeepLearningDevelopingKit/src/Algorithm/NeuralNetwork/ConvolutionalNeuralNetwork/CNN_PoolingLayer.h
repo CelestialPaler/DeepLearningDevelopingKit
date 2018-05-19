@@ -64,17 +64,26 @@ namespace Neural
 	public: // Getter and Setter
 
 		void SetInput(const std::vector<Feature> & _input);
+		void SetDelta(const std::vector<Feature> & _delta);
 
 		inline const Feature GetFeature(const size_t _index) const { return _output.at(_index); }
 		inline const std::vector<Feature> GetFeatureAll(void) const { return _output; }
+		inline const std::vector<Feature> GetDelta(void) const { return _deltaDepooled; }
 
 	public:
 
+		// ForwardPropagation function
+		void ForwardPropagation(void);
+		// BackwardPropagation function
+		void BackwardPropagation(void);
+		// Update function
+		void Update(void);
+
+
+	private:
 		void DownSampling(void);
 		void UpSampling(void);
 		void Padding(void);
-
-	private :
 
 		Feature MaxPool(const Feature & _feature);
 		ElemType MaxPoolPart(const Feature & _feature, const size_t m, const size_t n);
@@ -97,6 +106,7 @@ namespace Neural
 		
 		// Delta
 		std::vector<Feature> _delta;
+		std::vector<Feature> _deltaDepooled;
 
 		PoolingMethod _poolingMethod;
 		PaddingNum _paddingNum;

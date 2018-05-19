@@ -59,6 +59,11 @@ void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction 
 	}
 }
 
+void Neural::ConvolutionalLayer::SetDelta(const std::vector<MathLib::Matrix<ElemType>>& _delta)
+{
+	this->_delta = _delta;
+}
+
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
 	// Travesing every kernel in the layer.
@@ -73,7 +78,17 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 
 void Neural::ConvolutionalLayer::BackwardPropagation(void)
 {
-
+	for (size_t i = 0; i < _delta.size(); i++)
+	{
+		for (size_t j = 0; j < _delta.size(); j++)
+		{
+			std::cout << _delta.at(i) << std::endl;
+			auto temp1 = Rot180(_delta.at(i));
+			std::cout << temp1 << std::endl;
+			auto temp2 = MatrixConvolution(_input.at(j), temp1);
+			std::cout << temp2 << std::endl;
+		}
+	}
 }
 
 void Neural::ConvolutionalLayer::Padding(void)
@@ -89,7 +104,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 	}
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::MatrixConv(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2, const size_t _m, const size_t _n)
+Neural::ElemType Neural::ConvolutionalLayer::MatrixConvSum(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2, const size_t _m, const size_t _n)
 {
 	ElemType sum{ 0.f };
 	MathLib::Size size = _mat2.GetSize();
@@ -108,11 +123,48 @@ MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Convolution(const 
 	{
 		for (size_t j = 0; j < _inputSize.n; j++)
 		{
-			temp(i, j) = activationFunction(MatrixConv(_input, _kernel, kernalOffsetM, kernalOffsetN));
+			temp(i, j) = activationFunction(MatrixConvSum(_input, _kernel, kernalOffsetM, kernalOffsetN));
 			kernalOffsetN += _stride;
 		}
 		kernalOffsetM += _stride;
 		kernalOffsetN = 0;
+	}
+	return temp;
+}
+
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Rot180(const MathLib::Matrix<ElemType>& _mat)
+{
+	size_t sizeM = _mat.ColumeSize();
+	size_t sizeN = _mat.RowSize();
+	MathLib::Matrix<ElemType> temp(sizeM, sizeN);
+	for (size_t i = 0; i < sizeM; i++)
+	{
+		for (size_t j = 0; j < sizeN; j++)
+		{
+			temp(i, j) = _mat(sizeM - 1 - i, sizeN - 1 - j);
+		}
+	}
+	return temp;
+}
+
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::MatrixConvolution(MathLib::Matrix<ElemType> _mat1, MathLib::Matrix<ElemType> _mat2)
+{
+	size_t mat1M = _mat1.GetSize().m;
+	size_t mat1N = _mat1.GetSize().n;
+	_mat1 = Pad::Padding(_mat1, PaddingMethod::Surround, PaddingNum::ZeroPadding, mat1M, mat1N);
+	MathLib::Matrix<Neural::ElemType> temp(_inputSize.m, _inputSize.n);
+	size_t offsetM = 0;
+	size_t offsetN = 0;
+	for (size_t i = 0; i < _inputSize.m; i++)
+	{
+		for (size_t j = 0; j < _inputSize.n; j++)
+		{
+			temp(i, j) = MatrixConvSum(_mat1, _mat2, offsetM, offsetN);
+			std::cout << i << j << std::endl;
+			offsetN ++;
+		}
+		offsetM++;
+		offsetN = 0;
 	}
 	return temp;
 }

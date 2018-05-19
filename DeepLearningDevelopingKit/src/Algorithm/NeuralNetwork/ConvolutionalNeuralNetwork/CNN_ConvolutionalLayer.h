@@ -110,6 +110,8 @@ namespace Neural
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
 
+		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
+
 	public:
 
 		// ForwardPropagation function
@@ -121,8 +123,12 @@ namespace Neural
 
 	private:
 
-		ElemType MatrixConv(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
+		ElemType MatrixConvSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
 		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel);
+
+		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
+		MathLib::Matrix<ElemType> MatrixConvolution(MathLib::Matrix<ElemType> _mat1, MathLib::Matrix<ElemType> _mat2);
+
 
 	public:
 
@@ -149,6 +155,10 @@ namespace Neural
 		// Padding size
 		size_t _paddingM;
 		size_t _paddingN;
+
+		// Delta
+		std::vector<MathLib::Matrix<ElemType>> _delta;
+		std::vector<MathLib::Matrix<ElemType>> _deltaDeconved;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);

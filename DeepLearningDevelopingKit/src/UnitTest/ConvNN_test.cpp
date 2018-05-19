@@ -20,14 +20,14 @@ int main(int argc, char ** argv)
 {	
 	/***************************************************************************************************/
 	// Input
-	MathLib::Matrix<double> input1(10, 10, MathLib::MatrixType::Random);
+	MathLib::Matrix<double> input1(16, 16, MathLib::MatrixType::Random);
 	std::vector<MathLib::Matrix<double>> input;
 	input.push_back(input1);
 
 	/***************************************************************************************************/
 	// Initializing Convolutional Layer 1
 	Neural::ConvLayerInitor convInitor1;
-	convInitor1.InputSize = MathLib::Size(10, 10);
+	convInitor1.InputSize = MathLib::Size(16, 16);
 	convInitor1.KernelSize = MathLib::Size(3, 3);
 	convInitor1.Stride = 1;
 	convInitor1.KernelNum = 5;
@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Pooling Layer 1
 	Neural::PoolLayerInitor poolInitor1;
-	poolInitor1.InputSize = MathLib::Size(10, 10);
+	poolInitor1.InputSize = MathLib::Size(16, 16);
 	poolInitor1.Stride = 2;
 	poolInitor1.PoolSize = MathLib::Size(2, 2);
 	poolInitor1.PaddingNum = Neural::PaddingNum::ZeroPadding;
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Convolutional Layer 2
 	Neural::ConvLayerInitor convInitor2;
-	convInitor2.InputSize = MathLib::Size(5, 5);
+	convInitor2.InputSize = MathLib::Size(8, 8);
 	convInitor2.KernelSize = MathLib::Size(3, 3);
 	convInitor2.Stride = 1;
 	convInitor2.KernelNum = 10;
@@ -62,7 +62,7 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Pooling Layer 2
 	Neural::PoolLayerInitor poolInitor2;
-	poolInitor2.InputSize = MathLib::Size(5, 5);
+	poolInitor2.InputSize = MathLib::Size(8, 8);
 	poolInitor2.Stride = 2;
 	poolInitor2.PoolSize = MathLib::Size(2, 2);
 	poolInitor2.PaddingNum = Neural::PaddingNum::ZeroPadding;
@@ -81,13 +81,16 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Serialize Layer
 	Neural::SerializeLayerInitor serialInitor;
-	serialInitor.SerializeSize = MathLib::Size(40, 1);
-	serialInitor.DeserializeSize = MathLib::Size(2, 2);
+	serialInitor.SerializeSize = MathLib::Size(4*4*10, 1);
+	serialInitor.DeserializeSize = MathLib::Size(4, 4);
 	Neural::SerializeLayer serial(serialInitor);
 
 
 
 
+
+	/***************************************************************************************************/
+	// Forward Propagation
 	conv1.SetInput(input);
 	conv1.Padding();
 	conv1.ForwardPropagation();
@@ -95,8 +98,7 @@ int main(int argc, char ** argv)
 	std::vector<Neural::ConvFeature> conv1features = conv1.GetFeatureAll();
 
 	pool1.SetInput(conv1features);
-	pool1.Padding();
-	pool1.DownSampling();
+	pool1.ForwardPropagation();
 	std::vector<Neural::Feature> pool1features = pool1.GetFeatureAll();
 
 	conv2.SetInput(pool1features);
@@ -106,8 +108,7 @@ int main(int argc, char ** argv)
 	std::vector<Neural::ConvFeature> conv2features = conv2.GetFeatureAll();
 
 	pool2.SetInput(conv2features);
-	pool2.Padding();
-	pool2.DownSampling();
+	pool2.ForwardPropagation();
 	std::vector<Neural::Feature> pool2features = pool2.GetFeatureAll();
 
 	process.SetInput(pool2features);
@@ -116,33 +117,72 @@ int main(int argc, char ** argv)
 
 	serial.SetDeserializedMat(processOutput);
 	serial.Serialize();
-	MathLib::Matrix<double> serialOutput = serial.GetSerializedMat();
+	MathLib::Matrix<double> serialized = serial.GetSerializedMat();
 
+
+	// \(ΘwΘ)/  \(ΘwΘ)/  \(ΘwΘ)/  \(ΘwΘ)/
 	/*
 	*
+	*					Classifier Thingy
+	*	
+	*			Linear Regression			(MLR).
+	*			Logistic Regression			(LR)
+	*			Supported Vector Machine		(SVM)
+	*			K Nearest Neighbors			(KNN)
+	*			Decision Tree		 (DT)
+	*			Naive Bayes		 (NB)
+	*			Random Trees		(RT)
+	*			Neural Network		 (NN)
 	*
-	*	Here is classifier thingy.
-	*	Using FullConnectLayer, such as BNN.
-	*	Using LR, MLR.
-	*	Using SVM.
-	*	Using k-means.
 	*
-	*
-	*/
+\	*    /
+  \	*  /
+   \*/
 
 	/***************************************************************************************************/
 	// Delta
-	MathLib::Matrix<double> delta(40, 1, MathLib::MatrixType::Ones);
+	MathLib::Matrix<double> delta(4*4*10, 1, MathLib::MatrixType::Random);
+
+	/***************************************************************************************************/
+	// Backward Propagation
+
+	serial.SetSerializedMat(delta);
+	serial.Deserialize();
+	std::vector<MathLib::Matrix<double>> deserialized = serial.GetDeserializedMat();
+
+	process.SetInput(deserialized);
+	process.Deprocess();
+	std::vector<MathLib::Matrix<double>> deprocessOutput = process.GetOutputAll();
+
+	pool2.SetDelta(deprocessOutput);
+	pool2.BackwardPropagation();
+	std::vector<MathLib::Matrix<double>> pool2Delta = pool2.GetDelta();
+
+	conv2.SetDelta(pool2Delta);
+	conv2.BackwardPropagation();
 
 
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 	{
 		std::ofstream log;
-		log.open("log\\CNN_debug_output.txt");
+		std::string path = "log\\CNN_debug_output.txt";
+		log.open(path);
 		if (!log.is_open()) exit(0);
 		std::string temp;
 		temp += "Project : Deep Learning Developing Kit\n";
@@ -187,11 +227,27 @@ int main(int argc, char ** argv)
 
 		log << "/***************************************************************************************************/"
 			<< std::endl << "Serialize Layer" << std::endl;
-		log << serialOutput << std::endl;
+		log << serialized << std::endl;
 
 		log << "/***************************************************************************************************/"
-			<< std::endl << "Start Backpropagation" << std::endl;
-		log << delta << std::endl;
+			<< std::endl << "Start Backpropagation" << std::endl << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Serialize Layer" << std::endl;
+		for (auto mat : deserialized)
+			log << mat << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Process Layer" << std::endl;
+		for (auto mat : deprocessOutput)
+			log << mat << std::endl;
+
+		log << "/***************************************************************************************************/"
+			<< std::endl << "Pooling Layer 2" << std::endl;
+		for (auto mat : pool2Delta)
+			log << mat << std::endl;
+
+
 		log.close();
 	}
 	return 0;

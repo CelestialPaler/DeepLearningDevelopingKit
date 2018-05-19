@@ -40,8 +40,6 @@ namespace Neural
 		void Serialize(void);
 		void Deserialize(void);
 
-
-
 		inline const MathLib::Matrix<ElemType> GetSerializedMat(void) const { return _serializedMat; }
 		inline const std::vector<MathLib::Matrix<ElemType>> GetDeserializedMat(void) const { return _deserializedMat; }
 
