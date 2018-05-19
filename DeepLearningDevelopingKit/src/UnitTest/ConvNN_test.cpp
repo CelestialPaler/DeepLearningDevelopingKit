@@ -12,6 +12,7 @@
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.h"
+#include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h"
 
 int main(int argc, char ** argv)
 {	
@@ -111,7 +112,7 @@ int main(int argc, char ** argv)
 	poolInitor2.PaddingMethod = Neural::PaddingMethod::RightDown;
 	Neural::PoolingLayer pool2(poolInitor2);
 
-	pool2.SetInput(conv1features);
+	pool2.SetInput(conv2features);
 	pool2.Padding();
 	pool2.DownSampling();
 
@@ -139,22 +140,31 @@ int main(int argc, char ** argv)
 		std::cout << mat << std::endl;
 
 	/***************************************************************************************************/
-	// Initializing Process Layer
+	// Initializing Serialize Layer
 	std::cout << "/***************************************************************************************************/"
-		<< std::endl << "Process Layer" << std::endl;
-	Neural::ProcessLayerInitor processInitor;
-	processInitor.InputSize = MathLib::Size(2, 2);
-	processInitor.ProcessFunction = ReLU;
-	processInitor.ProcessFunctionDerivative = ReLUDerivative;
-	Neural::ProcessLayer process(processInitor);
+		<< std::endl << "Serialize Layer" << std::endl;
+	Neural::SerializeLayerInitor serialInitor;
+	serialInitor.SerializeSize = MathLib::Size(40, 1);
+	serialInitor.DeserializeSize = MathLib::Size(2, 2);
+	Neural::SerializeLayer serial(serialInitor);
 
-	process.SetInput(pool2features);
-	process.Process();
+	serial.SetDeserializedMat(processOutput);
+	serial.Serialize();
 
-	std::vector<Neural::Feature> processOutput = process.GetOutputAll();
+	MathLib::Matrix<double> serialOutput = serial.GetSerializedMat();
 
-	for (auto mat : processOutput)
-		std::cout << mat << std::endl;
+	std::cout << serialOutput << std::endl;
+
+	/***************************************************************************************************/
+	// BackPropagation
+	std::cout << "/***************************************************************************************************/"
+		<< std::endl << "Start Backpropagation" << std::endl;
+	MathLib::Matrix<double> input1(10, 10, MathLib::MatrixType::Random);
+
+
+
+
+
 
 	system("pause");
 	return 0;
