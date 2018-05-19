@@ -38,10 +38,15 @@ namespace Neural
 
 	public:
 		
-		static MathLib::Matrix<ElemType> Padding(const MathLib::Matrix<ElemType> & _input, const PaddingMethod _method, const PaddingNum _num)
+		static MathLib::Matrix<ElemType> Padding(
+			const MathLib::Matrix<ElemType> & _input, 
+			const PaddingMethod _method, 
+			const PaddingNum _num, 
+			const size_t _sizeM,
+			const size_t _sizeN)
 		{
-			size_t paddingSizeM = 2;
-			size_t paddingSizeN = 2;
+			size_t paddingSizeM = _sizeM;
+			size_t paddingSizeN = _sizeN;
 			size_t inputSizeM = _input.GetSize().m, inputSizeN = _input.GetSize().n;
 			size_t outputSizeM = 0, outputSizeN = 0;
 			MathLib::Matrix<ElemType> output;
@@ -57,7 +62,7 @@ namespace Neural
 						if (i < paddingSizeM || j < paddingSizeN)
 							output(i, j) = Pad::PaddingNum(_num);
 
-				for (size_t i = 0; i < inputSizeN; i++)
+				for (size_t i = 0; i < inputSizeM; i++)
 					for (size_t j = 0; j < inputSizeN; j++)
 						output(i + paddingSizeM, j + paddingSizeN) = _input(i, j);
 
@@ -72,7 +77,7 @@ namespace Neural
 						if (i > outputSizeM - paddingSizeM || j < paddingSizeN)
 							output(i, j) = Pad::PaddingNum(_num);
 
-				for (size_t i = 0; i < inputSizeN; i++)
+				for (size_t i = 0; i < inputSizeM; i++)
 					for (size_t j = 0; j < inputSizeN; j++)
 						output(i, j + paddingSizeN) = _input(i, j);
 
@@ -87,7 +92,7 @@ namespace Neural
 						if (i < paddingSizeM || j >  outputSizeN - paddingSizeN)
 							output(i, j) = Pad::PaddingNum(_num);
 
-				for (size_t i = 0; i < inputSizeN; i++)
+				for (size_t i = 0; i < inputSizeM; i++)
 					for (size_t j = 0; j < inputSizeN; j++)
 						output(i + paddingSizeM, j) = _input(i, j);
 
@@ -102,7 +107,7 @@ namespace Neural
 						if (i > outputSizeM - paddingSizeM || j >  outputSizeN - paddingSizeN)
 							output(i, j) = Pad::PaddingNum(_num);
 
-				for (size_t i = 0; i < inputSizeN; i++)
+				for (size_t i = 0; i < inputSizeM; i++)
 					for (size_t j = 0; j < inputSizeN; j++)
 						output(i, j) = _input(i, j);
 
@@ -117,7 +122,7 @@ namespace Neural
 						if (i < paddingSizeM || j < paddingSizeN)
 							output(i, j) = Pad::PaddingNum(_num);
 
-				for (size_t i = 0; i < inputSizeN; i++)
+				for (size_t i = 0; i < inputSizeM; i++)
 					for (size_t j = 0; j < inputSizeN; j++)
 						output(i + paddingSizeM, j + paddingSizeN) = _input(i, j);
 
@@ -142,7 +147,7 @@ namespace Neural
 				return 1;
 				break;
 			case Neural::PaddingNum::RandomPadding:
-				return Random();
+				return MathLib::Random();
 				break;
 			default:
 				return 0;

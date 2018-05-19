@@ -176,6 +176,7 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_Padding.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ReLULayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h" />

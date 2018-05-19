@@ -8,23 +8,27 @@
 // Header files
 #include "CNN_ConvolutionalLayer.h"
 
-
 Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 {
 	this->_convNodeNum = _initor.KernelNum;
 	this->_kernelSize = _initor.KernelSize;
-	this->_strideM = _initor.StrideM;
-	this->_strideN = _initor.StrideN;
+	this->_stride = _initor.Stride;
 	this->_inputSize = _initor.InputSize;
+	this->_paddingMethod = _initor.PaddingMethod;
+	this->_paddingNum = _initor.PaddingNum;
 
 	for (size_t i = 0; i < _convNodeNum; i++)
 	{
-		ConvNode newConvNode = *new ConvNode(_kernelSize);
+		ConvNode newConvNode = *new ConvNode(_kernelSize, _inputSize);
 		this->_convNodes.push_back(newConvNode);
 	}
 
 	SetActivationFunction(_initor.ActivationFunction);
-	SetLossFunction(_initor.LossFunction);
+
+	this->_outputSize.m = _inputSize.m;
+	this->_outputSize.n = _inputSize.n;
+	this->PaddingM = _inputSize.m + _kernelSize.m - 1 - _stride * _outputSize.m;
+	this->PaddingN = _inputSize.n + _kernelSize.n - 1 - _stride * _outputSize.n;
 }
 
 void Neural::ConvolutionalLayer::SetInput(const std::vector<MathLib::Matrix<ElemType>>& _input)
@@ -44,6 +48,10 @@ void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction 
 		this->activationFunction = ReLU;
 		this->activationFunctionDerivative = ReLUDerivative;
 		break;
+	case ActivationFunction::Linear:
+		this->activationFunction = Linear;
+		this->activationFunctionDerivative = LinearDerivative;
+		break;
 	default:
 		this->activationFunction = Sigmoid;
 		this->activationFunctionDerivative = SigmoidDerivative;
@@ -51,39 +59,14 @@ void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction 
 	}
 }
 
-void Neural::ConvolutionalLayer::SetLossFunction(const LossFunction _function)
-{
-	switch (_function)
-	{
-	case LossFunction::MES:
-		this->lossFunction = MES;
-		this->lossFunctionDerivative = MESDerivative;
-		break;
-	default:
-		this->lossFunction = MES;
-		this->lossFunctionDerivative = MESDerivative;
-		break;
-	}
-}
-
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
-	// Travesing every input feature in the layer.
-	for (size_t i = 0; i < _input.size(); i++)
+	// Travesing every kernel in the layer.
+	for (size_t k = 0; k < _convNodeNum; k++)
 	{
-		size_t kernelOffsetM = 0;
-		size_t kernelOffsetN = 0;
-		// Travesing every kernel in the layer.
-		for (size_t k = 0; k < _convNodeNum; k++)
+		for (size_t i = 0; i < _input.size(); i++)
 		{
-			for (size_t a = 0; a < _inputSize.m; a++)
-			{
-				for (size_t b = 0; b < _inputSize.n; b++)
-					_features.at(i * _convNodeNum + k)(a, b) = activationFunction(Convolution(_input.at(i), _convNodes.at(k).kernal, kernelOffsetM, kernelOffsetN));
-				kernelOffsetM += _strideM;
-			}
-			kernelOffsetN += _strideN;
-			kernelOffsetM = 0;
+			_convNodes.at(k).feature += Convolution(_paddedInput.at(i), _convNodes.at(k).kernel);
 		}
 	}
 }
@@ -93,22 +76,43 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2)
+void Neural::ConvolutionalLayer::Padding(void)
+{
+	for (size_t i = 0; i < _input.size(); i++)
+	{
+		MathLib::Matrix<ElemType> newMatrix = *new MathLib::Matrix<ElemType>;
+		_paddedInput.push_back(newMatrix);
+	}
+	for (size_t i = 0; i < _input.size(); i++)
+	{
+		_paddedInput.at(i) = Pad::Padding(_input.at(i), _paddingMethod, _paddingNum, PaddingM, PaddingN);
+	}
+}
+
+Neural::ElemType Neural::ConvolutionalLayer::MatrixConv(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2, const size_t _m, const size_t _n)
 {
 	ElemType sum{ 0.f };
-	MathLib::Size size = _mat1.GetSize();
+	MathLib::Size size = _mat2.GetSize();
 	for (size_t i = 0; i < size.m; i++)
 		for (size_t j = 0; j < size.n; j++)
-			sum += _mat1(i, j)* _mat2(i, j);
+			sum += _mat1(_m + i, _n + j)* _mat2(i, j);
 	return sum;
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _input, const MathLib::Matrix<ElemType>& _kernel, const size_t _m, const size_t _n)
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType>& _input, const MathLib::Matrix<ElemType>& _kernel)
 {
-	ElemType sum{ 0.f };
-	MathLib::Size size = _kernel.GetSize();
-	for (size_t i = 0; i < size.m; i++)
-		for (size_t j = 0; j < size.n; j++)
-			sum += _input(_m + i, _n + j)* _kernel(i, j);
-	return sum;
+	MathLib::Matrix<Neural::ElemType> temp(_inputSize.m, _inputSize.n);
+	size_t kernalOffsetM = 0;
+	size_t kernalOffsetN = 0;
+	for (size_t i = 0; i < _inputSize.m; i++)
+	{
+		for (size_t j = 0; j < _inputSize.n; j++)
+		{
+			temp(i, j) = activationFunction(MatrixConv(_input, _kernel, kernalOffsetM, kernalOffsetN));
+			kernalOffsetN += _stride;
+		}
+		kernalOffsetM += _stride;
+		kernalOffsetN = 0;
+	}
+	return temp;
 }

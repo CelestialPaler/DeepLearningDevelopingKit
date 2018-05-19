@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include "MathLibError.h"
+#include "MathTool.hpp"
 #include "Vector.hpp"
 
 /***************************************************************************************************/
@@ -222,7 +223,7 @@ namespace MathLib
 			Matrix<T> & self = *this;
 			if (self.m != _other.m || self.n != _other.n)
 			{
-				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				std::cerr << "ERROR : Invalid Matrix Addtion!" << std::endl;
 			}
 			for (size_t i = 0; i < self.m; i++)
 				for (size_t j = 0; j < self.n; j++)
@@ -408,7 +409,7 @@ namespace MathLib
 				for (size_t j = 0; j < _n; j++)
 				{
 					T tempElem = *new T;
-					tempElem = Random() * 10;
+					tempElem = Random();
 					tempVec.push_back(tempElem);
 				}
 				_data.push_back(tempVec);

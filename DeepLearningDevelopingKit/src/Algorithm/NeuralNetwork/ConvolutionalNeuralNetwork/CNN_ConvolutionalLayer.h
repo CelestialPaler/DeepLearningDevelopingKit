@@ -26,15 +26,18 @@ namespace Neural
 	struct ConvLayerInitor
 	{
 		// Stride
-		size_t StrideM;
-		size_t StrideN;
+		size_t Stride;
 		// The numner of kernels.
 		size_t KernelNum;
 		// Size of input matrix. 
 		MathLib::Size InputSize;
 		// Size of convolutional kernel.
 		MathLib::Size KernelSize;
-		LossFunction LossFunction;
+		// Method of padding.
+		PaddingMethod PaddingMethod;
+		// Value uesd in Padding
+		PaddingNum PaddingNum;
+		// Activation Function
 		ActivationFunction ActivationFunction;
 	};
 	
@@ -49,18 +52,21 @@ namespace Neural
 	{
 		ConvNode() = default;
 
-		ConvNode(const size_t _m, const size_t _n){
-			kernal.Init(_m,_n,MathLib::MatrixType::Random);
-			bias = Random();
+		ConvNode(const size_t _kernelM, const size_t _kernelN, const size_t _featureM, const size_t _featureN){
+			kernel.Init(_kernelM, _kernelN,MathLib::MatrixType::Random);
+			feature.Init(_featureM, _featureN, MathLib::MatrixType::Zero);
+			bias = MathLib::Random();
 		}
 
-		ConvNode(const MathLib::Size _size) {
-			kernal.Init(_size.m, _size.n, MathLib::MatrixType::Random);
-			bias = Random();
+		ConvNode(const MathLib::Size _kernelSize, const MathLib::Size _featureSize) {
+			kernel.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
+			feature.Init(_featureSize.m, _featureSize.n, MathLib::MatrixType::Zero);
+			bias = MathLib::Random();
 		}
 
-		ConvKernel kernal;
+		ConvKernel kernel;
 		ElemType bias;
+		ConvFeature feature;
 	};
 
 	/***************************************************************************************************/
@@ -77,10 +83,23 @@ namespace Neural
 
 	public: // Getter and Setter
 
-		inline const ConvFeature GetFeature(const size_t _index) const { return _features.at(_index); }
-		inline const std::vector<ConvFeature> GetFeatureAll(void) const { return _features; }
-		inline const ConvNode GetKernel(const size_t _index) const { return _convNodes.at(_index); }
-		inline const std::vector<ConvNode> GetKernelAll(void) const { return _convNodes; }
+		inline const ConvFeature GetFeature(const size_t _index) const { return _convNodes.at(_index).kernel; }
+		inline const std::vector<ConvFeature> GetFeatureAll(void) const
+		{
+			std::vector<ConvFeature> features;
+			for (const ConvNode & node : _convNodes)
+				features.push_back(node.feature);
+			return features;
+		}
+
+		inline const ConvKernel GetKernel(const size_t _index) const { return _convNodes.at(_index).kernel; }
+		inline const std::vector<ConvKernel> GetKernelAll(void) const 
+		{ 
+			std::vector<ConvKernel> kernels;
+			for (const ConvNode & node : _convNodes)
+				kernels.push_back(node.kernel);
+			return kernels;
+		}
 
 	public:
 
@@ -97,36 +116,44 @@ namespace Neural
 		void ForwardPropagation(void);
 		// BackwardPropagation function
 		void BackwardPropagation(void);
+		// Padding function
+		void Padding(void);
 
 	private:
 
-		ElemType Convolution(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2);
-		ElemType Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel, const size_t _m, const size_t _n);
+		ElemType MatrixConv(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
+		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel);
 
 	public:
 
 		// Input of convolutional layer.
 		std::vector<MathLib::Matrix<ElemType>> _input;
+		std::vector<MathLib::Matrix<ElemType>> _paddedInput;
 		// Input size.
 		MathLib::Size _inputSize;
+		MathLib::Size _outputSize;
 
 		// Convolutional Node in the Layer.
-		/// Contains a kernal and a bias.
+		/// Contains a kernal, a bias and features extracted by the node.
 		std::vector<ConvNode> _convNodes;
-		// Features extracted by the node.
-		std::vector<ConvFeature> _features;
 
 		// The num of ConvNodes in the layer.
 		size_t _convNodeNum;
 		// The size of kernal.
 		MathLib::Size _kernelSize;
 		// The size of stride.
-		size_t _strideM;
-		size_t _strideN;
+		size_t _stride;
+
+		// Padding size
+		size_t PaddingM;
+		size_t PaddingN;
+
+		// Padding Method
+		PaddingMethod _paddingMethod;
+		PaddingNum _paddingNum;
 
 		ElemType(*activationFunction)(ElemType x);
 		ElemType(*activationFunctionDerivative)(ElemType x);
-		ElemType(*lossFunction)(ElemType x, ElemType y);
-		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
+
 	};
 }

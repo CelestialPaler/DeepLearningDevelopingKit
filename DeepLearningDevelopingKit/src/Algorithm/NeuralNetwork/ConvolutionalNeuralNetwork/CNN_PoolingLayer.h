@@ -24,9 +24,6 @@ namespace Neural
 	// Define Kernel and Feature.
 	typedef MathLib::Matrix<ElemType> Feature;
 
-	extern enum class PaddingMethod;
-	extern enum class PaddingNum;
-
 	// Method of pooling
 	/// For most situation, Max Pooling is the most common practice.
 	enum class PoolingMethod {
@@ -46,18 +43,25 @@ namespace Neural
 		MathLib::Size InputSize;
 		// Size of pool
 		MathLib::Size PoolSize;
-		PaddingNum PaddingNum;
+		// Method of padding.
 		PaddingMethod PaddingMethod;
-		PoolingMethod  PoolingMethod;
+		// Value uesd in Padding
+		PaddingNum PaddingNum;
+		// Method of pooling.
+		PoolingMethod PoolingMethod;
 	};
 
+	/***************************************************************************************************/
+	// Class : Pooling Layer
+	/// Used for scalling down the features.
 	class PoolingLayer
 	{
-	public:
+	public: // Constructors
 
+		// Invoke constructor
 		PoolingLayer(const PoolLayerInitor & _initor);
 
-	public:
+	public: // Getter and Setter
 
 		void SetInput(const std::vector<Feature> & _input);
 
@@ -71,16 +75,25 @@ namespace Neural
 
 	private :
 
-		ElemType MaxPool(const Feature & _feature, const size_t m, const size_t n);
+		Feature MaxPool(const Feature & _feature);
+		ElemType MaxPoolPart(const Feature & _feature, const size_t m, const size_t n);
 
 	public:
 
 		std::vector<Feature> _input;
+		std::vector<Feature> _paddedInput;
 		std::vector<Feature> _output;
 
 		size_t _stride;
 		MathLib::Size _poolSize;
+		// Input size.
 		MathLib::Size _inputSize;
+		MathLib::Size _outputSize;
+
+		// Padding size
+		size_t PaddingM;
+		size_t PaddingN;
+
 		PoolingMethod _poolingMethod;
 		PaddingNum _paddingNum;
 		PaddingMethod _paddingMethod;

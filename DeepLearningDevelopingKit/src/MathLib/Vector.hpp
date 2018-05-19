@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "MathLibError.h"
+#include "MathTool.hpp"
 #include "Matrix.hpp"
 
 /***************************************************************************************************/

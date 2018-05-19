@@ -39,6 +39,17 @@ enum class ActivationFunctionDerivative {
 	CustomDerivative
 };
 
+//Linear Function
+const double K = 1;
+inline double Linear(double x) {
+	return x * K;
+}
+
+//Linear Derivative Function
+inline double LinearDerivative(double x) {
+	return K;
+}
+
 // Sigmoid Function
 /// Logistic activation function
 const double A = 1;
