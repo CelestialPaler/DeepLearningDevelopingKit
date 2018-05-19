@@ -67,6 +67,10 @@ namespace Neural
 		ConvKernel kernel;
 		ElemType bias;
 		ConvFeature feature;
+
+		ConvKernel krenelDelta;
+		ElemType biasDelta;
+		ConvFeature featureDelta;
 	};
 
 	/***************************************************************************************************/
@@ -78,8 +82,6 @@ namespace Neural
 
 		// Invoke constructor
 		ConvolutionalLayer(const ConvLayerInitor & _initor);
-		// Copy constructor
-		ConvolutionalLayer(ConvolutionalLayer & _convLayer);
 
 	public: // Getter and Setter
 
@@ -107,8 +109,6 @@ namespace Neural
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _input);
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
-		// Set the loss function of the layer.
-		void SetLossFunction(const LossFunction _function);
 
 	public:
 
@@ -136,7 +136,6 @@ namespace Neural
 		// Convolutional Node in the Layer.
 		/// Contains a kernal, a bias and features extracted by the node.
 		std::vector<ConvNode> _convNodes;
-
 		// The num of ConvNodes in the layer.
 		size_t _convNodeNum;
 		// The size of kernal.
@@ -144,16 +143,15 @@ namespace Neural
 		// The size of stride.
 		size_t _stride;
 
-		// Padding size
-		size_t PaddingM;
-		size_t PaddingN;
-
 		// Padding Method
 		PaddingMethod _paddingMethod;
 		PaddingNum _paddingNum;
+		// Padding size
+		size_t _paddingM;
+		size_t _paddingN;
 
+		// Activation Function
 		ElemType(*activationFunction)(ElemType x);
 		ElemType(*activationFunctionDerivative)(ElemType x);
-
 	};
 }

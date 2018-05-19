@@ -71,6 +71,7 @@ namespace Neural
 	public:
 
 		void DownSampling(void);
+		void UpSampling(void);
 		void Padding(void);
 
 	private :
@@ -91,8 +92,11 @@ namespace Neural
 		MathLib::Size _outputSize;
 
 		// Padding size
-		size_t PaddingM;
-		size_t PaddingN;
+		size_t _paddingM;
+		size_t _paddingN;
+		
+		// Delta
+		std::vector<Feature> _delta;
 
 		PoolingMethod _poolingMethod;
 		PaddingNum _paddingNum;

@@ -176,7 +176,7 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_Padding.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ReLULayer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h" />
@@ -205,6 +205,7 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Node.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp" />
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />

@@ -11,7 +11,7 @@
 
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h"
 #include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h"
-
+#include "..\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.h"
 
 int main(int argc, char ** argv)
 {	
@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
 	convInitor2.InputSize = MathLib::Size(5, 5);
 	convInitor2.KernelSize = MathLib::Size(3, 3);
 	convInitor2.Stride = 1;
-	convInitor2.KernelNum = 2;
+	convInitor2.KernelNum = 10;
 	convInitor2.ActivationFunction = ActivationFunction::Sigmoid;
 	convInitor2.PaddingMethod = Neural::PaddingMethod::RightDown;
 	convInitor2.PaddingNum = Neural::PaddingNum::ZeroPadding;
@@ -96,6 +96,64 @@ int main(int argc, char ** argv)
 	for (auto mat : conv2kernals)
 		std::cout << mat << std::endl;
 	for (auto mat : conv2features)
+		std::cout << mat << std::endl;
+
+	/***************************************************************************************************/
+	// Initializing Pooling Layer 2
+	std::cout << "/***************************************************************************************************/"
+		<< std::endl << "Pooling Layer 2" << std::endl;
+	Neural::PoolLayerInitor poolInitor2;
+	poolInitor2.InputSize = MathLib::Size(5, 5);
+	poolInitor2.Stride = 2;
+	poolInitor2.PoolSize = MathLib::Size(2, 2);
+	poolInitor2.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	poolInitor2.PoolingMethod = Neural::PoolingMethod::MaxPooling;
+	poolInitor2.PaddingMethod = Neural::PaddingMethod::RightDown;
+	Neural::PoolingLayer pool2(poolInitor2);
+
+	pool2.SetInput(conv1features);
+	pool2.Padding();
+	pool2.DownSampling();
+
+	std::vector<Neural::Feature> pool2features = pool2.GetFeatureAll();
+
+	for (auto mat : pool2features)
+		std::cout << mat << std::endl;
+
+	/***************************************************************************************************/
+	// Initializing Process Layer
+	std::cout << "/***************************************************************************************************/"
+		<< std::endl << "Process Layer" << std::endl;
+	Neural::ProcessLayerInitor processInitor;
+	processInitor.InputSize = MathLib::Size(2, 2);
+	processInitor.ProcessFunction = ReLU;
+	processInitor.ProcessFunctionDerivative = ReLUDerivative;
+	Neural::ProcessLayer process(processInitor);
+
+	process.SetInput(pool2features);
+	process.Process();
+
+	std::vector<Neural::Feature> processOutput = process.GetOutputAll();
+
+	for (auto mat : processOutput)
+		std::cout << mat << std::endl;
+
+	/***************************************************************************************************/
+	// Initializing Process Layer
+	std::cout << "/***************************************************************************************************/"
+		<< std::endl << "Process Layer" << std::endl;
+	Neural::ProcessLayerInitor processInitor;
+	processInitor.InputSize = MathLib::Size(2, 2);
+	processInitor.ProcessFunction = ReLU;
+	processInitor.ProcessFunctionDerivative = ReLUDerivative;
+	Neural::ProcessLayer process(processInitor);
+
+	process.SetInput(pool2features);
+	process.Process();
+
+	std::vector<Neural::Feature> processOutput = process.GetOutputAll();
+
+	for (auto mat : processOutput)
 		std::cout << mat << std::endl;
 
 	system("pause");

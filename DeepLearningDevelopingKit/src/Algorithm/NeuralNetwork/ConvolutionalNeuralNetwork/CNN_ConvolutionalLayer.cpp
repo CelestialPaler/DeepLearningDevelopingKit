@@ -27,8 +27,8 @@ Neural::ConvolutionalLayer::ConvolutionalLayer(const ConvLayerInitor & _initor)
 
 	this->_outputSize.m = _inputSize.m;
 	this->_outputSize.n = _inputSize.n;
-	this->PaddingM = _inputSize.m + _kernelSize.m - 1 - _stride * _outputSize.m;
-	this->PaddingN = _inputSize.n + _kernelSize.n - 1 - _stride * _outputSize.n;
+	this->_paddingM = _inputSize.m + _kernelSize.m - 1 - _stride * _outputSize.m;
+	this->_paddingN = _inputSize.n + _kernelSize.n - 1 - _stride * _outputSize.n;
 }
 
 void Neural::ConvolutionalLayer::SetInput(const std::vector<MathLib::Matrix<ElemType>>& _input)
@@ -85,7 +85,7 @@ void Neural::ConvolutionalLayer::Padding(void)
 	}
 	for (size_t i = 0; i < _input.size(); i++)
 	{
-		_paddedInput.at(i) = Pad::Padding(_input.at(i), _paddingMethod, _paddingNum, PaddingM, PaddingN);
+		_paddedInput.at(i) = Pad::Padding(_input.at(i), _paddingMethod, _paddingNum, _paddingM, _paddingN);
 	}
 }
 
