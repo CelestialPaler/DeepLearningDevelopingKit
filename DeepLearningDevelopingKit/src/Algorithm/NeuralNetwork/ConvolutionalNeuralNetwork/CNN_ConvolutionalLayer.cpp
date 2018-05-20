@@ -79,10 +79,10 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 
 void Neural::ConvolutionalLayer::BackwardPropagation(void)
 {
-	for (size_t i = 0; i < _input.size(); i++)
+	for (size_t k = 0; k < _convNodeNum; k++)
 	{
 		MathLib::Matrix<ElemType> tempMat(_inputSize.m, _inputSize.n);
-		for (size_t k = 0; k < _convNodeNum; k++)
+		for (size_t i = 0; i < _input.size(); i++)
 		{
 			for (size_t j = 0; j < _delta.size(); j++)
 			{
@@ -95,7 +95,10 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 
 void Neural::ConvolutionalLayer::Update(void)
 {
-
+	for (size_t i = 0; i < _convNodeNum; i++)
+	{
+		_convNodes.at(i).kernel += _deltaDeconved.at(i) * learnRate;
+	}
 }
 
 void Neural::ConvolutionalLayer::Padding(void)

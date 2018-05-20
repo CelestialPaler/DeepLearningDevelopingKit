@@ -163,6 +163,8 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _delta;
 		std::vector<MathLib::Matrix<ElemType>> _deltaDeconved;
 
+		const double learnRate = 0.05;
+
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);
 		ElemType(*activationFunctionDerivative)(ElemType x);

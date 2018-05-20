@@ -44,7 +44,6 @@ namespace Neural
 		inline const MathLib::Matrix<ElemType> GetOutput(const size_t _index) const { return _data.at(_index); }
 		inline const std::vector<MathLib::Matrix<ElemType>> GetOutputAll(void) const { return _data; }
 
-
 	private:
 
 		// Input of the layer.

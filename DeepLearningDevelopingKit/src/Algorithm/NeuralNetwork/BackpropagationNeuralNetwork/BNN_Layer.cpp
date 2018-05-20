@@ -119,8 +119,8 @@ void Neural::InputLayer::ForwardPropagation(void)
 /// Calculate the gradient(delta) of each node.
 Vector<Neural::ElemType> Neural::InputLayer::BackwardPropagation(const Vector<ElemType>& _vec)
 {
-	Vector<ElemType> temp(n);
-	return temp;
+	/// Calculate the partial derivative of loss to last layer value and return the expectation of last layer.
+	return _vec;
 }
 
 // Update Function

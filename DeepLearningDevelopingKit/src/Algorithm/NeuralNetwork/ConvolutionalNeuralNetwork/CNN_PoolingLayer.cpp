@@ -76,6 +76,7 @@ void Neural::PoolingLayer::BackwardPropagation(void)
 
 void Neural::PoolingLayer::Update(void)
 {
+
 }
 
 void Neural::PoolingLayer::DownSampling(void)

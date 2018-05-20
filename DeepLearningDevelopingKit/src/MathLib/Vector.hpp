@@ -89,9 +89,9 @@ namespace MathLib
 
 	public: // Transformation
 
-		// Represent a Vector in form of Matrix.
-		/// A Vector is interpreted as a 1xn Martix.
-		// Matrix<T> Matrixize(void);
+		//// Represent a Vector in form of Matrix.
+		///// A Vector is interpreted as a 1xn Martix.
+		//Matrix<T> Matrixfy(void);
 
 	public: // Pointer
 
@@ -139,7 +139,10 @@ namespace MathLib
 					throw unmatched_size();
 				else
 					if (this != &_other)
+					{
 						_data = _other._data;
+						n = _other.n;
+					}		
 			}
 			catch (std::exception& except) { ExceptionHandle(except); }
 			return (*this);
@@ -432,20 +435,18 @@ namespace MathLib
 		return temp;
 	}
 
-		/*
-	// Represent a Vector in form of Matrix.
-	/// A Vector is interpreted as a 1xn Martix.
-	template<class T>
-	inline Matrix<T> Vector<T>::Matrixize(void)
-	{
-		const Vector<T> & self = *this;
-		Matrix<T> temp(1, n);
-		for (size_t i = 0; i < n; i++)
-		{
-			temp(0, i) = self(i);
-		}
-		return temp;
-	}
-		*/
+	//// Represent a Vector in form of Matrix.
+	///// A Vector is interpreted as a 1xn Martix.
+	//template<class T>
+	//inline Matrix<T> Vector<T>::Matrixfy(void)
+	//{
+	//	const Vector<T> & self = *this;
+	//	Matrix<T> temp(n, 1);
+	//	for (size_t i = 0; i < n; i++)
+	//	{
+	//		temp(i, 0) = self(i);
+	//	}
+	//	return temp;
+	//}
 }
 
