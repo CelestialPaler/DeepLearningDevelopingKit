@@ -1,10 +1,11 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	          Process Layer     	                                                          */
+/*								        		 	          Process Layer     	                                                      */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
+// Header files
 #include "..\..\..\MathLib\MathLib.h"
 
 /***************************************************************************************************/
@@ -17,28 +18,33 @@ namespace Neural
 	typedef double ElemType;
 
 	// Process Layer Initor
-	/// Used for initialization of a ConvLayer.
+	/// Used for initialization of a ProcessLayer.
 	struct ProcessLayerInitor
 	{
-		// Size of input matrix. 
+		// The size of input Matrix.
 		MathLib::Size InputSize;
+		// The pointer pointed to a process function.
+		///This function will be applied to every element in the matrix.
 		ElemType(*ProcessFunction)(ElemType x);
+		// The pointer pointed to the derivative of process function.
 		ElemType(*ProcessFunctionDerivative)(ElemType x);
 	};
 
 	/***************************************************************************************************/
 	// Class : Process Layer
-	/// Used for XXXXXXX.
+	/// Used for processign data.Such as ReLU, Normalization, Regularization.
 	class ProcessLayer
 	{
-	public:
+	public: // Constructor
 
 		ProcessLayer(const ProcessLayerInitor _initor);
 
-		// Set the input of the ConvLayer.
+		// Set the input of the ProcessLayer.
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _data);
 
+		// Processing the data.
 		void Process(void);
+		// Deprocessing the data.
 		void Deprocess(void);
 
 		inline const MathLib::Matrix<ElemType> GetOutput(const size_t _index) const { return _data.at(_index); }
@@ -50,8 +56,7 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _data;
 
 		// Input size.
-		MathLib::Size _inputSize;
-		MathLib::Size _outputSize;
+		MathLib::Size _dataSize;
 
 		// Process Function
 		ElemType(*processFunction)(ElemType x);

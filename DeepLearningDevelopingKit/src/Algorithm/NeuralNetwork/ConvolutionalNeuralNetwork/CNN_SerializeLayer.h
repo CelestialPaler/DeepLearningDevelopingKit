@@ -1,6 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	         Serialize Layer     	                                                          */
+/*								        		 	         Serialize Layer     	                                                       */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -16,8 +16,8 @@ namespace Neural
 	/// Mainly using float and double.
 	typedef double ElemType;
 
-	// Process Layer Initor
-	/// Used for initialization of a ConvLayer.
+	// Serialize Layer Initor
+	/// Used for initialization of a SerializeLayer.
 	struct SerializeLayerInitor
 	{
 		MathLib::Size SerializeSize;
@@ -26,7 +26,8 @@ namespace Neural
 
 	/***************************************************************************************************/
 	// Class : Serialize Layer
-	/// Used for XXXXXXX.
+	/// Used for serialize the data from a serial of Matrix into a single Vector, and
+	/// deserialize it back in the oppsite diraction.
 	class SerializeLayer
 	{
 	public:
@@ -37,11 +38,8 @@ namespace Neural
 		void SetSerializedMat(const MathLib::Matrix<ElemType> &  _input);
 		void SetDeserializedMat(const std::vector<MathLib::Matrix<ElemType>> &  _input);
 
-		void Serialize(void);
-		void Deserialize(void);
-
-		inline const MathLib::Matrix<ElemType> GetSerializedMat(void) const { return _serializedMat; }
-		inline const std::vector<MathLib::Matrix<ElemType>> GetDeserializedMat(void) const { return _deserializedMat; }
+		MathLib::Matrix<ElemType> Serialize(void);
+		std::vector<MathLib::Matrix<ElemType>> Deserialize(void);
 
 	private:
 

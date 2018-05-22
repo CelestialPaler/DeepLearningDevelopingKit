@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define CNNDebug
+// #define CNNDebug
 
 #ifdef CNNDebug
 
@@ -131,8 +131,8 @@ int main(int argc, char ** argv)
 		std::vector<Neural::Feature> processOutput = process.GetOutputAll();
 
 		serial.SetDeserializedMat(processOutput);
-		serial.Serialize();
-		MathLib::Matrix<double> serializedMat = serial.GetSerializedMat();
+
+		MathLib::Matrix<double> serializedMat = serial.Serialize();
 
 		MathLib::Vector<double> serializedVec(serializedMat.ColumeSize());
 		for (size_t i = 0; i < serializedMat.ColumeSize(); i++)
@@ -185,7 +185,7 @@ int main(int argc, char ** argv)
 
 		serial.SetSerializedMat(inputLayerDeltaMat);
 		serial.Deserialize();
-		std::vector<MathLib::Matrix<double>> deserialized = serial.GetDeserializedMat();
+		std::vector<MathLib::Matrix<double>> deserialized = serial.Deserialize();
 
 		process.SetInput(deserialized);
 		process.Deprocess();

@@ -100,6 +100,9 @@
     <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\Long Short Term Memory %28LSTM%29">
       <UniqueIdentifier>{0de3b305-8910-4153-be77-036b2a1ee394}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\UnitTest">
+      <UniqueIdentifier>{e6bd7340-010c-42ac-9f3a-3ed49ab8ab60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -340,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_SerializeLayer_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
