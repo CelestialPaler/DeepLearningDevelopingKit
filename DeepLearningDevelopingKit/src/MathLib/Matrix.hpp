@@ -61,7 +61,6 @@ namespace MathLib
 		// Copy constructor
 		Matrix(const Matrix& _mat);
 
-
 	public: // Initializing
 
 		// Initializing function
@@ -117,6 +116,8 @@ namespace MathLib
 		
 	public: // Transformation
 
+		// Clear
+		void Clear(void);
 		// Gaussian Elimination
 		const Matrix<T> GaussianElimination(void) const;
 		// Transposition matrix
@@ -535,6 +536,19 @@ namespace MathLib
 			trace = trace * self(i, i);
 		}
 		return trace;
+	}
+
+	template<class T>
+	inline void Matrix<T>::Clear(void)
+	{
+		Matrix<T> self = *this;
+		for (size_t i = 0; i < m; i++)
+		{
+			for (size_t j = 0; j < n; j++)
+			{
+				self(i, j) = 0.f;
+			}
+		}
 	}
 
 	template<class T>

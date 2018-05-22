@@ -1,5 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
+/*								        		 Convolutional Neural Network     	                                          */
 /*								        		 	    Convolutional Layer     	                                                      */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
@@ -79,7 +80,7 @@ namespace Neural
 		// Invoke constructor
 		ConvolutionalLayer(const ConvLayerInitor & _initor);
 
-	public: // Getter and Setter
+	public: // Getter
 
 		inline const ConvFeature GetFeature(const size_t _index) const { return _convNodes.at(_index).kernel; }
 		inline const std::vector<ConvFeature> GetFeatureAll(void) const {
@@ -97,14 +98,17 @@ namespace Neural
 			return kernels;
 		}
 
-	public: // Getter and Setter
+	public: // Setter
 
 		// Set the input of the ConvLayer.
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _input);
+		// Set the delta propagate back from next layer.
+		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
+
+	public: // 
+
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
-		// Set the delta propagate from next layer.
-		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
 
 	public: // BackPropagation Algorithm
 

@@ -109,7 +109,7 @@
     <Filter Include="data\example">
       <UniqueIdentifier>{e698858f-7733-467e-9d32-e6fe246b38c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data\XO">
+    <Filter Include="data\example\XO">
       <UniqueIdentifier>{6a7be36c-f62f-4b1a-a23c-d15502918ba8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -362,6 +362,9 @@
     <ClCompile Include="src\UnitTest\OpenCV_test.cpp">
       <Filter>src\UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayer_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt">
@@ -373,64 +376,64 @@
       <Filter>data\example</Filter>
     </Image>
     <Image Include="data\XO\Data\O_0.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_1.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_2.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_3.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_4.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_5.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_6.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_7.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_8.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_9.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_10.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_11.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_12.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_13.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_14.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_15.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_16.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_17.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_18.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
     <Image Include="data\XO\Data\O_19.png">
-      <Filter>data\XO</Filter>
+      <Filter>data\example\XO</Filter>
     </Image>
   </ItemGroup>
 </Project>

@@ -8,12 +8,13 @@
 // Header files
 #include <iostream>
 
+#include "..\..\MathLib\MathLib.h"
+
 // OpenCV
 #include "..\..\..\external\opencv\include\opencv2\core.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
-
 
 /***************************************************************************************************/
 // Namespace : Visual
@@ -25,6 +26,11 @@ namespace Visual
 	public:
 
 		OpenCV();
+
+	public:
+
+		// Convert a cv::Mat into a MathLib::Matrix.
+		static MathLib::Matrix<double> Mat2Matrix(const cv::Mat & _mat);
 
 	private:
 

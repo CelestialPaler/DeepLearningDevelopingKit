@@ -70,6 +70,7 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 	// Travesing every kernel in the layer.
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
+		_convNodes.at(k).feature.Clear();
 		for (size_t i = 0; i < _input.size(); i++)
 		{
 			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
@@ -79,6 +80,7 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 
 void Neural::ConvolutionalLayer::BackwardPropagation(void)
 {
+	_deltaDeconved.clear();
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
 		MathLib::Matrix<ElemType> tempMat(_inputSize.m, _inputSize.n);
@@ -97,12 +99,13 @@ void Neural::ConvolutionalLayer::Update(void)
 {
 	for (size_t i = 0; i < _convNodeNum; i++)
 	{
-		_convNodes.at(i).kernel += _deltaDeconved.at(i) * learnRate;
+		// _convNodes.at(i).kernel += _deltaDeconved.at(i) * learnRate;
 	}
 }
 
 void Neural::ConvolutionalLayer::Padding(void)
 {
+	_paddedInput.clear();
 	for (size_t i = 0; i < _input.size(); i++)
 	{
 		MathLib::Matrix<ElemType> newMatrix = *new MathLib::Matrix<ElemType>;
