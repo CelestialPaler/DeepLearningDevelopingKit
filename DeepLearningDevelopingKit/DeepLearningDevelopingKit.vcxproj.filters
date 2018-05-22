@@ -58,9 +58,6 @@
     <Filter Include="src\PythonAPI\Unittest">
       <UniqueIdentifier>{c57d6673-b137-4b17-a7b2-d1a433a81fe8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data\exmaple">
-      <UniqueIdentifier>{e698858f-7733-467e-9d32-e6fe246b38c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\DataManager\Dataset">
       <UniqueIdentifier>{46e568e3-5509-49a4-b7e8-9b9340a16eb5}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,18 @@
     </Filter>
     <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\UnitTest">
       <UniqueIdentifier>{e6bd7340-010c-42ac-9f3a-3ed49ab8ab60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\OpenCV">
+      <UniqueIdentifier>{6f8b504a-cabf-4d00-b9bd-4311a3441e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Visualizer\OpenCV">
+      <UniqueIdentifier>{e9ffe4f0-65c8-45bc-9755-3d4b883f73da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example">
+      <UniqueIdentifier>{e698858f-7733-467e-9d32-e6fe246b38c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\XO">
+      <UniqueIdentifier>{6a7be36c-f62f-4b1a-a23c-d15502918ba8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -145,9 +154,6 @@
     <None Include="src\Visualizer\__init__.py">
       <Filter>src\Visualizer</Filter>
     </None>
-    <None Include="data\exmaple\vector.json">
-      <Filter>data\exmaple</Filter>
-    </None>
     <None Include="data\test\test2.json">
       <Filter>data\test</Filter>
     </None>
@@ -157,14 +163,17 @@
     <None Include="src\PythonAPI\SaveLoad\SaveLoad.py">
       <Filter>src\PythonAPI\SaveLoad</Filter>
     </None>
-    <None Include="data\exmaple\XOR.json">
-      <Filter>data\exmaple</Filter>
+    <None Include="data\example\LR.json">
+      <Filter>data\example</Filter>
     </None>
-    <None Include="data\exmaple\LR.json">
-      <Filter>data\exmaple</Filter>
+    <None Include="data\example\MLR.json">
+      <Filter>data\example</Filter>
     </None>
-    <None Include="data\exmaple\MLR.json">
-      <Filter>data\exmaple</Filter>
+    <None Include="data\example\vector.json">
+      <Filter>data\example</Filter>
+    </None>
+    <None Include="data\example\XOR.json">
+      <Filter>data\example</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +276,9 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
+    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.h">
+      <Filter>src\Visualizer\OpenCV</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Util\Json\JsonHandler.cpp">
@@ -347,10 +359,78 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_SerializeLayer_Test.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\UnitTest\OpenCV_test.cpp">
+      <Filter>src\UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt">
       <Filter>log</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\example\Rem.jpg">
+      <Filter>data\example</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_0.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_1.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_2.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_3.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_4.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_5.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_6.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_7.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_8.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_9.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_10.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_11.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_12.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_13.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_14.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_15.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_16.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_17.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_18.png">
+      <Filter>data\XO</Filter>
+    </Image>
+    <Image Include="data\XO\Data\O_19.png">
+      <Filter>data\XO</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -102,10 +102,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>F:\Software\Top Peoject\DeepLearningProject\DeepLearningDevelopingKit\DeepLearningDevelopingKit\DeepLearningDevelopingKit\external\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>F:\Software\Top Peoject\DeepLearningProject\DeepLearningDevelopingKit\DeepLearningDevelopingKit\DeepLearningDevelopingKit\external\opencv\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world341d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,20 +137,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>F:\Software\Top Peoject\DeepLearningProject\DeepLearningDevelopingKit\DeepLearningDevelopingKit\DeepLearningDevelopingKit\external\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>F:\Software\Top Peoject\DeepLearningProject\DeepLearningDevelopingKit\DeepLearningDevelopingKit\DeepLearningDevelopingKit\external\opencv\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world341.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\README.md" />
-    <None Include="data\exmaple\LR.json" />
-    <None Include="data\exmaple\MLR.json" />
-    <None Include="data\exmaple\vector.json" />
-    <None Include="data\exmaple\XOR.json" />
+    <None Include="data\example\LR.json" />
+    <None Include="data\example\MLR.json" />
+    <None Include="data\example\vector.json" />
+    <None Include="data\example\XOR.json" />
     <None Include="data\test\test.json" />
     <None Include="data\test\test2.json" />
     <None Include="src\PythonAPI\Json\JsonHandler.py" />
@@ -199,6 +205,7 @@
     <ClInclude Include="src\Util\Json\JsonParser.h" />
     <ClInclude Include="src\Util\LogManager\Log.h" />
     <ClInclude Include="src\Util\Timer\Time.hpp" />
+    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN.cpp" />
@@ -223,6 +230,7 @@
     <ClCompile Include="src\UnitTest\MatrixDecomposition_test.cpp" />
     <ClCompile Include="src\UnitTest\Matrix_test.cpp" />
     <ClCompile Include="src\UnitTest\Module_test.cpp" />
+    <ClCompile Include="src\UnitTest\OpenCV_test.cpp" />
     <ClCompile Include="src\UnitTest\Timer_test.cpp" />
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
     <ClCompile Include="src\Util\Json\JsonHandler.cpp" />
@@ -230,6 +238,29 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\example\Rem.jpg" />
+    <Image Include="data\XO\Data\O_0.png" />
+    <Image Include="data\XO\Data\O_1.png" />
+    <Image Include="data\XO\Data\O_10.png" />
+    <Image Include="data\XO\Data\O_11.png" />
+    <Image Include="data\XO\Data\O_12.png" />
+    <Image Include="data\XO\Data\O_13.png" />
+    <Image Include="data\XO\Data\O_14.png" />
+    <Image Include="data\XO\Data\O_15.png" />
+    <Image Include="data\XO\Data\O_16.png" />
+    <Image Include="data\XO\Data\O_17.png" />
+    <Image Include="data\XO\Data\O_18.png" />
+    <Image Include="data\XO\Data\O_19.png" />
+    <Image Include="data\XO\Data\O_2.png" />
+    <Image Include="data\XO\Data\O_3.png" />
+    <Image Include="data\XO\Data\O_4.png" />
+    <Image Include="data\XO\Data\O_5.png" />
+    <Image Include="data\XO\Data\O_6.png" />
+    <Image Include="data\XO\Data\O_7.png" />
+    <Image Include="data\XO\Data\O_8.png" />
+    <Image Include="data\XO\Data\O_9.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
