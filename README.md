@@ -16,7 +16,6 @@
     <li><p>Python</p></li>
 </ul>
 
-
  <p>&nbsp;&nbsp;Feature:</p> 
 <ul>
     <li><p>Simple and intuitive</p></li>
@@ -50,6 +49,7 @@
     <li><p>Convolutional Neural Network</p></li>
     <li><p>Refine Backpropagation Neural Network</p></li>
     <li><p>MultiThread for acceleration</p></li>
+    <li><p>OpenCV support for image processing</p></li>
 </ul>
 
 <h3>&nbsp;&nbsp;Further plan (Not top priority):</h3>
