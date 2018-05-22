@@ -541,7 +541,7 @@ namespace MathLib
 	template<class T>
 	inline void Matrix<T>::Clear(void)
 	{
-		Matrix<T> self = *this;
+		Matrix<T> & self = *this;
 		for (size_t i = 0; i < m; i++)
 		{
 			for (size_t j = 0; j < n; j++)

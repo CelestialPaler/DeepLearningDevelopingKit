@@ -73,7 +73,8 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		_convNodes.at(k).feature.Clear();
 		for (size_t i = 0; i < _input.size(); i++)
 		{
-			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
+			// _convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
+			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel));
 		}
 	}
 }

@@ -65,6 +65,7 @@ namespace Neural
 			bias = MathLib::Random();
 		}
 
+		//
 		ConvKernel kernel;
 		ElemType bias;
 		ConvFeature feature;
@@ -105,7 +106,7 @@ namespace Neural
 		// Set the delta propagate back from next layer.
 		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
 
-	public: // 
+	private: // 
 
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
