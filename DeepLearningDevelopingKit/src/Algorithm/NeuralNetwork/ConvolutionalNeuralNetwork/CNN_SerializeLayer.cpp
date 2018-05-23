@@ -10,6 +10,7 @@ Neural::SerializeLayer::SerializeLayer(const SerializeLayerInitor _initor)
 {
 	this->_serializedSize = _initor.SerializeSize;
 	this->_deserializedSize = _initor.DeserializeSize;
+	_serializedMat.Init(_serializedSize.m, _serializedSize.n);
 }
 
 void Neural::SerializeLayer::SetSerializedMat(const MathLib::Matrix<ElemType>& _input)
@@ -24,7 +25,7 @@ void Neural::SerializeLayer::SetDeserializedMat(const std::vector<MathLib::Matri
 
 MathLib::Matrix<Neural::ElemType> Neural::SerializeLayer::Serialize(void)
 {
-	_serializedMat.Init(_serializedSize.m, _serializedSize.n);
+	_serializedMat.Clear();
 	for (size_t i = 0; i < _deserializedMat.size(); i++)
 	{
 		for (size_t a = 0; a <_deserializedSize.m; a++)

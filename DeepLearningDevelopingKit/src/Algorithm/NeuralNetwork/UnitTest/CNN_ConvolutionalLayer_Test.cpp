@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define ConvolutionalLayerDebug
+// #define ConvolutionalLayerDebug
 
 #ifdef ConvolutionalLayerDebug
 
@@ -89,26 +89,21 @@ int main(int argc, char ** argv)
 	for (auto mat : delta)
 		std::cout << mat << std::endl;
 
-
-	for (size_t iteration = 0; iteration < 3; iteration++)
+	for (size_t iteration = 0; iteration < 1000; iteration++)
 	{
 		convLayer.ForwardPropagation();
 		convLayer.BackwardPropagation();
 		convLayer.Update();
-
-
-		std::cout << "After trained" << iteration << std::endl << std::endl;
-		std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
-		std::vector<Neural::ConvFeature> conv1featuresUpdated = convLayer.GetFeatureAll();
-		std::cout << "Kernels : " << std::endl << std::endl;
-		for (auto mat : conv1kernalsUpdated)
-			std::cout << mat << std::endl;
-		std::cout << "Features : " << std::endl << std::endl;
-		for (auto mat : conv1featuresUpdated)
-			std::cout << mat << std::endl;
 	}
 
-
+	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+	std::vector<Neural::ConvFeature> conv1featuresUpdated = convLayer.GetFeatureAll();
+	std::cout << "Kernels : " << std::endl << std::endl;
+	for (auto mat : conv1kernalsUpdated)
+		std::cout << mat << std::endl;
+	std::cout << "Features : " << std::endl << std::endl;
+	for (auto mat : conv1featuresUpdated)
+		std::cout << mat << std::endl;
 
 	system("pause");
 	return 0;

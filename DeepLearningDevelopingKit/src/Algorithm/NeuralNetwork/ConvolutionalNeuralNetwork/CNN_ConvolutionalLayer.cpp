@@ -113,7 +113,9 @@ void Neural::ConvolutionalLayer::Update(void)
 			kernalOffsetM += _stride;
 			kernalOffsetN = 0;
 		}
-		_convNodes.at(k).kernel += temp * learnRate;
+		double normalizeIndex = (double)1 / (double)(temp.ColumeSize() * temp.RowSize());
+		temp = temp * normalizeIndex;
+		_convNodes.at(k).kernel -= temp * learnRate;
 	}
 }
 

@@ -370,7 +370,7 @@ void Neural::OutputLayer::SetLossFunction(const LossFunction _function)
 /// Which means get the value pf all nodes in Vector.
 Vector<Neural::ElemType> Neural::OutputLayer::GetOutput(void)
 {
-	Vector<ElemType> temp(n);
+	Vector<ElemType> temp(m);
 	for (size_t i = 0; i < m; i++)
 	{
 		temp(i) = _nodes.at(i).value;

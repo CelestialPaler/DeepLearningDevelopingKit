@@ -365,6 +365,9 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayer_Test.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt">
