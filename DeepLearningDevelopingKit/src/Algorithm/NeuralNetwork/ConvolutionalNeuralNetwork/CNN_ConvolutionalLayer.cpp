@@ -73,8 +73,7 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		_convNodes.at(k).feature.Clear();
 		for (size_t i = 0; i < _input.size(); i++)
 		{
-			// _convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
-			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel));
+			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
 		}
 	}
 }
@@ -98,9 +97,23 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 
 void Neural::ConvolutionalLayer::Update(void)
 {
-	for (size_t i = 0; i < _convNodeNum; i++)
+	MathLib::Matrix<double> sumMatrix(_kernelSize.m, _kernelSize.n,MathLib::MatrixType::Ones);
+	for (size_t k = 0; k < _convNodeNum; k++)
 	{
-		// _convNodes.at(i).kernel += _deltaDeconved.at(i) * learnRate;
+		MathLib::Matrix<Neural::ElemType> temp(_kernelSize.m, _kernelSize.n);
+		size_t kernalOffsetM = 0;
+		size_t kernalOffsetN = 0;
+		for (size_t i = 0; i < _kernelSize.m; i++)
+		{
+			for (size_t j = 0; j < _kernelSize.n; j++)
+			{
+				temp(i, j) = activationFunction(MatrixConvSum(_deltaDeconved.at(k), sumMatrix, kernalOffsetM, kernalOffsetN));
+				kernalOffsetN += _stride;
+			}
+			kernalOffsetM += _stride;
+			kernalOffsetN = 0;
+		}
+		_convNodes.at(k).kernel += temp * learnRate;
 	}
 }
 

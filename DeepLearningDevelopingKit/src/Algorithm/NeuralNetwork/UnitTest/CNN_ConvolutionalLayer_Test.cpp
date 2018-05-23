@@ -15,7 +15,7 @@
 int main(int argc, char ** argv)
 {
 	Neural::ConvLayerInitor convInitor;
-	convInitor.InputSize = MathLib::Size(16, 16);
+	convInitor.InputSize = MathLib::Size(5, 5);
 	convInitor.KernelSize = MathLib::Size(3, 3);
 	convInitor.Stride = 1;
 	convInitor.KernelNum = 2;
@@ -24,14 +24,13 @@ int main(int argc, char ** argv)
 	convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	Neural::ConvolutionalLayer convLayer(convInitor);
 
-	MathLib::Matrix<double> input1(16, 16,MathLib::MatrixType::Zero);
+	MathLib::Matrix<double> input1(5, 5, MathLib::MatrixType::Zero);
 	for (size_t i = 0; i < input1.ColumeSize(); i++)
 		for (size_t j = 0; j < input1.RowSize(); j++)
 			if (i == j)
 				input1(i, j) = 1.f;
 			else
 				input1(i, j) = 0.5;
-
 
 	std::vector<MathLib::Matrix<double>> input;
 	input.push_back(input1);
@@ -49,24 +48,67 @@ int main(int argc, char ** argv)
 				convLayer._convNodes.at(1).kernel(i, j) = 1.f;
 
 	convLayer.SetInput(input);
-	convLayer.ForwardPropagation();
+	std::cout << "Orignal Input : " << std::endl;
+	std::cout << convLayer._input.at(0) << std::endl;
 
 	std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
 	std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
 
-	std::cout << "Raw input : " << std::endl;
-	std::cout << convLayer._input.at(0) << std::endl;
-
-	std::cout << "Padded input : " << std::endl;
-	std::cout << convLayer._paddedInput.at(0) << std::endl;
-
-	std::cout << "Kernals : " << std::endl << std::endl;
+	std::cout << "Orignal Kernel : " << std::endl;
+	std::cout << "Kernels : " << std::endl << std::endl;
 	for (auto mat : conv1kernals)
 		std::cout << mat << std::endl;
 
 	std::cout << "Features : " << std::endl << std::endl;
 	for (auto mat : conv1features)
 		std::cout << mat << std::endl;
+
+	MathLib::Matrix<double> delta1(5, 5, MathLib::MatrixType::Zero);
+	for (size_t i = 0; i < delta1.ColumeSize(); i++)
+		for (size_t j = 0; j < delta1.RowSize(); j++)
+			if (i == j)
+				delta1(i, j) = 1.f;
+			else
+				delta1(i, j) = 0.f;
+
+	MathLib::Matrix<double> delta2(5, 5, MathLib::MatrixType::Zero);
+	for (size_t i = 0; i < delta2.ColumeSize(); i++)
+		for (size_t j = 0; j < delta2.RowSize(); j++)
+			if (i == j)
+				delta2(i, j) = -0.5;
+			else
+				delta2(i, j) = 0.5;
+
+	std::vector<MathLib::Matrix<double>> delta;
+	delta.push_back(delta1);
+	delta.push_back(delta2);
+	convLayer.SetDelta(delta);
+
+	std::cout << "Delta : " << std::endl;
+	std::cout << "Kernels : " << std::endl << std::endl;
+	for (auto mat : delta)
+		std::cout << mat << std::endl;
+
+
+	for (size_t iteration = 0; iteration < 3; iteration++)
+	{
+		convLayer.ForwardPropagation();
+		convLayer.BackwardPropagation();
+		convLayer.Update();
+
+
+		std::cout << "After trained" << iteration << std::endl << std::endl;
+		std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+		std::vector<Neural::ConvFeature> conv1featuresUpdated = convLayer.GetFeatureAll();
+		std::cout << "Kernels : " << std::endl << std::endl;
+		for (auto mat : conv1kernalsUpdated)
+			std::cout << mat << std::endl;
+		std::cout << "Features : " << std::endl << std::endl;
+		for (auto mat : conv1featuresUpdated)
+			std::cout << mat << std::endl;
+	}
+
+
 
 	system("pause");
 	return 0;
