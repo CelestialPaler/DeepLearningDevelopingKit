@@ -5,14 +5,16 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define OpenCVDebug
+#define OpenCVDebug
 
 #ifdef OpenCVDebug
 
-#include "..\Visualizer\OpenCV\OpenCV.h"
+#include "..\Visualizer\Visualize.h"
 
 int main(int argc, char ** argv)
 {
+	srand((unsigned)time(NULL));
+	/*
 	cv::Mat imageTest = cv::imread("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\Data\\O_0.png");
 	if (!imageTest.data)
 		return -1;
@@ -20,7 +22,20 @@ int main(int argc, char ** argv)
 	cv::namedWindow("data", cv::WINDOW_AUTOSIZE);
 	cv::imshow("data", imageTest);
 	cv::waitKey();
-	system("pause");
+	*/
+
+	//cv::Mat testMat1(cv::Size(500, 500), CV_32FC1);
+	//MathLib::Matrix<float> testMatrix1(500, 500, MathLib::MatrixType::Random);
+
+	//testMat1 = Visual::OpenCV::Matrix2Mat<float>(testMatrix1);
+	//testMatrix1 = Visual::OpenCV::Mat2Matrix<float>(testMat1);
+	//std::cout << testMatrix1 << std::endl;
+	//std::cout << testMat1 << std::endl;
+
+	// Visual::Plot2D::Plot2DMatrix(testMatrix1);
+	// Visual::Plot2D::PerlinNoiseDemo(500, 500);
+
+	//system("pause");
 	return 0;
 }
 

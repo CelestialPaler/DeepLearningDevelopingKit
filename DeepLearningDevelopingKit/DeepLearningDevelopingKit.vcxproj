@@ -168,8 +168,6 @@
     <None Include="src\PythonAPI\Unittest\JsonHandler_test.py" />
     <None Include="src\PythonAPI\Unittest\__init__.py" />
     <None Include="src\PythonAPI\__init__.py" />
-    <None Include="src\Visualizer\VectorPlotTest.py" />
-    <None Include="src\Visualizer\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp" />
@@ -205,7 +203,9 @@
     <ClInclude Include="src\Util\Json\JsonParser.h" />
     <ClInclude Include="src\Util\LogManager\Log.h" />
     <ClInclude Include="src\Util\Timer\Time.hpp" />
-    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.h" />
+    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.hpp" />
+    <ClInclude Include="src\Visualizer\Plot\Plot.hpp" />
+    <ClInclude Include="src\Visualizer\Visualize.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN.cpp" />
@@ -237,6 +237,7 @@
     <ClCompile Include="src\UnitTest\Vector_test.cpp" />
     <ClCompile Include="src\Util\Json\JsonHandler.cpp" />
     <ClCompile Include="src\Util\Json\JsonParser.cpp" />
+    <ClCompile Include="src\Visualizer\Plot\Plot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt" />

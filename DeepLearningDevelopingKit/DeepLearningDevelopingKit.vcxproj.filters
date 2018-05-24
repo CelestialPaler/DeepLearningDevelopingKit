@@ -112,6 +112,9 @@
     <Filter Include="data\example\XO">
       <UniqueIdentifier>{6a7be36c-f62f-4b1a-a23c-d15502918ba8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Visualizer\Plot">
+      <UniqueIdentifier>{51e0ec89-7f53-465d-8528-69c04451d7cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -147,12 +150,6 @@
     </None>
     <None Include="src\PythonAPI\__init__.py">
       <Filter>src\PythonAPI</Filter>
-    </None>
-    <None Include="src\Visualizer\VectorPlotTest.py">
-      <Filter>src\Visualizer</Filter>
-    </None>
-    <None Include="src\Visualizer\__init__.py">
-      <Filter>src\Visualizer</Filter>
     </None>
     <None Include="data\test\test2.json">
       <Filter>data\test</Filter>
@@ -276,8 +273,14 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
-    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.h">
+    <ClInclude Include="src\Visualizer\OpenCV\OpenCV.hpp">
       <Filter>src\Visualizer\OpenCV</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Visualizer\Plot\Plot.hpp">
+      <Filter>src\Visualizer\Plot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Visualizer\Visualize.h">
+      <Filter>src\Visualizer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Visualizer\Plot\Plot.cpp">
+      <Filter>src\Visualizer\Plot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

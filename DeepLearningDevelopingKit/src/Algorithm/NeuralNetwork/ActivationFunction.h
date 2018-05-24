@@ -91,19 +91,19 @@ inline double ELU(double x) {
 }
 
 // Hyperbolic sinh Function
-inline double sinh(double x) {
-	return (exp(x) - exp(-x)) / 2;
-}
+//inline double sinh(double x) {
+//	return (exp(x) - exp(-x)) / 2;
+//}
 
 // Hyperbolic cosh Function
-inline double cosh(double x) {
-	return (exp(x) + exp(-x)) / 2;
-}
+//inline double cosh(double x) {
+//	return (exp(x) + exp(-x)) / 2;
+//}
 
 // Hyperbolic tanh Function
-inline double tanh(double x) {
-	return (exp(x) - exp(-x)) / (exp(x) + exp(-x));
-}
+//inline double tanh(double x) {
+//	return (exp(x) - exp(-x)) / (exp(x) + exp(-x));
+//}
 
 // Softplus Function
 /// A smoother version of ReLU

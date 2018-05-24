@@ -1,6 +1,6 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
-/*								        		 	         OpenCV Test   															  */
+/*								        		 	              OpenCV    															       */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -25,28 +25,49 @@ namespace Visual
 	{
 	public:
 
-		OpenCV();
-
-	public:
-
 		// Convert a cv::Mat into a MathLib::Matrix.
-		static MathLib::Matrix<double> Mat2Matrix(const cv::Mat & _mat);
+		template<class T>
+		static MathLib::Matrix<T> Mat2Matrix(const cv::Mat & _mat);
+		// Convert a MathLib::Matrix into a cv::Mat.
+		template<class T>
+		static cv::Mat Matrix2Mat(const MathLib::Matrix<T> & _matrix);
 
 	private:
 
 	};
+}
 
-	class Image
+namespace Visual
+{
+	template<class T>
+	MathLib::Matrix<T> OpenCV::Mat2Matrix(const cv::Mat & _mat)
 	{
-	public:
+		MathLib::Matrix<T> tempMat(_mat.cols, _mat.rows, MathLib::MatrixType::Zero);
+		for (size_t i = 0; i < _mat.cols; i++)
+		{
+			for (size_t j = 0; j < _mat.rows; j++)
+			{
+				tempMat(i, j) = _mat.at<T>(i, j);
+			}
+		}
+		return tempMat;
+	}
 
-		Image();
-
-	private:
-
-	};
-
+	template<class T>
+	inline cv::Mat OpenCV::Matrix2Mat(const MathLib::Matrix<T>& _matrix)
+	{
+		cv::Mat tempMat(_matrix.ColumeSize(), _matrix.RowSize(), CV_32FC1, cv::Scalar::all(0));
+		for (size_t i = 0; i < tempMat.cols; i++)
+		{
+			for (size_t j = 0; j < tempMat.rows; j++)
+			{
+				tempMat.at<T>(i, j) = _matrix(i, j);
+			}
+		}
+		return tempMat;
+	}
 
 }
+
 
 
