@@ -13,8 +13,16 @@
 
 int main(int argc, char ** argv)
 {
+	srand((unsigned)time(NULL));
+
 	MathLib::Matrix<double> input1(8, 8, MathLib::MatrixType::Zero);
 	std::vector<MathLib::Matrix<double>> input;
+	for (size_t i = 0; i < input1.ColumeSize(); i++)
+		for (size_t j = 0; j < input1.RowSize(); j++)
+			if (i == j)
+				input1(i, j) = 1.f;
+			else
+				input1(i, j) = 0.f;
 	input.push_back(input1);
 
 	/***************************************************************************************************/
@@ -62,14 +70,14 @@ int main(int argc, char ** argv)
 	inputLayer.SetLossFunction(LossFunction::MES);
 
 	Neural::HiddenLayer hiddenLayer(4 * 4 * 1, 10);
-	hiddenLayer.SetActivationFunction(ActivationFunction::Sigmoid);
+	hiddenLayer.SetActivationFunction(ActivationFunction::ReLU);
 	hiddenLayer.SetLossFunction(LossFunction::MES);
 
 	Neural::OutputLayer outputLayer(10, 1);
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	for (size_t iteration = 0; iteration < 10; iteration++)
+	for (size_t iteration = 0; iteration < 100; iteration++)
 	{
 		/***************************************************************************************************/
 		// Forward Propagation
@@ -77,14 +85,18 @@ int main(int argc, char ** argv)
 		convLayer.ForwardPropagation();
 		std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
 		std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
+		//std::cout << "ConvWeight : " << conv1kernals.at(0) << std::endl;
+		//std::cout << "ConvFeature : " << conv1features.at(0) << std::endl;
 
 		poolLayer.SetInput(conv1features);
 		poolLayer.ForwardPropagation();
 		std::vector<Neural::Feature> pool1features = poolLayer.GetFeatureAll();
+		//std::cout << "PoolFeature : " << pool1features.at(0) << std::endl;
 
 		process.SetInput(pool1features);
 		process.Process();
 		std::vector<Neural::Feature> processOutput = process.GetOutputAll();
+		//std::cout << "ReLU : " << processOutput.at(0) << std::endl;
 
 		serial.SetDeserializedMat(processOutput);
 		MathLib::Matrix<double> serializedMat = serial.Serialize();
@@ -107,7 +119,7 @@ int main(int argc, char ** argv)
 		/***************************************************************************************************/
 		// Backward Propagation
 		MathLib::Vector<double> lable(1);
-		lable(0) = 0;
+		lable(0) = 1;
 
 		MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
 
@@ -146,9 +158,13 @@ int main(int argc, char ** argv)
 
 		MathLib::Vector<double> result = outputLayer.GetOutput();
 		std::cout << result << std::endl;
+
 	}
 
-
+	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+	std::cout << "Kernels : " << std::endl << std::endl;
+	for (auto mat : conv1kernalsUpdated)
+		std::cout << mat << std::endl;
 
 	system("pause");
 	return 0;

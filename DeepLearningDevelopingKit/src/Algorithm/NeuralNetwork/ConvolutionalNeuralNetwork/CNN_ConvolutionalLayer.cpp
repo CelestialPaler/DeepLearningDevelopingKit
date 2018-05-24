@@ -73,7 +73,8 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		_convNodes.at(k).feature.Clear();
 		for (size_t i = 0; i < _input.size(); i++)
 		{
-			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
+			//_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
+			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel));
 		}
 	}
 }
@@ -107,7 +108,7 @@ void Neural::ConvolutionalLayer::Update(void)
 		{
 			for (size_t j = 0; j < _kernelSize.n; j++)
 			{
-				temp(i, j) = activationFunction(MatrixConvSum(_deltaDeconved.at(k), sumMatrix, kernalOffsetM, kernalOffsetN));
+				temp(i, j) = MatrixConvSum(_deltaDeconved.at(k), sumMatrix, kernalOffsetM, kernalOffsetN);
 				kernalOffsetN += _stride;
 			}
 			kernalOffsetM += _stride;
@@ -115,8 +116,11 @@ void Neural::ConvolutionalLayer::Update(void)
 		}
 		double normalizeIndex = (double)1 / (double)(temp.ColumeSize() * temp.RowSize());
 		temp = temp * normalizeIndex;
+		// std::cout << "Delta pooled : " << temp << std::endl;
 		_convNodes.at(k).kernel -= temp * learnRate;
 	}
+
+
 }
 
 void Neural::ConvolutionalLayer::Padding(void)

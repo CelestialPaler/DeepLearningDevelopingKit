@@ -81,6 +81,7 @@ void Neural::PoolingLayer::Update(void)
 
 void Neural::PoolingLayer::DownSampling(void)
 {
+	_output.clear();
 	for (size_t i = 0; i < _input.size(); i++)
 	{
 		Feature pooledFeature = MaxPool(_paddedInput.at(i));
@@ -90,6 +91,7 @@ void Neural::PoolingLayer::DownSampling(void)
 
 void Neural::PoolingLayer::UpSampling(void)
 {
+	_deltaDepooled.clear();
 	for (size_t i = 0; i < _delta.size(); i++)
 	{
 		MathLib::Matrix<ElemType> deltaDepoolMat(_outputSize.m * _poolSize.m, _outputSize.n * _poolSize.n);
@@ -112,6 +114,7 @@ void Neural::PoolingLayer::UpSampling(void)
 
 void Neural::PoolingLayer::Padding(void)
 {
+	_paddedInput.clear();
 	for (size_t i = 0; i < _input.size(); i++)
 	{
 		MathLib::Matrix<ElemType> newMatrix = Pad::Padding(_input.at(i), _paddingMethod, _paddingNum, _paddingM, _paddingN);
