@@ -61,12 +61,12 @@ void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction 
 
 void Neural::ConvolutionalLayer::SetDelta(const std::vector<MathLib::Matrix<ElemType>>& _delta)
 {
-	this->_delta = _delta;
+	this->_deltaLastLayer = _delta;
 }
 
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
-	Padding();
+	// Padding();
 	// Travesing every kernel in the layer.
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
@@ -74,31 +74,44 @@ void Neural::ConvolutionalLayer::ForwardPropagation(void)
 		for (size_t i = 0; i < _input.size(); i++)
 		{
 			_convNodes.at(k).bias = 0;
-			_convNodes.at(k).feature += (Convolution(_paddedInput.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
+			_convNodes.at(k).feature += (Convolution(_input.at(i), _convNodes.at(k).kernel) + _convNodes.at(k).bias);
 		}
 	}
 }
 
 void Neural::ConvolutionalLayer::BackwardPropagation(void)
 {
-	_deltaDeconved.clear();
+	_delta.clear();
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
 		MathLib::Matrix<ElemType> tempMat(_inputSize.m, _inputSize.n);
 		for (size_t i = 0; i < _input.size(); i++)
 		{
-			for (size_t j = 0; j < _delta.size(); j++)
+			for (size_t j = 0; j < _deltaLastLayer.size(); j++)
 			{
-				tempMat += Rot180(Convolution(_delta.at(j), Rot180(_convNodes.at(k).kernel)));
+				tempMat += Hadamard(Convolution(_deltaLastLayer.at(j), Rot180(_convNodes.at(k).kernel)), _convNodes.at(j).feature);
 			}
 		}
-		_deltaDeconved.push_back(tempMat);
+		_delta.push_back(tempMat);
 	}
 }
 
 void Neural::ConvolutionalLayer::Update(void)
 {
-
+	for (size_t i = 0; i < _delta.size(); i++)
+	{
+		_convNodes.at(i).bias -= _delta.at(i).Sum();
+	}
+	for (size_t i = 0; i < _delta.size(); i++)
+	{
+		for (size_t j = 0; j < _kernelSize.m; j++)
+		{
+			for (size_t k = 0; k < _kernelSize.n; k++)
+			{
+				_convNodes.at(i).kernel(j, k) += Hadamard(Rot180(_input.at(i)), _delta.at(i))(j + 1, k + 1);
+			}
+		}
+	}
 }
 
 void Neural::ConvolutionalLayer::Padding(void)
@@ -143,20 +156,31 @@ Neural::ElemType Neural::ConvolutionalLayer::CorrelationSum(const MathLib::Matri
 	return sum;
 }
 
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Hadamard(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2)
+{
+	MathLib::Matrix<ElemType> temp(_mat2.ColumeSize(), _mat2.RowSize());
+	for (size_t i = 0; i < _mat2.ColumeSize(); i++)
+	{
+		for (size_t j = 0; j < _mat2.RowSize(); j++)
+		{
+			temp(i, j) = _mat1(i, j) * _mat2(i, j);
+		}
+	}
+	return temp;
+}
+
 MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
 {
-	//size_t mat1M = _inputSize.m + _kernelSize.m - 1 - _stride * _outputSize.m;
-	//size_t mat1N = _inputSize.n + _kernelSize.n - 1 - _stride * _outputSize.n;
-	//MathLib::Matrix<Neural::ElemType> mat1Padded = Pad::Padding(_mat1, PaddingMethod::Surround, PaddingNum::ZeroPadding, mat1M, mat1N);
+	MathLib::Matrix<Neural::ElemType> mat1Padded = Pad::Padding(_mat1, PaddingMethod::Surround, PaddingNum::ZeroPadding, _paddingM, _paddingN);
 	MathLib::Matrix<Neural::ElemType> temp(_inputSize.m, _inputSize.n);
 	size_t offsetM = 0;
 	size_t offsetN = 0;
-	MathLib::Matrix<Neural::ElemType> rotKernel = Rot180(_mat2);
+	//MathLib::Matrix<Neural::ElemType> rotKernel = Rot180(_mat2);
 	for (size_t i = 0; i < _inputSize.m; i++)
 	{
 		for (size_t j = 0; j < _inputSize.n; j++)
 		{
-			temp(i, j) = CorrelationSum(_mat1, rotKernel, offsetM, offsetN);
+			temp(i, j) = CorrelationSum(mat1Padded, _mat2, offsetM, offsetN);
 			offsetN += _stride;
 		}
 		offsetM += _stride;

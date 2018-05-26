@@ -11,7 +11,7 @@
 #include "..\..\..\MathLib\MathLib.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
-#include "CNN_Padding.h"
+#include "PaddingLayer.h"
 
 /***************************************************************************************************/
 // Namespace : Neural
@@ -41,7 +41,7 @@ namespace Neural
 		// Activation Function
 		ActivationFunction ActivationFunction;
 	};
-	
+
 	// Define Kernel and Feature.
 	typedef MathLib::Matrix<ElemType> ConvKernel;
 	typedef MathLib::Matrix<ElemType> ConvFeature;
@@ -53,8 +53,8 @@ namespace Neural
 	{
 		ConvNode() = default;
 
-		ConvNode(const size_t _kernelM, const size_t _kernelN, const size_t _featureM, const size_t _featureN){
-			kernel.Init(_kernelM, _kernelN,MathLib::MatrixType::Random);
+		ConvNode(const size_t _kernelM, const size_t _kernelN, const size_t _featureM, const size_t _featureN) {
+			kernel.Init(_kernelM, _kernelN, MathLib::MatrixType::Random);
 			feature.Init(_featureM, _featureN, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
 		}
@@ -65,10 +65,13 @@ namespace Neural
 			bias = MathLib::Random();
 		}
 
-		//
 		ConvKernel kernel;
 		ElemType bias;
 		ConvFeature feature;
+
+		ConvKernel kernelDelta;
+		ElemType biasDelta;
+		ConvFeature featureDelta;
 	};
 
 	/***************************************************************************************************/
@@ -92,7 +95,7 @@ namespace Neural
 		}
 
 		inline const ConvKernel GetKernel(const size_t _index) const { return _convNodes.at(_index).kernel; }
-		inline const std::vector<ConvKernel> GetKernelAll(void) const { 
+		inline const std::vector<ConvKernel> GetKernelAll(void) const {
 			std::vector<ConvKernel> kernels;
 			for (const ConvNode & node : _convNodes)
 				kernels.push_back(node.kernel);
@@ -106,11 +109,6 @@ namespace Neural
 		// Set the delta propagate back from next layer.
 		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
 
-	private: // 
-
-		// Set the activation function of the layer.
-		void SetActivationFunction(const ActivationFunction _function);
-
 	public: // BackPropagation Algorithm
 
 		// ForwardPropagation function
@@ -120,28 +118,25 @@ namespace Neural
 		// Update function
 		void Update(void);
 
-	private: // Working functions
+	private:
 
-		// Padding function
-		void Padding(void);
+		// Convolution of two matrix.
+		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
 
-	private: // Math Stuff
+	private: // 
 
-		// Convolution between two matrix.
-		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
-		// Rotate a Matrix with 180° 
-		/// Used for calculating the delta -> correlation(A, B) = rot180°(A * rot180°(B))
-		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
-		// The sum of Cross-correlation matrix of two matrix.
-		Neural::ElemType CorrelationSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
+		// Set the activation function of the layer.
+		void SetActivationFunction(const ActivationFunction _function);
 
 	public:
 
 		// Input of convolutional layer.
 		std::vector<MathLib::Matrix<ElemType>> _input;
 		std::vector<MathLib::Matrix<ElemType>> _paddedInput;
+
 		// Input size.
 		MathLib::Size _inputSize;
+		// Output size.
 		MathLib::Size _outputSize;
 
 		// Convolutional Node in the Layer.
@@ -154,17 +149,14 @@ namespace Neural
 		// The size of stride.
 		size_t _stride;
 
-		// Padding Method
+		// Padding method
 		PaddingMethod _paddingMethod;
 		PaddingNum _paddingNum;
 		// Padding size
 		size_t _paddingM;
 		size_t _paddingN;
 
-		// Delta
-		std::vector<MathLib::Matrix<ElemType>> _delta;
-		std::vector<MathLib::Matrix<ElemType>> _deltaDeconved;
-
+		// Learning rate
 		const double learnRate = 0.05;
 
 		// Activation Function

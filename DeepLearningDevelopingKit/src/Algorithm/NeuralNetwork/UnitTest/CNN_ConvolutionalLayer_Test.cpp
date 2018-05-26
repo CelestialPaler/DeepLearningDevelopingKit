@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define ConvolutionalLayerImgDebug
+#define ConvolutionalLayerImgDebug
 
 #ifdef ConvolutionalLayerImgDebug
 
@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
 				if (i == j)
 					input1(i, j) = 1.f;
 				else
-					input1(i, j) = 1.f;
+					input1(i, j) = 0.f;
 		}
 		input.push_back(input1);
 	}
@@ -63,32 +63,43 @@ int main(int argc, char ** argv)
 	for (size_t i = 0; i < delta1.ColumeSize(); i++)
 		for (size_t j = 0; j < delta1.RowSize(); j++)
 			if (i == j)
-				delta1(i, j) = 1.f;
+				delta1(i, j) = 1;
 			else
-				delta1(i, j) = 0.f;
+				delta1(i, j) = 0;
 
 	std::vector<MathLib::Matrix<double>> delta;
 	delta.push_back(delta1);
 
-	convLayer.SetInput(input);
+
 	convLayer.SetDelta(delta);
 
 	convLayer.ForwardPropagation();
 
-	std::cout << "Padded Input : " << std::endl;
-	std::cout << convLayer._paddedInput.at(0) << std::endl;
-
-	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
-	std::vector<Neural::ConvFeature> conv1featuresUpdated = convLayer.GetFeatureAll();
+	std::vector<Neural::ConvFeature> a = convLayer.GetFeatureAll();
 	std::cout << "Output Features : " << std::endl << std::endl;
-	for (auto mat : conv1featuresUpdated)
+	for (auto mat : a)
 		std::cout << mat << std::endl;
 
-	// convLayer.BackwardPropagation();
+	convLayer.BackwardPropagation();
 
+	std::cout << "Delta LastLayer : " << std::endl << std::endl;
+	for (auto mat : convLayer._deltaLastLayer)
+		std::cout << mat << std::endl;
+	std::cout << "Delta : " << std::endl << std::endl;
+	for (auto mat : convLayer._delta)
+		std::cout << mat << std::endl;
 
 	convLayer.Update();
 
+	std::cout << "Updated Kernels : " << std::endl << std::endl;
+	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+	for (auto mat : conv1kernalsUpdated)
+		std::cout << mat << std::endl;
+	convLayer.ForwardPropagation();
+	std::vector<Neural::ConvFeature> conv1featuresUpdated = convLayer.GetFeatureAll();
+	std::cout << "Updated Output Features : " << std::endl << std::endl;
+	for (auto mat : conv1featuresUpdated)
+		std::cout << mat << std::endl;
 
 
 	

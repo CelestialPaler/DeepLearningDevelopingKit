@@ -447,7 +447,7 @@ namespace MathLib
 	template<class T>
 	inline const T Matrix<T>::Sum(void) const
 	{
-		const Vector<T> & self = *this;
+		const Matrix<T> & self = *this;
 		T Sum = 0;
 		for (size_t i = 0; i < m; i++)
 		{
