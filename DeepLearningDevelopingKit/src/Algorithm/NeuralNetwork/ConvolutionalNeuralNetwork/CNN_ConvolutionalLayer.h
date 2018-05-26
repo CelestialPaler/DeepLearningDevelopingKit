@@ -11,7 +11,7 @@
 #include "..\..\..\MathLib\MathLib.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
-#include "PaddingLayer.h"
+#include "CNN_PaddingLayer.h"
 
 /***************************************************************************************************/
 // Namespace : Neural
@@ -118,15 +118,30 @@ namespace Neural
 		// Update function
 		void Update(void);
 
-	private:
-
-		// Convolution of two matrix.
-		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
-
 	private: // 
 
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
+
+	private:
+
+		// ConvolutionCal
+		MathLib::Matrix<ElemType> ConvolutionCal(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+
+		// Convolution of two matrix.
+		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+		ElemType ConvolutionSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n);
+		// Cross-correlation of two matrix.
+		MathLib::Matrix<ElemType> Correlation(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+		// Sum of all elements of the Cross-correlation of two matrix.
+		ElemType CorrelationSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n);
+
+		// Rotate a Matrix with 180° 
+		/// Cross-correlation(A, B) = rot180°(A * rot180°(B))
+		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
+
+		// Hadamard Product of two matrix.
+		MathLib::Matrix<Neural::ElemType> Hadamard(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2);
 
 	public:
 
@@ -156,8 +171,11 @@ namespace Neural
 		size_t _paddingM;
 		size_t _paddingN;
 
+		std::vector<MathLib::Matrix<ElemType>> _derivative;
+		std::vector<MathLib::Matrix<ElemType>> _derivativeLastLayer;
+
 		// Learning rate
-		const double learnRate = 0.05;
+		const double learnRate = 0.005;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);

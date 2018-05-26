@@ -16,5 +16,8 @@
 #endif // NeuralNetwork
 
 #ifdef ConvolutionalNeuralNetwork
-
+#include "ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h"
+#include "ConvolutionalNeuralNetwork\CNN_PoolingLayer.h"
+#include "ConvolutionalNeuralNetwork\CNN_ProcessLayer.h"
+#include "ConvolutionalNeuralNetwork\CNN_SerializeLayer.h"
 #endif // ConvolutionalNeuralNetwork

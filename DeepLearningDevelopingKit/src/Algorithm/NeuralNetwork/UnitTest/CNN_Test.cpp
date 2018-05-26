@@ -5,11 +5,12 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define CNNDebug
+#define CNNDebug
 
 #ifdef CNNDebug
 #include "..\NeuralLib.h"
 #include "..\..\..\MathLib\MathLib.h"
+#include "..\..\..\Visualizer\Visualize.h"
 
 int main(int argc, char ** argv)
 {
@@ -31,9 +32,9 @@ int main(int argc, char ** argv)
 	convInitor.InputSize = MathLib::Size(8, 8);
 	convInitor.KernelSize = MathLib::Size(3, 3);
 	convInitor.Stride = 1;
-	convInitor.KernelNum = 1;
+	convInitor.KernelNum = 5;
 	convInitor.ActivationFunction = ActivationFunction::Linear;
-	convInitor.PaddingMethod = Neural::PaddingMethod::RightDown;
+	convInitor.PaddingMethod = Neural::PaddingMethod::Surround;
 	convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	Neural::ConvolutionalLayer convLayer(convInitor);
 
@@ -45,7 +46,7 @@ int main(int argc, char ** argv)
 	poolInitor.PoolSize = MathLib::Size(2, 2);
 	poolInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	poolInitor.PoolingMethod = Neural::PoolingMethod::MaxPooling;
-	poolInitor.PaddingMethod = Neural::PaddingMethod::RightDown;
+	poolInitor.PaddingMethod = Neural::PaddingMethod::Surround;
 	Neural::PoolingLayer poolLayer(poolInitor);
 
 	/***************************************************************************************************/
@@ -59,17 +60,17 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Serialize Layer
 	Neural::SerializeLayerInitor serialInitor;
-	serialInitor.SerializeSize = MathLib::Size(4 * 4 * 1, 1);
+	serialInitor.SerializeSize = MathLib::Size(4 * 4 * 5, 1);
 	serialInitor.DeserializeSize = MathLib::Size(4, 4);
 	Neural::SerializeLayer serial(serialInitor);
 
 	/***************************************************************************************************/
 	// Initializing FullConnect Layer
-	Neural::InputLayer inputLayer(4 * 4 * 1, 4 * 4 * 1);
+	Neural::InputLayer inputLayer(4 * 4 * 5, 4 * 4 * 5);
 	inputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	inputLayer.SetLossFunction(LossFunction::MES);
 
-	Neural::HiddenLayer hiddenLayer(4 * 4 * 1, 10);
+	Neural::HiddenLayer hiddenLayer(4 * 4 * 5, 10);
 	hiddenLayer.SetActivationFunction(ActivationFunction::ReLU);
 	hiddenLayer.SetLossFunction(LossFunction::MES);
 
@@ -77,7 +78,7 @@ int main(int argc, char ** argv)
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	for (size_t iteration = 0; iteration < 100; iteration++)
+	for (size_t iteration = 0; iteration < 3; iteration++)
 	{
 		/***************************************************************************************************/
 		// Forward Propagation
@@ -85,18 +86,16 @@ int main(int argc, char ** argv)
 		convLayer.ForwardPropagation();
 		std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
 		std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
-		//std::cout << "ConvWeight : " << conv1kernals.at(0) << std::endl;
-		//std::cout << "ConvFeature : " << conv1features.at(0) << std::endl;
+
+		// Visual::Plot2D::Plot2DMatrixVec(conv1features,"conv1features",Visual::Plot2DMode::RB);
 
 		poolLayer.SetInput(conv1features);
 		poolLayer.ForwardPropagation();
 		std::vector<Neural::Feature> pool1features = poolLayer.GetFeatureAll();
-		//std::cout << "PoolFeature : " << pool1features.at(0) << std::endl;
 
 		process.SetInput(pool1features);
 		process.Process();
 		std::vector<Neural::Feature> processOutput = process.GetOutputAll();
-		//std::cout << "ReLU : " << processOutput.at(0) << std::endl;
 
 		serial.SetDeserializedMat(processOutput);
 		MathLib::Matrix<double> serializedMat = serial.Serialize();
@@ -146,7 +145,7 @@ int main(int argc, char ** argv)
 
 		convLayer.SetDelta(pool1Delta);
 		convLayer.BackwardPropagation();
-		std::vector<MathLib::Matrix<double>> conv1Delta = convLayer._deltaDeconved;
+		std::vector<MathLib::Matrix<double>> conv1Delta = convLayer._derivative;
 
 		/***************************************************************************************************/
 		// Updating

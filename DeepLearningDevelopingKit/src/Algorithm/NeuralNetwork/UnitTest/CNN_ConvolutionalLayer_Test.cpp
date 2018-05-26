@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define ConvolutionalLayerImgDebug
+// #define ConvolutionalLayerImgDebug
 
 #ifdef ConvolutionalLayerImgDebug
 
@@ -83,10 +83,10 @@ int main(int argc, char ** argv)
 	convLayer.BackwardPropagation();
 
 	std::cout << "Delta LastLayer : " << std::endl << std::endl;
-	for (auto mat : convLayer._deltaLastLayer)
+	for (auto mat : convLayer._derivativeLastLayer)
 		std::cout << mat << std::endl;
 	std::cout << "Delta : " << std::endl << std::endl;
-	for (auto mat : convLayer._delta)
+	for (auto mat : convLayer._derivative)
 		std::cout << mat << std::endl;
 
 	convLayer.Update();

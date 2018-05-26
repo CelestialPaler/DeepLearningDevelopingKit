@@ -1,8 +1,8 @@
 
-#include "..\ConvolutionalNeuralNetwork\PaddingLayer.h"
+#include "..\ConvolutionalNeuralNetwork\CNN_PaddingLayer.h"
 
-
-int dmain(int argc, char ** argv)
+/*
+int main(int argc, char ** argv)
 {
 	srand((unsigned)time(NULL));
 	std::cout << "Unit Test : CNN-PaddingLayer" << std::endl;
@@ -50,4 +50,4 @@ int dmain(int argc, char ** argv)
 
 	system("pause");
 	return 0;
-}
+}*/

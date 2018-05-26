@@ -267,10 +267,19 @@
     <ClInclude Include="src\Visualizer\Visualize.h">
       <Filter>src\Visualizer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\ConvolutionalLayer.h">
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
-    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\PaddingLayer.h">
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PaddingLayer.h">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClInclude>
   </ItemGroup>
@@ -344,11 +353,35 @@
     <ClCompile Include="src\Visualizer\Plot\Plot.cpp">
       <Filter>src\Visualizer\Plot</Filter>
     </ClCompile>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\ConvolutionalLayer.cpp">
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClCompile>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\PaddingLayerTest.cpp">
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayer_Test.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Img_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_SerializeLayer_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayerTest.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_PaddingLayerTest.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\Unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\ConvolutionalNeuralNetwork %28CNN%29</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

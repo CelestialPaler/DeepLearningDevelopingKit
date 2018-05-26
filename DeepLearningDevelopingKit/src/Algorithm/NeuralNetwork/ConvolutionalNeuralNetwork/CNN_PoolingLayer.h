@@ -10,7 +10,7 @@
 #include "..\..\..\MathLib\MathLib.h"
 #include "..\ActivationFunction.h"
 #include "..\LossFunction.h"
-#include "CNN_Padding.h"
+#include "CNN_PaddingLayer.h"
 
 /***************************************************************************************************/
 // Namespace : Neural

@@ -77,17 +77,34 @@ void Visual::Plot2D::PerlinNoiseDemo(const size_t _m, const size_t _n)
 		cv::normalize(tempMat, tempMat, 0, 1, cv::NORM_MINMAX);
 
 		cv::Mat img(tempMat.cols, tempMat.rows, CV_8UC3);
+
 		for (size_t i = 0; i < tempMat.cols; i++)
 		{
 			for (size_t j = 0; j < tempMat.rows; j++)
 			{
-				cv::Vec3b pixel;
-				pixel.val[0] = (1 - tempMat.at<float>(i, j)) * 255; // B
-				pixel.val[1] = 0; // G
-				pixel.val[2] = tempMat.at<float>(i, j) * 255; // R
-				img.at<cv::Vec3b>(i, j) = pixel;
+				tempMat.at<float>(i, j);
+				//cv::Vec3b pixel;
+				//pixel.val[0] = (1 - tempMat.at<float>(i, j)) * 255; // B
+				//pixel.val[1] = 0; // G
+				//pixel.val[2] = tempMat.at<float>(i, j) * 255; // R
+				//img.at<cv::Vec3b>(i, j) = pixel;
 			}
 		}
 		cv::imshow("Perlin Noise Anim", img);
 	}
+}
+
+cv::Mat Visual::Plot2D::Scale(const cv::Mat _mat, unsigned n)
+{
+	MathLib::Matrix<double> data1(_mat.cols, _mat.rows);
+	MathLib::Matrix<double> data2(_mat.cols*n, _mat.rows*n);
+	data1 = OpenCV::Mat2Matrix<float>(_mat);
+	for (size_t i = 0; i < data2.ColumeSize(); i++)
+	{
+		for (size_t j = 0; j < data2.RowSize(); j++)
+		{
+			data2(i, j) = data1(i / n, j / n);
+		}
+	}
+	return OpenCV::Matrix2Mat(data2);
 }
