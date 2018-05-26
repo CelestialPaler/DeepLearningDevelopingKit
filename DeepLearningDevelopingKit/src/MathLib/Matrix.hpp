@@ -199,7 +199,7 @@ namespace MathLib
 			Matrix<T> temp(m, n);
 			if (self.m != _other.m || self.n != _other.n)
 			{
-				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				std::cerr << "ERROR : Invalid Matrix Addtion!" << std::endl;
 				return temp;
 			}
 			for (size_t i = 0; i < self.m; i++)
@@ -240,7 +240,7 @@ namespace MathLib
 			Matrix<T> & self = *this;
 			if (self.m != _other.m || self.n != _other.n)
 			{
-				cerr << "ERROR : Invalid Matrix Addtion!" << endl;
+				std::cerr << "ERROR : Invalid Matrix Addtion!" << std::endl;
 			}
 			for (size_t i = 0; i < self.m; i++)
 				for (size_t j = 0; j < self.n; j++)

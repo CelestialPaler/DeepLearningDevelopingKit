@@ -124,19 +124,16 @@ namespace Neural
 
 		// Padding function
 		void Padding(void);
-		// Convolution between two matrix.
-		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> & _input, const MathLib::Matrix<ElemType> & _kernel);
 
 	private: // Math Stuff
 
+		// Convolution between two matrix.
+		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
 		// Rotate a Matrix with 180° 
 		/// Used for calculating the delta -> correlation(A, B) = rot180°(A * rot180°(B))
 		MathLib::Matrix<ElemType> Rot180(const MathLib::Matrix<ElemType> & _mat);
-
-		// Sum of the product of corresponding elements.
-		ElemType MatrixConvSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
-		// Mathematical convolution of two Matrix.
-		MathLib::Matrix<ElemType> MatrixConvolution(MathLib::Matrix<ElemType> _mat1, MathLib::Matrix<ElemType> _mat2);
+		// The sum of Cross-correlation matrix of two matrix.
+		Neural::ElemType CorrelationSum(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> & _mat2, const size_t _m, const size_t _n);
 
 	public:
 

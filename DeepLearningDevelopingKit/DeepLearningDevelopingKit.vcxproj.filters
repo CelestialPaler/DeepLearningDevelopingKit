@@ -368,11 +368,14 @@
     <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayer_Test.cpp">
       <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp">
-      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
-    </ClCompile>
     <ClCompile Include="src\Visualizer\Plot\Plot.cpp">
       <Filter>src\Visualizer\Plot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Img_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp">
+      <Filter>src\Algorithm\NeuralNetwork %28ANN%29\UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

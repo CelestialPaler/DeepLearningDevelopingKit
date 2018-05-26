@@ -27,7 +27,7 @@ namespace Visual
 
 		// Convert a cv::Mat into a MathLib::Matrix.
 		template<class T>
-		static MathLib::Matrix<T> Mat2Matrix(const cv::Mat & _mat);
+		static MathLib::Matrix<double> Mat2Matrix(const cv::Mat & _mat);
 		// Convert a MathLib::Matrix into a cv::Mat.
 		template<class T>
 		static cv::Mat Matrix2Mat(const MathLib::Matrix<T> & _matrix);
@@ -40,9 +40,9 @@ namespace Visual
 namespace Visual
 {
 	template<class T>
-	MathLib::Matrix<T> OpenCV::Mat2Matrix(const cv::Mat & _mat)
+	MathLib::Matrix<double> OpenCV::Mat2Matrix(const cv::Mat & _mat)
 	{
-		MathLib::Matrix<T> tempMat(_mat.cols, _mat.rows, MathLib::MatrixType::Zero);
+		MathLib::Matrix<double> tempMat(_mat.cols, _mat.rows, MathLib::MatrixType::Zero);
 		for (size_t i = 0; i < _mat.cols; i++)
 		{
 			for (size_t j = 0; j < _mat.rows; j++)
