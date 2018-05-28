@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define CNNDebug
+// #define CNNDebug
 
 #ifdef CNNDebug
 #include "..\NeuralLib.h"
@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 	convInitor.KernelSize = MathLib::Size(3, 3);
 	convInitor.Stride = 1;
 	convInitor.KernelNum = 5;
-	convInitor.ActivationFunction = ActivationFunction::Linear;
+	convInitor.ActivationFunction = ActivationFunction::ReLU;
 	convInitor.PaddingMethod = Neural::PaddingMethod::Surround;
 	convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	Neural::ConvolutionalLayer convLayer(convInitor);
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	for (size_t iteration = 0; iteration < 3; iteration++)
+	for (size_t iteration = 0; iteration < 100; iteration++)
 	{
 		/***************************************************************************************************/
 		// Forward Propagation
@@ -158,6 +158,10 @@ int main(int argc, char ** argv)
 		MathLib::Vector<double> result = outputLayer.GetOutput();
 		std::cout << result << std::endl;
 
+		std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+		std::cout << "Kernels : " << std::endl << std::endl;
+		for (auto mat : conv1kernalsUpdated)
+			std::cout << mat << std::endl;
 	}
 
 	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
