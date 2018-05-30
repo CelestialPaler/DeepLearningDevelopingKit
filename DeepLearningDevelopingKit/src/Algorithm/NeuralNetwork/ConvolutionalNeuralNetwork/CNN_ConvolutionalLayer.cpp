@@ -69,11 +69,11 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 		_derivative.push_back(tempMat);
 	}
 
-
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
 		_convNodes.at(k).kernelDelta.Clear();
 		_convNodes.at(k).biasDelta = 0;
+		auto temp = Rot180(_derivative.at(k));
 		for (size_t a = 0; a < _input.size(); a++)
 		{
 			for (size_t m = 0; m < _kernelSize.m; m++)
@@ -85,17 +85,16 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 					{
 						for (size_t j = 0; j < _inputSize.n - _kernelSize.n; j++)
 						{
-							sum += _derivative.at(k)(i, j) * _input.at(a)(i + m, j + n);
+							sum += temp(i, j) * _input.at(a)(i + m, j + n);
 						}
 					}
-					_convNodes.at(k).kernelDelta(m, n) = sum;
+					_convNodes.at(k).kernelDelta(m, n) = sum / _derivative.at(k).ColumeSize() * _derivative.at(k).RowSize();
 				}
 			}
 		}
 		
-		_convNodes.at(k).biasDelta = _derivative.at(k).Sum();
+		_convNodes.at(k).biasDelta = _derivative.at(k).Sum() / _derivative.at(k).ColumeSize() * _derivative.at(k).RowSize();
 	}
-
 }
 
 void Neural::ConvolutionalLayer::Update(void)

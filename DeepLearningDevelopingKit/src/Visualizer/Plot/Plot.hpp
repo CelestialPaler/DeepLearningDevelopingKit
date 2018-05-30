@@ -43,7 +43,7 @@ namespace Visual
 	};
 
 	template<class T>
-	inline void Plot2D::Plot2DMatrix(const MathLib::Matrix<T>& _mat, const std::string & _name, const Plot2DMode _mode, unsigned _x = 100, unsigned _y = 100)
+	inline void Plot2D::Plot2DMatrix(const MathLib::Matrix<T>& _mat, const std::string & _name, const Plot2DMode _mode, unsigned _x, unsigned _y)
 	{
 		cv::Mat tempMat(cv::Size(_mat.ColumeSize(), _mat.RowSize()), CV_32FC1);
 		tempMat = Visual::OpenCV::Matrix2Mat<float>(_mat);
@@ -97,10 +97,11 @@ namespace Visual
 				img.at<cv::Vec3b>(i, j) = pixel;
 			}
 		}
+		resize(img, img, cv::Size(img.cols * 10, img.rows * 10), 0, 0, cv::INTER_NEAREST);
 
 		cv::namedWindow(_name, cv::WINDOW_AUTOSIZE);
 		cv::imshow(_name, img);
-		cv::waitKey();
+		cv::waitKey(10);
 	}
 
 	template<class T>
@@ -114,10 +115,9 @@ namespace Visual
 				for (size_t j = 0; j < mat.RowSize(); j++)
 					data2(i, j) = mat(i, j);
 			cv::Mat newImg = Visual::OpenCV::Matrix2Mat<float>(data2);
+			cv::normalize(newImg, newImg, 0, 1, cv::NORM_MINMAX);
 			img_merge.push_back(newImg);
 		}
-
-		cv::normalize(img_merge, img_merge, 0, 1, cv::NORM_MINMAX);
 
 		cv::Mat img(cv::Size(img_merge.size()), CV_8UC3);
 		for (size_t i = 0; i < img_merge.rows; i++)
