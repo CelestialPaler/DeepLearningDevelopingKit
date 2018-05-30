@@ -55,12 +55,14 @@ namespace Neural
 
 		ConvNode(const size_t _kernelM, const size_t _kernelN, const size_t _featureM, const size_t _featureN) {
 			kernel.Init(_kernelM, _kernelN, MathLib::MatrixType::Random);
+			kernelDelta.Init(_kernelM, _kernelN, MathLib::MatrixType::Random);
 			feature.Init(_featureM, _featureN, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
 		}
 
 		ConvNode(const MathLib::Size _kernelSize, const MathLib::Size _featureSize) {
 			kernel.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
+			kernelDelta.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
 			feature.Init(_featureSize.m, _featureSize.n, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
 		}
@@ -175,7 +177,7 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _derivativeLastLayer;
 
 		// Learning rate
-		const double learnRate = 0.0000000000000000000000000000005;
+		const double learnRate = 0.00005;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);

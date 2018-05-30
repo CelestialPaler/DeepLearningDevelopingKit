@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define CNNDebug
+#define CNNDebug
 
 #ifdef CNNDebug
 #include "..\NeuralLib.h"
@@ -16,24 +16,20 @@ int main(int argc, char ** argv)
 {
 	srand((unsigned)time(NULL));
 
-	MathLib::Matrix<double> input1(8, 8, MathLib::MatrixType::Zero);
+	MathLib::Matrix<double> input1(16, 16, MathLib::MatrixType::Identity);
 	std::vector<MathLib::Matrix<double>> input;
-	for (size_t i = 0; i < input1.ColumeSize(); i++)
-		for (size_t j = 0; j < input1.RowSize(); j++)
-			if (i == j)
-				input1(i, j) = 1.f;
-			else
-				input1(i, j) = 0.f;
 	input.push_back(input1);
+
+	unsigned kernalNum = 5;
 
 	/***************************************************************************************************/
 	// Initializing Convolutional Layer
 	Neural::ConvLayerInitor convInitor;
-	convInitor.InputSize = MathLib::Size(8, 8);
+	convInitor.InputSize = MathLib::Size(16, 16);
 	convInitor.KernelSize = MathLib::Size(3, 3);
 	convInitor.Stride = 1;
-	convInitor.KernelNum = 5;
-	convInitor.ActivationFunction = ActivationFunction::ReLU;
+	convInitor.KernelNum = kernalNum;
+	convInitor.ActivationFunction = ActivationFunction::Sigmoid;
 	convInitor.PaddingMethod = Neural::PaddingMethod::Surround;
 	convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	Neural::ConvolutionalLayer convLayer(convInitor);
@@ -41,9 +37,9 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Pooling Layer
 	Neural::PoolLayerInitor poolInitor;
-	poolInitor.InputSize = MathLib::Size(8, 8);
-	poolInitor.Stride = 2;
-	poolInitor.PoolSize = MathLib::Size(2, 2);
+	poolInitor.InputSize = MathLib::Size(16, 16);
+	poolInitor.Stride = 4;
+	poolInitor.PoolSize = MathLib::Size(4, 4);
 	poolInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 	poolInitor.PoolingMethod = Neural::PoolingMethod::MaxPooling;
 	poolInitor.PaddingMethod = Neural::PaddingMethod::Surround;
@@ -60,17 +56,17 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Serialize Layer
 	Neural::SerializeLayerInitor serialInitor;
-	serialInitor.SerializeSize = MathLib::Size(4 * 4 * 5, 1);
+	serialInitor.SerializeSize = MathLib::Size(4 * 4 * kernalNum, 1);
 	serialInitor.DeserializeSize = MathLib::Size(4, 4);
 	Neural::SerializeLayer serial(serialInitor);
 
 	/***************************************************************************************************/
 	// Initializing FullConnect Layer
-	Neural::InputLayer inputLayer(4 * 4 * 5, 4 * 4 * 5);
+	Neural::InputLayer inputLayer(4 * 4 * kernalNum, 8 * 88 * 8 * kernalNum);
 	inputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	inputLayer.SetLossFunction(LossFunction::MES);
 
-	Neural::HiddenLayer hiddenLayer(4 * 4 * 5, 10);
+	Neural::HiddenLayer hiddenLayer(4 * 4 * kernalNum, 10);
 	hiddenLayer.SetActivationFunction(ActivationFunction::ReLU);
 	hiddenLayer.SetLossFunction(LossFunction::MES);
 
@@ -78,7 +74,7 @@ int main(int argc, char ** argv)
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	for (size_t iteration = 0; iteration < 100; iteration++)
+	for (size_t iteration = 0; iteration < 1000; iteration++)
 	{
 		/***************************************************************************************************/
 		// Forward Propagation
@@ -86,8 +82,6 @@ int main(int argc, char ** argv)
 		convLayer.ForwardPropagation();
 		std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
 		std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
-
-		// Visual::Plot2D::Plot2DMatrixVec(conv1features,"conv1features",Visual::Plot2DMode::RB);
 
 		poolLayer.SetInput(conv1features);
 		poolLayer.ForwardPropagation();
@@ -119,8 +113,9 @@ int main(int argc, char ** argv)
 		// Backward Propagation
 		MathLib::Vector<double> lable(1);
 		lable(0) = 1;
-
-		MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
+		MathLib::Vector<double> error(1);
+		error = lable - outputLayer.GetOutput();
+		MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(error);
 
 		MathLib::Vector<double> hiddenLayerDelta = hiddenLayer.BackwardPropagation(outputLayerDelta);
 
@@ -155,19 +150,33 @@ int main(int argc, char ** argv)
 		hiddenLayer.Update();
 		outputLayer.Update();
 
-		MathLib::Vector<double> result = outputLayer.GetOutput();
-		std::cout << result << std::endl;
+		Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200);
+		Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 400, 200);
+		Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 600, 200);
+		Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200);
+		Visual::Plot2D::Plot2DMatrix(serializedMat, "serializedMat", Visual::Plot2DMode::RB, 1000, 200);
 
-		std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
-		std::cout << "Kernels : " << std::endl << std::endl;
-		for (auto mat : conv1kernalsUpdated)
-			std::cout << mat << std::endl;
+
+		std::cout << error << std::endl;
+		if (error(0) < 0.001)
+		{
+			while (true)
+			{
+				Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 200, 200);
+				Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 400, 200);
+			}
+		}
+
+		//std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+		//std::cout << "Kernels : " << std::endl << std::endl;
+		//for (auto mat : conv1kernalsUpdated)
+		//	std::cout << mat << std::endl;
 	}
 
-	std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
-	std::cout << "Kernels : " << std::endl << std::endl;
-	for (auto mat : conv1kernalsUpdated)
-		std::cout << mat << std::endl;
+	//std::vector<Neural::ConvKernel> conv1kernalsUpdated = convLayer.GetKernelAll();
+	//std::cout << "Kernels : " << std::endl << std::endl;
+	//for (auto mat : conv1kernalsUpdated)
+	//	std::cout << mat << std::endl;
 
 	system("pause");
 	return 0;

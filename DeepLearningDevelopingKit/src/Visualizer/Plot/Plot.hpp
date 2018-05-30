@@ -29,10 +29,10 @@ namespace Visual
 	public:
 
 		template<class T>
-		static void Plot2DMatrix(const MathLib::Matrix<T> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode= Plot2DMode::RB);
+		static void Plot2DMatrix(const MathLib::Matrix<T> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode= Plot2DMode::RB, unsigned _x = 100, unsigned _y = 100);
 
 		template<class T>
-		static void Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB);
+		static void Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB, unsigned _x=100, unsigned _y=100);
 
 		static void PerlinNoiseDemo(const size_t _m, const size_t _n);
 
@@ -43,7 +43,7 @@ namespace Visual
 	};
 
 	template<class T>
-	inline void Plot2D::Plot2DMatrix(const MathLib::Matrix<T>& _mat, const std::string & _name, const Plot2DMode _mode)
+	inline void Plot2D::Plot2DMatrix(const MathLib::Matrix<T>& _mat, const std::string & _name, const Plot2DMode _mode, unsigned _x = 100, unsigned _y = 100)
 	{
 		cv::Mat tempMat(cv::Size(_mat.ColumeSize(), _mat.RowSize()), CV_32FC1);
 		tempMat = Visual::OpenCV::Matrix2Mat<float>(_mat);
@@ -103,9 +103,8 @@ namespace Visual
 		cv::waitKey();
 	}
 
-
 	template<class T>
-	inline static void Plot2D::Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>>& _mat, const std::string & _name, const Plot2DMode _mode)
+	inline static void Plot2D::Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>>& _mat, const std::string & _name, const Plot2DMode _mode,unsigned _x, unsigned _y)
 	{
 		cv::Mat img_merge;
 		for (const MathLib::Matrix<double> & mat : _mat)
@@ -137,7 +136,8 @@ namespace Visual
 		resize(img, img, cv::Size(img.cols * 10, img.rows * 10), 0, 0, cv::INTER_NEAREST);
 
 		cv::namedWindow(_name, cv::WINDOW_AUTOSIZE);
+		cv::moveWindow(_name, _x, _y);
 		cv::imshow(_name, img);
-		cv::waitKey();
+		cv::waitKey(10);
 	}
 }
