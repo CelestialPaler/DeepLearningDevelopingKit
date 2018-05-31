@@ -1,0 +1,108 @@
+{
+    "name": "XO Image Recognization",
+	"class": "image_set",
+	"sample_size": 20,
+	"image_size_m": 16,
+	"image_size_n": 16,
+	"datablock": [{
+			"class": "image_set::sample",
+			"input": "\\O_0.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_1.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_2.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_3.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_4.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_5.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_6.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_7.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_8.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_9.png",
+			"lable": [0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_10.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_11.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_12.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_13.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_14.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_15.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_16.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_17.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_18.png",
+			"lable": [1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\O_19.png",
+			"lable": [1]
+		}
+	]
+}

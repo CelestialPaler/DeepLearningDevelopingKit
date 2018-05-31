@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 	//std::cout << testMat1 << std::endl;
 
 	// Visual::Plot2D::Plot2DMatrix(testMatrix1);
-	Visual::Plot2D::PerlinNoiseDemo(800, 800);
+	// Visual::Plot2D::PerlinNoiseDemo(800, 800);
 
 	//system("pause");
 	return 0;

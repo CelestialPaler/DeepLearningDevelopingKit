@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define DataSetDebug
+// #define DataSetDebug
 
 #ifdef DataSetDebug
 #include <iostream>
@@ -16,7 +16,9 @@ using namespace Data;
 
 int main()
 {
-	ImageSet 
+	ImageSet XOImageSet;
+	XOImageSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\Data");
+	XOImageSet.PrintToConsole();
 
 	system("pause");
 	return 0;

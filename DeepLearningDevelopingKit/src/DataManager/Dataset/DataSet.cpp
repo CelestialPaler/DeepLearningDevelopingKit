@@ -95,3 +95,59 @@ void Data::NumericSet::PrintToConsole(void)
 	}
 }
 
+Data::ImageSet::ImageSet()
+{
+
+}
+
+const Data::ImageSet::Sample Data::ImageSet::GetBatch(void) const
+{
+	static int x = 0;
+	x++;
+	if (x == _samples.size())
+		x = 0;
+	return _samples.at(x);
+}
+
+const Data::ImageSet::Sample Data::ImageSet::GetRandomSample(void) const
+{
+	return _samples.at(floor((Random() + 1) * 19 - 1));
+}
+
+void Data::ImageSet::LoadFromJson(const std::string & _filePath)
+{
+	JsonHandler jsonhandler;
+	jsonhandler.OpenJson(_filePath + "\\ImageSet.json");
+
+	name = jsonhandler.documentReadBuffer["name"].GetString();
+	sampleSize = jsonhandler.documentReadBuffer["sample_size"].GetUint();
+	size_t imageSizeM = jsonhandler.documentReadBuffer["image_size_m"].GetUint();
+	size_t imageSizeN = jsonhandler.documentReadBuffer["image_size_n"].GetUint();
+	const rapidjson::Value& dataBlock = jsonhandler.documentReadBuffer["datablock"];
+
+	for (size_t i = 0; i < sampleSize; i++)
+	{
+		const rapidjson::Value& sample = dataBlock[i];
+
+		std::string path = sample["input"].GetString();
+		cv::Mat tempMat(cv::Size(imageSizeM, imageSizeN), CV_32FC1);
+		tempMat = cv::imread(_filePath + path, cv::IMREAD_GRAYSCALE);
+		tempMat = 255 - tempMat;
+		cv::normalize(tempMat, tempMat, 0, 10, cv::NORM_MINMAX);
+		MathLib::Matrix<double> img = Visual::OpenCV::Mat2Matrix<unsigned char>(tempMat);
+		const rapidjson::Value& data2 = sample["lable"];
+		double lable = data2[0].GetDouble();
+
+		Sample tempSample = { img, std::vector<double>{lable} };
+		_samples.push_back(tempSample);
+	}
+}
+
+void Data::ImageSet::PrintToConsole(void)
+{
+	for (auto sample : _samples)
+	{
+		std::cout << sample.first << std::endl;
+		std::cout << sample.second.at(0) << std::endl;
+	}
+}

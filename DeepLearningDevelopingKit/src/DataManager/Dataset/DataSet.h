@@ -9,9 +9,11 @@
 #include <vector>
 #include <iomanip>
 #include <string>
+#include <iostream>
 
 #include "..\..\MathLib\MathLib.h"
 #include "..\..\Util\Json\JsonHandler.h"
+#include "..\..\Visualizer\Visualize.h"
 
 // Namespaces
 using namespace MathLib;
@@ -82,16 +84,32 @@ namespace Data
 	{
 	public:
 
+		typedef std::pair<MathLib::Matrix<double>, std::vector<double>> Sample;
+
+	public:
+
 		ImageSet();
 
 	public:
 
-		void LoadFromImageDir(const std::string & _filePath);
+		const Sample GetBatch(void) const;
+		const Sample GetRandomSample(void) const;
+		const Sample GetSample(const size_t _index) const;
+
+	public:
+
+		void LoadFromJson(const std::string & _filePath);
+
+	public:
+
+		void PrintToConsole(void);
 
 	private:
 
+		std::string name;
+		size_t sampleSize;
 
-
+		std::vector<Sample> _samples;
 	};
 
 	/***************************************************************************************************/
