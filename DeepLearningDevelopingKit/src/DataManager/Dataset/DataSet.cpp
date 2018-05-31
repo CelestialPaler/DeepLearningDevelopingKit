@@ -111,7 +111,7 @@ const Data::ImageSet::Sample Data::ImageSet::GetBatch(void) const
 
 const Data::ImageSet::Sample Data::ImageSet::GetRandomSample(void) const
 {
-	return _samples.at(floor((Random() + 1) * 19 - 1));
+	return _samples.at(floor(Random(0, 1) * _samples.size()));
 }
 
 void Data::ImageSet::LoadFromJson(const std::string & _filePath)

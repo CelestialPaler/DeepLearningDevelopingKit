@@ -39,6 +39,11 @@ void Neural::ConvolutionalLayer::SetDelta(const std::vector<MathLib::Matrix<Elem
 	this->_derivativeLastLayer = _delta;
 }
 
+void Neural::ConvolutionalLayer::SetLearnRate(const double _learnRate)
+{
+	this->learnRate = _learnRate;
+}
+
 void Neural::ConvolutionalLayer::ForwardPropagation(void)
 {
 	for (size_t k = 0; k < _convNodeNum; k++) // Travesing kernel
@@ -62,7 +67,7 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 		{
 			for (size_t j = 0; j < _convNodeNum; j++)
 			{
-				auto a = ConvolutionCal(_derivativeLastLayer.at(j), Rot180(_convNodes.at(k).kernel));
+				auto a = ConvolutionCal(_derivativeLastLayer.at(j), _convNodes.at(k).kernel);
 				tempMat += Hadamard(a, _convNodes.at(j).feature);
 			}
 		}
@@ -76,7 +81,7 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 		auto temp = _derivative.at(k);
 		for (size_t a = 0; a < _input.size(); a++)
 		{
-			auto temp2 = _input.at(a);
+			auto temp2 = Rot180(_input.at(a));
 			for (size_t m = 0; m < _kernelSize.m; m++)
 			{
 				for (size_t n = 0; n < _kernelSize.n; n++)

@@ -69,16 +69,17 @@ int main(int argc, char ** argv)
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	for (size_t iteration = 0; iteration < 1000; iteration++)
-	{
+	int totalIteration = 50;
 
+	for (size_t iteration = 0; iteration < totalIteration; iteration++)
+	{
 		for (size_t ID = 0; ID < 20; ID++)
 		{
 			auto sample = XOImageSet.GetRandomSample();
 
 			std::vector<MathLib::Matrix<double>> input;
 			input.clear();
-			input.push_back(sample.first);
+			input.push_back(sample.first + Random());
 
 			/***************************************************************************************************/
 			// Forward Propagation
@@ -120,7 +121,7 @@ int main(int argc, char ** argv)
 			MathLib::Vector<double> lable(1);
 			lable(0) = sample.second.at(0);
 			MathLib::Vector<double> error(1);
-			error = lable - outputLayer.GetOutput();
+			error = outputLayer.GetOutput() - lable;
 			MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
 
 			MathLib::Vector<double> hiddenLayerDelta = hiddenLayer.BackwardPropagation(outputLayerDelta);
@@ -169,11 +170,11 @@ int main(int argc, char ** argv)
 
 			auto loss = outputLayer.GetLoss();
 			outputLayer.LossSumClear();
-			std::cout << "Iteration : " << iteration << " | "
-				<< "ID : " << ID << " | "
+			std::cout << "Iteration : " << std::setw(3) << std::setfill('0') << iteration << " | "
+				<< "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
 				<< "Predict : " << outputLayer.GetOutput()(0) << " | "
 				<< "Lable : " << lable(0) << " | "
-				<< "Loss : " << loss << " | "
+				<< "Error : " << error(0)
 				<< std::endl;
 
 			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200);
@@ -182,6 +183,63 @@ int main(int argc, char ** argv)
 			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200);
 		}
 	}
+
+
+	std::cout << "Testing : " << std::endl;
+	std::cout << "Total Iteration : " << totalIteration << std::endl;
+	for (size_t ID = 0; ID < 20; ID++)
+	{
+		auto sample = XOImageSet.GetBatch();
+
+		std::vector<MathLib::Matrix<double>> input;
+		input.clear();
+		input.push_back(sample.first);
+
+		/***************************************************************************************************/
+		// Forward Propagation
+		convLayer.SetInput(input);
+		convLayer.ForwardPropagation();
+		std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
+		std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
+
+		poolLayer.SetInput(conv1features);
+		poolLayer.ForwardPropagation();
+		std::vector<Neural::Feature> pool1features = poolLayer.GetFeatureAll();
+
+		process.SetInput(pool1features);
+		process.Process();
+		std::vector<Neural::Feature> processOutput = process.GetOutputAll();
+
+		serial.SetDeserializedMat(processOutput);
+		MathLib::Matrix<double> serializedMat = serial.Serialize();
+
+		MathLib::Vector<double> serializedVec(serializedMat.ColumeSize());
+		MathLib::Matrix<float> CNNout(serializedMat.ColumeSize(), 1);
+		for (size_t i = 0; i < serializedMat.ColumeSize(); i++)
+		{
+			serializedVec(i) = serializedMat(i, 0);
+			CNNout(i, 0) = serializedMat(i, 0);
+		}
+
+		inputLayer.SetInput(serializedVec);
+		inputLayer.ForwardPropagation();
+
+		hiddenLayer.SetInput(inputLayer.GetOutput());
+		hiddenLayer.ForwardPropagation();
+
+		outputLayer.SetInput(hiddenLayer.GetOutput());
+		outputLayer.ForwardPropagation();
+		std::cout << "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
+			<< "Predict : " << outputLayer.GetOutput()(0) << " | "
+			<< "Lable : " << sample.second.at(0)
+			<< std::endl;
+	}
+
+
+
+
+
+
 	system("pause");
 	return 0;
 }

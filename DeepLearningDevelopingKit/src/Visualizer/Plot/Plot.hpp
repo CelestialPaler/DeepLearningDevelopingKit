@@ -138,6 +138,6 @@ namespace Visual
 		cv::namedWindow(_name, cv::WINDOW_AUTOSIZE);
 		cv::moveWindow(_name, _x, _y);
 		cv::imshow(_name, img);
-		cv::waitKey(10);
+		cv::waitKey(1);
 	}
 }

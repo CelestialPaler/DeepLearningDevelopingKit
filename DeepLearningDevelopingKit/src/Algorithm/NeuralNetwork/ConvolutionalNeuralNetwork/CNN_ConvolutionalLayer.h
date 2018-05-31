@@ -110,6 +110,8 @@ namespace Neural
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _input);
 		// Set the delta propagate back from next layer.
 		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
+		// Set the Learn Rate of the ConvLayer.
+		void SetLearnRate(const double _learnRate);
 
 	public: // BackPropagation Algorithm
 
@@ -177,7 +179,7 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _derivativeLastLayer;
 
 		// Learning rate
-		const double learnRate = 0;
+		double learnRate = 0.001 * 0.001;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);
