@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define CNNDebug
+// #define CNNDebug
 
 #ifdef CNNDebug
 #include "..\NeuralLib.h"

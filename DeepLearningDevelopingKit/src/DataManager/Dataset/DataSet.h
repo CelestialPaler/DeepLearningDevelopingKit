@@ -86,7 +86,7 @@ namespace Data
 
 	public:
 
-		void LoadFromImage(const std::string & _filePath);
+		void LoadFromImageDir(const std::string & _filePath);
 
 	private:
 
