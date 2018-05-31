@@ -38,10 +38,10 @@ int main(int argc, char ** argv)
 		// Initializing Convolutional Layer
 		Neural::ConvLayerInitor convInitor;
 		convInitor.InputSize = MathLib::Size(16, 16);
-		convInitor.KernelSize = MathLib::Size(5, 5);
+		convInitor.KernelSize = MathLib::Size(3, 3);
 		convInitor.Stride = 1;
 		convInitor.KernelNum = kernalNum;
-		convInitor.ActivationFunction = ActivationFunction::Sigmoid;
+		convInitor.ActivationFunction = ActivationFunction::ReLU;
 		convInitor.PaddingMethod = Neural::PaddingMethod::Surround;
 		convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
 		Neural::ConvolutionalLayer convLayer(convInitor);
@@ -74,15 +74,15 @@ int main(int argc, char ** argv)
 
 		/***************************************************************************************************/
 		// Initializing FullConnect Layer
-		Neural::InputLayer inputLayer(4 * 4 * kernalNum, 8 * 88 * 8 * kernalNum);
+		Neural::InputLayer inputLayer(4 * 4 * kernalNum, 4 * 4 * kernalNum);
 		inputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 		inputLayer.SetLossFunction(LossFunction::MES);
 
-		Neural::HiddenLayer hiddenLayer(4 * 4 * kernalNum, 10);
+		Neural::HiddenLayer hiddenLayer(4 * 4 * kernalNum, 4 * 4 * kernalNum);
 		hiddenLayer.SetActivationFunction(ActivationFunction::ReLU);
 		hiddenLayer.SetLossFunction(LossFunction::MES);
 
-		Neural::OutputLayer outputLayer(10, 1);
+		Neural::OutputLayer outputLayer(4 * 4 * kernalNum, 1);
 		outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 		outputLayer.SetLossFunction(LossFunction::MES);
 
@@ -157,12 +157,26 @@ int main(int argc, char ** argv)
 			std::vector<MathLib::Matrix<double>> conv1Delta = convLayer._derivative;
 
 			/***************************************************************************************************/
-			// Updating
+			// 
+			int batchsize = 1;
+			inputLayer.BatchDeltaSumUpdate(batchsize);
+			outputLayer.BatchDeltaSumUpdate(batchsize);
+			hiddenLayer.BatchDeltaSumUpdate(batchsize);
+
+			outputLayer.LossSumUpdate();
+
 			convLayer.Update();
 			poolLayer.Update();
 			inputLayer.Update();
 			hiddenLayer.Update();
 			outputLayer.Update();
+
+			inputLayer.BatchDeltaSumClear();
+			outputLayer.BatchDeltaSumClear();
+			hiddenLayer.BatchDeltaSumClear();
+
+			auto loss = outputLayer.GetLoss();
+			outputLayer.LossSumClear();
 
 			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200);
 			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 400, 200);
@@ -170,7 +184,7 @@ int main(int argc, char ** argv)
 			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200);
 			//Visual::Plot2D::Plot2DMatrix<float>(CNNout, "CNNout", Visual::Plot2DMode::RB, 1000, 200);
 
-			std::cout << error << std::endl;
+			std::cout << error << " | " << loss << " | " << outputLayer.GetOutput()(0) << std::endl;
 			if (error(0) < 0.001)
 			{
 				while (true)

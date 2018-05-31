@@ -73,9 +73,10 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 	{
 		_convNodes.at(k).kernelDelta.Clear();
 		_convNodes.at(k).biasDelta = 0;
-		auto temp = Rot180(_derivative.at(k));
+		auto temp = _derivative.at(k);
 		for (size_t a = 0; a < _input.size(); a++)
 		{
+			auto temp2 = _input.at(a);
 			for (size_t m = 0; m < _kernelSize.m; m++)
 			{
 				for (size_t n = 0; n < _kernelSize.n; n++)
@@ -85,7 +86,7 @@ void Neural::ConvolutionalLayer::BackwardPropagation(void)
 					{
 						for (size_t j = 0; j < _inputSize.n - _kernelSize.n; j++)
 						{
-							sum += temp(i, j) * _input.at(a)(i + m, j + n);
+							sum += temp(i, j) * temp2(i + m, j + n);
 						}
 					}
 					_convNodes.at(k).kernelDelta(m, n) = sum / _derivative.at(k).ColumeSize() * _derivative.at(k).RowSize();
