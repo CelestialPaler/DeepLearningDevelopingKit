@@ -29,10 +29,10 @@ namespace Visual
 	public:
 
 		template<class T>
-		static void Plot2DMatrix(const MathLib::Matrix<T> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode= Plot2DMode::RB, unsigned _x = 100, unsigned _y = 100);
+		static void Plot2DMatrix(const MathLib::Matrix<T> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB, unsigned _x = 100, unsigned _y = 100);
 
 		template<class T>
-		static void Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB, unsigned _x=100, unsigned _y=100);
+		static void Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB, unsigned _x = 100, unsigned _y = 100, bool _normalize = false );
 
 		static void PerlinNoiseDemo(const size_t _m, const size_t _n);
 
@@ -105,7 +105,7 @@ namespace Visual
 	}
 
 	template<class T>
-	inline static void Plot2D::Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>>& _mat, const std::string & _name, const Plot2DMode _mode,unsigned _x, unsigned _y)
+	inline static void Plot2D::Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>>& _mat, const std::string & _name, const Plot2DMode _mode, unsigned _x, unsigned _y, bool _normalize)
 	{
 		cv::Mat img_merge;
 		for (const MathLib::Matrix<double> & mat : _mat)
@@ -117,6 +117,11 @@ namespace Visual
 			cv::Mat newImg = Visual::OpenCV::Matrix2Mat<float>(data2);
 			cv::normalize(newImg, newImg, 0, 1, cv::NORM_MINMAX);
 			img_merge.push_back(newImg);
+		}
+
+		if (_normalize)
+		{
+			cv::normalize(img_merge, img_merge, 0, 1, cv::NORM_MINMAX);
 		}
 
 		cv::Mat img(cv::Size(img_merge.size()), CV_8UC3);

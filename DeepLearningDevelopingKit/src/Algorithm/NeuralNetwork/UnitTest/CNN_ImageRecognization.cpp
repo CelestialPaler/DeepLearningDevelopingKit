@@ -177,10 +177,10 @@ int main(int argc, char ** argv)
 				<< "Error : " << error(0)
 				<< std::endl;
 
-			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200);
-			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 400, 200);
-			Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 600, 200);
-			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200);
+			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 400, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 600, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200, true);
 		}
 	}
 
