@@ -177,7 +177,7 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _derivativeLastLayer;
 
 		// Learning rate
-		const double learnRate = 0.0005;
+		const double learnRate = 0;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);
