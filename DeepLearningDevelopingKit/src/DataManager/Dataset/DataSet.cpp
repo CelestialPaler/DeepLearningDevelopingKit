@@ -136,9 +136,10 @@ void Data::ImageSet::LoadFromJson(const std::string & _filePath)
 		cv::normalize(tempMat, tempMat, 0, 10, cv::NORM_MINMAX);
 		MathLib::Matrix<double> img = Visual::OpenCV::Mat2Matrix<unsigned char>(tempMat);
 		const rapidjson::Value& data2 = sample["lable"];
-		double lable = data2[0].GetDouble();
+		double lable1 = data2[0].GetDouble();
+		double lable2 = data2[1].GetDouble();
 
-		Sample tempSample = { img, std::vector<double>{lable} };
+		Sample tempSample = { img, std::vector<double>{lable1, lable2} };
 		_samples.push_back(tempSample);
 	}
 }

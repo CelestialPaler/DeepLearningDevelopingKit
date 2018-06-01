@@ -8,7 +8,7 @@
 // Header files
 #include "BNN_Layer.h"
 
-const double learnRate = 0.001;
+const double learnRate = 0.001 * 0.01;
 
 /***************************************************************************************************/
 // Class : Layer 

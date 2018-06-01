@@ -12,41 +12,63 @@
 
 int main(int argc, char ** argv)
 {
+	srand((unsigned)time(NULL));
 	Data::ImageSet XOImageTrainSet;
 	XOImageTrainSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\TrainSet");
 
 	Data::ImageSet XOImageTestSet;
 	XOImageTestSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\TestSet");
 
-	unsigned kernalNum = 5;
+	/***************************************************************************************************/
+	// Initializing Convolutional Layer 1
+	Neural::ConvLayerInitor convInitor1;
+	convInitor1.InputSize = MathLib::Size(16, 16);
+	convInitor1.KernelSize = MathLib::Size(3, 3);
+	convInitor1.Stride = 1;
+	convInitor1.KernelNum = 5;
+	convInitor1.ActivationFunction = ActivationFunction::ReLU;
+	convInitor1.PaddingMethod = Neural::PaddingMethod::Surround;
+	convInitor1.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	Neural::ConvolutionalLayer convLayer1(convInitor1);
 
 	/***************************************************************************************************/
-	// Initializing Convolutional Layer
-	Neural::ConvLayerInitor convInitor;
-	convInitor.InputSize = MathLib::Size(16, 16);
-	convInitor.KernelSize = MathLib::Size(3, 3);
-	convInitor.Stride = 1;
-	convInitor.KernelNum = kernalNum;
-	convInitor.ActivationFunction = ActivationFunction::ReLU;
-	convInitor.PaddingMethod = Neural::PaddingMethod::Surround;
-	convInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
-	Neural::ConvolutionalLayer convLayer(convInitor);
+	// Initializing Pooling Layer 1
+	Neural::PoolLayerInitor poolInitor1;
+	poolInitor1.InputSize = MathLib::Size(16, 16);
+	poolInitor1.Stride = 4;
+	poolInitor1.PoolSize = MathLib::Size(4, 4);
+	poolInitor1.PoolingMethod = Neural::PoolingMethod::MaxPooling;
+	poolInitor1.PaddingMethod = Neural::PaddingMethod::Surround;
+	poolInitor1.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	Neural::PoolingLayer poolLayer1(poolInitor1);
 
 	/***************************************************************************************************/
-	// Initializing Pooling Layer
-	Neural::PoolLayerInitor poolInitor;
-	poolInitor.InputSize = MathLib::Size(16, 16);
-	poolInitor.Stride = 4;
-	poolInitor.PoolSize = MathLib::Size(4, 4);
-	poolInitor.PaddingNum = Neural::PaddingNum::ZeroPadding;
-	poolInitor.PoolingMethod = Neural::PoolingMethod::MaxPooling;
-	poolInitor.PaddingMethod = Neural::PaddingMethod::Surround;
-	Neural::PoolingLayer poolLayer(poolInitor);
+	// Initializing Convolutional Layer 2
+	Neural::ConvLayerInitor convInitor2;
+	convInitor2.InputSize = MathLib::Size(4, 4);
+	convInitor2.KernelSize = MathLib::Size(3, 3);
+	convInitor2.Stride = 1;
+	convInitor2.KernelNum = 5;
+	convInitor2.ActivationFunction = ActivationFunction::ReLU;
+	convInitor2.PaddingMethod = Neural::PaddingMethod::Surround;
+	convInitor2.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	Neural::ConvolutionalLayer convLayer2(convInitor2);
+
+	/***************************************************************************************************/
+	// Initializing Pooling Layer 2
+	Neural::PoolLayerInitor poolInitor2;
+	poolInitor2.InputSize = MathLib::Size(4, 4);
+	poolInitor2.Stride = 2;
+	poolInitor2.PoolSize = MathLib::Size(2, 2);
+	poolInitor2.PoolingMethod = Neural::PoolingMethod::MaxPooling;
+	poolInitor2.PaddingMethod = Neural::PaddingMethod::Surround;
+	poolInitor2.PaddingNum = Neural::PaddingNum::ZeroPadding;
+	Neural::PoolingLayer poolLayer2(poolInitor2);
 
 	/***************************************************************************************************/
 	// Initializing Process Layer
 	Neural::ProcessLayerInitor processInitor;
-	processInitor.InputSize = MathLib::Size(4, 4);
+	processInitor.InputSize = MathLib::Size(2, 2);
 	processInitor.ProcessFunction = ReLU;
 	processInitor.ProcessFunctionDerivative = ReLUDerivative;
 	Neural::ProcessLayer process(processInitor);
@@ -54,21 +76,21 @@ int main(int argc, char ** argv)
 	/***************************************************************************************************/
 	// Initializing Serialize Layer
 	Neural::SerializeLayerInitor serialInitor;
-	serialInitor.SerializeSize = MathLib::Size(4 * 4 * kernalNum, 1);
-	serialInitor.DeserializeSize = MathLib::Size(4, 4);
+	serialInitor.SerializeSize = MathLib::Size(2 * 2 * 10, 1);
+	serialInitor.DeserializeSize = MathLib::Size(2, 2);
 	Neural::SerializeLayer serial(serialInitor);
 
 	/***************************************************************************************************/
 	// Initializing FullConnect Layer
-	Neural::InputLayer inputLayer(4 * 4 * kernalNum, 4 * 4 * kernalNum);
+	Neural::InputLayer inputLayer(2 * 2 * 10, 2 * 2 * 10);
 	inputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	inputLayer.SetLossFunction(LossFunction::MES);
 
-	Neural::HiddenLayer hiddenLayer(4 * 4 * kernalNum, 4 * 4 * kernalNum);
+	Neural::HiddenLayer hiddenLayer(2 * 2 * 10, 2 * 2 * 10);
 	hiddenLayer.SetActivationFunction(ActivationFunction::ReLU);
 	hiddenLayer.SetLossFunction(LossFunction::MES);
 
-	Neural::OutputLayer outputLayer(4 * 4 * kernalNum, 1);
+	Neural::OutputLayer outputLayer(2 * 2 * 10, 2);
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
@@ -86,16 +108,25 @@ int main(int argc, char ** argv)
 
 			/***************************************************************************************************/
 			// Forward Propagation
-			convLayer.SetInput(input);
-			convLayer.ForwardPropagation();
-			std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
-			std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
+			convLayer1.SetInput(input);
+			convLayer1.ForwardPropagation();
+			std::vector<Neural::ConvKernel> conv1kernals = convLayer1.GetKernelAll();
+			std::vector<Neural::ConvFeature> conv1features = convLayer1.GetFeatureAll();
 
-			poolLayer.SetInput(conv1features);
-			poolLayer.ForwardPropagation();
-			std::vector<Neural::Feature> pool1features = poolLayer.GetFeatureAll();
+			poolLayer1.SetInput(conv1features);
+			poolLayer1.ForwardPropagation();
+			std::vector<Neural::Feature> pool1features = poolLayer1.GetFeatureAll();
 
-			process.SetInput(pool1features);
+			convLayer2.SetInput(pool1features);
+			convLayer2.ForwardPropagation();
+			std::vector<Neural::ConvKernel> conv2kernals = convLayer2.GetKernelAll();
+			std::vector<Neural::ConvFeature> conv2features = convLayer2.GetFeatureAll();
+
+			poolLayer2.SetInput(conv2features);
+			poolLayer2.ForwardPropagation();
+			std::vector<Neural::Feature> pool2features = poolLayer2.GetFeatureAll();
+
+			process.SetInput(pool2features);
 			process.Process();
 			std::vector<Neural::Feature> processOutput = process.GetOutputAll();
 
@@ -121,9 +152,10 @@ int main(int argc, char ** argv)
 
 			/***************************************************************************************************/
 			// Backward Propagation
-			MathLib::Vector<double> lable(1);
-			lable(0) = sample.second.at(0);
-			MathLib::Vector<double> error(1);
+			MathLib::Vector<double> lable(2);
+			for (size_t i = 0; i < 2; i++)
+				lable(i) = sample.second.at(i);
+			MathLib::Vector<double> error(2);
 			error = outputLayer.GetOutput() - lable;
 			MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
 
@@ -144,13 +176,21 @@ int main(int argc, char ** argv)
 			process.Deprocess();
 			std::vector<MathLib::Matrix<double>> deprocessOutput = process.GetOutputAll();
 
-			poolLayer.SetDelta(deprocessOutput);
-			poolLayer.BackwardPropagation();
-			std::vector<MathLib::Matrix<double>> pool1Delta = poolLayer.GetDelta();
+			poolLayer2.SetDelta(deprocessOutput);
+			poolLayer2.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> pool2Delta = poolLayer2.GetDelta();
 
-			convLayer.SetDelta(pool1Delta);
-			convLayer.BackwardPropagation();
-			std::vector<MathLib::Matrix<double>> conv1Delta = convLayer._derivative;
+			convLayer2.SetDelta(pool2Delta);
+			convLayer2.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> conv2Delta = convLayer2._derivative;
+
+			poolLayer1.SetDelta(conv2Delta);
+			poolLayer1.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> pool1Delta = poolLayer1.GetDelta();
+
+			convLayer1.SetDelta(pool1Delta);
+			convLayer1.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> conv1Delta = convLayer1._derivative;
 
 			/***************************************************************************************************/
 			// Updating
@@ -161,8 +201,10 @@ int main(int argc, char ** argv)
 
 			outputLayer.LossSumUpdate();
 
-			convLayer.Update();
-			poolLayer.Update();
+			convLayer1.Update();
+			poolLayer1.Update();
+			convLayer2.Update();
+			poolLayer2.Update();
 			inputLayer.Update();
 			hiddenLayer.Update();
 			outputLayer.Update();
@@ -175,18 +217,20 @@ int main(int argc, char ** argv)
 			outputLayer.LossSumClear();
 			std::cout << "Iteration : " << std::setw(3) << std::setfill('0') << iteration << " | "
 				<< "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
-				<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " | "
-				<< "Lable : " << lable(0) << " | "
-				<< "Error : " << error(0)
+				<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " , " << outputLayer.GetOutput()(1) << " | "
+				<< "Lable : " << lable(0) << " , " << lable(1) << " | "
+				<< "Error : " << error(0) << " , " << error(1)
 				<< std::endl;
 
-			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 200, 200, false);
-			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 400, 200, false);
-			Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 600, 200, false);
-			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 800, 200, true);
+			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 100, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 300, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 500, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 700, 200, true);
+			Visual::Plot2D::Plot2DMatrixVec(conv2kernals, "conv2kernals", Visual::Plot2DMode::RB, 900, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv2features, "conv2features", Visual::Plot2DMode::RB, 1100, 200, false);
+			Visual::Plot2D::Plot2DMatrixVec(pool2features, "pool2features", Visual::Plot2DMode::RB, 1300, 200, true);
 		}
 	}
-
 
 	std::cout << "Testing : " << std::endl;
 	std::cout << "Total Iteration : " << totalIteration << std::endl;
@@ -200,16 +244,25 @@ int main(int argc, char ** argv)
 
 		/***************************************************************************************************/
 		// Forward Propagation
-		convLayer.SetInput(input);
-		convLayer.ForwardPropagation();
-		std::vector<Neural::ConvKernel> conv1kernals = convLayer.GetKernelAll();
-		std::vector<Neural::ConvFeature> conv1features = convLayer.GetFeatureAll();
+		convLayer1.SetInput(input);
+		convLayer1.ForwardPropagation();
+		std::vector<Neural::ConvKernel> conv1kernals = convLayer1.GetKernelAll();
+		std::vector<Neural::ConvFeature> conv1features = convLayer1.GetFeatureAll();
 
-		poolLayer.SetInput(conv1features);
-		poolLayer.ForwardPropagation();
-		std::vector<Neural::Feature> pool1features = poolLayer.GetFeatureAll();
+		poolLayer1.SetInput(conv1features);
+		poolLayer1.ForwardPropagation();
+		std::vector<Neural::Feature> pool1features = poolLayer1.GetFeatureAll();
 
-		process.SetInput(pool1features);
+		convLayer2.SetInput(pool1features);
+		convLayer2.ForwardPropagation();
+		std::vector<Neural::ConvKernel> conv2kernals = convLayer2.GetKernelAll();
+		std::vector<Neural::ConvFeature> conv2features = convLayer2.GetFeatureAll();
+
+		poolLayer2.SetInput(conv2features);
+		poolLayer2.ForwardPropagation();
+		std::vector<Neural::Feature> pool2features = poolLayer2.GetFeatureAll();
+
+		process.SetInput(pool2features);
 		process.Process();
 		std::vector<Neural::Feature> processOutput = process.GetOutputAll();
 
@@ -232,9 +285,10 @@ int main(int argc, char ** argv)
 
 		outputLayer.SetInput(hiddenLayer.GetOutput());
 		outputLayer.ForwardPropagation();
+
 		std::cout << "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
-			<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " | "
-			<< "Lable : " << sample.second.at(0)
+			<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " , " << outputLayer.GetOutput()(1) << " | "
+			<< "Lable : " << sample.second.at(0) << " , " << sample.second.at(1) << " | "
 			<< std::endl;
 	}
 
