@@ -248,26 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\example\Rem.jpg" />
-    <Image Include="data\XO\Data\O_0.png" />
-    <Image Include="data\XO\Data\O_1.png" />
-    <Image Include="data\XO\Data\O_10.png" />
-    <Image Include="data\XO\Data\O_11.png" />
-    <Image Include="data\XO\Data\O_12.png" />
-    <Image Include="data\XO\Data\O_13.png" />
-    <Image Include="data\XO\Data\O_14.png" />
-    <Image Include="data\XO\Data\O_15.png" />
-    <Image Include="data\XO\Data\O_16.png" />
-    <Image Include="data\XO\Data\O_17.png" />
-    <Image Include="data\XO\Data\O_18.png" />
-    <Image Include="data\XO\Data\O_19.png" />
-    <Image Include="data\XO\Data\O_2.png" />
-    <Image Include="data\XO\Data\O_3.png" />
-    <Image Include="data\XO\Data\O_4.png" />
-    <Image Include="data\XO\Data\O_5.png" />
-    <Image Include="data\XO\Data\O_6.png" />
-    <Image Include="data\XO\Data\O_7.png" />
-    <Image Include="data\XO\Data\O_8.png" />
-    <Image Include="data\XO\Data\O_9.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,107 +1,107 @@
 {
-    "name": "XO Image Recognization",
+    "name": "XO Image Recognization : Train Set",
 	"class": "image_set",
 	"sample_size": 20,
 	"image_size_m": 16,
 	"image_size_n": 16,
 	"datablock": [{
 			"class": "image_set::sample",
-			"input": "\\O_0.png",
+			"input": "\\0.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_1.png",
+			"input": "\\1.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_2.png",
+			"input": "\\2.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_3.png",
+			"input": "\\3.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_4.png",
+			"input": "\\4.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_5.png",
+			"input": "\\5.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_6.png",
+			"input": "\\6.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_7.png",
+			"input": "\\7.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_8.png",
+			"input": "\\8.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_9.png",
+			"input": "\\9.png",
 			"lable": [0]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_10.png",
+			"input": "\\10.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_11.png",
+			"input": "\\11.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_12.png",
+			"input": "\\12.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_13.png",
+			"input": "\\13.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_14.png",
+			"input": "\\14.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_15.png",
+			"input": "\\15.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_16.png",
+			"input": "\\16.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_17.png",
+			"input": "\\17.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_18.png",
+			"input": "\\18.png",
 			"lable": [1]
 		},
 		{
 			"class": "image_set::sample",
-			"input": "\\O_19.png",
+			"input": "\\19.png",
 			"lable": [1]
 		}
 	]

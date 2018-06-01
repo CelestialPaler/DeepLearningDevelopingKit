@@ -48,6 +48,7 @@ namespace Data
 
 		void LoadFromJson(const std::string & _filePath);
 		void AddToSet(const Sample & _sample);
+		inline const size_t GetSampleSize(void) const { return this->sampleSize; }
 
 	public:
 
@@ -95,6 +96,7 @@ namespace Data
 		const Sample GetBatch(void) const;
 		const Sample GetRandomSample(void) const;
 		const Sample GetSample(const size_t _index) const;
+		inline const size_t GetSampleSize(void) const { return this->sampleSize; }
 
 	public:
 

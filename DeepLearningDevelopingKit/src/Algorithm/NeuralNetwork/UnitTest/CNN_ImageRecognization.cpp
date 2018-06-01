@@ -12,8 +12,11 @@
 
 int main(int argc, char ** argv)
 {
-	Data::ImageSet XOImageSet;
-	XOImageSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\Data");
+	Data::ImageSet XOImageTrainSet;
+	XOImageTrainSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\TrainSet");
+
+	Data::ImageSet XOImageTestSet;
+	XOImageTestSet.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\XO\\TestSet");
 
 	unsigned kernalNum = 5;
 
@@ -69,13 +72,13 @@ int main(int argc, char ** argv)
 	outputLayer.SetActivationFunction(ActivationFunction::Sigmoid);
 	outputLayer.SetLossFunction(LossFunction::MES);
 
-	int totalIteration = 50;
+	int totalIteration = 100;
 
 	for (size_t iteration = 0; iteration < totalIteration; iteration++)
 	{
-		for (size_t ID = 0; ID < 20; ID++)
+		for (size_t ID = 0; ID < XOImageTrainSet.GetSampleSize(); ID++)
 		{
-			auto sample = XOImageSet.GetRandomSample();
+			auto sample = XOImageTrainSet.GetRandomSample();
 
 			std::vector<MathLib::Matrix<double>> input;
 			input.clear();
@@ -172,7 +175,7 @@ int main(int argc, char ** argv)
 			outputLayer.LossSumClear();
 			std::cout << "Iteration : " << std::setw(3) << std::setfill('0') << iteration << " | "
 				<< "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
-				<< "Predict : " << outputLayer.GetOutput()(0) << " | "
+				<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " | "
 				<< "Lable : " << lable(0) << " | "
 				<< "Error : " << error(0)
 				<< std::endl;
@@ -187,9 +190,9 @@ int main(int argc, char ** argv)
 
 	std::cout << "Testing : " << std::endl;
 	std::cout << "Total Iteration : " << totalIteration << std::endl;
-	for (size_t ID = 0; ID < 20; ID++)
+	for (size_t ID = 0; ID < XOImageTestSet.GetSampleSize(); ID++)
 	{
-		auto sample = XOImageSet.GetBatch();
+		auto sample = XOImageTestSet.GetBatch();
 
 		std::vector<MathLib::Matrix<double>> input;
 		input.clear();
@@ -230,15 +233,10 @@ int main(int argc, char ** argv)
 		outputLayer.SetInput(hiddenLayer.GetOutput());
 		outputLayer.ForwardPropagation();
 		std::cout << "ID : " << std::setw(3) << std::setfill('0') << ID << " | "
-			<< "Predict : " << outputLayer.GetOutput()(0) << " | "
+			<< "Predict : " << std::fixed << std::setprecision(3) << outputLayer.GetOutput()(0) << " | "
 			<< "Lable : " << sample.second.at(0)
 			<< std::endl;
 	}
-
-
-
-
-
 
 	system("pause");
 	return 0;
