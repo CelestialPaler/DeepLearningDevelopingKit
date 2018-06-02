@@ -61,6 +61,14 @@ namespace MathLib
 		// Copy constructor
 		Matrix(const Matrix& _mat);
 
+		~Matrix() {
+			for (size_t i = 0; i < _data.size(); i++)
+			{
+				_data.at(i).clear();
+			}
+			_data.clear();
+		}
+
 	public: // Initializing
 
 		// Initializing function

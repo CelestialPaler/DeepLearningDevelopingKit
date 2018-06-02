@@ -153,7 +153,7 @@ void Neural::ConvolutionalLayer::SetActivationFunction(const ActivationFunction 
 	}
 }
 
-MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::ConvolutionCal(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::ConvolutionCal(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2)
 {
 	MathLib::Matrix<Neural::ElemType> temp(_inputSize.m, _inputSize.n);
 
@@ -172,22 +172,24 @@ MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::ConvolutionCal(con
 	return temp;
 }
 
-MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Convolution(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2)
 {
 	return Correlation(_mat1, Rot180(_mat2));
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::ConvolutionSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n)
+Neural::ElemType Neural::ConvolutionalLayer::ConvolutionSum(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2, const size_t _m, const size_t _n)
 {
-	return CorrelationSum(_mat1, Rot180(_mat2), _m, _n);
+	MathLib::Matrix<Neural::ElemType> temp = Rot180(_mat2);
+	Neural::ElemType result = CorrelationSum(_mat1, temp, _m, _n);
+	return result;
 }
 
-MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Correlation(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2)
+MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Correlation(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2)
 {
 	return Hadamard(_mat1, _mat2);
 }
 
-Neural::ElemType Neural::ConvolutionalLayer::CorrelationSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n)
+Neural::ElemType Neural::ConvolutionalLayer::CorrelationSum(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2, const size_t _m, const size_t _n)
 {
 	ElemType sum = 0;
 	for (size_t i = 0; i < _mat2.ColumeSize(); i++)
@@ -207,15 +209,14 @@ MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Hadamard(const Mat
 
 MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Rot180(const MathLib::Matrix<ElemType>& _mat)
 {
-	size_t sizeM = _mat.ColumeSize();
-	size_t sizeN = _mat.RowSize();
-	MathLib::Matrix<ElemType> temp(sizeM, sizeN);
-	for (size_t i = 0; i < sizeM; i++)
-	{
-		for (size_t j = 0; j < sizeN; j++)
-		{
-			temp(i, j) = _mat(sizeM - 1 - i, sizeN - 1 - j);
-		}
-	}
+	MathLib::Matrix<ElemType>temp(5, 5);
+	//for (size_t i = 0; i < _mat.ColumeSize(); i++)
+	//{
+	//	for (size_t j = 0; j <  _mat.RowSize(); j++)
+	//	{
+	//		temp(i, j) = _mat(_mat.ColumeSize() - 1 - i, _mat.RowSize() - 1 - j);
+	//	}
+	//}
 	return temp;
 }
+

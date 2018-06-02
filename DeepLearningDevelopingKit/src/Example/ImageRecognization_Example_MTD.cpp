@@ -4,7 +4,8 @@
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
-#define CNNImageRecognization
+
+//#define CNNImageRecognization
 
 #ifdef CNNImageRecognization
 #include "..\\Algorithm\NeuralNetwork\NeuralLib.h"

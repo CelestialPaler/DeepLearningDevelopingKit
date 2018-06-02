@@ -140,17 +140,17 @@ namespace Neural
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
 		// ConvolutionCal
-		MathLib::Matrix<ElemType> ConvolutionCal(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+		MathLib::Matrix<ElemType> ConvolutionCal(const MathLib::Matrix<ElemType> & _mat1, const MathLib::Matrix<ElemType> &  _mat2);
 
 	private: //  Math stuff you know
 
 		// Convolution of two matrix.
-		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
-		ElemType ConvolutionSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n);
+		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2);
+		ElemType ConvolutionSum(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2, const size_t _m, const size_t _n);
 		// Cross-correlation of two matrix.
-		MathLib::Matrix<ElemType> Correlation(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+		MathLib::Matrix<ElemType> Correlation(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2);
 		// Sum of all elements of the Cross-correlation of two matrix.
-		ElemType CorrelationSum(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2, const size_t _m, const size_t _n);
+		ElemType CorrelationSum(const MathLib::Matrix<ElemType> &  _mat1, const MathLib::Matrix<ElemType> &  _mat2, const size_t _m, const size_t _n);
 
 		// Rotate a Matrix with 180° 
 		/// Cross-correlation(A, B) = rot180°(A * rot180°(B))
