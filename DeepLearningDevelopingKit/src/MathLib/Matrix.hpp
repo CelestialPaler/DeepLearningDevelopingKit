@@ -126,9 +126,6 @@ namespace MathLib
 		const Matrix<T> Adjoint(void) const;
 		// Inverse matrix
 		const Matrix<T> Inverse(void) const;
-		//// Represent a Matrix in form of Vector.
-		///// A Vector is interpreted as a 1xn Martix.
-		//Vector<T> Vectorfy(void);
 
 	private: // Inner woking functions
 
@@ -612,18 +609,6 @@ namespace MathLib
 		tempMat = self.Adjoint() * (1 / self.Determinant());
 		return tempMat;
 	}
-
-	//template<class T>
-	//inline Vector<T> Matrix<T>::Vectorfy(void)
-	//{
-	//	const Vector<T> & self = *this;
-	//	Vector<T> temp(m);
-	//	for (size_t i = 0; i < m; i++)
-	//	{
-	//		temp(i) = self(i, 0);
-	//	}
-	//	return temp;
-	//}
 
 	template<class T>
 	inline const T MathLib::Matrix<T>::Cofactor(const size_t _i, const size_t _j) const
