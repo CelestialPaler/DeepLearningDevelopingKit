@@ -318,24 +318,21 @@ namespace MathLib
 		case VectorType::Zero:
 			for (size_t j = 0; j < _n; j++)
 			{
-				T tempElem = *new T;
-				tempElem = 0.f;
+				T tempElem = 0.f;
 				_data.push_back(tempElem);
 			}
 			break;
 		case VectorType::Ones:
 			for (size_t j = 0; j < _n; j++)
 			{
-				T tempElem = *new T;
-				tempElem = 1.f;
+				T tempElem = 1.f;
 				_data.push_back(tempElem);
 			}
 			break;
 		case VectorType::Random:
 			for (size_t j = 0; j < _n; j++)
 			{
-				T tempElem = *new T;
-				tempElem = Random();
+				T tempElem = Random();
 				_data.push_back(tempElem);
 			}
 			break;

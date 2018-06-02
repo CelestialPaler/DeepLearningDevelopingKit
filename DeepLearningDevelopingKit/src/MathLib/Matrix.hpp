@@ -391,8 +391,7 @@ namespace MathLib
 				std::vector<T> tempVec;
 				for (size_t j = 0; j < _n; j++)
 				{
-					T tempElem = *new T;
-					tempElem = 0.f;
+					T tempElem = 0.f;
 					tempVec.push_back(tempElem);
 				}
 				_data.push_back(tempVec);
@@ -404,8 +403,7 @@ namespace MathLib
 				std::vector<T> tempVec;
 				for (size_t j = 0; j < _n; j++)
 				{
-					T tempElem = *new T;
-					tempElem = 1.f;
+					T tempElem = 1.f;
 					tempVec.push_back(tempElem);
 				}
 				_data.push_back(tempVec);
@@ -417,8 +415,7 @@ namespace MathLib
 				std::vector<T> tempVec;
 				for (size_t j = 0; j < _n; j++)
 				{
-					T tempElem = *new T;
-					tempElem = Random();
+					T tempElem = Random();
 					tempVec.push_back(tempElem);
 				}
 				_data.push_back(tempVec);
@@ -430,7 +427,7 @@ namespace MathLib
 				std::vector<T> tempVec;
 				for (size_t j = 0; j < _n; j++)
 				{
-					T tempElem = *new T;
+					T tempElem;
 					if (i == j)
 						tempElem = 1.f;
 					else

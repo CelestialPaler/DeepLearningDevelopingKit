@@ -129,7 +129,7 @@ int main(int argc, char ** argv)
 
 	/***************************************************************************************************/
 	// Start Training
-	int totalTrainIteration = 10;
+	int totalTrainIteration = 100;
 	for (size_t iteration = 0; iteration < totalTrainIteration; iteration++)
 	{
 		for (size_t ID = 0; ID < TrainSet.GetSampleSize(); ID++)
@@ -144,113 +144,113 @@ int main(int argc, char ** argv)
 			// convLayer 1
 			convLayer1.SetInput(input);
 			convLayer1.ForwardPropagation();
-			//std::vector<Neural::ConvKernel> conv1kernals = convLayer1.GetKernelAll();
-			//std::vector<Neural::ConvFeature> conv1features = convLayer1.GetFeatureAll();
-			//// poolLayer 1
-			//poolLayer1.SetInput(conv1features);
-			//poolLayer1.ForwardPropagation();
-			//std::vector<Neural::Feature> pool1features = poolLayer1.GetFeatureAll();
-			//// processLayer 1
-			//process1.SetInput(pool1features);
-			//process1.Process();
-			//std::vector<Neural::Feature> process1output = process1.GetOutputAll();
-			//// convLayer 2
-			//convLayer2.SetInput(process1output);
-			//convLayer2.ForwardPropagation();
-			//std::vector<Neural::ConvKernel> conv2kernals = convLayer2.GetKernelAll();
-			//std::vector<Neural::ConvFeature> conv2features = convLayer2.GetFeatureAll();
-			//// poolLayer 2
-			//poolLayer2.SetInput(conv2features);
-			//poolLayer2.ForwardPropagation();
-			//std::vector<Neural::Feature> pool2features = poolLayer2.GetFeatureAll();
-			//// processLayer 2
-			//process2.SetInput(pool2features);
-			//process2.Process();
-			//std::vector<Neural::Feature> process2output = process2.GetOutputAll();
-			//// serialLayer
-			//serial.SetDeserializedMat(process2output);
-			//MathLib::Vector<double> serializedVec = Matrix2Vector(serial.Serialize());
-			//// inputLayer
-			//inputLayer.SetInput(serializedVec);
-			//inputLayer.ForwardPropagation();
-			//MathLib::Vector<double> inputout = inputLayer.GetOutput();
-			//// hiddenLayer 1
-			//hiddenLayer1.SetInput(inputout);
-			//hiddenLayer1.ForwardPropagation();
-			//MathLib::Vector<double> hidden1output = hiddenLayer1.GetOutput();
-			//// hiddenLayer 2
-			//hiddenLayer2.SetInput(hidden1output);
-			//hiddenLayer2.ForwardPropagation();
-			//MathLib::Vector<double> hidden2output = hiddenLayer2.GetOutput();
-			//// outputLayer
-			//outputLayer.SetInput(hidden2output);
-			//outputLayer.ForwardPropagation();
-			//MathLib::Vector<double> output = outputLayer.GetOutput();
+			std::vector<Neural::ConvKernel> conv1kernals = convLayer1.GetKernelAll();
+			std::vector<Neural::ConvFeature> conv1features = convLayer1.GetFeatureAll();
+			// poolLayer 1
+			poolLayer1.SetInput(conv1features);
+			poolLayer1.ForwardPropagation();
+			std::vector<Neural::Feature> pool1features = poolLayer1.GetFeatureAll();
+			// processLayer 1
+			process1.SetInput(pool1features);
+			process1.Process();
+			std::vector<Neural::Feature> process1output = process1.GetOutputAll();
+			// convLayer 2
+			convLayer2.SetInput(process1output);
+			convLayer2.ForwardPropagation();
+			std::vector<Neural::ConvKernel> conv2kernals = convLayer2.GetKernelAll();
+			std::vector<Neural::ConvFeature> conv2features = convLayer2.GetFeatureAll();
+			// poolLayer 2
+			poolLayer2.SetInput(conv2features);
+			poolLayer2.ForwardPropagation();
+			std::vector<Neural::Feature> pool2features = poolLayer2.GetFeatureAll();
+			// processLayer 2
+			process2.SetInput(pool2features);
+			process2.Process();
+			std::vector<Neural::Feature> process2output = process2.GetOutputAll();
+			// serialLayer
+			serial.SetDeserializedMat(process2output);
+			MathLib::Vector<double> serializedVec = Matrix2Vector(serial.Serialize());
+			// inputLayer
+			inputLayer.SetInput(serializedVec);
+			inputLayer.ForwardPropagation();
+			MathLib::Vector<double> inputout = inputLayer.GetOutput();
+			// hiddenLayer 1
+			hiddenLayer1.SetInput(inputout);
+			hiddenLayer1.ForwardPropagation();
+			MathLib::Vector<double> hidden1output = hiddenLayer1.GetOutput();
+			// hiddenLayer 2
+			hiddenLayer2.SetInput(hidden1output);
+			hiddenLayer2.ForwardPropagation();
+			MathLib::Vector<double> hidden2output = hiddenLayer2.GetOutput();
+			// outputLayer
+			outputLayer.SetInput(hidden2output);
+			outputLayer.ForwardPropagation();
+			MathLib::Vector<double> output = outputLayer.GetOutput();
 			/***************************************************************************************************/
 
-			//// Initialzing lable
-			//MathLib::Vector<double> lable = sample.second;
+			// Initialzing lable
+			MathLib::Vector<double> lable = sample.second;
 
-			//// Calculating Error
-			//MathLib::Vector<double> error = output - lable;
+			// Calculating Error
+			MathLib::Vector<double> error = output - lable;
 
-			///***************************************************************************************************/
-			//// Backward Propagation
-			//MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
-			//// hiddenLayer 1
-			//MathLib::Vector<double> hiddenLayer2Delta = hiddenLayer2.BackwardPropagation(outputLayerDelta);
-			//// hiddenLayer 2
-			//MathLib::Vector<double> hiddenLayer1Delta = hiddenLayer1.BackwardPropagation(hiddenLayer2Delta);
-			//// outputLayer
-			//MathLib::Vector<double> inputLayerDelta = inputLayer.BackwardPropagation(hiddenLayer1Delta);
-			//// serialLayer
-			//serial.SetSerializedMat(Vector2Matrix(inputLayerDelta));
-			//std::vector<MathLib::Matrix<double>> deserialized = serial.Deserialize();
-			//// process 2
-			//process2.SetInput(deserialized);
-			//process2.Deprocess();
-			//std::vector<MathLib::Matrix<double>> deprocess2output = process2.GetOutputAll();
-			//// poolLayer 2
-			//poolLayer2.SetDelta(deprocess2output);
-			//poolLayer2.BackwardPropagation();
-			//std::vector<MathLib::Matrix<double>> pool2Delta = poolLayer2.GetDelta();
-			//// convLayer 2
-			//convLayer2.SetDelta(pool2Delta);
-			//convLayer2.BackwardPropagation();
-			//std::vector<MathLib::Matrix<double>> conv2Delta = convLayer2.GetDelta();
-			//// process 1
-			//process1.SetInput(conv2Delta);
-			//process1.Deprocess();
-			//std::vector<MathLib::Matrix<double>> deprocess1output = process1.GetOutputAll();
-			//// poolLayer 1
-			//poolLayer1.SetDelta(deprocess1output);
-			//poolLayer1.BackwardPropagation();
-			//std::vector<MathLib::Matrix<double>> pool1Delta = poolLayer1.GetDelta();
-			//// convLayer 1
-			//convLayer1.SetDelta(pool1Delta);
-			//convLayer1.BackwardPropagation();
-			//std::vector<MathLib::Matrix<double>> conv1Delta = convLayer1.GetDelta();
-			///***************************************************************************************************/
+			/***************************************************************************************************/
+			// Backward Propagation
+			MathLib::Vector<double> outputLayerDelta = outputLayer.BackwardPropagation(lable);
+			// hiddenLayer 1
+			MathLib::Vector<double> hiddenLayer2Delta = hiddenLayer2.BackwardPropagation(outputLayerDelta);
+			// hiddenLayer 2
+			MathLib::Vector<double> hiddenLayer1Delta = hiddenLayer1.BackwardPropagation(hiddenLayer2Delta);
+			// outputLayer
+			MathLib::Vector<double> inputLayerDelta = inputLayer.BackwardPropagation(hiddenLayer1Delta);
+			// serialLayer
+			serial.SetSerializedMat(Vector2Matrix(inputLayerDelta));
+			std::vector<MathLib::Matrix<double>> deserialized = serial.Deserialize();
+			// process 2
+			process2.SetInput(deserialized);
+			process2.Deprocess();
+			std::vector<MathLib::Matrix<double>> deprocess2output = process2.GetOutputAll();
+			// poolLayer 2
+			poolLayer2.SetDelta(deprocess2output);
+			poolLayer2.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> pool2Delta = poolLayer2.GetDelta();
+			// convLayer 2
+			convLayer2.SetDelta(pool2Delta);
+			convLayer2.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> conv2Delta = convLayer2.GetDelta();
+			// process 1
+			process1.SetInput(conv2Delta);
+			process1.Deprocess();
+			std::vector<MathLib::Matrix<double>> deprocess1output = process1.GetOutputAll();
+			// poolLayer 1
+			poolLayer1.SetDelta(deprocess1output);
+			poolLayer1.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> pool1Delta = poolLayer1.GetDelta();
+			// convLayer 1
+			convLayer1.SetDelta(pool1Delta);
+			convLayer1.BackwardPropagation();
+			std::vector<MathLib::Matrix<double>> conv1Delta = convLayer1.GetDelta();
+			/***************************************************************************************************/
 
 
-			///***************************************************************************************************/
-			//// Updating
-			//int batchsize = TrainSet.GetSampleSize();
-			//convLayer1.BatchDeltaSumUpdate(batchsize);
-			//convLayer2.BatchDeltaSumUpdate(batchsize);
-			//hiddenLayer1.BatchDeltaSumUpdate(batchsize);
-			//hiddenLayer2.BatchDeltaSumUpdate(batchsize);
-			//outputLayer.BatchDeltaSumUpdate(batchsize);
+			/***************************************************************************************************/
+			// Updating
+			int batchsize = TrainSet.GetSampleSize();
+			convLayer1.BatchDeltaSumUpdate(batchsize);
+			convLayer2.BatchDeltaSumUpdate(batchsize);
+			hiddenLayer1.BatchDeltaSumUpdate(batchsize);
+			hiddenLayer2.BatchDeltaSumUpdate(batchsize);
+			outputLayer.BatchDeltaSumUpdate(batchsize);
 
-			//outputLayer.LossSumUpdate();
+			outputLayer.LossSumUpdate();
 
-			//Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 0, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 350, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 400, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 750, 0, true);
-			//Visual::Plot2D::Plot2DMatrixVec(conv2kernals, "conv2kernals", Visual::Plot2DMode::RB, 900, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv2features, "conv2features", Visual::Plot2DMode::RB, 1100, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(pool2features, "pool2features", Visual::Plot2DMode::RB, 1300, 0, true);
+			Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 0, 0, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 350, 0, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 400, 0, false);
+			Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 750, 0, true);
+			Visual::Plot2D::Plot2DMatrixVec(conv2kernals, "conv2kernals", Visual::Plot2DMode::RB, 900, 0, false);
+			Visual::Plot2D::Plot2DMatrixVec(conv2features, "conv2features", Visual::Plot2DMode::RB, 1100, 0, false);
+			Visual::Plot2D::Plot2DMatrixVec(pool2features, "pool2features", Visual::Plot2DMode::RB, 1300, 0, true);
 
 		}
 			

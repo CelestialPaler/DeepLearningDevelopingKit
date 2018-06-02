@@ -209,14 +209,16 @@ MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Hadamard(const Mat
 
 MathLib::Matrix<Neural::ElemType> Neural::ConvolutionalLayer::Rot180(const MathLib::Matrix<ElemType>& _mat)
 {
-	MathLib::Matrix<ElemType>temp(5, 5);
-	//for (size_t i = 0; i < _mat.ColumeSize(); i++)
-	//{
-	//	for (size_t j = 0; j <  _mat.RowSize(); j++)
-	//	{
-	//		temp(i, j) = _mat(_mat.ColumeSize() - 1 - i, _mat.RowSize() - 1 - j);
-	//	}
-	//}
+	size_t sizeM = _mat.ColumeSize();
+	size_t sizeN = _mat.RowSize();
+	MathLib::Matrix<ElemType>temp(sizeM, sizeN);
+	for (size_t i = 0; i < sizeM; i++)
+	{
+		for (size_t j = 0; j < sizeN; j++)
+		{
+			temp(i, j) = _mat(sizeM - 1 - i, sizeN - 1 - j);
+		}
+	}
 	return temp;
 }
 
