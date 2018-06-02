@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-//#define CNNImageRecognization
+#define CNNImageRecognization
 
 #ifdef CNNImageRecognization
 #include "..\\Algorithm\NeuralNetwork\NeuralLib.h"
@@ -21,7 +21,7 @@ std::mutex workQueueMutex;
 std::mutex plotMutex;
 bool threadLifeFlag;
 
-static void trainThread(
+static void trainThreadFunc(
 	Neural::ConvolutionalLayer convLayer1,
 	Neural::PoolingLayer poolLayer1,
 	Neural::ProcessLayer process1,
@@ -42,6 +42,7 @@ static void trainThread(
 
 	while (threadLifeFlag)
 	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		workQueueMutex.lock();
 		if (!workQueue.empty())
 		{
@@ -155,26 +156,17 @@ static void trainThread(
 
 			/***************************************************************************************************/
 			// Updating
-			int batchsize = trainSet.GetSampleSize();
-			convLayer1.BatchDeltaSumUpdate(batchsize);
-			convLayer2.BatchDeltaSumUpdate(batchsize);
-			hiddenLayer1.BatchDeltaSumUpdate(batchsize);
-			hiddenLayer2.BatchDeltaSumUpdate(batchsize);
-			outputLayer.BatchDeltaSumUpdate(batchsize);
 
-			outputLayer.LossSumUpdate();
-
-			plotMutex.lock();
-			//Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 0, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 350, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 400, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 750, 0, true);
-			//Visual::Plot2D::Plot2DMatrixVec(conv2kernals, "conv2kernals", Visual::Plot2DMode::RB, 900, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(conv2features, "conv2features", Visual::Plot2DMode::RB, 1100, 0, false);
-			//Visual::Plot2D::Plot2DMatrixVec(pool2features, "pool2features", Visual::Plot2DMode::RB, 1300, 0, true);
-			plotMutex.unlock();
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
+			//plotMutex.lock();
+			//std::cout << "ID : " << ID << std::endl;
+			////Visual::Plot2D::Plot2DMatrixVec(input, "input", Visual::Plot2DMode::RB, 0, 0, false);
+			////Visual::Plot2D::Plot2DMatrixVec(conv1kernals, "conv1kernals", Visual::Plot2DMode::RB, 350, 0, false);
+			////Visual::Plot2D::Plot2DMatrixVec(conv1features, "conv1features", Visual::Plot2DMode::RB, 400, 0, false);
+			////Visual::Plot2D::Plot2DMatrixVec(pool1features, "pool1features", Visual::Plot2DMode::RB, 750, 0, true);
+			////Visual::Plot2D::Plot2DMatrixVec(conv2kernals, "conv2kernals", Visual::Plot2DMode::RB, 900, 0, false);
+			////Visual::Plot2D::Plot2DMatrixVec(conv2features, "conv2features", Visual::Plot2DMode::RB, 1100, 0, false);
+			////Visual::Plot2D::Plot2DMatrixVec(pool2features, "pool2features", Visual::Plot2DMode::RB, 1300, 0, true);
+			//plotMutex.unlock();
 			workFlag = false;
 		}
 	}
@@ -297,6 +289,10 @@ int main(int argc, char ** argv)
 	hiddenLayer1.SetLearnRate(globalRate);
 	hiddenLayer2.SetLearnRate(globalRate);
 
+	std::vector<Neural::ConvKernel> kernel1DeltaSum;
+	std::vector<Neural::ConvKernel> kernel2DeltaSum;
+	std::vector<double> biasDeltaSum;
+
 	/***************************************************************************************************/
 	// Start Training
 	int totalTrainIteration = 100;
@@ -309,7 +305,7 @@ int main(int argc, char ** argv)
 		for (size_t i = 0; i < 8; i++)
 		{
 			std::thread * tempthread = new std::thread(
-				trainThread,
+				trainThreadFunc,
 				convLayer1,
 				poolLayer1,
 				processLayer1,
@@ -334,11 +330,14 @@ int main(int argc, char ** argv)
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		threadLifeFlag = false;
-		std::this_thread::sleep_for(std::chrono::seconds(5));
+		for (std::thread * thr : threadpool)
+			thr->join();
 
 		/***************************************************************************************************/
 		// Updating
 		convLayer1.Update();
+		MathLib::Matrix<double> temp = convLayer1.GetKernel(0);
+		std::cout << temp << std::endl;
 		poolLayer1.Update();
 		convLayer2.Update();
 		poolLayer2.Update();

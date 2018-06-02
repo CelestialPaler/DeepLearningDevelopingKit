@@ -117,7 +117,7 @@ void Neural::ConvolutionalLayer::BatchDeltaSumUpdate(const size_t _batchSize)
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
 		_convNodes.at(k).kernelDeltaSum += _convNodes.at(k).kernelDelta * (1 / (double)_batchSize);
-		_convNodes.at(k).biasDeltaSum += _convNodes.at(k).biasDelta * (1 / (double)_batchSize);
+		_convNodes.at(k).biasDeltaSum+= _convNodes.at(k).biasDelta * (1 / (double)_batchSize);
 	}
 }
 

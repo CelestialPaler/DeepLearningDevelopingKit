@@ -59,6 +59,8 @@ namespace Neural
 			kernelDeltaSum.Init(_kernelM, _kernelN, MathLib::MatrixType::Zero);
 			feature.Init(_featureM, _featureN, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
+			biasDelta = 0;
+			biasDeltaSum = 0;
 		}
 
 		ConvNode(const MathLib::Size _kernelSize, const MathLib::Size _featureSize) {
@@ -67,6 +69,8 @@ namespace Neural
 			kernelDeltaSum.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Zero);
 			feature.Init(_featureSize.m, _featureSize.n, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
+			biasDelta = 0;
+			biasDeltaSum = 0;
 		}
 
 		ConvKernel kernel;
@@ -75,11 +79,9 @@ namespace Neural
 
 		ConvKernel kernelDelta;
 		ElemType biasDelta;
-		ConvFeature featureDelta;
 
 		ConvKernel kernelDeltaSum;
 		ElemType biasDeltaSum;
-		ConvFeature featureDeltaSum;
 	};
 
 	/***************************************************************************************************/
