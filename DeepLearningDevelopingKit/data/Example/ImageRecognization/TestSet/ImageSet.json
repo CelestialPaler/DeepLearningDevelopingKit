@@ -4,6 +4,7 @@
 	"sample_size": 25,
 	"image_size_m": 16,
 	"image_size_n": 16,
+	"lable_size": 2,
 	"datablock": [{
 			"class": "image_set::sample",
 			"input": "\\0.png",

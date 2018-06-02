@@ -1,14 +1,110 @@
 {
-  "name": "XO Image Recognization : Train Set",
+  "name": "Class1O Image Recognization : Train Set",
   "class": "image_set",
-  "sample_size": 1,
+  "sample_size": 20,
   "image_size_m": 32,
   "image_size_n": 32,
+  "lable_size": 4,
   "datablock": [
     {
       "class": "image_set::sample",
-      "input": "\\0.png",
-      "lable": [ 0, 0, 0, 0 ]
+      "input": "\\Class1_0.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_1.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_2.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_3.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_4.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_5.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_6.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_7.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_8.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class1_9.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_0.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_1.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_2.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_3.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_4.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_5.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_6.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_7.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_8.png",
+      "lable": [ 0, 0, 0, 1 ]
+    },
+    {
+      "class": "image_set::sample",
+      "input": "\\Class2_9.png",
+      "lable": [ 0, 0, 0, 1 ]
     }
   ]
 }
