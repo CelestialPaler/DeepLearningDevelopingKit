@@ -1,0 +1,133 @@
+{
+    "name": "XO Image Recognization : Test Set",
+	"class": "image_set",
+	"sample_size": 25,
+	"image_size_m": 16,
+	"image_size_n": 16,
+	"datablock": [{
+			"class": "image_set::sample",
+			"input": "\\0.png",
+			"lable": [0, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\1.png",
+			"lable": [0, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\2.png",
+			"lable": [0, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\3.png",
+			"lable": [0, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\4.png",
+			"lable": [0, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\5.png",
+			"lable": [0, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\6.png",
+			"lable": [0, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\7.png",
+			"lable": [0, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\8.png",
+			"lable": [0, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\9.png",
+			"lable": [0, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\10.png",
+			"lable": [1, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\11.png",
+			"lable": [1, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\12.png",
+			"lable": [1, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\13.png",
+			"lable": [1, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\14.png",
+			"lable": [1, 0]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\15.png",
+			"lable": [1, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\16.png",
+			"lable": [1, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\17.png",
+			"lable": [1, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\18.png",
+			"lable": [1, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\19.png",
+			"lable": [1, 1]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\20.png",
+			"lable": [6, 6]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\21.png",
+			"lable": [6, 6]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\22.png",
+			"lable": [6, 6]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\23.png",
+			"lable": [6, 6]
+		},
+		{
+			"class": "image_set::sample",
+			"input": "\\24.png",
+			"lable": [6, 6]
+		}
+	]
+}
