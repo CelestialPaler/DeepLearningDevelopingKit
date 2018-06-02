@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************/
 /*                                               Deep Learning Developing Kit                                                   */
 /*								        		 Convolutional Neural Network     	                                          */
-/*								        		 	    Convolutional Layer     	                                                      */
+/*								        		 	    Convolutional Layer     	                                                   */
 /*                                                   www.tianshicangxie.com                                                        */
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
@@ -110,7 +110,7 @@ namespace Neural
 		void SetInput(const std::vector<MathLib::Matrix<ElemType>> &  _input);
 		// Set the delta propagate back from next layer.
 		void SetDelta(const std::vector<MathLib::Matrix<ElemType>> & _delta);
-		// Set the Learn Rate of the ConvLayer.
+		// Set the learn rate of the ConvLayer.
 		void SetLearnRate(const double _learnRate);
 
 	public: // BackPropagation Algorithm
@@ -122,15 +122,14 @@ namespace Neural
 		// Update function
 		void Update(void);
 
-	private: // 
+	private: //  Inner working function
 
 		// Set the activation function of the layer.
 		void SetActivationFunction(const ActivationFunction _function);
-
-	private:
-
 		// ConvolutionCal
 		MathLib::Matrix<ElemType> ConvolutionCal(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
+
+	private: //  Math stuff you know
 
 		// Convolution of two matrix.
 		MathLib::Matrix<ElemType> Convolution(const MathLib::Matrix<ElemType> _mat1, const MathLib::Matrix<ElemType> _mat2);
@@ -179,7 +178,8 @@ namespace Neural
 		std::vector<MathLib::Matrix<ElemType>> _derivativeLastLayer;
 
 		// Learning rate
-		double learnRate = 0.001 * 0.001 * 0.001;
+		/// Default value is 1
+		double learnRate = 1;
 
 		// Activation Function
 		ElemType(*activationFunction)(ElemType x);

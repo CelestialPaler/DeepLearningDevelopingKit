@@ -173,8 +173,8 @@
     <ClInclude Include="src\Algorithm\MatrixAnalysis\LUD.hpp" />
     <ClInclude Include="src\Algorithm\MatrixAnalysis\QRD.hpp" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ActivationFunction.h" />
-    <ClInclude Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Layer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Module.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Node.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.h" />
@@ -182,6 +182,7 @@
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PaddingLayer.h" />
+    <ClInclude Include="src\Algorithm\NeuralNetwork\Iterator\Iterator.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\LossFunction.h" />
     <ClInclude Include="src\Algorithm\NeuralNetwork\NeuralLib.h" />
     <ClInclude Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.h" />
@@ -208,26 +209,26 @@
     <ClInclude Include="src\Visualizer\Visualize.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Layer.cpp" />
+    <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Module.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\BackpropagationNeuralNetwork\BNN_Node.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_PoolingLayer.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ProcessLayer.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_SerializeLayer.cpp" />
     <ClCompile Include="src\Algorithm\NeuralNetwork\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayer_Test.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ImageRecognization.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Img_Test.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_SerializeLayer_Test.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_Test.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_ConvolutionalLayerTest.cpp" />
-    <ClCompile Include="src\Algorithm\NeuralNetwork\UnitTest\CNN_PaddingLayerTest.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LinearRegression\LinearRegression.cpp" />
     <ClCompile Include="src\Algorithm\RegressionAnalysis\LogisticRegression\LogisticRegression.cpp" />
     <ClCompile Include="src\Algorithm\SupportedVectorMachine\SupportedVectorMachine.cpp" />
     <ClCompile Include="src\DataManager\Dataset\DataSet.cpp" />
     <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp" />
     <ClCompile Include="src\MathLib\MathLibError.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_ConvolutionalLayerTest.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_ConvolutionalLayer_Test.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_ImageRecognization.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_Img_Test.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_PaddingLayerTest.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_SerializeLayer_Test.cpp" />
+    <ClCompile Include="src\UnitTest\CNN_Test.cpp" />
     <ClCompile Include="src\UnitTest\ConvNN_test.cpp" />
     <ClCompile Include="src\UnitTest\DataSet_test.cpp" />
     <ClCompile Include="src\UnitTest\JsonHandler_test.cpp" />

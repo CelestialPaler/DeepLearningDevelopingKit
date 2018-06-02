@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#include "BNN.h"
+#include "BNN_Module.h"
 
 Neural::BNN::BNN(void)
 {

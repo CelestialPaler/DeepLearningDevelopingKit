@@ -12,7 +12,7 @@
 #ifdef NeuralNetwork
 #include "BackpropagationNeuralNetwork\BNN_Node.h"
 #include "BackpropagationNeuralNetwork\BNN_Layer.h"
-#include "BackpropagationNeuralNetwork\BNN.h"
+#include "BackpropagationNeuralNetwork\BNN_Module.h"
 #endif // NeuralNetwork
 
 #ifdef ConvolutionalNeuralNetwork
