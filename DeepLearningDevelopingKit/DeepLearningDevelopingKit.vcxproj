@@ -224,6 +224,7 @@
     <ClCompile Include="src\DataManager\Dataset\DataSet.cpp" />
     <ClCompile Include="src\DataManager\SaveLoad\Saver.cpp" />
     <ClCompile Include="src\Example\ImageRecognization_Example.cpp" />
+    <ClCompile Include="src\Example\ImageRecognization_Example_MTD.cpp" />
     <ClCompile Include="src\MathLib\MathLibError.cpp" />
     <ClCompile Include="src\UnitTest\CNN_ConvolutionalLayerTest.cpp" />
     <ClCompile Include="src\UnitTest\CNN_ConvolutionalLayer_Test.cpp" />

@@ -9,7 +9,7 @@
 
 Neural::BNN::BNN(void)
 {
-
+	
 }
 
 Neural::BNN::BNN(const BNNInitor & _initor)

@@ -419,6 +419,9 @@
     <ClCompile Include="src\Example\ImageRecognization_Example.cpp">
       <Filter>src\Example</Filter>
     </ClCompile>
+    <ClCompile Include="src\Example\ImageRecognization_Example_MTD.cpp">
+      <Filter>src\Example</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt">

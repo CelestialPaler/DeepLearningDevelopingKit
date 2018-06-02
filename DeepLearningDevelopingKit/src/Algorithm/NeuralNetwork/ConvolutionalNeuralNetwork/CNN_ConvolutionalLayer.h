@@ -110,6 +110,9 @@ namespace Neural
 			return kernels;
 		}
 
+		inline const std::vector<MathLib::Matrix<ElemType>> GetDelta(void) const { return _derivative; }
+
+
 	public: // Setter
 
 		// Set the input of the ConvLayer.

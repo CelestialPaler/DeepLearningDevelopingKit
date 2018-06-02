@@ -85,7 +85,7 @@ namespace Data
 	{
 	public:
 
-		typedef std::pair<MathLib::Matrix<double>, std::vector<double>> Sample;
+		typedef std::pair<MathLib::Matrix<double>, MathLib::Vector<double>> Sample;
 
 	public:
 
@@ -110,6 +110,7 @@ namespace Data
 
 		std::string name;
 		size_t sampleSize;
+		size_t lableSize;
 
 		std::vector<Sample> _samples;
 	};

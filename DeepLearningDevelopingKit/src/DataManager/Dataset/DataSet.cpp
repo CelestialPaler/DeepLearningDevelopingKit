@@ -128,6 +128,7 @@ void Data::ImageSet::LoadFromJson(const std::string & _filePath)
 	sampleSize = jsonhandler.documentReadBuffer["sample_size"].GetUint();
 	size_t imageSizeM = jsonhandler.documentReadBuffer["image_size_m"].GetUint();
 	size_t imageSizeN = jsonhandler.documentReadBuffer["image_size_n"].GetUint();
+	lableSize = jsonhandler.documentReadBuffer["lable_size"].GetUint();
 	const rapidjson::Value& dataBlock = jsonhandler.documentReadBuffer["datablock"];
 
 	for (size_t i = 0; i < sampleSize; i++)
@@ -139,12 +140,15 @@ void Data::ImageSet::LoadFromJson(const std::string & _filePath)
 		tempMat = cv::imread(_filePath + path, cv::IMREAD_GRAYSCALE);
 		tempMat = 255 - tempMat;
 		cv::normalize(tempMat, tempMat, 0, 10, cv::NORM_MINMAX);
-		MathLib::Matrix<double> img = Visual::OpenCV::Mat2Matrix<unsigned char>(tempMat);
-		const rapidjson::Value& data2 = sample["lable"];
-		double lable1 = data2[0].GetDouble();
-		double lable2 = data2[1].GetDouble();
 
-		Sample tempSample = { img, std::vector<double>{lable1, lable2} };
+		MathLib::Matrix<double> img = Visual::OpenCV::Mat2Matrix<unsigned char>(tempMat);
+
+		Vector<double> lable(lableSize, VectorType::Zero);
+		const rapidjson::Value& data2 = sample["lable"];
+		for (rapidjson::SizeType i = 0; i < lableSize; i++)
+			lable(i) = data2[i].GetDouble();
+
+		Sample tempSample = { img, lable };
 		_samples.push_back(tempSample);
 	}
 }
@@ -154,6 +158,6 @@ void Data::ImageSet::PrintToConsole(void)
 	for (auto sample : _samples)
 	{
 		std::cout << sample.first << std::endl;
-		std::cout << sample.second.at(0) << std::endl;
+		std::cout << sample.second << std::endl;
 	}
 }
