@@ -27,7 +27,6 @@ namespace Visual
 	class Plot2D
 	{
 	public:
-
 		template<class T>
 		static void Plot2DMatrix(const MathLib::Matrix<T> & _mat, const std::string & _name = "Figure1", const Plot2DMode _mode = Plot2DMode::RB, unsigned _x = 100, unsigned _y = 100);
 
@@ -38,8 +37,8 @@ namespace Visual
 
 		static cv::Mat Scale(const cv::Mat _mat, unsigned n);
 
-	private:
-
+		template<class T>
+		static void PlotCNNTrainProcess(const std::vector<std::vector<MathLib::Matrix<T>>> _data, const std::string & _name = "Layer1");
 	};
 
 	template<class T>
@@ -107,7 +106,7 @@ namespace Visual
 	template<class T>
 	inline static void Plot2D::Plot2DMatrixVec(const std::vector<MathLib::Matrix<T>>& _mat, const std::string & _name, const Plot2DMode _mode, unsigned _x, unsigned _y, bool _normalize)
 	{
-		cv::Mat img_merge;
+		cv::Mat img;
 		for (const MathLib::Matrix<double> & mat : _mat)
 		{
 			MathLib::Matrix<float> data2(mat.ColumeSize(), mat.RowSize());
@@ -116,26 +115,23 @@ namespace Visual
 					data2(i, j) = mat(i, j);
 			cv::Mat newImg = Visual::OpenCV::Matrix2Mat<float>(data2);
 			cv::normalize(newImg, newImg, 0, 1, cv::NORM_MINMAX);
-			img_merge.push_back(newImg);
-		}
 
-		if (_normalize)
-		{
-			cv::normalize(img_merge, img_merge, 0, 1, cv::NORM_MINMAX);
-		}
-
-		cv::Mat img(cv::Size(img_merge.size()), CV_8UC3);
-		for (size_t i = 0; i < img_merge.rows; i++)
-		{
-			for (size_t j = 0; j < img_merge.cols; j++)
+			cv::Mat img_temp(newImg.size(), CV_8UC3);
+			for (size_t i = 0; i < newImg.rows; i++)
 			{
-				img_merge.at<float>(i, j);
-				cv::Vec3b pixel;
-				pixel.val[0] = (1 - img_merge.at<float>(i, j)) * 255; // B
-				pixel.val[1] = 0; // G
-				pixel.val[2] = img_merge.at<float>(i, j) * 255; // R
-				img.at<cv::Vec3b>(i, j) = pixel;
+				for (size_t j = 0; j < newImg.cols; j++)
+				{
+					cv::Vec3b pixel;
+					pixel.val[0] = (1 - newImg.at<float>(i, j)) * 255; // B
+					pixel.val[1] = 0; // G
+					pixel.val[2] = newImg.at<float>(i, j) * 255; // R
+					img_temp.at<cv::Vec3b>(i, j) = pixel;
+				}
 			}
+			img.push_back(img_temp);
+
+			cv::Mat img_div(1, mat.RowSize(), CV_8UC3, cv::Scalar::all(0));
+			img.push_back(img_div);
 		}
 
 		resize(img, img, cv::Size(img.cols * 10, img.rows * 10), 0, 0, cv::INTER_NEAREST);
@@ -144,5 +140,11 @@ namespace Visual
 		cv::moveWindow(_name, _x, _y);
 		cv::imshow(_name, img);
 		cv::waitKey(1);
+	}
+
+	template<class T>
+	inline void Plot2D::PlotCNNTrainProcess(const std::vector<std::vector<MathLib::Matrix<T>>> _data, const std::string & _name)
+	{
+
 	}
 }

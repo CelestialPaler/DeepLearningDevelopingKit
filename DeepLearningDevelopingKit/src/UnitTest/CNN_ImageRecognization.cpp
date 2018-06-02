@@ -5,7 +5,7 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-#define CNNImageRecognization
+// #define CNNImageRecognization
 
 #ifdef CNNImageRecognization
 #include "..\NeuralLib.h"

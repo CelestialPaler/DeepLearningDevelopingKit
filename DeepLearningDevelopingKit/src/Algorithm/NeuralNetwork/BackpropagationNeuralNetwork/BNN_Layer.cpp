@@ -8,12 +8,15 @@
 // Header files
 #include "BNN_Layer.h"
 
-const double learnRate = 0.001 * 0.01;
-
 /***************************************************************************************************/
 // Class : Layer 
 /// Base class of the layer class.
 // Get the node number of the layers.
+
+void Neural::Layer::SetLearnRate(const double _learnRate)
+{
+	this->learnRate = _learnRate;
+}
 
 size_t Neural::Layer::GetNodeNum(void)
 {

@@ -29,9 +29,6 @@ namespace Data
 	class DataSet
 	{
 		virtual void LoadFromJson(const std::string & _filePath) = 0;
-		virtual const Sample GetBatch(void) const = 0;
-		virtual const Sample GetRandomSample(void) const = 0;
-		virtual const Sample GetSample(const size_t _index) const = 0;
 	};
 
 	/***************************************************************************************************/

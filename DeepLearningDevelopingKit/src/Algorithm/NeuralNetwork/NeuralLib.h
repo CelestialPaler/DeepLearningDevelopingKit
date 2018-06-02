@@ -20,4 +20,5 @@
 #include "ConvolutionalNeuralNetwork\CNN_PoolingLayer.h"
 #include "ConvolutionalNeuralNetwork\CNN_ProcessLayer.h"
 #include "ConvolutionalNeuralNetwork\CNN_SerializeLayer.h"
+#include "ConvolutionalNeuralNetwork\CNN.h"
 #endif // ConvolutionalNeuralNetwork

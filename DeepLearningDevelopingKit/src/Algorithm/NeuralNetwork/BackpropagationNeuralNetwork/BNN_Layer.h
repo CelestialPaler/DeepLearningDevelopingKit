@@ -32,6 +32,7 @@ namespace Neural
 		virtual void SetActivationFunction(const ActivationFunction _function) = 0;
 		// Set the loss function of the layer.
 		virtual void SetLossFunction(const LossFunction _function) = 0;
+		void SetLearnRate(const double _learnRate);
 
 	public: // Getters
 
@@ -64,6 +65,7 @@ namespace Neural
 		ElemType(*lossFunction)(ElemType x, ElemType y);
 		ElemType(*lossFunctionDerivative)(ElemType x, ElemType y);
 		size_t n, m;
+		double learnRate = 1;
 	};
 
 	/***************************************************************************************************/

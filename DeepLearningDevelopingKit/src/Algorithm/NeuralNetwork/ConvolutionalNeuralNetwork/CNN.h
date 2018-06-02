@@ -15,15 +15,5 @@
 /// Provide Neural Network algorithm library.
 namespace Neural
 {
-	class CNN
-	{
-	public:
 
-		CNN();
-
-	private:
-
-
-
-	};
 }

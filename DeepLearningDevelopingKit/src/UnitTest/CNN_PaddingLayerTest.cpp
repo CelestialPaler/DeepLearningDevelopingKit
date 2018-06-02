@@ -1,5 +1,5 @@
 
-#include "..\ConvolutionalNeuralNetwork\CNN_PaddingLayer.h"
+#include "..\Algorithm\NeuralNetwork\NeuralLib.h"
 
 /*
 int main(int argc, char ** argv)

@@ -1,6 +1,4 @@
 
-#include "..\ConvolutionalNeuralNetwork\CNN_ConvolutionalLayer.h"
-
 /*
 int main(int argc, char ** argv)
 {

@@ -112,6 +112,30 @@
     <Filter Include="src\Algorithm\NeuralNetwork %28ANN%29\Iterator %28Trainer%29">
       <UniqueIdentifier>{a6a093de-e104-44ef-b7db-1be9c7dfc00a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Example">
+      <UniqueIdentifier>{9beb124d-722f-4fc8-9e73-84ed117412c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\OpenCV">
+      <UniqueIdentifier>{4ec81e2d-2f59-43ff-a66a-2199ddfdb8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\LinearRegression">
+      <UniqueIdentifier>{d867b62d-3bd1-4c51-96fc-39f67371a6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\BNN">
+      <UniqueIdentifier>{1c2be155-dcf0-49ac-983c-710799c2e8c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\JsonParser">
+      <UniqueIdentifier>{cbbe2fd8-08af-4da2-af00-cca4731524a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\ImageRecognization">
+      <UniqueIdentifier>{716f61d3-f816-4237-a166-0d62da0d5466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\ImageRecognization\TrainSet">
+      <UniqueIdentifier>{1cc1946b-11ee-4de0-b01f-1e74bbc2b33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\example\ImageRecognization\TestSet">
+      <UniqueIdentifier>{52455a7d-ab9b-4c5f-b0f4-ffe0fa6d2e40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -157,17 +181,23 @@
     <None Include="src\PythonAPI\SaveLoad\SaveLoad.py">
       <Filter>src\PythonAPI\SaveLoad</Filter>
     </None>
-    <None Include="data\example\LR.json">
-      <Filter>data\example</Filter>
+    <None Include="data\Example\LinearRregression\LR.json">
+      <Filter>data\example\LinearRegression</Filter>
     </None>
-    <None Include="data\example\MLR.json">
-      <Filter>data\example</Filter>
+    <None Include="data\Example\LinearRregression\MLR.json">
+      <Filter>data\example\LinearRegression</Filter>
     </None>
-    <None Include="data\example\vector.json">
-      <Filter>data\example</Filter>
+    <None Include="data\Example\BNN\XOR.json">
+      <Filter>data\example\BNN</Filter>
     </None>
-    <None Include="data\example\XOR.json">
-      <Filter>data\example</Filter>
+    <None Include="data\Example\JsonParser\vector.json">
+      <Filter>data\example\JsonParser</Filter>
+    </None>
+    <None Include="data\Example\ImageRecognization\TrainSet\ImageSet.json">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </None>
+    <None Include="data\Example\ImageRecognization\TestSet\ImageSet.json">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +416,9 @@
     <ClCompile Include="src\UnitTest\CNN_Test.cpp">
       <Filter>src\UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="src\Example\ImageRecognization_Example.cpp">
+      <Filter>src\Example</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\CNN_debug_output.txt">
@@ -393,8 +426,191 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\example\Rem.jpg">
-      <Filter>data\example</Filter>
+    <Image Include="data\Example\OpenCV\niconi.png">
+      <Filter>data\example\OpenCV</Filter>
+    </Image>
+    <Image Include="data\Example\OpenCV\Rem.jpg">
+      <Filter>data\example\OpenCV</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\0.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\1.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\2.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\3.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\4.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\5.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\6.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\7.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\8.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\9.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\10.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\11.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\12.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\13.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\14.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\15.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\16.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\17.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\18.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\19.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\20.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\21.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\22.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\23.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\24.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\25.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\26.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\27.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\28.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\29.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\30.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\31.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\32.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\33.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\34.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\35.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\36.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\37.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\38.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TrainSet\39.png">
+      <Filter>data\example\ImageRecognization\TrainSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\0.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\1.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\2.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\3.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\4.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\5.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\6.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\7.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\8.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\9.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\10.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\11.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\12.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\13.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\14.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\15.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\16.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\17.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\18.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
+    </Image>
+    <Image Include="data\Example\ImageRecognization\TestSet\19.png">
+      <Filter>data\example\ImageRecognization\TestSet</Filter>
     </Image>
   </ItemGroup>
 </Project>

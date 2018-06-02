@@ -55,14 +55,16 @@ namespace Neural
 
 		ConvNode(const size_t _kernelM, const size_t _kernelN, const size_t _featureM, const size_t _featureN) {
 			kernel.Init(_kernelM, _kernelN, MathLib::MatrixType::Random);
-			kernelDelta.Init(_kernelM, _kernelN, MathLib::MatrixType::Random);
+			kernelDelta.Init(_kernelM, _kernelN, MathLib::MatrixType::Zero);
+			kernelDeltaSum.Init(_kernelM, _kernelN, MathLib::MatrixType::Zero);
 			feature.Init(_featureM, _featureN, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
 		}
 
 		ConvNode(const MathLib::Size _kernelSize, const MathLib::Size _featureSize) {
 			kernel.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
-			kernelDelta.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Random);
+			kernelDelta.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Zero);
+			kernelDeltaSum.Init(_kernelSize.m, _kernelSize.n, MathLib::MatrixType::Zero);
 			feature.Init(_featureSize.m, _featureSize.n, MathLib::MatrixType::Zero);
 			bias = MathLib::Random();
 		}
@@ -74,6 +76,10 @@ namespace Neural
 		ConvKernel kernelDelta;
 		ElemType biasDelta;
 		ConvFeature featureDelta;
+
+		ConvKernel kernelDeltaSum;
+		ElemType biasDeltaSum;
+		ConvFeature featureDeltaSum;
 	};
 
 	/***************************************************************************************************/
@@ -121,6 +127,10 @@ namespace Neural
 		void BackwardPropagation(void);
 		// Update function
 		void Update(void);
+		// Sum up the delta of a batch.
+		void BatchDeltaSumUpdate(const size_t _batchSize);
+		// Clear the deltaSum of a batch.
+		void BatchDeltaSumClear(void);
 
 	private: //  Inner working function
 
@@ -146,7 +156,7 @@ namespace Neural
 		// Hadamard Product of two matrix.
 		MathLib::Matrix<Neural::ElemType> Hadamard(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2);
 
-	public:
+	private:
 
 		// Input of convolutional layer.
 		std::vector<MathLib::Matrix<ElemType>> _input;

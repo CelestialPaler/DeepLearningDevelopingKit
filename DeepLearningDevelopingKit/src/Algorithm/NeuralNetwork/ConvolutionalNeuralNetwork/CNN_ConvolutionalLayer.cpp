@@ -107,8 +107,26 @@ void Neural::ConvolutionalLayer::Update(void)
 {
 	for (size_t k = 0; k < _convNodeNum; k++)
 	{
-		_convNodes.at(k).kernel -= _convNodes.at(k).kernelDelta * learnRate;
-		_convNodes.at(k).bias -= _convNodes.at(k).biasDelta * learnRate;
+		_convNodes.at(k).kernel -= _convNodes.at(k).kernelDeltaSum * learnRate;
+		_convNodes.at(k).bias -= _convNodes.at(k).biasDeltaSum * learnRate;
+	}
+}
+
+void Neural::ConvolutionalLayer::BatchDeltaSumUpdate(const size_t _batchSize)
+{
+	for (size_t k = 0; k < _convNodeNum; k++)
+	{
+		_convNodes.at(k).kernelDeltaSum += _convNodes.at(k).kernelDelta * (1 / (double)_batchSize);
+		_convNodes.at(k).biasDeltaSum += _convNodes.at(k).biasDelta * (1 / (double)_batchSize);
+	}
+}
+
+void Neural::ConvolutionalLayer::BatchDeltaSumClear(void)
+{
+	for (size_t k = 0; k < _convNodeNum; k++)
+	{
+		_convNodes.at(k).kernelDeltaSum.Clear();
+		_convNodes.at(k).biasDeltaSum = 0;
 	}
 }
 

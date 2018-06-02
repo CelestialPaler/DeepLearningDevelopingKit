@@ -114,6 +114,11 @@ const Data::ImageSet::Sample Data::ImageSet::GetRandomSample(void) const
 	return _samples.at(floor(Random(0, 1) * _samples.size()));
 }
 
+const Data::ImageSet::Sample Data::ImageSet::GetSample(const size_t _index) const
+{
+	return _samples.at(_index);
+}
+
 void Data::ImageSet::LoadFromJson(const std::string & _filePath)
 {
 	JsonHandler jsonhandler;
