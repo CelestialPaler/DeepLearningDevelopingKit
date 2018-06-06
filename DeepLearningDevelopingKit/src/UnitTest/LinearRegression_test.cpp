@@ -30,10 +30,10 @@ int main()
 	trainset2.LoadFromJson("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\test\\test.json");
 	trainset2.PrintToConsole();
 
-	Regression::MultivariateLinearRegression debugMLR(10);
-	debugMLR.SetTrainSet(&trainset2);
-	debugMLR.Train();
-	debugMLR.Test();
+	Regression::MultivariateLinearRegression MLR(10);
+	MLR.SetTrainSet(&trainset2);
+	MLR.Train();
+	MLR.Test();
 	system("pause");
 	return 0;
 }

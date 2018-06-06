@@ -14,7 +14,7 @@
 #include "CNN_PaddingLayer.h"
 
 /***************************************************************************************************/
-// Namespace : Neural
+// Namespace : Neural 
 /// Provide Neural Network algorithm library.
 namespace Neural
 {
@@ -161,7 +161,7 @@ namespace Neural
 		// Hadamard Product of two matrix.
 		MathLib::Matrix<Neural::ElemType> Hadamard(const MathLib::Matrix<ElemType>& _mat1, const MathLib::Matrix<ElemType>& _mat2);
 
-	private:
+		public:
 
 		// Input of convolutional layer.
 		std::vector<MathLib::Matrix<ElemType>> _input;

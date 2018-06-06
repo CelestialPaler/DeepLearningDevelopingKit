@@ -5,19 +5,17 @@
 /*                                      Copyright © 2015-2018 Celestial Tech Inc.                                          */
 /***************************************************************************************************/
 
-// #define ConvolutionalLayerImgDebug
+#define ConvolutionalLayerImgDebug
 
 #ifdef ConvolutionalLayerImgDebug
 
-#include "..\NeuralLib.h"
-#include "..\..\..\MathLib\MathLib.h"
-#include "..\..\..\Visualizer\Visualize.h"
-#include "..\..\..\..\external\opencv\include\opencv2\core\core.hpp"
+#include "..\Algorithm\NeuralNetwork\NeuralLib.h"
+//#include "..\Visualizer\Visualize.h"
 
 int main(int argc, char ** argv)
 {
-	cv::Mat imgRGB = cv::imread("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\example\\niconi.png");
-	cv::Mat img = cv::imread("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\example\\niconi.png", cv::IMREAD_GRAYSCALE);
+	cv::Mat imgRGB = cv::imread("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\example\\OpenCV\\niconi.png");
+	cv::Mat img = cv::imread("F:\\Software\\Top Peoject\\DeepLearningProject\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\DeepLearningDevelopingKit\\data\\example\\OpenCV\\niconi.png", cv::IMREAD_GRAYSCALE);
 	cv::imshow("Rem", imgRGB);
 	cv::waitKey(500);
 
